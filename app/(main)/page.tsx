@@ -1,7 +1,31 @@
+"use client";
 import Link from "next/link";
 import styls from "./index.module.css";
+import { useState } from "react";
 
-export default async function Home() {
+const defaultSoftworeTab = [
+  {
+    id: 1,
+    name: "Highest rated",
+  },
+  {
+    id: 2,
+    name: "Category leaders",
+  },
+  {
+    id: 3,
+    name: "Ease of use",
+  },
+  {
+    id: 4,
+    name: "Value for money",
+  },
+];
+
+export default function Home() {
+  const [softworeValue, setSoftworeValue] = useState(1);
+  const [softworeTab, setSoftworeTab] = useState(defaultSoftworeTab);
+
   return (
     <div className={styls.main}>
       <div className={styls.searchPanel}>
@@ -30,11 +54,26 @@ export default async function Home() {
           </div>
         </div>
         <div className={styls.searchPanel__bg}>
-
           <div className={styls.product_info}>
-            <h3 className={ styls.title}>37K+</h3>
-            <p className={ styls.desc}>Software profiles</p>
+            <h3 className={styls.title}>37K+</h3>
+            <p className={styls.desc}>Software profiles</p>
           </div>
+        </div>
+      </div>
+
+      <div className={styls.softwore}>
+        <div className={styls.header}>
+          <ul className={styls.softwore_list}>
+            {softworeTab.map((item) => (
+              <li
+                className={`${styls.softwore_list_item} 
+                ${item.id == softworeValue && styls.active}`}
+                key={item.id}
+              >
+                {item.name}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>
