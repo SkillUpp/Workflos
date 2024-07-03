@@ -1,0 +1,51 @@
+.popupMain .popupHolder {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  transform: translate(-50%);
+  background: #f4f4f5;
+  width: 100%;
+  max-width: 400px;
+  width: fit-content;
+  padding: 8px 16px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  margin: 0 auto;
+  transition: all 0.5s ease-in-out;
+  z-index: 9999;
+}
+.popupMain .popupHolder .message {
+  position: relative;
+  padding-left: 32px;
+  display: flex;
+  align-items: center;
+}
+.popupMain .popupHolder .message.info::before {
+  position: absolute;
+  left: 0;
+  content: "";
+  width: 20px;
+  height: 20px;
+  background: url("../../images/info-fill.svg") 0 0 no-repeat;
+  background-size: cover;
+}
+.popupMain .popupHolder .message.success::before {
+  position: absolute;
+  left: 0;
+  content: "";
+  width: 20px;
+  height: 20px;
+  background: url("../../images/success_fill.svg") 0 0 no-repeat;
+  background-size: cover;
+}
+.popupMain .popupHolder .message.warning::before {
+  position: absolute;
+  left: 0;
+  content: "";
+  width: 20px;
+  height: 20px;
+  background: url("../../images/warning.svg") 0 0 no-repeat;
+  background-size: cover;
+}
