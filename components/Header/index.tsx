@@ -7,11 +7,11 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 const defaultNavList = [
-  { title: "Category", id: "category-section", path: "/" },
-  { title: "Trending", id: "agenda-section", path: "/studio" },
-  { title: "Launch", id: "speakers-sectionid", path: "/portfolio" },
-  { title: "Blog", id: "partners-section", path: "/Insights" },
-  { title: "About", id: "partners-section", path: "/Insights" },
+  { title: "Category", id: "category-section", path: "/category" },
+  { title: "Trending", id: "agenda-section", path: "/trending" },
+  { title: "Launch", id: "speakers-sectionid", path: "/launch" },
+  { title: "Blog", id: "partners-section", path: "/blog" },
+  { title: "About", id: "partners-section", path: "/about" },
 ];
 
 const Header = () => {
