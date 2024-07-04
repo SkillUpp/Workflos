@@ -86,7 +86,11 @@ export default function Home() {
 
         <div className={styls.content}>
           <SoftworeList />
+
+          <div className={styls.more}>See all CRM Software</div>
         </div>
+
+        
       </div>
     </div>
   );

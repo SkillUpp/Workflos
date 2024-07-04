@@ -106,7 +106,7 @@
   top: 36px;
   width: 500px;
   height: 100%;
-  background: url('../../images/search_bg.png') 0 0 no-repeat;
+  background: url("../../images/search_bg.png") 0 0 no-repeat;
   background-size: contain;
 }
 .main .searchPanel .searchPanel__bg .product_info {
@@ -157,16 +157,33 @@
   color: #fff;
 }
 .main .softwore .header .softwore_list .softwore_list_item.active {
-  color: #9747FF;
+  color: #9747ff;
   box-sizing: border-box;
-  border-bottom: 1px solid #9747FF;
+  border-bottom: 1px solid #9747ff;
 }
 .main .softwore .header .select_wrap {
   display: none;
 }
 .main .softwore .content {
-  background: #F0F0F0;
+  background: #f0f0f0;
   padding: 50px 200px;
+}
+.main .softwore .more {
+  width: 198px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #9747ff;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #fff;
+  margin: 0 auto;
+  margin-top: 50px;
+  cursor: pointer;
+}
+.main .softwore .more:hover {
+  opacity: 0.8;
 }
 @media (max-width: 1420px) {
   .main {
@@ -268,12 +285,12 @@
     color: #fff;
   }
   .main .softwore .header .softwore_list .softwore_list_item.active {
-    color: #9747FF;
+    color: #9747ff;
     box-sizing: border-box;
-    border-bottom: 1px solid #9747FF;
+    border-bottom: 1px solid #9747ff;
   }
   .main .softwore .content {
-    background: #F0F0F0;
+    background: #f0f0f0;
     padding: 50px 56px;
   }
 }
@@ -355,12 +372,12 @@
     color: #fff;
   }
   .main .softwore .header .softwore_list .softwore_list_item.active {
-    color: #9747FF;
+    color: #9747ff;
     box-sizing: border-box;
-    border-bottom: 1px solid #9747FF;
+    border-bottom: 1px solid #9747ff;
   }
   .main .softwore .content {
-    background: #F0F0F0;
+    background: #f0f0f0;
     padding: 24px;
   }
 }
@@ -390,7 +407,7 @@
     margin-top: 24px;
   }
   .main .searchPanel .searchPanel__input .search__content .input_wrap .search {
-    width: 32PX;
+    width: 32px;
     height: 32px;
   }
   .main .searchPanel .searchPanel__input .button__content {
@@ -450,7 +467,12 @@
     outline: none;
   }
   .main .softwore .content {
-    background: #F0F0F0;
+    background: #f0f0f0;
     padding: 24px;
+  }
+  .main .softwore .content .more {
+    margin-top: 16px;
+    height: 36px;
+    width: 100%;
   }
 }
