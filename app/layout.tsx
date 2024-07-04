@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,7 @@ export default function RootLayout({
         className={`${inter.className} antialiased`}
         style={{ margin: 0, overflowY: "scroll" }}
       >
-        {children}
+        <AntdRegistry>{children}</AntdRegistry>
       </body>
       {/* <Footer /> */}
     </html>

@@ -2,6 +2,8 @@
 import Link from "next/link";
 import styls from "./index.module.css";
 import { useState } from "react";
+import { Select } from "antd";
+import SoftworeList from "@/components/SoftworeList";
 
 const defaultSoftworeTab = [
   {
@@ -74,6 +76,16 @@ export default function Home() {
               </li>
             ))}
           </ul>
+
+          <div className={styls.select_wrap}>
+            <Select>
+              <Select.Option value="1">Option 1</Select.Option>
+            </Select>
+          </div>
+        </div>
+
+        <div className={styls.content}>
+          <SoftworeList />
         </div>
       </div>
     </div>
