@@ -142,13 +142,20 @@
 }
 .compare .content .right .overview,
 .compare .content .right .product,
+.compare .content .right .stack,
+.compare .content .right .funding,
+.compare .content .right .team,
 .compare .content .right .news {
+  margin-top: 16px;
   background: #fff;
   padding: 20px;
   border-radius: 8px;
 }
 .compare .content .right .overview .title,
 .compare .content .right .product .title,
+.compare .content .right .stack .title,
+.compare .content .right .funding .title,
+.compare .content .right .team .title,
 .compare .content .right .news .title {
   margin: 0;
   font-size: 20px;
@@ -157,14 +164,17 @@
 }
 .compare .content .right .overview .desc,
 .compare .content .right .product .desc,
+.compare .content .right .stack .desc,
+.compare .content .right .funding .desc,
+.compare .content .right .team .desc,
 .compare .content .right .news .desc {
   padding-top: 5px;
   margin: 0;
   font-size: 14px;
   line-height: 25px;
 }
-.compare .content .right .news {
-  margin-top: 16px;
+.compare .content .right .overview {
+  margin-top: 0;
 }
 .compare .content .right .news .news_list {
   display: flex;
@@ -234,17 +244,105 @@
   color: #000;
   line-height: 14px;
 }
-.compare .content .right .product .product_list {
+.compare .content .right .product .stack_list,
+.compare .content .right .funding .stack_list,
+.compare .content .right .stack .stack_list,
+.compare .content .right .product .funding_list,
+.compare .content .right .funding .funding_list,
+.compare .content .right .stack .funding_list,
+.compare .content .right .product .product_list,
+.compare .content .right .funding .product_list,
+.compare .content .right .stack .product_list {
   list-style: none;
   display: flex;
   flex-direction: column;
   padding: 0;
 }
-.compare .content .right .product .product_list .product_item {
+.compare .content .right .product .stack_list .stack_item,
+.compare .content .right .funding .stack_list .stack_item,
+.compare .content .right .stack .stack_list .stack_item,
+.compare .content .right .product .funding_list .stack_item,
+.compare .content .right .funding .funding_list .stack_item,
+.compare .content .right .stack .funding_list .stack_item,
+.compare .content .right .product .product_list .stack_item,
+.compare .content .right .funding .product_list .stack_item,
+.compare .content .right .stack .product_list .stack_item,
+.compare .content .right .product .stack_list .funding_item,
+.compare .content .right .funding .stack_list .funding_item,
+.compare .content .right .stack .stack_list .funding_item,
+.compare .content .right .product .funding_list .funding_item,
+.compare .content .right .funding .funding_list .funding_item,
+.compare .content .right .stack .funding_list .funding_item,
+.compare .content .right .product .product_list .funding_item,
+.compare .content .right .funding .product_list .funding_item,
+.compare .content .right .stack .product_list .funding_item,
+.compare .content .right .product .stack_list .product_item,
+.compare .content .right .funding .stack_list .product_item,
+.compare .content .right .stack .stack_list .product_item,
+.compare .content .right .product .funding_list .product_item,
+.compare .content .right .funding .funding_list .product_item,
+.compare .content .right .stack .funding_list .product_item,
+.compare .content .right .product .product_list .product_item,
+.compare .content .right .funding .product_list .product_item,
+.compare .content .right .stack .product_list .product_item {
   padding-top: 16px;
   font-size: 14px;
   line-height: 25px;
 }
-.compare .content .right .product .product_list .product_item:first-child {
+.compare .content .right .product .stack_list .stack_item:first-child,
+.compare .content .right .funding .stack_list .stack_item:first-child,
+.compare .content .right .stack .stack_list .stack_item:first-child,
+.compare .content .right .product .funding_list .stack_item:first-child,
+.compare .content .right .funding .funding_list .stack_item:first-child,
+.compare .content .right .stack .funding_list .stack_item:first-child,
+.compare .content .right .product .product_list .stack_item:first-child,
+.compare .content .right .funding .product_list .stack_item:first-child,
+.compare .content .right .stack .product_list .stack_item:first-child,
+.compare .content .right .product .stack_list .funding_item:first-child,
+.compare .content .right .funding .stack_list .funding_item:first-child,
+.compare .content .right .stack .stack_list .funding_item:first-child,
+.compare .content .right .product .funding_list .funding_item:first-child,
+.compare .content .right .funding .funding_list .funding_item:first-child,
+.compare .content .right .stack .funding_list .funding_item:first-child,
+.compare .content .right .product .product_list .funding_item:first-child,
+.compare .content .right .funding .product_list .funding_item:first-child,
+.compare .content .right .stack .product_list .funding_item:first-child,
+.compare .content .right .product .stack_list .product_item:first-child,
+.compare .content .right .funding .stack_list .product_item:first-child,
+.compare .content .right .stack .stack_list .product_item:first-child,
+.compare .content .right .product .funding_list .product_item:first-child,
+.compare .content .right .funding .funding_list .product_item:first-child,
+.compare .content .right .stack .funding_list .product_item:first-child,
+.compare .content .right .product .product_list .product_item:first-child,
+.compare .content .right .funding .product_list .product_item:first-child,
+.compare .content .right .stack .product_list .product_item:first-child {
   padding-top: 0;
+}
+.compare .content .right .team .team_list {
+  list-style: none;
+  display: flex;
+  margin-top: 20px;
+  padding: 0;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.compare .content .right .team .team_list .team_item {
+  border-radius: 5px;
+  border: 1px solid #9747ff;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+  padding: 10px;
+  width: calc(100% / 3 - 16px);
+}
+.compare .content .right .team .team_list .team_item .name {
+  margin: 0;
+  font-size: 16px;
+  line-height: 20px;
+  color: #9747ff;
+  font-weight: 700;
+}
+.compare .content .right .team .team_list .team_item .desc {
+  margin: 0;
+  font-size: 12px;
+  line-height: 14px;
 }

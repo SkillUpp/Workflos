@@ -140,7 +140,11 @@
       width: calc(100% - 110px);
       .overview,
       .product,
+      .stack,
+			.funding,
+			.team,
       .news {
+				margin-top: 16px;
         background: #fff;
         padding: 20px;
         border-radius: 8px;
@@ -157,8 +161,10 @@
           line-height: 25px;
         }
       }
+			.overview {
+				margin-top: 0;
+			}
       .news {
-        margin-top: 16px;
         .news_list {
           display: flex;
           flex-direction: column;
@@ -229,22 +235,59 @@
         }
       }
 
-      .product {
+      .product,
+			.funding,
+      .stack {
+        .stack_list,
+				.funding_list,
         .product_list {
           list-style: none;
-					display: flex;
-					flex-direction: column;
-					padding: 0;
-					.product_item {
-						padding-top: 16px;
-						font-size: 14px;
-						line-height: 25px;
-						&:first-child {
-							padding-top: 0;
-						}
-					}
+          display: flex;
+          flex-direction: column;
+          padding: 0;
+          .stack_item,
+					.funding_item,
+          .product_item {
+            padding-top: 16px;
+            font-size: 14px;
+            line-height: 25px;
+            &:first-child {
+              padding-top: 0;
+            }
+          }
         }
       }
+
+			.team {
+				.team_list {
+					list-style: none;
+					display: flex;
+					margin-top: 20px;
+					padding: 0;
+					flex-wrap: wrap;
+					justify-content: space-between;
+					.team_item {
+						border-radius: 5px;
+						border: 1px solid #9747ff;
+						box-sizing: border-box;
+						margin-bottom: 16px;
+						padding: 10px;
+						width: calc(100% / 3 - 16px);
+						.name {
+							margin: 0;
+							font-size: 16px;
+							line-height: 20px;
+							color: #9747ff;
+							font-weight: 700;
+						}
+						.desc {
+							margin: 0;
+							font-size: 12px;
+							line-height: 14px;
+						}
+					}
+				}
+			}
     }
   }
 }

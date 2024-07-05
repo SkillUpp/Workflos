@@ -261,6 +261,119 @@ const Compare = () => {
               </li>
             </ul>
           </div>
+
+          <div className={styls.stack}>
+            <h3 className={styls.title}>AI Stack</h3>
+            <ul className={styls.stack_list}>
+              <li className={styls.stack_item}>
+                Google offers a wide range of products and services, including
+                Android, Chrome, Google Play, Wear OS, Chromecast, Fitbit,
+                Google Nest, Pixel, Gemini, Bard, Google Assistant, Maps, News,
+                Search, Shopping, Photos, Translate, and more.
+              </li>
+              <li className={styls.stack_item}>
+                Google provides various business products and services,
+                including AdMob, AdSense, Analytics, Android Enterprise,
+                Blogger, Business Messages, Business Profile, Chrome Enterprise,
+                Enterprise Search, Google Ad Manager, Google Ads, Google
+                Assistant, Google Cloud, Google Digital Garage, Google Maps
+                Platform, Google Marketing Platform, and more.
+              </li>
+              <li className={styls.stack_item}>
+                Google offers developer products and services, including App
+                Testing, Business Messages, Cloud Computing, Devices,
+                Engagement, Game Services, Google Wallet, Growth, Maps +
+                Location, Messaging + Notifications, Monetization, Monitoring,
+                Payments, Sign in + Identity, Storage + Sync, and more.
+              </li>
+              <li className={styls.stack_item}>
+                Google Workspace provides a suite of productivity and
+                collaboration tools, including Gmail, Drive, Meet, Calendar,
+                Chat, Docs, Sheets, Slides, Keep, Sites, Forms, AppSheet, and
+                more, with pricing plans starting at $6 USD per user/month.
+              </li>
+              <li className={styls.stack_item}>
+                Google also offers various other products and services,
+                including Google One (cloud storage), Google Photos, Google
+                Drive, Gmail, Gemini Advanced (AI-powered features), Magic
+                Editor (Google Photos feature), and more, with pricing plans
+                starting at 15 GB storage for free.
+              </li>
+            </ul>
+          </div>
+
+          <div className={styls.funding}>
+            <h3 className={styls.title}>Funding</h3>
+            <ul className={styls.funding_list}>
+              <li className={styls.funding_item}>
+                Google.org commits $25M in funding to accelerate progress
+                towards the Sustainable Development Goals.
+              </li>
+              <li className={styls.funding_item}>
+                Google.org commits $30M to fund big bet projects that accelerate
+                technological advances in climate information and action through
+                the Google.org Impact Challenge on Climate Innovation.
+              </li>
+              <li className={styls.funding_item}>
+                Google.org has committed $40 million in funding to organizations
+                that use data science and innovative new approaches to advance
+                racial justice since 2015.
+              </li>
+              <li className={styls.funding_item}>
+                Google.org has committed $100 million in funding to support
+                effective solutions throughout the course of the COVID-19
+                pandemic.
+              </li>
+              <li className={styls.funding_item}>
+                The top individual insider shareholders of Google are Larry Page
+                and Sergey Brin, and the top institutional shareholders are
+                Vanguard Group Inc., BlackRock, Inc., and T. Rowe Price
+                Associates, Inc.
+              </li>
+            </ul>
+          </div>
+
+          <div className={styls.team}>
+            <h3 className={styls.title}>Core Team</h3>
+            <ul className={styls.team_list}>
+              <li className={styls.team_item}>
+                <h3 className={styls.name}>Sundar Pichai</h3>
+                <p className={styls.desc}>CEO of Google and Alphabet Inc.</p>
+              </li>
+              <li className={styls.team_item}>
+                <h3 className={styls.name}>Sundar Pichai</h3>
+                <p className={styls.desc}>CEO of Google and Alphabet Inc.</p>
+              </li>
+              <li className={styls.team_item}>
+                <h3 className={styls.name}>Sundar Pichai</h3>
+                <p className={styls.desc}>CEO of Google and Alphabet Inc.</p>
+              </li>
+              <li className={styls.team_item}>
+                <h3 className={styls.name}>Sundar Pichai</h3>
+                <p className={styls.desc}>CEO of Google and Alphabet Inc.</p>
+              </li>
+              <li className={styls.team_item}>
+                <h3 className={styls.name}>Sundar Pichai</h3>
+                <p className={styls.desc}>CEO of Google and Alphabet Inc.</p>
+              </li>
+              <li className={styls.team_item}>
+                <h3 className={styls.name}>Sundar Pichai</h3>
+                <p className={styls.desc}>CEO of Google and Alphabet Inc.</p>
+              </li>
+              <li className={styls.team_item}>
+                <h3 className={styls.name}>Sundar Pichai</h3>
+                <p className={styls.desc}>CEO of Google and Alphabet Inc.</p>
+              </li>
+              <li className={styls.team_item}>
+                <h3 className={styls.name}>Sundar Pichai</h3>
+                <p className={styls.desc}>CEO of Google and Alphabet Inc.</p>
+              </li>
+              <li className={styls.team_item}>
+                <h3 className={styls.name}>Sundar Pichai</h3>
+                <p className={styls.desc}>CEO of Google and Alphabet Inc.</p>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
