@@ -1,4 +1,173 @@
 .launch {
   padding-top: 86px;
+  background: #f0f0f0;
   overflow: hidden;
+  min-height: calc(100vh - 86px);
+}
+.launch .header {
+  background: #fff;
+  padding: 60px 200px 30px 200px;
+}
+.launch .header .title {
+  margin: 0;
+  font-size: 36px;
+  line-height: 1.2;
+  font-weight: 800;
+}
+.launch .header .desc {
+  margin: 4px 0 0 0;
+  line-height: 2;
+  font-size: 20px;
+}
+.launch .header :global .ant-input {
+  height: 55px;
+}
+.launch .header :global .ant-input:focus,
+.launch .header :global .ant-input:hover {
+  border-color: #9747ff;
+}
+.launch .header .tag_list {
+  display: flex;
+  margin-top: 14px;
+}
+.launch .header .tag_list .tag {
+  padding: 0 10px;
+  font-size: 14px;
+  line-height: 1.4;
+  background: #9747ff;
+  border-radius: 50px;
+  color: #fff;
+  margin-left: 8px;
+}
+.launch .header .tag_list .tag:first-child {
+  margin-left: 0;
+}
+.launch .header .search {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 14px;
+}
+.launch .header .search :global .ant-select {
+  width: 152px;
+  height: 40px;
+  margin-left: 18px;
+}
+.launch .header .search :global .ant-select:first-child {
+  margin-left: 0;
+}
+.launch .header .search :global .ant-select:focus .ant-select-selector,
+.launch .header .search :global .ant-select:hover .ant-select-selector {
+  border-color: #9747ff !important;
+}
+.launch .content {
+  padding: 0 200px;
+}
+.launch .content .launch_list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 40px;
+}
+.launch .content .launch_list .launch_item {
+  display: flex;
+  background: #fff;
+  border-radius: 8px;
+  width: 100%;
+  padding: 17px 30px;
+  margin-top: 17px;
+}
+.launch .content .launch_list .launch_item:first-child {
+  margin-top: 0;
+}
+.launch .content .launch_list .launch_item .idx {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.launch .content .launch_list .launch_item .idx .icon {
+  display: block;
+  width: 34px;
+  height: 34px;
+  background: url("../../images/arrow-up-circle.svg") 0 0 no-repeat;
+  background-size: cover;
+}
+.launch .content .launch_list .launch_item .idx .text {
+  font-size: 20px;
+  line-height: 1.2;
+  display: block;
+  padding-top: 6px;
+}
+.launch .content .launch_list .launch_item .picture {
+  padding-left: 20px;
+  padding-right: 12px;
+}
+.launch .content .launch_list .launch_item .picture img {
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+}
+.launch .content .launch_list .launch_item .info {
+  width: calc(100% - 174px);
+}
+.launch .content .launch_list .launch_item .info .title,
+.launch .content .launch_list .launch_item .info .desc {
+  margin: 0;
+  font-size: 25px;
+  line-height: 40px;
+  font-weight: 800;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.launch .content .launch_list .launch_item .info .desc {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 40px;
+  opacity: 0.8;
+}
+.launch .content .launch_list .launch_item .user_info {
+  display: flex;
+  align-items: center;
+  height: 24px;
+}
+.launch .content .launch_list .launch_item .user_info img {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+}
+.launch .content .launch_list .launch_item .user_info .wrap {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+}
+.launch .content .launch_list .launch_item .user_info .wrap .name,
+.launch .content .launch_list .launch_item .user_info .wrap .tie,
+.launch .content .launch_list .launch_item .user_info .wrap .time {
+  max-width: 160px;
+  padding-left: 9px;
+  color: #000;
+  font-size: 16px;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  opacity: 0.8;
+}
+.launch .content .launch_list .launch_item .user_info .tags {
+  padding-left: 24px;
+  display: flex;
+}
+.launch .content .launch_list .launch_item .user_info .tags .tag {
+  padding: 0 10px;
+  font-size: 14px;
+  line-height: 1.4;
+  background: #9747ff;
+  border-radius: 50px;
+  color: #fff;
+  margin-left: 8px;
+}
+.launch .content .launch_list .launch_item .user_info .tags .tag:first-child {
+  margin-left: 0;
 }

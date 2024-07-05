@@ -1,4 +1,181 @@
 .launch {
-	padding-top: 86px;
+  padding-top: 86px;
+  background: #f0f0f0;
   overflow: hidden;
+  min-height: calc(100vh - 86px);
+  .header {
+    background: #fff;
+    padding: 60px 200px 30px 200px;
+    .title {
+      margin: 0;
+      font-size: 36px;
+      line-height: 1.2;
+      font-weight: 800;
+    }
+    .desc {
+      margin: 4px 0 0 0;
+      line-height: 2;
+      font-size: 20px;
+    }
+    :global {
+      .ant-input {
+        height: 55px;
+        &:focus,
+        &:hover {
+          border-color: #9747ff;
+        }
+      }
+    }
+
+    .tag_list {
+      display: flex;
+      margin-top: 14px;
+      .tag {
+        padding: 0 10px;
+        font-size: 14px;
+        line-height: 1.4;
+        background: #9747ff;
+        border-radius: 50px;
+        color: #fff;
+        margin-left: 8px;
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+    }
+
+    .search {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 14px;
+      :global {
+        .ant-select {
+          width: 152px;
+          height: 40px;
+          margin-left: 18px;
+          &:first-child {
+            margin-left: 0;
+          }
+          &:focus,
+          &:hover {
+            .ant-select-selector {
+              border-color: #9747ff !important;
+            }
+          }
+        }
+      }
+    }
+  }
+  .content {
+    padding: 0 200px;
+    .launch_list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      padding-top: 40px;
+      .launch_item {
+        display: flex;
+        background: #fff;
+        border-radius: 8px;
+        width: 100%;
+        padding: 17px 30px;
+        margin-top: 17px;
+        &:first-child {
+          margin-top: 0;
+        }
+        .idx {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          .icon {
+            display: block;
+            width: 34px;
+            height: 34px;
+            background: url("../../images/arrow-up-circle.svg") 0 0 no-repeat;
+            background-size: cover;
+          }
+          .text {
+            font-size: 20px;
+            line-height: 1.2;
+            display: block;
+            padding-top: 6px;
+          }
+        }
+        .picture {
+          padding-left: 20px;
+          padding-right: 12px;
+          img {
+            width: 74px;
+            height: 74px;
+            border-radius: 50%;
+          }
+        }
+        .info {
+          width: calc(100% - 174px);
+          .title,
+          .desc {
+            margin: 0;
+            font-size: 25px;
+            line-height: 40px;
+            font-weight: 800;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+          .desc {
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 40px;
+						opacity: .8;
+          }
+        }
+        .user_info {
+          display: flex;
+          align-items: center;
+          height: 24px;
+          img {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+          }
+          .wrap {
+            display: flex;
+            align-items: center;
+						margin-top: 4px;
+            .name,
+            .tie,
+            .time {
+              max-width: 160px;
+              padding-left: 9px;
+              color: #000;
+              font-size: 16px;
+              line-height: 1.2;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+							opacity: .8;
+            }
+          }
+          .tags {
+            padding-left: 24px;
+            display: flex;
+            .tag {
+              padding: 0 10px;
+              font-size: 14px;
+              line-height: 1.4;
+              background: #9747ff;
+              border-radius: 50px;
+              color: #fff;
+              margin-left: 8px;
+              &:first-child {
+                margin-left: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
