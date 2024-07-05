@@ -1,4 +1,105 @@
 .trending {
   padding-top: 86px;
+  background: #f0f0f0;
   overflow: hidden;
+  min-height: calc(100vh - 86px);
+}
+.trending .trending__content .title {
+  margin: 0;
+  padding: 57px 200px 0 200px;
+  font-size: 35px;
+  font-weight: 800;
+}
+.trending .trending__content .main {
+  padding: 10px 200px 64px 200px;
+  background: #f0f0f0;
+}
+.trending .trending__content .main .list {
+  display: flex;
+  flex-direction: column;
+}
+.trending .trending__content .main .list .item {
+  position: relative;
+  margin-top: 25px;
+  padding: 19px 0 0 0;
+  background: #fff;
+  border-radius: 12px;
+}
+.trending .trending__content .main .list .item .top {
+  margin: 0 19px;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(151, 71, 255, 0.3);
+}
+.trending .trending__content .main .list .item .top .left {
+  display: flex;
+}
+.trending .trending__content .main .list .item .top .left img {
+  width: 77px;
+  height: 77px;
+  border-radius: 5px;
+}
+.trending .trending__content .main .list .item .top .left .info {
+  padding-left: 22px;
+}
+.trending .trending__content .main .list .item .top .left .info .title_wrap {
+  display: flex;
+  align-items: center;
+}
+.trending .trending__content .main .list .item .top .left .info .title_wrap .text {
+  display: block;
+  max-width: 800px;
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 600;
+  color: #9747ff;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.trending .trending__content .main .list .item .top .left .info .title_wrap .share_icon {
+  display: block;
+  margin-left: 8px;
+  width: 20px;
+  height: 20px;
+  background: url("../../images/share-2.svg") 0 0 no-repeat;
+  background-size: cover;
+}
+.trending .trending__content .main .list .item .top .left .info .desc {
+  margin: 6px 0 0 0;
+  font-size: 14px;
+  line-height: 1.2;
+  color: #000;
+}
+.trending .trending__content .main .list .item .top .right {
+  display: flex;
+}
+.trending .trending__content .main .list .item .top .right span {
+  font-size: 30px;
+  color: #999999;
+  font-weight: 800;
+  line-height: 1.2;
+}
+.trending .trending__content .main .list .item .top .right span.active {
+  color: #9747FF;
+}
+.trending .trending__content .main .list .item .content {
+  padding: 16px 19px 14px 19px;
+}
+.trending .trending__content .main .list .item .content .desc {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.2;
+}
+.trending .trending__content .main .list .item .content .more {
+  display: block;
+  background: none;
+  color: #9747ff;
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 1.2;
+  border: none;
+  margin-top: 6px;
+  text-decoration: none;
 }

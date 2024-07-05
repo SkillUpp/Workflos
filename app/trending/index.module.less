@@ -1,4 +1,108 @@
 .trending {
   padding-top: 86px;
+  background: #f0f0f0;
   overflow: hidden;
+  min-height: calc(100vh - 86px);
+  .trending__content {
+    .title {
+      margin: 0;
+      padding: 57px 200px 0 200px;
+      font-size: 35px;
+      font-weight: 800;
+    }
+    .main {
+      padding: 10px 200px 64px 200px;
+      background: #f0f0f0;
+      .list {
+        display: flex;
+        flex-direction: column;
+        .item {
+          position: relative;
+          margin-top: 25px;
+          padding: 19px 0 0 0;
+          background: #fff;
+          border-radius: 12px;
+
+          .top {
+						margin: 0 19px;
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(151, 71, 255, 0.3);
+            .left {
+              display: flex;
+              img {
+                width: 77px;
+                height: 77px;
+                border-radius: 5px;
+              }
+              .info {
+                padding-left: 22px;
+                .title_wrap {
+                  display: flex;
+                  align-items: center;
+                  .text {
+                    display: block;
+                    max-width: 800px;
+                    font-size: 24px;
+                    line-height: 1.2;
+                    font-weight: 600;
+                    color: #9747ff;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                  }
+                  .share_icon {
+                    display: block;
+                    margin-left: 8px;
+                    width: 20px;
+                    height: 20px;
+                    background: url("../../images/share-2.svg") 0 0 no-repeat;
+                    background-size: cover;
+                  }
+                }
+                .desc {
+                  margin: 6px 0 0 0;
+                  font-size: 14px;
+                  line-height: 1.2;
+                  color: #000;
+                }
+              }
+            }
+            .right {
+              display: flex;
+              span {
+                font-size: 30px;
+                color: #999999;
+                font-weight: 800;
+                line-height: 1.2;
+                &.active {
+                  color: #9747FF;
+                }
+              }
+            }
+          }
+          .content {
+            padding: 16px 19px 14px 19px;
+            .desc {
+              margin: 0;
+              font-size: 14px;
+              line-height: 1.2;
+            }
+            .more {
+              display: block;
+              background: none;
+              color: #9747ff;
+              font-weight: 800;
+              font-size: 14px;
+              line-height: 1.2;
+              border: none;
+              margin-top: 6px;
+              text-decoration: none;
+            }
+          }
+        }
+      }
+    }
+  }
 }
