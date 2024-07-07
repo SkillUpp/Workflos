@@ -170,6 +170,7 @@
   box-sizing: border-box;
   border-radius: 8px;
   padding: 0 22px;
+  cursor: pointer;
 }
 .category .category__content .main .list .item .top .right .btn .compare {
   display: block;

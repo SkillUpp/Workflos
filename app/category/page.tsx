@@ -5,6 +5,7 @@ import { Select } from "antd";
 import Image from "next/image";
 import SoftIcon from "@/images/soft-icon.png";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const tabs = [
   { id: 1, title: "Allapps", active: true },
@@ -13,6 +14,7 @@ const tabs = [
 ];
 
 const Category = () => {
+  const route = useRouter();
   const [categoryTabs, setCategoryTabs] = useState(tabs);
 
   const handleTabClick = (id: number) => {
@@ -23,6 +25,10 @@ const Category = () => {
       }))
     );
   };
+
+  const handleJumpCompare = () => {
+    route.push('/compare')
+  }
   return (
     <div className={styls.category}>
       <div className={styls.category__content}>
@@ -131,7 +137,10 @@ const Category = () => {
                   </div>
                 </div>
                 <div className={styls.right}>
-                  <button className={styls.btn}>
+                  <button
+                    className={styls.btn}
+                    onClick={() => handleJumpCompare()}
+                  >
                     <i className={styls.compare}></i>
                     <span>Compare</span>
                   </button>
@@ -178,7 +187,10 @@ const Category = () => {
                   </div>
                 </div>
                 <div className={styls.right}>
-                  <button className={styls.btn}>
+                  <button
+                    className={styls.btn}
+                    onClick={() => handleJumpCompare()}
+                  >
                     <i className={styls.compare}></i>
                     <span>Compare</span>
                   </button>
@@ -225,7 +237,10 @@ const Category = () => {
                   </div>
                 </div>
                 <div className={styls.right}>
-                  <button className={styls.btn}>
+                  <button
+                    className={styls.btn}
+                    onClick={() => handleJumpCompare()}
+                  >
                     <i className={styls.compare}></i>
                     <span>Compare</span>
                   </button>
@@ -272,7 +287,7 @@ const Category = () => {
                   </div>
                 </div>
                 <div className={styls.right}>
-                  <button className={styls.btn}>
+                  <button className={styls.btn} onClick={() => handleJumpCompare()}>
                     <i className={styls.compare}></i>
                     <span>Compare</span>
                   </button>

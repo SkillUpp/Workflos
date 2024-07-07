@@ -4,6 +4,7 @@ import styls from "./index.module.css";
 import { useState } from "react";
 import { Select } from "antd";
 import SoftworeList from "@/components/SoftworeList";
+import { useRouter } from "next/navigation";
 
 const defaultSoftworeTab = [
   {
@@ -25,8 +26,10 @@ const defaultSoftworeTab = [
 ];
 
 export default function Home() {
+  const route = useRouter();
   const [softworeValue, setSoftworeValue] = useState(1);
   const [softworeTab, setSoftworeTab] = useState(defaultSoftworeTab);
+
 
   return (
     <div className={styls.main}>
