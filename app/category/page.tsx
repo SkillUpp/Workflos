@@ -27,8 +27,8 @@ const Category = () => {
   };
 
   const handleJumpCompare = () => {
-    route.push('/compare')
-  }
+    route.push("/compare");
+  };
   return (
     <div className={styls.category}>
       <div className={styls.category__content}>
@@ -90,53 +90,6 @@ const Category = () => {
                   </div>
                 </div>
                 <div className={styls.right}>
-                  <button className={styls.btn}>
-                    <i className={styls.compare}></i>
-                    <span>Compare</span>
-                  </button>
-
-                  <button className={styls.btn}>
-                    <span>VISIT WEBSITE</span>
-                    <i className={styls.share}></i>
-                  </button>
-                </div>
-              </div>
-              <div className={styls.content}>
-                <p className={styls.desc}>
-                  DataSnipper is an intelligent Automation Platform created for
-                  Audit and Finance teams
-                </p>
-                <Link href={"/"} className={styls.more}>
-                  Read more about DataSnipper
-                </Link>
-              </div>
-              <div className={styls.bottom}>
-                <div className={styls.left}>
-                  <i className={styls.user}></i>
-                  <span>Users also considered</span>
-                </div>
-                <div className={styls.right}>
-                  <i className={styls.arrow}></i>
-                </div>
-              </div>
-            </div>
-
-            <div className={styls.item}>
-              <div className={styls.top}>
-                <div className={styls.left}>
-                  <Image src={SoftIcon} alt="" width={77} height={77} />
-
-                  <div className={styls.info}>
-                    <div className={styls.title_wrap}>
-                      <span className={styls.text}>616 software options</span>
-                      <i className={styls.share_icon}></i>
-                    </div>
-                    <p className={styls.desc}>
-                      Improve the speed and quality of your audit
-                    </p>
-                  </div>
-                </div>
-                <div className={styls.right}>
                   <button
                     className={styls.btn}
                     onClick={() => handleJumpCompare()}
@@ -287,7 +240,60 @@ const Category = () => {
                   </div>
                 </div>
                 <div className={styls.right}>
-                  <button className={styls.btn} onClick={() => handleJumpCompare()}>
+                  <button
+                    className={styls.btn}
+                    onClick={() => handleJumpCompare()}
+                  >
+                    <i className={styls.compare}></i>
+                    <span>Compare</span>
+                  </button>
+
+                  <button className={styls.btn}>
+                    <span>VISIT WEBSITE</span>
+                    <i className={styls.share}></i>
+                  </button>
+                </div>
+              </div>
+              <div className={styls.content}>
+                <p className={styls.desc}>
+                  DataSnipper is an intelligent Automation Platform created for
+                  Audit and Finance teams
+                </p>
+                <Link href={"/"} className={styls.more}>
+                  Read more about DataSnipper
+                </Link>
+              </div>
+              <div className={styls.bottom}>
+                <div className={styls.left}>
+                  <i className={styls.user}></i>
+                  <span>Users also considered</span>
+                </div>
+                <div className={styls.right}>
+                  <i className={styls.arrow}></i>
+                </div>
+              </div>
+            </div>
+
+            <div className={styls.item}>
+              <div className={styls.top}>
+                <div className={styls.left}>
+                  <Image src={SoftIcon} alt="" width={77} height={77} />
+
+                  <div className={styls.info}>
+                    <div className={styls.title_wrap}>
+                      <span className={styls.text}>616 software options</span>
+                      <i className={styls.share_icon}></i>
+                    </div>
+                    <p className={styls.desc}>
+                      Improve the speed and quality of your audit
+                    </p>
+                  </div>
+                </div>
+                <div className={styls.right}>
+                  <button
+                    className={styls.btn}
+                    onClick={() => handleJumpCompare()}
+                  >
                     <i className={styls.compare}></i>
                     <span>Compare</span>
                   </button>
