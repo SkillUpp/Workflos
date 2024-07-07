@@ -1,8 +1,8 @@
 .compare {
   padding-top: 86px;
   background: #f0f0f0;
-  // overflow: hidden;
-  min-height: calc(100vh - 86px);
+  overflow: hidden;
+  height: calc(100vh - 86px);
   .header {
     width: 100%;
     padding: 42px 200px 24px 350px;
@@ -95,9 +95,9 @@
     }
   }
   .content {
-    padding: 18px 200px 64px 200px;
-    margin-bottom: 24px;
+    padding: 18px 200px 0 200px;
     display: flex;
+    height: calc(100vh - 310px);
     .left {
       width: 126px;
       margin-right: 24px;
@@ -121,13 +121,13 @@
           justify-content: flex-end;
           height: 27px;
           font-size: 14px;
-          padding-top: 13px;
+          margin-top: 13px;
           padding-right: 12px;
           color: #000;
           border-top-left-radius: 12px;
           border-bottom-left-radius: 12px;
           &:first-child {
-            padding-top: 0;
+            margin-top: 0;
           }
           &.active {
             background: #9747ff;
@@ -138,6 +138,8 @@
     }
     .right {
       width: calc(100% - 110px);
+      height: 100%;
+      overflow: scroll;
       .overview,
       .product,
       .stack,

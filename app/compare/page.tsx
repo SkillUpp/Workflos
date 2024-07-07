@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import styls from "./index.module.css";
 import Google from "@/images/google.svg";
@@ -6,6 +7,7 @@ import Ins from "@/images/ins.svg";
 import x from "@/images/x.svg";
 import message from "@/images/message.svg";
 import twitter from "@/images/twitter.svg";
+import { MouseEvent, useEffect, useState } from "react";
 
 const mediaList = [
   { id: 1, img: Ins },
@@ -14,60 +16,85 @@ const mediaList = [
   { id: 4, img: twitter },
 ];
 
-const CompareMenu = [
+const defaultCompareMenu = [
   {
     id: 1,
+    htmlId: "overview",
     name: "Overview",
     active: true,
   },
   {
     id: 2,
     name: "News",
+    htmlId: "news",
     active: false,
   },
   {
     id: 3,
     name: "Products",
+    htmlId: "products",
     active: false,
   },
   {
     id: 4,
     name: "AI Stack",
+    htmlId: "stack",
     active: false,
   },
   {
     id: 5,
     name: "Funding",
+    htmlId: "funding",
     active: false,
   },
   {
     id: 6,
     name: "Core Team",
+    htmlId: "team",
     active: false,
   },
   {
     id: 7,
     name: "Revenue",
+    htmlId: "revenue",
     active: false,
   },
   {
     id: 8,
     name: "Competitors",
+    htmlId: "competitors",
     active: false,
   },
   {
     id: 9,
     name: "Challenges",
+    htmlId: "challenges",
     active: false,
   },
   {
     id: 10,
     name: "Hiring",
+    htmlId: "hiring",
     active: false,
   },
 ];
 
 const Compare = () => {
+  const [compareMenu, setCompareMenu] = useState(defaultCompareMenu);
+  const handleClick = (id: string) => {
+    const el = document.getElementById(id);
+    el && el.scrollIntoView({ behavior: "smooth" });
+    const menus = JSON.parse(JSON.stringify(compareMenu));
+    menus.forEach((item: { active: boolean; htmlId: string }) => {
+      item.active = false;
+      if (item.htmlId == id) {
+        item.active = true;
+      }
+    });
+    setCompareMenu(menus);
+  };
+
+  
   return (
     <div className={styls.compare}>
       <div className={styls.header}>
@@ -115,10 +142,11 @@ const Compare = () => {
       <div className={styls.content}>
         <div className={styls.left}>
           <div className={styls.menu_list}>
-            {CompareMenu.map((item) => (
+            {compareMenu.map((item) => (
               <div
                 className={`${styls.menu_item} ${item.active && styls.active}`}
                 key={item.id}
+                onClick={() => handleClick(item.htmlId)}
               >
                 <span className={styls.text}>{item.name}</span>
               </div>
@@ -126,7 +154,7 @@ const Compare = () => {
           </div>
         </div>
         <div className={styls.right}>
-          <div className={styls.overview}>
+          <div className={styls.overview} id="overview">
             <h3 className={styls.title}>Overview</h3>
             <p className={styls.desc}>
               Google LLC is an American multinational corporation and technology
@@ -140,7 +168,7 @@ const Compare = () => {
             </p>
           </div>
 
-          <div className={styls.news}>
+          <div className={styls.news} id="news">
             <h3 className={styls.title}>News</h3>
             <div className={styls.news_list}>
               <div className={styls.news_item}>
@@ -222,7 +250,7 @@ const Compare = () => {
             </div>
           </div>
 
-          <div className={styls.product}>
+          <div className={styls.product} id="products">
             <h3 className={styls.title}>Product</h3>
             <ul className={styls.product_list}>
               <li className={styls.product_item}>
@@ -262,7 +290,7 @@ const Compare = () => {
             </ul>
           </div>
 
-          <div className={styls.stack}>
+          <div className={styls.stack} id="stack">
             <h3 className={styls.title}>AI Stack</h3>
             <ul className={styls.stack_list}>
               <li className={styls.stack_item}>
@@ -302,7 +330,7 @@ const Compare = () => {
             </ul>
           </div>
 
-          <div className={styls.funding}>
+          <div className={styls.funding} id="funding">
             <h3 className={styls.title}>Funding</h3>
             <ul className={styls.funding_list}>
               <li className={styls.funding_item}>
@@ -333,7 +361,7 @@ const Compare = () => {
             </ul>
           </div>
 
-          <div className={styls.team}>
+          <div className={styls.team} id="team">
             <h3 className={styls.title}>Core Team</h3>
             <ul className={styls.team_list}>
               <li className={styls.team_item}>

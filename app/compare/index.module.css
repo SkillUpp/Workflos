@@ -1,7 +1,8 @@
 .compare {
   padding-top: 86px;
   background: #f0f0f0;
-  min-height: calc(100vh - 86px);
+  overflow: hidden;
+  height: calc(100vh - 86px);
 }
 .compare .header {
   width: 100%;
@@ -95,9 +96,9 @@
   background-size: cover;
 }
 .compare .content {
-  padding: 18px 200px 64px 200px;
-  margin-bottom: 24px;
+  padding: 18px 200px 0 200px;
   display: flex;
+  height: calc(100vh - 310px);
 }
 .compare .content .left {
   width: 126px;
@@ -124,14 +125,14 @@
   justify-content: flex-end;
   height: 27px;
   font-size: 14px;
-  padding-top: 13px;
+  margin-top: 13px;
   padding-right: 12px;
   color: #000;
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
 }
 .compare .content .left .menu_list .menu_item:first-child {
-  padding-top: 0;
+  margin-top: 0;
 }
 .compare .content .left .menu_list .menu_item.active {
   background: #9747ff;
@@ -139,6 +140,8 @@
 }
 .compare .content .right {
   width: calc(100% - 110px);
+  height: 100%;
+  overflow: scroll;
 }
 .compare .content .right .overview,
 .compare .content .right .product,
