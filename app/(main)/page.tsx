@@ -53,7 +53,7 @@ export default function Home() {
               Explore software categories customers love
             </h3>
             <div className={styls.button_wrap}>
-              <Select>
+              <Select defaultValue={"1"}>
                 <Select.Option value="1">CRM Software</Select.Option>
               </Select>
               <i className={styls.arrow}></i>

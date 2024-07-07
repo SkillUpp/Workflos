@@ -8,6 +8,7 @@ import x from "@/images/x.svg";
 import message from "@/images/message.svg";
 import twitter from "@/images/twitter.svg";
 import { MouseEvent, useEffect, useState } from "react";
+import { Select } from "antd";
 
 const mediaList = [
   { id: 1, img: Ins },
@@ -82,6 +83,8 @@ const defaultCompareMenu = [
 const Compare = () => {
   const [compareMenu, setCompareMenu] = useState(defaultCompareMenu);
   const handleClick = (id: string) => {
+    console.log(id, "id");
+
     const el = document.getElementById(id);
     el && el.scrollIntoView({ behavior: "smooth" });
     const menus = JSON.parse(JSON.stringify(compareMenu));
@@ -94,7 +97,6 @@ const Compare = () => {
     setCompareMenu(menus);
   };
 
-  
   return (
     <div className={styls.compare}>
       <div className={styls.header}>
@@ -151,6 +153,15 @@ const Compare = () => {
                 <span className={styls.text}>{item.name}</span>
               </div>
             ))}
+          </div>
+          <div className={styls.select_wrap}>
+            <Select defaultValue={'overview'} onChange={handleClick}>
+              {compareMenu.map((item) => (
+                <Select.Option value={item.htmlId} key={item.id}>
+                  {item.name}
+                </Select.Option>
+              ))}
+            </Select>
           </div>
         </div>
         <div className={styls.right}>
