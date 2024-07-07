@@ -179,6 +179,7 @@
   align-items: center;
   font-size: 16px;
   color: #fff;
+  cursor: pointer;
 }
 .main .softwore .header .softwore_list .softwore_list_item.active {
   color: #9747ff;

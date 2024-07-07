@@ -76,6 +76,7 @@ export default function Home() {
                 className={`${styls.softwore_list_item} 
                 ${item.id == softworeValue && styls.active}`}
                 key={item.id}
+                onClick={() => setSoftworeValue(item.id)}
               >
                 {item.name}
               </li>
