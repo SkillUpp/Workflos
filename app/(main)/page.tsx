@@ -50,7 +50,9 @@ export default function Home() {
               Explore software categories customers love
             </h3>
             <div className={styls.button_wrap}>
-              <button className={styls.btn}>CRM Software</button>
+              <Select>
+                <Select.Option value="1">CRM Software</Select.Option>
+              </Select>
               <i className={styls.arrow}></i>
             </div>
           </div>
@@ -89,8 +91,6 @@ export default function Home() {
 
           <div className={styls.more}>See all CRM Software</div>
         </div>
-
-        
       </div>
     </div>
   );

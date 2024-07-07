@@ -7,10 +7,10 @@
   display: flex;
   justify-content: space-between;
   height: 424px;
-  padding: 89px 0 0 200px;
+  padding: 89px 56px 0 200px;
 }
 .main .searchPanel .searchPanel__input {
-  width: 724px;
+  width: 50%;
 }
 .main .searchPanel .searchPanel__input .search__content .title {
   color: #9747ff;
@@ -74,6 +74,32 @@
 .main .searchPanel .searchPanel__input .button__content .button_wrap:hover {
   opacity: 0.8;
 }
+.main .searchPanel .searchPanel__input .button__content .button_wrap :global .ant-select {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background: transparent;
+  color: #9747ff;
+  font-size: 24px;
+  outline: none;
+  cursor: pointer;
+  border: none;
+}
+.main .searchPanel .searchPanel__input .button__content .button_wrap :global .ant-select .ant-select-selector {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+.main .searchPanel .searchPanel__input .button__content .button_wrap :global .ant-select .ant-select-selector .ant-select-selection-item {
+  text-align: center;
+  color: #9747ff;
+  font-size: 24px;
+}
+.main .searchPanel .searchPanel__input .button__content .button_wrap :global .ant-select input {
+  border-radius: 24px;
+  width: 100%;
+  height: 100%;
+}
 .main .searchPanel .searchPanel__input .button__content .button_wrap .btn {
   width: 100%;
   height: 100%;
@@ -101,10 +127,8 @@
   opacity: 0.7;
 }
 .main .searchPanel .searchPanel__bg {
-  position: absolute;
-  right: 60px;
-  top: 36px;
-  width: 500px;
+  position: relative;
+  width: 35%;
   height: 100%;
   background: url("../../images/search_bg.png") 0 0 no-repeat;
   background-size: contain;
@@ -194,7 +218,7 @@
     position: relative;
     display: flex;
     height: 424px;
-    padding: 89px 0 0 56px;
+    padding: 89px 24px 0 56px;
   }
   .main .searchPanel .searchPanel__input {
     width: 50%;
@@ -231,9 +255,8 @@
     height: 36px;
   }
   .main .searchPanel .searchPanel__bg {
-    right: 56px;
-    top: 36px;
-    width: 30%;
+    width: 35%;
+    background-size: contain;
   }
   .main .searchPanel .searchPanel__bg .product_info {
     position: absolute;

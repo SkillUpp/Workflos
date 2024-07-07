@@ -7,10 +7,10 @@
     display: flex;
     justify-content: space-between;
     height: 424px;
-    padding: 89px 0 0 200px;
+    padding: 89px 56px 0 200px;
 
     .searchPanel__input {
-      width: 724px;
+      width: 50%;
 
       .search__content {
         .title {
@@ -82,7 +82,35 @@
           &:hover {
             opacity: 0.8;
           }
-
+          :global {
+            .ant-select {
+              width: 100%;
+              height: 100%;
+              box-sizing: border-box;
+              background: transparent;
+              color: #9747ff;
+              font-size: 24px;
+              outline: none;
+              border: none;
+              cursor: pointer;
+              border: none;
+              .ant-select-selector {
+                border: none;
+                background: transparent;
+                box-shadow: none;
+                .ant-select-selection-item {
+                  text-align: center;
+                  color: #9747ff;
+                  font-size: 24px;
+                }
+              }
+              input {
+                border-radius: 24px;
+                width: 100%;
+                height: 100%;
+              }
+            }
+          }
           .btn {
             width: 100%;
             height: 100%;
@@ -116,10 +144,8 @@
     }
 
     .searchPanel__bg {
-      position: absolute;
-      right: 60px;
-      top: 36px;
-      width: 500px;
+      position: relative;
+      width: 35%;
       height: 100%;
       background: url("../../images/search_bg.png") 0 0 no-repeat;
       background-size: contain;
@@ -224,7 +250,7 @@
       position: relative;
       display: flex;
       height: 424px;
-      padding: 89px 0 0 56px;
+      padding: 89px 24px 0 56px;
 
       .searchPanel__input {
         width: 50%;
@@ -271,9 +297,8 @@
       }
 
       .searchPanel__bg {
-        right: 56px;
-        top: 36px;
-        width: 30%;
+        width: 35%;
+        background-size: contain;
 
         .product_info {
           position: absolute;
@@ -344,6 +369,7 @@
     }
   }
 }
+
 
 @media (max-width: 960px) {
   .main {
@@ -559,7 +585,7 @@
       .content {
         background: #f0f0f0;
         padding: 24px;
-        
+
         .more {
           margin-top: 16px;
           height: 36px;
