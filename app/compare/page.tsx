@@ -155,7 +155,7 @@ const Compare = () => {
             ))}
           </div>
           <div className={styls.select_wrap}>
-            <Select defaultValue={'overview'} onChange={handleClick}>
+            <Select defaultValue={"overview"} onChange={handleClick}>
               {compareMenu.map((item) => (
                 <Select.Option value={item.htmlId} key={item.id}>
                   {item.name}
@@ -413,6 +413,62 @@ const Compare = () => {
               </li>
             </ul>
           </div>
+
+          <div className={styls.funding} id="revenue">
+            <h3 className={styls.title}>Revenue</h3>
+            <ul className={styls.funding_list}>
+              <li className={styls.funding_item}>
+                Google's revenue in the first quarter of 2024 amounted to over
+                79.9 billion U.S. dollars.
+              </li>
+              <li className={styls.funding_item}>
+                The company's annual revenue in 2023 was 305.63 billion U.S.
+                dollars, its highest value to date.
+              </li>
+              <li className={styls.funding_item}>
+                Google's annual revenue from 2002 to 2023 is as follows:
+              </li>
+              <li className={styls.funding_item}>
+                Google's total yearly revenue in 2023 was $307.4 billion, with a
+                breakdown of revenue streams including Google Search & Other,
+                YouTube Ads, Google Network, Google Other, and Google Cloud.
+              </li>
+              <li className={styls.funding_item}>
+                Alphabet Inc.'s revenue, as the parent company of Google,
+                reported $68.01 billion in the first quarter of 2022.
+              </li>
+            </ul>
+          </div>
+
+          <div className={styls.funding} id="challenges">
+            <h3 className={styls.title}>Challenges</h3>
+            <ul className={styls.funding_list}>
+              <li className={styls.funding_item}>
+                Google's revenue in the first quarter of 2024 amounted to over
+                79.9 billion U.S. dollars.
+              </li>
+              <li className={styls.funding_item}>
+                The company's annual revenue in 2023 was 305.63 billion U.S.
+                dollars, its highest value to date.
+              </li>
+              <li className={styls.funding_item}>
+                Google's annual revenue from 2002 to 2023 is as follows:
+              </li>
+              <li className={styls.funding_item}>
+                Google's total yearly revenue in 2023 was $307.4 billion, with a
+                breakdown of revenue streams including Google Search & Other,
+                YouTube Ads, Google Network, Google Other, and Google Cloud.
+              </li>
+              <li className={styls.funding_item}>
+                Alphabet Inc.'s revenue, as the parent company of Google,
+                reported $68.01 billion in the first quarter of 2022.
+              </li>
+            </ul>
+          </div>
+
+          {/* <div className={styls.hiring} id="hiring">
+            <h3 className={styls.title}>Hiring</h3>
+          </div> */}
         </div>
       </div>
     </div>

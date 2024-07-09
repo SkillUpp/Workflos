@@ -75,6 +75,7 @@
   width: 100%;
   padding: 17px 30px;
   margin-top: 17px;
+  cursor: pointer;
 }
 .launch .content .launch_list .launch_item:first-child {
   margin-top: 0;

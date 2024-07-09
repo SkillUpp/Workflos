@@ -4,10 +4,15 @@ import { Input, Select } from "antd";
 import styls from "./index.module.css";
 import T1 from "@/images/t.png";
 import User from "@/images/user.png";
+import { useRouter } from "next/navigation";
 
 const tags = ["All", "Upcoming", "Past", "Launches"];
 
 const Launch = () => {
+  const route = useRouter();
+  const handleJump = (path: string) => {
+    route.push(path);
+  };
   return (
     <div className={styls.launch}>
       <div className={styls.header}>
@@ -40,7 +45,7 @@ const Launch = () => {
       </div>
       <div className={styls.content}>
         <div className={styls.launch_list}>
-          <div className={styls.launch_item}>
+          <div className={styls.launch_item} onClick={()=> handleJump('/launch/detail')}>
             <div className={styls.idx}>
               <i className={styls.icon}></i>
               <span className={styls.text}>1</span>
@@ -74,7 +79,7 @@ const Launch = () => {
             </div>
           </div>
 
-          <div className={styls.launch_item}>
+          <div className={styls.launch_item} onClick={()=> handleJump('/launch/detail')}>
             <div className={styls.idx}>
               <i className={styls.icon}></i>
               <span className={styls.text}>1</span>
