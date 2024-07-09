@@ -42,7 +42,7 @@ export default function Home() {
             <div className={styls.input_wrap}>
               <input
                 type="text"
-                placeholder="Search apps, categories, reviews..."
+                placeholder="Search apps, categories..."
               />
               <i className={styls.search}></i>
             </div>
