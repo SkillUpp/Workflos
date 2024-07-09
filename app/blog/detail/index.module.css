@@ -1,14 +1,11 @@
 .blog_detail {
-  padding-top: 102px;
+  padding-top: 80px;
   overflow: hidden;
 }
 .blog_detail .blog_detail_header {
-  height: 699px;
-  width: 100%;
-  background: #000;
+  padding: 0 200px;
 }
 .blog_detail .blog_detail_header .container {
-  max-width: 1320px;
   width: 100%;
   margin: 0 auto;
   padding: 64px 0;
@@ -30,15 +27,14 @@
 .blog_detail .blog_detail_header .container .source .text,
 .blog_detail .blog_detail_header .container .source .time {
   font-size: 18px;
-  color: #fff;
+  color: #000;
 }
 .blog_detail .blog_detail_content {
+  padding: 0 200px;
   margin: 36px 0;
 }
 .blog_detail .blog_detail_content .container {
   width: 100%;
-  max-width: 1320px;
-  margin: 0 auto;
 }
 .blog_detail .blog_detail_content .container :global img {
   width: 100%;

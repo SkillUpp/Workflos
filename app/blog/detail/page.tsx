@@ -10,7 +10,7 @@ interface IBlogDetailProps {
   id: string;
 }
 
-const BlogDetail = (props: IBlogDetailProps) => {
+const BlogDetail = (props: any) => {
   const [info, setInfo] = useState<any>({});
 
   const getBlogDetail = async (id: string) => {
@@ -25,6 +25,7 @@ const BlogDetail = (props: IBlogDetailProps) => {
     <div className={styls.blog_detail}>
       <div className={styls.blog_detail_header}>
         <div className={styls.container}>
+          <h1>{info?.title}</h1>
           <Image
             src={`https://directus.aiapex.asia/assets/${info?.cover}`}
             alt=""

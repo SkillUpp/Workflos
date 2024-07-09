@@ -16,7 +16,7 @@ interface IBlogDetailParams {
   };
 }
 
-const LearnDetail = (props: IBlogDetailParams) => {
+const LearnDetail = (props: any) => {
   return <BlogDetail id={props.params.id} />;
 };
 
