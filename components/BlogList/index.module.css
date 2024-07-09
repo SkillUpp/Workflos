@@ -23,7 +23,6 @@
   border-radius: 12px;
   text-decoration: none;
   transition: all 0.3s ease-in-out;
-  box-shadow: 0.625rem 0.625rem 0.938rem rgba(1, 1, 30, 0.2);
 }
 .blog_wrap .container .blog_list .blog_item .image_wrap {
   border-top-left-radius: 12px;

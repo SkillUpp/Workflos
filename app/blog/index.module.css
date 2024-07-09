@@ -1,4 +1,32 @@
 .blog {
-  padding-top: 86px;
+  padding: 143px 200px;
+  background: #f0f0f0;
   overflow: hidden;
+}
+.blog .title {
+  margin: 0 0 24px 0;
+  font-size: 36px;
+  line-height: 1.2;
+}
+@media (max-width: 1420px) {
+  .blog {
+    padding: 143px 56px;
+    overflow: hidden;
+  }
+  .blog .title {
+    margin: 0 0 12px 0;
+    font-size: 36px;
+    line-height: 1.2;
+  }
+}
+@media (max-width: 960px) {
+  .blog {
+    padding: 100px 24px;
+    overflow: hidden;
+  }
+  .blog .title {
+    margin: 0;
+    font-size: 36px;
+    line-height: 1.2;
+  }
 }
