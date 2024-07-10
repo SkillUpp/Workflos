@@ -30,6 +30,9 @@ export default function Home() {
   const [softworeValue, setSoftworeValue] = useState(1);
   const [softworeTab, setSoftworeTab] = useState(defaultSoftworeTab);
 
+  const handleJump = (path: string) => {
+    route.push(path);
+  };
 
   return (
     <div className={styls.main}>
@@ -40,10 +43,7 @@ export default function Home() {
               Where business leaders find software
             </h3>
             <div className={styls.input_wrap}>
-              <input
-                type="text"
-                placeholder="Search apps, categories..."
-              />
+              <input type="text" placeholder="Search apps, categories..." />
               <i className={styls.search}></i>
             </div>
           </div>
@@ -82,10 +82,11 @@ export default function Home() {
               </li>
             ))}
           </ul>
-
           <div className={styls.select_wrap}>
-            <Select>
-              <Select.Option value="1">Option 1</Select.Option>
+            <Select defaultValue={1}>
+              {defaultSoftworeTab.map((item) => (
+                <Select.Option value={item.id}>{item.name}</Select.Option>
+              ))}
             </Select>
           </div>
         </div>
@@ -93,7 +94,9 @@ export default function Home() {
         <div className={styls.content}>
           <SoftworeList />
 
-          <div className={styls.more}>See all CRM Software</div>
+          <div className={styls.more} onClick={() => handleJump("/category")}>
+            See all CRM Software
+          </div>
         </div>
       </div>
     </div>

@@ -28,7 +28,6 @@
 }
 .launch .header .tag_list {
   display: flex;
-  margin-top: 14px;
 }
 .launch .header .tag_list .tag {
   padding: 0 10px;
@@ -38,6 +37,7 @@
   border-radius: 50px;
   color: #fff;
   margin-left: 8px;
+  margin-top: 8px;
 }
 .launch .header .tag_list .tag:first-child {
   margin-left: 0;
@@ -76,6 +76,12 @@
   padding: 17px 30px;
   margin-top: 17px;
   cursor: pointer;
+  transition: all 0.2s;
+  box-sizing: border-box;
+}
+.launch .content .launch_list .launch_item:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transform: scale(1.02);
 }
 .launch .content .launch_list .launch_item:first-child {
   margin-top: 0;
@@ -102,6 +108,8 @@
 .launch .content .launch_list .launch_item .picture {
   padding-left: 20px;
   padding-right: 12px;
+  display: flex;
+  align-items: center;
 }
 .launch .content .launch_list .launch_item .picture img {
   width: 74px;
@@ -132,6 +140,9 @@
   display: flex;
   align-items: center;
   height: 24px;
+}
+.launch .content .launch_list .launch_item .user_info .user {
+  display: flex;
 }
 .launch .content .launch_list .launch_item .user_info img {
   width: 22px;
@@ -171,4 +182,126 @@
 }
 .launch .content .launch_list .launch_item .user_info .tags .tag:first-child {
   margin-left: 0;
+}
+@media (max-width: 1420px) {
+  .launch {
+    padding-top: 86px;
+  }
+  .launch .header {
+    background: #fff;
+    padding: 60px 56px 30px 56px;
+  }
+  .launch .header .tag_list {
+    display: flex;
+    margin-top: 14px;
+  }
+  .launch .content {
+    padding: 0 56px;
+  }
+  .launch .content .launch_list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 40px;
+    box-sizing: border-box;
+  }
+  .launch .content .launch_list .launch_item {
+    border-radius: 8px;
+    width: 100%;
+    padding: 17px 30px;
+    margin-top: 17px;
+  }
+}
+@media (max-width: 960px) {
+  .launch {
+    padding-top: 70px;
+  }
+  .launch .header {
+    background: #fff;
+    padding: 30px 24px;
+  }
+  .launch .header .tag_list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+  .launch .header .search {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .launch .header .search .left {
+    width: 100%;
+  }
+  .launch .header .search .left :global .ant-select {
+    width: calc(100% / 2 - 10px);
+  }
+  .launch .header .search .sort_wrap {
+    justify-content: space-between;
+    margin-top: 12px;
+    width: 100%;
+  }
+  .launch .header .search .sort_wrap :global .ant-select {
+    width: calc(100% - 76px);
+  }
+  .launch .content {
+    padding: 0 24px;
+  }
+  .launch .content .launch_list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 40px;
+    box-sizing: border-box;
+  }
+  .launch .content .launch_list .launch_item {
+    border-radius: 8px;
+    width: 100%;
+    padding: 17px 30px;
+    margin-top: 17px;
+  }
+  .launch .content .launch_list .launch_item .idx {
+    display: none;
+  }
+  .launch .content .launch_list .launch_item .picture {
+    align-items: flex-start;
+    padding-left: 0;
+  }
+  .launch .content .launch_list .launch_item .picture img {
+    width: 68px;
+    height: 68px;
+  }
+  .launch .content .launch_list .launch_item .info {
+    width: calc(100% - 88px);
+  }
+  .launch .content .launch_list .launch_item .info .user_info {
+    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .launch .content .launch_list .launch_item .info .user_info .user {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .launch .content .launch_list .launch_item .info .user_info .name,
+  .launch .content .launch_list .launch_item .info .user_info .tie,
+  .launch .content .launch_list .launch_item .info .user_info .time {
+    padding-left: 9px;
+    color: #000;
+    font-size: 16px;
+    line-height: 1.2;
+  }
+  .launch .content .launch_list .launch_item .info .user_info .tie,
+  .launch .content .launch_list .launch_item .info .user_info .time {
+    max-width: calc(100% / 2);
+    width: 100%;
+  }
+  .launch .content .launch_list .launch_item .info .user_info .tags {
+    padding-left: 0;
+    flex-wrap: wrap;
+  }
+  .launch .content .launch_list .launch_item .info .user_info .tags .tag {
+    margin-top: 10px;
+  }
 }

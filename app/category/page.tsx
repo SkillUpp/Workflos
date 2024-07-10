@@ -83,7 +83,13 @@ const Category = () => {
             </div>
           ))}
         </div>
-
+        <div className={styls.select_wrap}>
+          <Select defaultValue={1}>
+            {categoryTabs.map((item) => (
+              <Select.Option value={item.id}>{item.title}</Select.Option>
+            ))}
+          </Select>
+        </div>
         <div className={styls.main}>
           <div className={styls.fillter}>
             <p className={styls.content}>616 software options</p>

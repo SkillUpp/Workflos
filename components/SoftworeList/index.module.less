@@ -6,12 +6,17 @@
 
   .list_item {
     display: flex;
-    width: calc(~'(100% / 3) - 64px');
+    width: calc(~"(100% / 3) - 64px");
     margin-bottom: 24px;
     background: #fff;
     border-radius: 16px;
     padding: 24px;
     cursor: pointer;
+    transition: all 0.2s;
+    &:hover {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transform: scale(1.02);
+    }
 
     .left {
       img {
@@ -52,14 +57,12 @@
 
     .list_item {
       display: flex;
-      width: calc(~'(100% / 2) - 56px');
+      width: calc(~"(100% / 2) - 56px");
       margin-bottom: 16px;
       border-radius: 12px;
-      
     }
   }
 }
-
 
 @media (max-width: 599px) {
   .list {
@@ -73,7 +76,6 @@
       width: 100%;
       margin-bottom: 16px;
       border-radius: 12px;
-      
     }
   }
 }

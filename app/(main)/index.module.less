@@ -371,7 +371,6 @@
   }
 }
 
-
 @media (max-width: 960px) {
   .main {
     padding-top: 86px;
@@ -489,7 +488,7 @@
       display: flex;
       justify-content: space-between;
       height: auto;
-      padding: 80px 24px;
+      padding: 80px 24px 32px 24px;
 
       .searchPanel__input {
         width: 100%;
@@ -559,12 +558,21 @@
 
         .select_wrap {
           width: calc(~"100% - 48px");
-
+          display: block;
           :global {
             .ant-select {
               width: 100%;
               height: 44px;
-
+              .ant-select-selector {
+                border-color: #9747ff !important;
+                background: transparent;
+              }
+              &:focus,
+              &:hover {
+                .ant-select-selector {
+                  border-color: #9747ff !important;
+                }
+              }
               input {
                 width: 100%;
                 height: 44px;

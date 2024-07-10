@@ -29,7 +29,7 @@
 
     .tag_list {
       display: flex;
-      margin-top: 14px;
+      
       .tag {
         padding: 0 10px;
         font-size: 14px;
@@ -38,6 +38,7 @@
         border-radius: 50px;
         color: #fff;
         margin-left: 8px;
+        margin-top: 8px;
         &:first-child {
           margin-left: 0;
         }
@@ -81,6 +82,12 @@
         padding: 17px 30px;
         margin-top: 17px;
         cursor: pointer;
+        transition: all 0.2s;
+        box-sizing: border-box;
+        &:hover {
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          transform: scale(1.02);
+        }
         &:first-child {
           margin-top: 0;
         }
@@ -106,6 +113,8 @@
         .picture {
           padding-left: 20px;
           padding-right: 12px;
+          display: flex;
+          align-items: center;
           img {
             width: 74px;
             height: 74px;
@@ -129,13 +138,16 @@
             font-weight: 400;
             font-size: 20px;
             line-height: 40px;
-						opacity: .8;
+            opacity: 0.8;
           }
         }
         .user_info {
           display: flex;
           align-items: center;
           height: 24px;
+          .user {
+            display: flex;
+          }
           img {
             width: 22px;
             height: 22px;
@@ -144,7 +156,7 @@
           .wrap {
             display: flex;
             align-items: center;
-						margin-top: 4px;
+            margin-top: 4px;
             .name,
             .tie,
             .time {
@@ -156,7 +168,7 @@
               overflow: hidden;
               text-overflow: ellipsis;
               white-space: nowrap;
-							opacity: .8;
+              opacity: 0.8;
             }
           }
           .tags {
@@ -172,6 +184,134 @@
               margin-left: 8px;
               &:first-child {
                 margin-left: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1420px) {
+  .launch {
+    padding-top: 86px;
+    .header {
+      background: #fff;
+      padding: 60px 56px 30px 56px;
+      .tag_list {
+        display: flex;
+        margin-top: 14px;
+      }
+    }
+    .content {
+      padding: 0 56px;
+      .launch_list {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding-top: 40px;
+        box-sizing: border-box;
+        .launch_item {
+          border-radius: 8px;
+          width: 100%;
+          padding: 17px 30px;
+          margin-top: 17px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 960px) {
+  .launch {
+    padding-top: 70px;
+    .header {
+      background: #fff;
+      padding: 30px 24px;
+      .tag_list {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 14px;
+      }
+      .search {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        .left {
+          width: 100%;
+          :global {
+            .ant-select {
+              width: calc(100% / 2 - 10px);
+            }
+          }
+        }
+        .sort_wrap {
+          justify-content: space-between;
+          margin-top: 12px;
+          width: 100%;
+          :global {
+            .ant-select {
+              width: calc(100% - 76px);
+            }
+          }
+        }
+      }
+    }
+    .content {
+      padding: 0 24px;
+      .launch_list {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding-top: 40px;
+        box-sizing: border-box;
+        .launch_item {
+          border-radius: 8px;
+          width: 100%;
+          padding: 17px 30px;
+          margin-top: 17px;
+          .idx {
+            display: none;
+          }
+          .picture {
+            align-items: flex-start;
+            padding-left: 0;
+            img {
+              width: 68px;
+              height: 68px;
+            }
+          }
+          .info {
+            width: calc(100% - 88px);
+            .user_info {
+              height: auto;
+              flex-direction: column;
+              align-items: flex-start;
+              .user {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+              }
+              .name,
+              .tie,
+              .time {
+                padding-left: 9px;
+                color: #000;
+                font-size: 16px;
+                line-height: 1.2;
+              }
+              .tie,
+              .time {
+                max-width: calc(100% / 2);
+                width: 100%;
+              }
+              .tags {
+                padding-left: 0;
+                flex-wrap: wrap;
+                .tag {
+                  margin-top: 10px;
+                }
               }
             }
           }
