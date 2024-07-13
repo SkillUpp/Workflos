@@ -112,7 +112,7 @@ const Compare = (props: any) => {
         <h3 className={styls.title}>Compare</h3>
         <div className={styls.list}>
           {compareData &&
-            compareData.map((item) => (
+            compareData.map((item: any) => (
               <div
                 className={`${styls.item} ${
                   compareData.length == 2 ? styls.two : styls.three
@@ -258,7 +258,7 @@ const Compare = (props: any) => {
           <div className={styls.wrap} id="features">
             <h3 className={styls.title}>Key features</h3>
             <div className={styls.list}>
-              {compareData.map((item) => (
+              {compareData.map((item: any) => (
                 <div
                   className={`${styls.item} ${
                     compareData.length == 2 ? styls.two : styls.three
