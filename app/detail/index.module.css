@@ -23,6 +23,17 @@
 .compare .header .media .media_list a:first-child {
   margin-left: 0;
 }
+.compare .header .media .site_wrap {
+  display: flex;
+  align-items: center;
+}
+.compare .header .media .site_wrap span {
+  font-size: 18px;
+  line-height: 1.2;
+  color: #000;
+  font-weight: 800;
+  margin-left: 10px;
+}
 .compare .header .address {
   font-size: 14px;
   line-height: 1.2;
@@ -98,7 +109,7 @@
 .compare .content {
   padding: 18px 200px 0 200px;
   display: flex;
-  height: calc(100vh - 310px);
+  height: calc(100vh - 250px);
 }
 .compare .content .left {
   width: 126px;
@@ -179,6 +190,160 @@
   margin: 0;
   font-size: 14px;
   line-height: 25px;
+}
+.compare .content .right .overview .box,
+.compare .content .right .product .box,
+.compare .content .right .stack .box,
+.compare .content .right .funding .box,
+.compare .content .right .team .box,
+.compare .content .right .news .box {
+  list-style: none;
+  padding-top: 24px;
+}
+.compare .content .right .overview .box:first-child,
+.compare .content .right .product .box:first-child,
+.compare .content .right .stack .box:first-child,
+.compare .content .right .funding .box:first-child,
+.compare .content .right .team .box:first-child,
+.compare .content .right .news .box:first-child {
+  padding-top: 0;
+}
+.compare .content .right .overview .box .box_list,
+.compare .content .right .product .box .box_list,
+.compare .content .right .stack .box .box_list,
+.compare .content .right .funding .box .box_list,
+.compare .content .right .team .box .box_list,
+.compare .content .right .news .box .box_list {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.compare .content .right .overview .box .box_list .box_item,
+.compare .content .right .product .box .box_list .box_item,
+.compare .content .right .stack .box .box_list .box_item,
+.compare .content .right .funding .box .box_list .box_item,
+.compare .content .right .team .box .box_list .box_item,
+.compare .content .right .news .box .box_list .box_item {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 14px;
+  line-height: 24px;
+}
+.compare .content .right .overview .box .box_list .box_item.nocheck,
+.compare .content .right .product .box .box_list .box_item.nocheck,
+.compare .content .right .stack .box .box_list .box_item.nocheck,
+.compare .content .right .funding .box .box_list .box_item.nocheck,
+.compare .content .right .team .box .box_list .box_item.nocheck,
+.compare .content .right .news .box .box_list .box_item.nocheck {
+  color: #c5c5c5;
+}
+.compare .content .right .overview .box .box_list .box_item.nocheck .icon,
+.compare .content .right .product .box .box_list .box_item.nocheck .icon,
+.compare .content .right .stack .box .box_list .box_item.nocheck .icon,
+.compare .content .right .funding .box .box_list .box_item.nocheck .icon,
+.compare .content .right .team .box .box_list .box_item.nocheck .icon,
+.compare .content .right .news .box .box_list .box_item.nocheck .icon {
+  display: block;
+  width: 16px;
+  height: 16px;
+  background: url(../../images/close1.svg) 0 0 no-repeat;
+  background-size: cover;
+  margin-right: 4px;
+}
+.compare .content .right .overview .box .box_list .box_item span,
+.compare .content .right .product .box .box_list .box_item span,
+.compare .content .right .stack .box .box_list .box_item span,
+.compare .content .right .funding .box .box_list .box_item span,
+.compare .content .right .team .box .box_list .box_item span,
+.compare .content .right .news .box .box_list .box_item span {
+  display: block;
+  max-width: 60%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.compare .content .right .overview .box .box_list .box_item .icon,
+.compare .content .right .product .box .box_list .box_item .icon,
+.compare .content .right .stack .box .box_list .box_item .icon,
+.compare .content .right .funding .box .box_list .box_item .icon,
+.compare .content .right .team .box .box_list .box_item .icon,
+.compare .content .right .news .box .box_list .box_item .icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: url(../../images/check.svg) 0 0 no-repeat;
+  background-size: cover;
+}
+.compare .content .right .overview .pricing_top,
+.compare .content .right .product .pricing_top,
+.compare .content .right .stack .pricing_top,
+.compare .content .right .funding .pricing_top,
+.compare .content .right .team .pricing_top,
+.compare .content .right .news .pricing_top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.compare .content .right .overview .pricing_top .name,
+.compare .content .right .product .pricing_top .name,
+.compare .content .right .stack .pricing_top .name,
+.compare .content .right .funding .pricing_top .name,
+.compare .content .right .team .pricing_top .name,
+.compare .content .right .news .pricing_top .name,
+.compare .content .right .overview .pricing_top .text,
+.compare .content .right .product .pricing_top .text,
+.compare .content .right .stack .pricing_top .text,
+.compare .content .right .funding .pricing_top .text,
+.compare .content .right .team .pricing_top .text,
+.compare .content .right .news .pricing_top .text,
+.compare .content .right .overview .pricing_top .price,
+.compare .content .right .product .pricing_top .price,
+.compare .content .right .stack .pricing_top .price,
+.compare .content .right .funding .pricing_top .price,
+.compare .content .right .team .pricing_top .price,
+.compare .content .right .news .pricing_top .price {
+  margin: 0;
+}
+.compare .content .right .overview .pricing_top .name,
+.compare .content .right .product .pricing_top .name,
+.compare .content .right .stack .pricing_top .name,
+.compare .content .right .funding .pricing_top .name,
+.compare .content .right .team .pricing_top .name,
+.compare .content .right .news .pricing_top .name {
+  font-size: 14px;
+  line-height: 24px;
+}
+.compare .content .right .overview .pricing_top .price,
+.compare .content .right .product .pricing_top .price,
+.compare .content .right .stack .pricing_top .price,
+.compare .content .right .funding .pricing_top .price,
+.compare .content .right .team .pricing_top .price,
+.compare .content .right .news .pricing_top .price {
+  font-size: 50px;
+  line-height: 1.2;
+  font-weight: 800;
+}
+.compare .content .right .overview .pricing_top .price::before,
+.compare .content .right .product .pricing_top .price::before,
+.compare .content .right .stack .pricing_top .price::before,
+.compare .content .right .funding .pricing_top .price::before,
+.compare .content .right .team .pricing_top .price::before,
+.compare .content .right .news .pricing_top .price::before {
+  content: "$";
+  font-size: 16px;
+}
+.compare .content .right .overview .pricing_top .text,
+.compare .content .right .product .pricing_top .text,
+.compare .content .right .stack .pricing_top .text,
+.compare .content .right .funding .pricing_top .text,
+.compare .content .right .team .pricing_top .text,
+.compare .content .right .news .pricing_top .text {
+  font-size: 14px;
+  line-height: 24px;
+  color: #c5c5c5;
 }
 .compare .content .right .overview {
   margin-top: 0;

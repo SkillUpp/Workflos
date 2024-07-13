@@ -1,14 +1,13 @@
 "use client";
 import Image from "next/image";
 import styls from "./index.module.css";
-import Google from "@/images/google.svg";
 import Link from "next/link";
 import Ins from "@/images/ins.svg";
 import x from "@/images/x.svg";
 import message from "@/images/message.svg";
 import twitter from "@/images/twitter.svg";
-import { MouseEvent, useEffect, useState } from "react";
-import { Select } from "antd";
+import { useEffect, useState } from "react";
+import { Rate, Select } from "antd";
 import { productDetail } from "@/api/product";
 import LoadingContext from "@/components/LoadingContext";
 
@@ -23,63 +22,63 @@ const defaultCompareMenu = [
   {
     id: 1,
     htmlId: "overview",
-    name: "Overview",
+    name: "App Info",
     active: true,
   },
   {
     id: 2,
-    name: "News",
+    name: "Pricing",
     htmlId: "news",
     active: false,
   },
   {
     id: 3,
-    name: "Products",
+    name: "Features",
     htmlId: "products",
     active: false,
   },
   {
     id: 4,
-    name: "AI Stack",
+    name: "Reviews",
     htmlId: "stack",
     active: false,
   },
-  {
-    id: 5,
-    name: "Funding",
-    htmlId: "funding",
-    active: false,
-  },
-  {
-    id: 6,
-    name: "Core Team",
-    htmlId: "team",
-    active: false,
-  },
-  {
-    id: 7,
-    name: "Revenue",
-    htmlId: "revenue",
-    active: false,
-  },
-  {
-    id: 8,
-    name: "Competitors",
-    htmlId: "competitors",
-    active: false,
-  },
-  {
-    id: 9,
-    name: "Challenges",
-    htmlId: "challenges",
-    active: false,
-  },
-  {
-    id: 10,
-    name: "Hiring",
-    htmlId: "hiring",
-    active: false,
-  },
+  // {
+  //   id: 5,
+  //   name: "Alternatives",
+  //   htmlId: "funding",
+  //   active: false,
+  // },
+  // {
+  //   id: 6,
+  //   name: "Core Team",
+  //   htmlId: "team",
+  //   active: false,
+  // },
+  // {
+  //   id: 7,
+  //   name: "Revenue",
+  //   htmlId: "revenue",
+  //   active: false,
+  // },
+  // {
+  //   id: 8,
+  //   name: "Competitors",
+  //   htmlId: "competitors",
+  //   active: false,
+  // },
+  // {
+  //   id: 9,
+  //   name: "Challenges",
+  //   htmlId: "challenges",
+  //   active: false,
+  // },
+  // {
+  //   id: 10,
+  //   name: "Hiring",
+  //   htmlId: "hiring",
+  //   active: false,
+  // },
 ];
 
 const ProductDetail = (props: any) => {
@@ -129,7 +128,8 @@ const ProductDetail = (props: any) => {
       <div className={styls.header}>
         <div className={styls.media}>
           <div className={styls.site_wrap}>
-            <Image src={productInfo?.photo} alt="" width={145} height={42} />
+            <Image src={productInfo?.photo} alt="" width={40} height={40} />
+            <span>{productInfo?.name}</span>
           </div>
           <div className={styls.media_list}>
             {mediaList.map((item) => (
@@ -139,10 +139,8 @@ const ProductDetail = (props: any) => {
             ))}
           </div>
         </div>
-        <p className={styls.address}>
-          Mountain View, California, United States
-        </p>
-        <div className={styls.wrap}>
+        <p className={styls.address}>{productInfo?.introduce}</p>
+        {/* <div className={styls.wrap}>
           <div className={styls.phone}>
             <i className={styls.phone_icon}></i>
             <span className={styls.text}>+1 650 253 0000</span>
@@ -151,8 +149,8 @@ const ProductDetail = (props: any) => {
             <i className={styls.email_icon}></i>
             <span className={styls.text}>google@google.com</span>
           </div>
-        </div>
-        <div className={styls.tags}>
+        </div> */}
+        {/* <div className={styls.tags}>
           <div className={styls.user}>
             <i className={styls.icon}></i>
             <span className={styls.text}>100+</span>
@@ -165,7 +163,7 @@ const ProductDetail = (props: any) => {
             <span>$</span>
             <span className={styls.text}>100+</span>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div className={styls.content}>
@@ -193,183 +191,160 @@ const ProductDetail = (props: any) => {
         </div>
         <div className={styls.right}>
           <div className={styls.overview} id="overview">
-            <h3 className={styls.title}>Overview</h3>
-            <p className={styls.desc}>
-              Google LLC is an American multinational corporation and technology
-              company focusing on online advertising, search engine technology,
-              cloud computing, computer software, quantum computing, e-commerce,
-              consumer electronics, and artificial intelligence. The company's
-              business areas include advertising, search, platforms and
-              operating systems, and enterprise and hardware products Alphabet,
-              the parent company of Google, topped $100 billion in annual sales
-              for the first time in Google's 20-year history
-            </p>
+            <h3 className={styls.title}>App Info</h3>
+            <p className={styls.desc}>{productInfo?.description}</p>
+
+            <div className={styls.box}>
+              <h3 className={styls.title}>Platforms supported</h3>
+              <ul className={styls.box_list}>
+                {productInfo?.platformsSupported &&
+                  productInfo.platformsSupported.map((item: string) => (
+                    <li className={styls.box_item} key={item}>
+                      <span>{item}</span>
+                      <i className={styls.icon}></i>
+                    </li>
+                  ))}
+              </ul>
+            </div>
+
+            <div className={styls.box}>
+              <h3 className={styls.title}>Typical customers</h3>
+              <ul className={styls.box_list}>
+                {productInfo?.typicalCustomers &&
+                  productInfo.typicalCustomers.map((item: string) => (
+                    <li className={styls.box_item} key={item}>
+                      <span>{item}</span>
+                      <i className={styls.icon}></i>
+                    </li>
+                  ))}
+              </ul>
+            </div>
+
+            <div className={styls.box}>
+              <h3 className={styls.title}>Customer support</h3>
+              <ul className={styls.box_list}>
+                {productInfo?.supportOptions &&
+                  productInfo.supportOptions.map((item: string) => (
+                    <li className={styls.box_item} key={item}>
+                      <span>{item}</span>
+                      <i className={styls.icon}></i>
+                    </li>
+                  ))}
+              </ul>
+            </div>
+
+            <div
+              dangerouslySetInnerHTML={{
+                __html: productInfo?.keyBenefits,
+              }}
+            ></div>
           </div>
 
           <div className={styls.news} id="news">
-            <h3 className={styls.title}>News</h3>
-            <div className={styls.news_list}>
-              <div className={styls.news_item}>
-                <div className={styls.top}>
-                  <span className={styls.time}>Jun 29, 2024</span>
-                  <p className={styls.line}></p>
-                </div>
-                <p className={styls.desc}>
-                  Google announced its next-generation Tensor Processing Units
-                  (TPUs) called Trillium, the Wear OS 5 update, and the Gemini
-                  1.5 Pro, its most capable generative AI model. The company has
-                  opened access to the 2-million-token context window of the
-                  Gemini 1.5 Pro AI model, enabling code execution and making
-                  the Gemma 2 model available in Google AI Studio.
-                </p>
-
-                <div className={styls.company_list}>
-                  <div className={styls.company_item}>
-                    <h3 className={styls.title}>techcrunch.com</h3>
-                    <p className={styls.text}>
-                      Here are the hottest product announcements fromApple,
-                      Google, Microsoft and others so far in 2024
-                    </p>
-                  </div>
-                  <div className={styls.company_item}>
-                    <h3 className={styls.title}>techcrunch.com</h3>
-                    <p className={styls.text}>
-                      Here are the hottest product announcements fromApple,
-                      Google, Microsoft and others so far in 2024
-                    </p>
-                  </div>
-                  <div className={styls.company_item}>
-                    <h3 className={styls.title}>techcrunch.com</h3>
-                    <p className={styls.text}>
-                      Here are the hottest product announcements fromApple,
-                      Google, Microsoft and others so far in 2024
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className={styls.news_item}>
-                <div className={styls.top}>
-                  <span className={styls.time}>Jun 29, 2024</span>
-                  <p className={styls.line}></p>
-                </div>
-                <p className={styls.desc}>
-                  Google announced its next-generation Tensor Processing Units
-                  (TPUs) called Trillium, the Wear OS 5 update, and the Gemini
-                  1.5 Pro, its most capable generative AI model. The company has
-                  opened access to the 2-million-token context window of the
-                  Gemini 1.5 Pro AI model, enabling code execution and making
-                  the Gemma 2 model available in Google AI Studio.
-                </p>
-                <div className={styls.company_list}>
-                  <div className={styls.company_item}>
-                    <h3 className={styls.title}>techcrunch.com</h3>
-                    <p className={styls.text}>
-                      Here are the hottest product announcements fromApple,
-                      Google, Microsoft and others so far in 2024
-                    </p>
-                  </div>
-                  <div className={styls.company_item}>
-                    <h3 className={styls.title}>techcrunch.com</h3>
-                    <p className={styls.text}>
-                      Here are the hottest product announcements fromApple,
-                      Google, Microsoft and others so far in 2024
-                    </p>
-                  </div>
-                  <div className={styls.company_item}>
-                    <h3 className={styls.title}>techcrunch.com</h3>
-                    <p className={styls.text}>
-                      Here are the hottest product announcements fromApple,
-                      Google, Microsoft and others so far in 2024
-                    </p>
-                  </div>
-                </div>
-              </div>
+            <h3 className={styls.title}>Pricing</h3>
+            <div className={styls.pricing_top}>
+              <h4 className={styls.name}>Starting from</h4>
+              <p className={styls.price}>{productInfo?.price / 100}</p>
+              <p className={styls.text}>per month</p>
             </div>
+            <div className={styls.box}>
+              <ul className={styls.box_list}>
+                {productInfo?.priceOption &&
+                  productInfo.priceOption.map((item: string) => (
+                    <li className={styls.box_item} key={item}>
+                      <span>{item}</span>
+                      <i className={styls.icon}></i>
+                    </li>
+                  ))}
+              </ul>
+            </div>
+
+            <div
+              style={{ paddingTop: "16px" }}
+              dangerouslySetInnerHTML={{
+                __html: productInfo?.priceDetail,
+              }}
+            ></div>
           </div>
 
           <div className={styls.product} id="products">
-            <h3 className={styls.title}>Product</h3>
-            <ul className={styls.product_list}>
-              <li className={styls.product_item}>
-                Google offers a wide range of products and services, including
-                Android, Chrome, Google Play, Wear OS, Chromecast, Fitbit,
-                Google Nest, Pixel, Gemini, Bard, Google Assistant, Maps, News,
-                Search, Shopping, Photos, Translate, and more.
-              </li>
-              <li className={styls.product_item}>
-                Google provides various business products and services,
-                including AdMob, AdSense, Analytics, Android Enterprise,
-                Blogger, Business Messages, Business Profile, Chrome Enterprise,
-                Enterprise Search, Google Ad Manager, Google Ads, Google
-                Assistant, Google Cloud, Google Digital Garage, Google Maps
-                Platform, Google Marketing Platform, and more.
-              </li>
-              <li className={styls.product_item}>
-                Google offers developer products and services, including App
-                Testing, Business Messages, Cloud Computing, Devices,
-                Engagement, Game Services, Google Wallet, Growth, Maps +
-                Location, Messaging + Notifications, Monetization, Monitoring,
-                Payments, Sign in + Identity, Storage + Sync, and more.
-              </li>
-              <li className={styls.product_item}>
-                Google Workspace provides a suite of productivity and
-                collaboration tools, including Gmail, Drive, Meet, Calendar,
-                Chat, Docs, Sheets, Slides, Keep, Sites, Forms, AppSheet, and
-                more, with pricing plans starting at $6 USD per user/month.
-              </li>
-              <li className={styls.product_item}>
-                Google also offers various other products and services,
-                including Google One (cloud storage), Google Photos, Google
-                Drive, Gmail, Gemini Advanced (AI-powered features), Magic
-                Editor (Google Photos feature), and more, with pricing plans
-                starting at 15 GB storage for free.
-              </li>
-            </ul>
+            <h3 className={styls.title}>Features</h3>
+            <div className={styls.box}>
+              <ul className={styls.box_list}>
+                <li className={`${styls.box_item}`}>
+                  <span>Total features</span>
+                  <span>{productInfo?.totalFeature}</span>
+                </li>
+
+                {productInfo?.supportFeatures &&
+                  productInfo.supportFeatures.map((item: string) => (
+                    <li className={styls.box_item} key={item}>
+                      <span>{item}</span>
+                      <i className={styls.icon}></i>
+                    </li>
+                  ))}
+
+                {productInfo?.supportCommonFeatures &&
+                  productInfo.supportCommonFeatures.map((item: string) => (
+                    <li className={styls.box_item} key={item}>
+                      <span>{item}</span>
+                      <i className={styls.icon}></i>
+                    </li>
+                  ))}
+                {productInfo?.unsupportCommonFeatures &&
+                  productInfo.unsupportCommonFeatures.map((item: string) => (
+                    <li
+                      className={`${styls.box_item} ${styls.nocheck}`}
+                      key={item}
+                    >
+                      <span>{item}</span>
+                      <i className={styls.icon}></i>
+                    </li>
+                  ))}
+              </ul>
+            </div>
           </div>
 
           <div className={styls.stack} id="stack">
-            <h3 className={styls.title}>AI Stack</h3>
-            <ul className={styls.stack_list}>
-              <li className={styls.stack_item}>
-                Google offers a wide range of products and services, including
-                Android, Chrome, Google Play, Wear OS, Chromecast, Fitbit,
-                Google Nest, Pixel, Gemini, Bard, Google Assistant, Maps, News,
-                Search, Shopping, Photos, Translate, and more.
-              </li>
-              <li className={styls.stack_item}>
-                Google provides various business products and services,
-                including AdMob, AdSense, Analytics, Android Enterprise,
-                Blogger, Business Messages, Business Profile, Chrome Enterprise,
-                Enterprise Search, Google Ad Manager, Google Ads, Google
-                Assistant, Google Cloud, Google Digital Garage, Google Maps
-                Platform, Google Marketing Platform, and more.
-              </li>
-              <li className={styls.stack_item}>
-                Google offers developer products and services, including App
-                Testing, Business Messages, Cloud Computing, Devices,
-                Engagement, Game Services, Google Wallet, Growth, Maps +
-                Location, Messaging + Notifications, Monetization, Monitoring,
-                Payments, Sign in + Identity, Storage + Sync, and more.
-              </li>
-              <li className={styls.stack_item}>
-                Google Workspace provides a suite of productivity and
-                collaboration tools, including Gmail, Drive, Meet, Calendar,
-                Chat, Docs, Sheets, Slides, Keep, Sites, Forms, AppSheet, and
-                more, with pricing plans starting at $6 USD per user/month.
-              </li>
-              <li className={styls.stack_item}>
-                Google also offers various other products and services,
-                including Google One (cloud storage), Google Photos, Google
-                Drive, Gmail, Gemini Advanced (AI-powered features), Magic
-                Editor (Google Photos feature), and more, with pricing plans
-                starting at 15 GB storage for free.
-              </li>
-            </ul>
+            <h3 className={styls.title}>Reviews</h3>
+            <div className={styls.box}>
+              <h3 className={styls.title}>Rating criteria</h3>
+              <ul className={styls.box_list}>
+                <li className={styls.box_item}>
+                  <span>Value for money</span>
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <Rate value={productInfo?.valueForMoney / 10} disabled />(
+                    {productInfo?.valueForMoney / 10})
+                  </div>
+                </li>
+
+                <li className={styls.box_item}>
+                  <span>Ease of use</span>
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <Rate value={productInfo?.easeOfUse / 10} disabled />(
+                    {productInfo?.easeOfUse / 10})
+                  </div>
+                </li>
+                <li className={styls.box_item}>
+                  <span>Features</span>
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <Rate value={productInfo?.features / 10} disabled />(
+                    {productInfo?.features / 10})
+                  </div>
+                </li>
+                <li className={styls.box_item}>
+                  <span>Customer support</span>
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <Rate value={productInfo?.customerSupport / 10} disabled />(
+                    {productInfo?.customerSupport / 10})
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
 
-          <div className={styls.funding} id="funding">
-            <h3 className={styls.title}>Funding</h3>
+          {/* <div className={styls.funding} id="funding">
+            <h3 className={styls.title}>Alternatives</h3>
             <ul className={styls.funding_list}>
               <li className={styls.funding_item}>
                 Google.org commits $25M in funding to accelerate progress
@@ -397,9 +372,9 @@ const ProductDetail = (props: any) => {
                 Associates, Inc.
               </li>
             </ul>
-          </div>
+          </div> */}
 
-          <div className={styls.team} id="team">
+          {/* <div className={styls.team} id="team">
             <h3 className={styls.title}>Core Team</h3>
             <ul className={styls.team_list}>
               <li className={styls.team_item}>
@@ -491,7 +466,7 @@ const ProductDetail = (props: any) => {
                 reported $68.01 billion in the first quarter of 2022.
               </li>
             </ul>
-          </div>
+          </div> */}
 
           {/* <div className={styls.hiring} id="hiring">
             <h3 className={styls.title}>Hiring</h3>

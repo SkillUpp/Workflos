@@ -20,6 +20,17 @@
           }
         }
       }
+      .site_wrap {
+        display: flex;
+        align-items: center;
+        span {
+          font-size: 18px;
+          line-height: 1.2;
+          color: #000;
+          font-weight: 800;
+          margin-left: 10px;
+        }
+      }
     }
     .address {
       font-size: 14px;
@@ -97,7 +108,7 @@
   .content {
     padding: 18px 200px 0 200px;
     display: flex;
-    height: calc(100vh - 310px);
+    height: calc(100vh - 250px);
     .left {
       width: 126px;
       margin-right: 24px;
@@ -165,6 +176,90 @@
           margin: 0;
           font-size: 14px;
           line-height: 25px;
+        }
+        .box {
+          list-style: none;
+          padding-top: 24px;
+          &:first-child {
+            padding-top: 0;
+          }
+
+          .box_list {
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+
+            .box_item {
+              display: flex;
+              justify-content: space-between;
+              width: 100%;
+              font-size: 14px;
+              line-height: 24px;
+
+              &.nocheck {
+                color: #c5c5c5;
+                .icon {
+                  display: block;
+                  width: 16px;
+                  height: 16px;
+                  background: url(../../images/close1.svg) 0 0 no-repeat;
+                  background-size: cover;
+                  margin-right: 4px;
+                }
+              }
+
+              span {
+                display: block;
+                max-width: 60%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+              }
+
+              .icon {
+                display: block;
+                width: 20px;
+                height: 20px;
+                background: url(../../images/check.svg) 0 0 no-repeat;
+                background-size: cover;
+              }
+            }
+          }
+        }
+        .pricing_top {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          .name,
+          .text,
+          .price {
+            margin: 0;
+          }
+
+          .name {
+            font-size: 14px;
+            line-height: 24px;
+          }
+
+          .price {
+            font-size: 50px;
+            line-height: 1.2;
+            font-weight: 800;
+
+            &::before {
+              content: "$";
+              font-size: 16px;
+            }
+          }
+
+          .text {
+            font-size: 14px;
+            line-height: 24px;
+            color: #c5c5c5;
+          }
         }
       }
       .overview {

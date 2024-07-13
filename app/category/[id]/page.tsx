@@ -1,9 +1,14 @@
-import ProductDetail from "@/app/detail/index";
+import ProductCompare from "@/app/category/compare/page";
 import { useStore } from "@/store/userStore";
 
 export const generateStaticParams = async () => {
-	// const { compareStr } = useStore();
-  const paths = [{ id: 'name&name' }];
+  // const { compareStr } = useStore();
+  const paths = [
+    { id: "ClickUp&name" },
+    { id: "name&ClickUp" },
+    { id: "ClickUp&Slack" },
+    { id: "Slack&ClickUp" },
+  ];
   return paths;
 };
 
@@ -14,7 +19,7 @@ interface IBlogDetailParams {
 }
 
 const LearnDetail = (props: any) => {
-  return <ProductDetail id={props.params.id} />;
+  return <ProductCompare id={props.params.id} />;
 };
 
 export default LearnDetail;

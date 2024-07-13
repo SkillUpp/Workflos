@@ -43,19 +43,13 @@ const CompareModal = (props: ICompareModalProps) => {
     route.push(`/category/${names}`);
   };
 
-  /**
-   * 获取产品列表
-   */
-  const getSoftworeList = async () => {
-    const params = {
-      category: "CRM",
-      sortBy: "HighestRated",
-      limit: 16,
-      page: 1,
-    };
-    const res = await productList(params);
-    if (res.data) {
-      setSoftworeList(res.data.list);
+  const handleClose = (info: any) => {
+    const newList = compareList.filter(
+      (compareItem: any) => compareItem.name !== info.name
+    );
+    setCompareList(newList);
+    if (newList.length == 0) {
+      props.close();
     }
   };
 
@@ -81,7 +75,7 @@ const CompareModal = (props: ICompareModalProps) => {
         <h3 className={styls.title}>App comparison</h3>
         <i className={styls.close_icon} onClick={() => props.close()}></i>
         <p className={styls.desc}>
-          Add up to 4 apps below to see how theycompare. You can also use the
+          Add up to 3 apps below to see how theycompare. You can also use the
           "Compare'buttons while browsing.
         </p>
 
@@ -89,8 +83,11 @@ const CompareModal = (props: ICompareModalProps) => {
           {compareList.map((item: any) => (
             <li key={item.id}>
               <div className={styls.list_item}>
-                <i className={styls.close}></i>
-                <Image src={SoftIcon} width={160} height={58} alt="" />
+                <i
+                  className={styls.close}
+                  onClick={() => handleClose(item)}
+                ></i>
+                <Image src={item.photo} width={160} height={58} alt="" />
               </div>
             </li>
           ))}

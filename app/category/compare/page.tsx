@@ -2,13 +2,14 @@
 import Image from "next/image";
 import styls from "./index.module.css";
 import Google from "@/images/google.svg";
-import Link from "next/link";
 import Ins from "@/images/ins.svg";
 import x from "@/images/x.svg";
 import message from "@/images/message.svg";
 import twitter from "@/images/twitter.svg";
-import { MouseEvent, useEffect, useState } from "react";
-import { Select } from "antd";
+import { useEffect, useState } from "react";
+import { Rate, Select } from "antd";
+import { productDetail } from "@/api/product";
+import LoadingContext from "@/components/LoadingContext";
 
 const mediaList = [
   { id: 1, img: Ins },
@@ -24,12 +25,6 @@ const defaultCompareMenu = [
     name: "Overview",
     active: true,
   },
-  // {
-  //   id: 2,
-  //   name: "Screenshots",
-  //   htmlId: "screenshots",
-  //   active: false,
-  // },
   {
     id: 3,
     name: "Pricing",
@@ -44,14 +39,14 @@ const defaultCompareMenu = [
   },
   {
     id: 5,
-    name: "Integrations",
-    htmlId: "integrations",
+    name: "Reviews",
+    htmlId: "reviews",
     active: false,
   },
   // {
-  //   id: 6,
-  //   name: "Alternatives",
-  //   htmlId: "alternatives",
+  //   id: 5,
+  //   name: "Integrations",
+  //   htmlId: "integrations",
   //   active: false,
   // },
 ];
@@ -62,13 +57,14 @@ const companyList = [
   { id: 3, img: Google, name: "Google" },
 ];
 
-const overviewList = [{ id: 1 }, { id: 2 }, { id: 3 }];
-
-const Compare = () => {
+const Compare = (props: any) => {
+  const { id } = props;
+  const [loading, setLoading] = useState(false);
+  const [compareData, setCompareData] = useState<any>([]);
   const [compareMenu, setCompareMenu] = useState(defaultCompareMenu);
   const handleClick = (id: string) => {
     console.log(id);
-    
+
     const el = document.getElementById(id);
     el && el.scrollIntoView({ behavior: "smooth" });
     const menus = JSON.parse(JSON.stringify(compareMenu));
@@ -81,22 +77,55 @@ const Compare = () => {
     setCompareMenu(menus);
   };
 
+  const getProductDetail = async (id: string) => {
+    try {
+      const res = await productDetail();
+      return res.data;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    const fetchProductDetails = async () => {
+      if (id) {
+        const ids = encodeURI(id).split("%2526");
+        setLoading(true);
+
+        const results = await Promise.all(
+          ids.map((item) => getProductDetail(item))
+        );
+        setCompareData((prevData: any) => [
+          ...prevData,
+          ...results.filter(Boolean),
+        ]);
+        setLoading(false);
+      }
+    };
+    fetchProductDetails();
+  }, []);
   return (
     <div className={styls.compare}>
+      {loading && <LoadingContext />}
       <div className={styls.header}>
         <h3 className={styls.title}>Compare</h3>
         <div className={styls.list}>
-          {companyList.map((item) => (
-            <div
-              className={`${styls.item} ${
-                companyList.length == 2 ? styls.two : styls.three
-              }`}
-              key={item.id}
-            >
-              <Image src={item.img} alt="" width={140} height={42} />
-              <button className={styls.btn}>LEARN MORE</button>
-            </div>
-          ))}
+          {compareData &&
+            compareData.map((item) => (
+              <div
+                className={`${styls.item} ${
+                  compareData.length == 2 ? styls.two : styls.three
+                }`}
+                key={item.name}
+              >
+                <div className={styls.logo_info}>
+                  <Image src={item.photo} alt="" width={40} height={40} />
+                  <span className={styls.name}>{item.name}</span>
+                </div>
+                {/* <button className={styls.btn}>LEARN MORE</button> */}
+              </div>
+            ))}
         </div>
       </div>
       <div className={styls.content}>
@@ -126,123 +155,101 @@ const Compare = () => {
           <div className={styls.wrap} id="overview">
             <h3 className={styls.title}>Overview</h3>
             <div className={styls.list}>
-              {overviewList.map((item) => (
-                <div
-                  className={`${styls.item} ${
-                    overviewList.length == 2 ? styls.two : styls.three
-                  }`}
-                  key={item.id}
-                >
-                  <p className={styls.desc}>
-                    Full Slate is a cloud based appointment scheduling software
-                  </p>
-                  <div className={styls.box}>
-                    <h3 className={styls.title}>Platforms supported</h3>
-                    <ul className={styls.box_list}>
-                      <li className={styls.box_item}>
-                        <span>Web-based</span>
-                        <i className={styls.icon}></i>
-                      </li>
-                      <li className={styls.box_item}>
-                        <span>iPhone app</span>
-                        <i className={styls.icon}></i>
-                      </li>
-                      <li className={styls.box_item}>
-                        <span>Android app</span>
-                        <i className={styls.icon}></i>
-                      </li>
-                      <li className={`${styls.box_item} ${styls.nocheck}`}>
-                        <span>Windows Phone app</span>
-                        <i className={styls.icon}></i>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className={styls.box}>
-                    <h3 className={styls.title}>Typical customers</h3>
-                    <ul className={styls.box_list}>
-                      <li className={styls.box_item}>
-                        <span>Freelancers</span>
-                        <i className={styls.icon}></i>
-                      </li>
-                      <li className={styls.box_item}>
-                        <span>Small businesses</span>
-                        <i className={styls.icon}></i>
-                      </li>
-                      <li className={styls.box_item}>
-                        <span>Mid size businesses</span>
-                        <i className={styls.icon}></i>
-                      </li>
-                      <li className={`${styls.box_item} ${styls.nocheck}`}>
-                        <span>Large enterprises</span>
-                        <i className={styls.icon}></i>
-                      </li>
-                    </ul>
-                  </div>
+              {compareData &&
+                compareData.map((item: any) => (
+                  <div
+                    className={`${styls.item} ${
+                      compareData.length == 2 ? styls.two : styls.three
+                    }`}
+                    key={item.name}
+                  >
+                    <h3 className={styls.title}>App Info</h3>
+                    <p className={styls.desc}>{item?.description}</p>
 
-                  <div className={styls.box}>
-                    <h3 className={styls.title}>Customer support</h3>
-                    <ul className={styls.box_list}>
-                      <li className={styls.box_item}>
-                        <span>Phone</span>
-                        <i className={styls.icon}></i>
-                      </li>
-                      <li className={styls.box_item}>
-                        <span>Online</span>
-                        <i className={styls.icon}></i>
-                      </li>
-                      <li className={styls.box_item}>
-                        <span>Knowledge base</span>
-                        <i className={styls.icon}></i>
-                      </li>
-                      <li className={`${styls.box_item} ${styls.nocheck}`}>
-                        <span>Video tutorials</span>
-                        <i className={styls.icon}></i>
-                      </li>
-                    </ul>
-                  </div>
+                    <div className={styls.box}>
+                      <h3 className={styls.title}>Platforms supported</h3>
+                      <ul className={styls.box_list}>
+                        {item?.platformsSupported &&
+                          item.platformsSupported.map((val: string) => (
+                            <li className={styls.box_item} key={val}>
+                              <span>{val}</span>
+                              <i className={styls.icon}></i>
+                            </li>
+                          ))}
+                      </ul>
+                    </div>
 
-                  <button className={styls.btn}>VIEW MORE DETAILS</button>
-                </div>
-              ))}
+                    <div className={styls.box}>
+                      <h3 className={styls.title}>Typical customers</h3>
+                      <ul className={styls.box_list}>
+                        {item?.typicalCustomers &&
+                          item.typicalCustomers.map((val: string) => (
+                            <li className={styls.box_item} key={val}>
+                              <span>{val}</span>
+                              <i className={styls.icon}></i>
+                            </li>
+                          ))}
+                      </ul>
+                    </div>
+
+                    <div className={styls.box}>
+                      <h3 className={styls.title}>Customer support</h3>
+                      <ul className={styls.box_list}>
+                        {item?.supportOptions &&
+                          item.supportOptions.map((val: string) => (
+                            <li className={styls.box_item} key={val}>
+                              <span>{val}</span>
+                              <i className={styls.icon}></i>
+                            </li>
+                          ))}
+                      </ul>
+                    </div>
+
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: item?.keyBenefits,
+                      }}
+                    ></div>
+
+                    {/* <button className={styls.btn}>VIEW MORE DETAILS</button> */}
+                  </div>
+                ))}
             </div>
           </div>
 
           <div className={styls.wrap} id="pricing">
             <h3 className={styls.title}>Pricing</h3>
             <div className={styls.list}>
-              {overviewList.map((item) => (
+              {compareData.map((item: any) => (
                 <div
                   className={`${styls.item} ${
-                    overviewList.length == 2 ? styls.two : styls.three
+                    compareData.length == 2 ? styls.two : styls.three
                   }`}
-                  key={item.id}
+                  key={item.name}
                 >
                   <div className={styls.pricing_top}>
                     <h4 className={styls.name}>Starting from</h4>
-                    <p className={styls.price}>39.95</p>
+                    <p className={styls.price}>{item?.price / 100}</p>
                     <p className={styls.text}>per month</p>
                   </div>
                   <div className={styls.box}>
                     <ul className={styls.box_list}>
-                      <li className={`${styls.box_item} ${styls.nocheck}`}>
-                        <span>Free trial available</span>
-                        <i className={styls.icon}></i>
-                      </li>
-                      <li className={`${styls.box_item} ${styls.nocheck}`}>
-                        <span>Free account</span>
-                        <i className={styls.icon}></i>
-                      </li>
-                      <li className={styls.box_item}>
-                        <span>Mid size businesses</span>
-                        <i className={styls.icon}></i>
-                      </li>
-                      <li className={`${styls.box_item}`}>
-                        <span>Subscription based</span>
-                        <i className={styls.icon}></i>
-                      </li>
+                      {item?.priceOption &&
+                        item.priceOption.map((val: string) => (
+                          <li className={styls.box_item} key={val}>
+                            <span>{val}</span>
+                            <i className={styls.icon}></i>
+                          </li>
+                        ))}
                     </ul>
                   </div>
-                  <button className={styls.btn}>VIEW MORE DETAILS</button>
+
+                  <div
+                    style={{ paddingTop: "16px" }}
+                    dangerouslySetInnerHTML={{
+                      __html: item?.priceDetail,
+                    }}
+                  ></div>
                 </div>
               ))}
             </div>
@@ -251,118 +258,97 @@ const Compare = () => {
           <div className={styls.wrap} id="features">
             <h3 className={styls.title}>Key features</h3>
             <div className={styls.list}>
-              {overviewList.map((item) => (
+              {compareData.map((item) => (
                 <div
                   className={`${styls.item} ${
-                    overviewList.length == 2 ? styls.two : styls.three
+                    compareData.length == 2 ? styls.two : styls.three
                   }`}
-                  key={item.id}
+                  key={item.name}
                 >
                   <div className={styls.box}>
                     <ul className={styls.box_list}>
                       <li className={`${styls.box_item}`}>
                         <span>Total features</span>
-                        <span>19</span>
+                        <span>{item?.totalFeature}</span>
                       </li>
-                      <li className={`${styls.box_item} ${styls.nocheck}`}>
-                        <span>API</span>
-                        <i className={styls.icon}></i>
-                      </li>
-                      <li className={`${styls.box_item} ${styls.nocheck}`}>
-                        <span>Activity Tracking</span>
-                        <i className={styls.icon}></i>
-                      </li>
-                      <li className={styls.box_item}>
-                        <span>Alerts/Notifications</span>
-                        <i className={styls.icon}></i>
-                      </li>
-                      <li className={`${styls.box_item}`}>
-                        <span>Calendar Management</span>
-                        <i className={styls.icon}></i>
-                      </li>
-                      <li className={`${styls.box_item}`}>
-                        <span>Class Scheduling</span>
-                        <i className={styls.icon}></i>
-                      </li>
-                      <li className={`${styls.box_item}`}>
-                        <span>Drag & Drop</span>
-                        <i className={styls.icon}></i>
-                      </li>
-                      <li className={`${styls.box_item}`}>
-                        <span>Reminders</span>
-                        <i className={styls.icon}></i>
-                      </li>
-                      <li className={`${styls.box_item}`}>
-                        <span>Self Service Portal</span>
-                        <i className={styls.icon}></i>
-                      </li>
-                      <li className={`${styls.box_item}`}>
-                        <span>Third-Party Integrations</span>
-                        <i className={styls.icon}></i>
-                      </li>
+
+                      {item?.supportFeatures &&
+                        item.supportFeatures.map((val: string) => (
+                          <li className={styls.box_item} key={val}>
+                            <span>{val}</span>
+                            <i className={styls.icon}></i>
+                          </li>
+                        ))}
+
+                      {item?.supportCommonFeatures &&
+                        item.supportCommonFeatures.map((item: string) => (
+                          <li className={styls.box_item} key={item}>
+                            <span>{item}</span>
+                            <i className={styls.icon}></i>
+                          </li>
+                        ))}
+                      {item?.unsupportCommonFeatures &&
+                        item.unsupportCommonFeatures.map((val: string) => (
+                          <li
+                            className={`${styls.box_item} ${styls.nocheck}`}
+                            key={val}
+                          >
+                            <span>{val}</span>
+                            <i className={styls.icon}></i>
+                          </li>
+                        ))}
                     </ul>
                   </div>
-                  <button className={styls.btn}>VIEW MORE DETAILS</button>
+                  {/* <button className={styls.btn}>VIEW MORE DETAILS</button> */}
                 </div>
               ))}
             </div>
           </div>
 
-          <div className={styls.wrap} id="integrations">
-            <h3 className={styls.title}>Integrations</h3>
+          <div className={styls.wrap} id="reviews">
+            <h3 className={styls.title}>Reviews</h3>
             <div className={styls.list}>
-              {overviewList.map((item) => (
+              {compareData.map((item: any) => (
                 <div
                   className={`${styls.item} ${
-                    overviewList.length == 2 ? styls.two : styls.three
+                    compareData.length == 2 ? styls.two : styls.three
                   }`}
-                  key={item.id}
+                  key={item.name}
                 >
                   <div className={styls.box}>
+                    <h3 className={styls.title}>Rating criteria</h3>
                     <ul className={styls.box_list}>
-                      <li className={`${styls.box_item}`}>
-                        <span>Total features</span>
-                        <span>19</span>
+                      <li className={styls.box_item}>
+                        <span>Value for money</span>
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                          <Rate value={item?.valueForMoney / 10} disabled />(
+                          {item?.valueForMoney / 10})
+                        </div>
                       </li>
-                      <li className={`${styls.box_item} ${styls.nocheck}`}>
-                        <span>API</span>
-                        <i className={styls.icon}></i>
-                      </li>
-                      <li className={`${styls.box_item} ${styls.nocheck}`}>
-                        <span>Activity Tracking</span>
-                        <i className={styls.icon}></i>
+
+                      <li className={styls.box_item}>
+                        <span>Ease of use</span>
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                          <Rate value={item?.easeOfUse / 10} disabled />(
+                          {item?.easeOfUse / 10})
+                        </div>
                       </li>
                       <li className={styls.box_item}>
-                        <span>Alerts/Notifications</span>
-                        <i className={styls.icon}></i>
+                        <span>Features</span>
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                          <Rate value={item?.features / 10} disabled />(
+                          {item?.features / 10})
+                        </div>
                       </li>
-                      <li className={`${styls.box_item}`}>
-                        <span>Calendar Management</span>
-                        <i className={styls.icon}></i>
-                      </li>
-                      <li className={`${styls.box_item}`}>
-                        <span>Class Scheduling</span>
-                        <i className={styls.icon}></i>
-                      </li>
-                      <li className={`${styls.box_item}`}>
-                        <span>Drag & Drop</span>
-                        <i className={styls.icon}></i>
-                      </li>
-                      <li className={`${styls.box_item}`}>
-                        <span>Reminders</span>
-                        <i className={styls.icon}></i>
-                      </li>
-                      <li className={`${styls.box_item}`}>
-                        <span>Self Service Portal</span>
-                        <i className={styls.icon}></i>
-                      </li>
-                      <li className={`${styls.box_item}`}>
-                        <span>Third-Party Integrations</span>
-                        <i className={styls.icon}></i>
+                      <li className={styls.box_item}>
+                        <span>Customer support</span>
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                          <Rate value={item?.customerSupport / 10} disabled />(
+                          {item?.customerSupport / 10})
+                        </div>
                       </li>
                     </ul>
                   </div>
-                  <button className={styls.btn}>VIEW MORE DETAILS</button>
                 </div>
               ))}
             </div>

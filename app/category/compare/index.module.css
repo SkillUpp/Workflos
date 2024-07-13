@@ -32,6 +32,17 @@
   border-radius: 8px;
   background: #fff;
 }
+.compare .header .list .item .logo_info {
+  display: flex;
+  align-items: center;
+}
+.compare .header .list .item .logo_info span {
+  margin-left: 12px;
+  font-size: 18px;
+  font-weight: 800;
+  color: #000;
+  line-height: 1.2;
+}
 .compare .header .list .item.two {
   width: calc((100% / 2) - 8px);
 }
@@ -39,7 +50,7 @@
   width: calc((100% / 3) - 8px);
 }
 .compare .header .list .item img {
-  width: 140px;
+  width: 40px;
   height: 40px;
 }
 .compare .header .list .item .btn {

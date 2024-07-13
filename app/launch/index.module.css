@@ -168,7 +168,6 @@
   opacity: 0.8;
 }
 .launch .content .launch_list .launch_item .user_info .tags {
-  padding-left: 24px;
   display: flex;
 }
 .launch .content .launch_list .launch_item .user_info .tags .tag {

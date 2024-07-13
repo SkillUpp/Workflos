@@ -2,7 +2,7 @@ import { blogList } from "@/api/blog";
 import ProductDetail from "@/app/detail/index";
 
 export const generateStaticParams = async () => {
-  const paths = [{ id: "name" }];
+  const paths = [{ id: "ClickUp" }, { id: "name" }, { id: "Slack" }];
   return paths;
 };
 
