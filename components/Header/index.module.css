@@ -84,6 +84,28 @@
   background: #9747FF;
   color: #fff;
 }
+.header .header_top .main_nav .header_top_right .user_info {
+  display: flex;
+  align-items: center;
+}
+.header .header_top .main_nav .header_top_right .user_info img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+.header .header_top .main_nav .header_top_right .user_info .info {
+  margin-left: 12px;
+  display: flex;
+  flex-direction: column;
+}
+.header .header_top .main_nav .header_top_right .user_info .info .name {
+  font-size: 18px;
+  line-height: 1.2;
+}
+.header .header_top .main_nav .header_top_right .user_info .info .email {
+  font-size: 16px;
+  line-height: 1.2;
+}
 @media (max-width: 1320px) {
   .header .header_top {
     max-width: 100%;

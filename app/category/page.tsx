@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styls from "./index.module.css";
 import { Select } from "antd";
 import Image from "next/image";
@@ -7,11 +7,14 @@ import SoftIcon from "@/images/soft-icon.png";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import CompareModal from "./CompareModal";
+import { productList } from "@/api/product";
+import { productEnumList } from "@/utils/enum";
+import LoadingContext from "@/components/LoadingContext";
 
 const tabs = [
-  { id: 1, title: "Allapps", active: true },
-  { id: 2, title: "Leaders", active: false },
-  { id: 3, title: "Guide", active: false },
+  { id: 1, title: "Allapps", value: "HighestRated", active: true },
+  { id: 2, title: "Leaders", value: "CategoryLeaders", active: false },
+  { id: 3, title: "Guide", value: "EaseOfUse", active: false },
 ];
 
 const defaultList = [
@@ -49,23 +52,63 @@ const defaultList = [
 
 const Category = () => {
   const route = useRouter();
+  const [loading, setLoading] = useState(false);
   const [categoryTabs, setCategoryTabs] = useState(tabs);
+  const [currentCategory, setCurrentCategory] = useState("CRM");
+  const [currentSort, setCurrentSort] = useState("HighestRated");
   const [isCompareModalOpen, setIsCompareModalOpen] = useState(false);
+  const [softworeList, setSoftworeList] = useState([]);
 
   const toggleCompareModal = () => setIsCompareModalOpen(!isCompareModalOpen);
 
-  const handleTabClick = (id: number) => {
+  const handleTabClick = (id: number, name: string) => {
+    setCurrentSort(name);
     setCategoryTabs((prevTabs) =>
       prevTabs.map((tab) => ({
         ...tab,
         active: tab.id === id,
       }))
     );
+    getSoftworeList();
   };
 
   const handleJumpCompare = () => {
     route.push("/compare");
   };
+
+  /**
+   * 跳转官网
+   * @param path
+   */
+  const handleJumpWebsite = (path: string) => {
+    window.open(path, "_blank");
+  };
+
+  /**
+   * 获取产品列表
+   */
+  const getSoftworeList = async () => {
+    const params = {
+      category: currentCategory,
+      sortBy: currentSort,
+      limit: 16,
+      page: 1,
+    };
+    try {
+      setLoading(true);
+      const res = await productList(params);
+      if (res.data) {
+        setLoading(false);
+        setSoftworeList(res.data.list);
+      }
+    } catch (error) {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getSoftworeList();
+  }, []);
   return (
     <div className={styls.category}>
       <div className={styls.category__content}>
@@ -77,28 +120,34 @@ const Category = () => {
               className={`${styls.category__item} ${
                 item.active && styls.active
               }`}
-              onClick={() => handleTabClick(item.id)}
+              onClick={() => handleTabClick(item.id, item.value)}
             >
               {item.title}
             </div>
           ))}
         </div>
         <div className={styls.select_wrap}>
-          <Select defaultValue={1}>
+          <Select
+            defaultValue={currentSort}
+            onChange={(val) => {
+              setCurrentCategory(val);
+              getSoftworeList();
+            }}
+          >
             {categoryTabs.map((item) => (
-              <Select.Option value={item.id}>{item.title}</Select.Option>
+              <Select.Option value={item.value}>{item.title}</Select.Option>
             ))}
           </Select>
         </div>
         <div className={styls.main}>
           <div className={styls.fillter}>
             <p className={styls.content}>616 software options</p>
-            <div className={styls.sort_wrap}>
+            {/* <div className={styls.sort_wrap}>
               <span className={styls.label}>Sort by</span>
               <Select defaultValue={"1"}>
                 <Select.Option value="1">Sponsored</Select.Option>
               </Select>
-            </div>
+            </div> */}
           </div>
 
           <div className={styls.search}>
@@ -107,28 +156,36 @@ const Category = () => {
               <span className={styls.text}>Personalize your search</span>
             </div>
             <div className={styls.right}>
-              <Select defaultValue={"1"}>
-                <Select.Option value="1">Any industry</Select.Option>
+              <Select
+                value={currentCategory}
+                onChange={(val: string) => {
+                  setCurrentCategory(val);
+                  getSoftworeList();
+                }}
+              >
+                {productEnumList.map((item) => (
+                  <Select.Option value={item.value}>{item.name}</Select.Option>
+                ))}
               </Select>
-              <Select defaultValue={"1"}>
+              {/* <Select defaultValue={"1"}>
                 <Select.Option value="1">Any business size</Select.Option>
-              </Select>
+              </Select> */}
             </div>
           </div>
 
           <div className={styls.list}>
-            {defaultList.map((item) => (
-              <div className={styls.item} key={item.id}>
+            {loading && <LoadingContext />}
+            {softworeList.map((item: any) => (
+              <div className={styls.item} key={item.name}>
                 <div className={styls.top}>
                   <div className={styls.left}>
-                    <Image src={SoftIcon} alt="" width={77} height={77} />
-
+                    <Image src={item.photo} alt="" width={77} height={77} />
                     <div className={styls.info}>
                       <div className={styls.title_wrap}>
                         <span className={styls.text}>{item.name}</span>
                         {/* <i className={styls.share_icon}></i> */}
                       </div>
-                      <p className={styls.desc}>{item.desc}</p>
+                      <p className={styls.desc}>{item.introduce}</p>
                     </div>
                   </div>
                   <div className={styls.right}>
@@ -140,14 +197,17 @@ const Category = () => {
                       <span>Compare</span>
                     </button>
 
-                    <button className={styls.btn}>
+                    <button
+                      className={styls.btn}
+                      onClick={() => handleJumpWebsite(item.website)}
+                    >
                       <span>VISIT WEBSITE</span>
                       <i className={styls.share}></i>
                     </button>
                   </div>
                 </div>
                 <div className={styls.content}>
-                  <p className={styls.desc}>{item.text}</p>
+                  <p className={styls.desc}>{item.description}</p>
                   <Link href={"/"} className={styls.more}>
                     Read more about DataSnipper
                   </Link>

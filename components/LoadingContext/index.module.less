@@ -1,0 +1,37 @@
+@keyframes spin {
+	0% {
+			transform: rotate(0deg);
+	}
+
+	100% {
+			transform: rotate(360deg);
+	}
+}
+.loadingMain {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: #000;
+  opacity: 0.6;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	.loadingWrap {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 64px;
+		height: 64px;
+		.loadingSvg {
+			display: block;
+			width: 100%;
+			height: 100%;
+			background: url('../../images/loading.svg') 0 0 no-repeat;
+			background-size: cover;
+			animation: spin 2s linear infinite;
+		}
+	}
+}

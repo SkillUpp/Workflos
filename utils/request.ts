@@ -2,9 +2,9 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 
 const api = axios.create({
   // baseURL: "https://api-dev.skillupp.xyz",
-  baseURL: "https://directus.alphadao.co",
+  baseURL: "https://api.aitracker.ai",
   timeout: 5000,
-  // withCredentials: true,
+  withCredentials: true,
 });
 
 interface CustomAxiosError extends AxiosError {

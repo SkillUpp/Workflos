@@ -3,7 +3,11 @@
   flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
-
+  &::after {
+    content: "";
+    width: calc(~"(100% / 3) - 64px");
+    height: 1px;
+  }
   .list_item {
     display: flex;
     width: calc(~"(100% / 3) - 64px");
@@ -13,6 +17,7 @@
     padding: 24px;
     cursor: pointer;
     transition: all 0.2s;
+
     &:hover {
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       transform: scale(1.02);
@@ -44,6 +49,20 @@
         margin-top: 6px;
         font-size: 14px;
       }
+    }
+  }
+
+  .noData {
+    height: 200px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    p {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.2;
     }
   }
 }

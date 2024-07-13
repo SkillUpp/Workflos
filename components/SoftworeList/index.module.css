@@ -4,6 +4,11 @@
   justify-content: space-between;
   width: 100%;
 }
+.list::after {
+  content: "";
+  width: calc((100% / 3) - 64px);
+  height: 1px;
+}
 .list .list_item {
   display: flex;
   width: calc((100% / 3) - 64px);
@@ -38,6 +43,19 @@
 .list .list_item .right .desc {
   margin-top: 6px;
   font-size: 14px;
+}
+.list .noData {
+  height: 200px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.list .noData p {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.2;
 }
 @media (max-width: 960px) {
   .list {
