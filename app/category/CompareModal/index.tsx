@@ -1,18 +1,25 @@
 "use client";
+import { productList } from "@/api/product";
 import styls from "./index.module.css";
 import SoftIcon from "@/images/soft-icon.png";
+import { Select, message } from "antd";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useStore } from "@/store/userStore";
 const list = [{ id: 1, name: "App 1", image: SoftIcon }];
 
 interface ICompareModalProps {
   close: () => void;
+  item: any;
 }
 
 const CompareModal = (props: ICompareModalProps) => {
-  const [isAddModal, setAddModal] = useState(false);
-  const [compareList, setCompareList] = useState(list);
-  const toggleAddModal = () => setAddModal(!isAddModal);
+  const { item } = props;
+  const route = useRouter();
+  const { updateCompareStr } = useStore();
+  const [compareList, setCompareList] = useState<any>([]);
+  const [softworeList, setSoftworeList] = useState<any>([]);
 
   /**
    * remove all
@@ -20,6 +27,53 @@ const CompareModal = (props: ICompareModalProps) => {
   const handleRemoveAll = () => {
     setCompareList([]);
   };
+
+  const handleJumpCompare = () => {
+    if (compareList.length < 2) {
+      message.open({
+        type: "info",
+        content: "Please add at least 2 apps to compare",
+      });
+      return;
+    }
+    const names = compareList
+      .map((item: { name: string }) => item.name)
+      .join("&");
+    updateCompareStr(names);
+    route.push(`/category/${names}`);
+  };
+
+  /**
+   * 获取产品列表
+   */
+  const getSoftworeList = async () => {
+    const params = {
+      category: "CRM",
+      sortBy: "HighestRated",
+      limit: 16,
+      page: 1,
+    };
+    const res = await productList(params);
+    if (res.data) {
+      setSoftworeList(res.data.list);
+    }
+  };
+
+  useEffect(() => {
+    if (compareList.length > 3) {
+      message.open({
+        type: "info",
+        content: "You can only add up to 4 apps to compare",
+      });
+      return;
+    }
+    const isItemInList = compareList.some(
+      (compareItem: any) => compareItem.name == item.name
+    );
+    // if (!isItemInList) {
+    setCompareList([...compareList, item]);
+    // }
+  }, [item]);
 
   return (
     <>
@@ -32,51 +86,56 @@ const CompareModal = (props: ICompareModalProps) => {
         </p>
 
         <ul className={styls.list}>
-          {compareList.map((item) => (
+          {compareList.map((item: any) => (
             <li key={item.id}>
-              {item.image ? (
-                <div className={styls.list_item}>
-                  <i className={styls.close}></i>
-                  <Image src={SoftIcon} width={160} height={58} alt="" />
-                </div>
-              ) : (
-                <i className={styls.add} onClick={() => toggleAddModal()}></i>
-              )}
+              <div className={styls.list_item}>
+                <i className={styls.close}></i>
+                <Image src={SoftIcon} width={160} height={58} alt="" />
+              </div>
             </li>
           ))}
         </ul>
         <div className={styls.btns}>
-          <button
-            className={styls.remove_btn}
-            onClick={() => handleRemoveAll()}
-          >
-            Remove all
-          </button>
+          {compareList.length > 0 && (
+            <button
+              className={styls.remove_btn}
+              onClick={() => {
+                handleRemoveAll();
+                props.close();
+              }}
+            >
+              Remove all
+            </button>
+          )}
 
-          <button className={styls.add_btn} onClick={() => toggleAddModal()}>
-            <i className={styls.icon}></i>
-            <span>Add COMPARISON</span>
-          </button>
-          <button className={styls.btn}>
+          <button className={styls.btn} onClick={() => handleJumpCompare()}>
             <i className={styls.icon}></i>
             <span>SEE COMPARISON</span>
           </button>
         </div>
       </div>
 
-      {isAddModal && (
+      {/* {isAddModal && (
         <div className={styls.add_modal}>
           <div className={styls.mask}></div>
           <div className={styls.main}>
             <h3 className={styls.title}>Add an app to compare</h3>
             <i className={styls.close} onClick={() => toggleAddModal()}></i>
             <div className={styls.input_wrap}>
-              <input type="text" placeholder="Search apps, categories..." />
-              <i className={styls.search}></i>
+              <Select
+                placeholder="Search apps, categories..."
+                labelInValue
+                filterOption={false}
+                onSearch={debounceFetcher}
+              >
+                {softworeList.map((item: any) => (
+                  <Select.Option value={item.name}>{item.name}</Select.Option>
+                ))}
+              </Select>
             </div>
           </div>
         </div>
-      )}
+      )} */}
     </>
   );
 };

@@ -58,6 +58,7 @@ const Category = () => {
   const [currentSort, setCurrentSort] = useState("HighestRated");
   const [isCompareModalOpen, setIsCompareModalOpen] = useState(false);
   const [softworeList, setSoftworeList] = useState([]);
+  const [currentItem, setCurrentItem] = useState<any>({});
 
   const toggleCompareModal = () => setIsCompareModalOpen(!isCompareModalOpen);
 
@@ -104,6 +105,12 @@ const Category = () => {
     } catch (error) {
       setLoading(false);
     }
+  };
+
+  const handleCompare = (item: any) => {
+    setCurrentItem(item);
+    // toggleCompareModal();
+    setIsCompareModalOpen(true);
   };
 
   useEffect(() => {
@@ -191,7 +198,7 @@ const Category = () => {
                   <div className={styls.right}>
                     <button
                       className={styls.btn}
-                      onClick={() => toggleCompareModal()}
+                      onClick={() => handleCompare(item)}
                     >
                       <i className={styls.compare}></i>
                       <span>Compare</span>
@@ -228,7 +235,7 @@ const Category = () => {
       </div>
 
       {isCompareModalOpen && (
-        <CompareModal close={() => toggleCompareModal()} />
+        <CompareModal close={() => toggleCompareModal()} item={currentItem} />
       )}
     </div>
   );

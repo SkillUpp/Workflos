@@ -22,21 +22,22 @@ const SoftworeList = (props: any) => {
   };
   return (
     <div className={styls.list}>
-      {list && list.map((item: any, index: number) => (
-        <div
-          className={styls.list_item}
-          key={index}
-          onClick={() => handleJump("/detail")}
-        >
-          <div className={styls.left}>
-            <Image src={item.icon} alt="" width={36} height={36} />
+      {list &&
+        list.map((item: any, index: number) => (
+          <div
+            className={styls.list_item}
+            key={index}
+            onClick={() => handleJump(`product/${item.name}`)}
+          >
+            <div className={styls.left}>
+              <Image src={item.icon} alt="" width={36} height={36} />
+            </div>
+            <div className={styls.right}>
+              <h3 className={styls.title}>{item.name}</h3>
+              <p className={styls.desc}>{item.description}</p>
+            </div>
           </div>
-          <div className={styls.right}>
-            <h3 className={styls.title}>{item.name}</h3>
-            <p className={styls.desc}>{item.description}</p>
-          </div>
-        </div>
-      ))}
+        ))}
       {list.length == 0 && (
         <div className={styls.noData}>
           <p className={styls.title}>No Data</p>

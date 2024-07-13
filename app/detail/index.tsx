@@ -9,6 +9,8 @@ import message from "@/images/message.svg";
 import twitter from "@/images/twitter.svg";
 import { MouseEvent, useEffect, useState } from "react";
 import { Select } from "antd";
+import { productDetail } from "@/api/product";
+import LoadingContext from "@/components/LoadingContext";
 
 const mediaList = [
   { id: 1, img: Ins },
@@ -80,7 +82,11 @@ const defaultCompareMenu = [
   },
 ];
 
-const Compare = () => {
+const ProductDetail = (props: any) => {
+  const { id } = props;
+  const [loading, setLoading] = useState(false);
+  const [productInfo, setProductInfo] = useState<any>({});
+
   const [compareMenu, setCompareMenu] = useState(defaultCompareMenu);
   const handleClick = (id: string) => {
     console.log(id, "id");
@@ -97,12 +103,33 @@ const Compare = () => {
     setCompareMenu(menus);
   };
 
+  /**
+   * 获取产品详情
+   */
+  const getProductDetail = async () => {
+    try {
+      setLoading(true);
+      const res = await productDetail();
+      if (res.data) {
+        setLoading(false);
+        setProductInfo(res.data);
+      }
+    } catch (error) {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getProductDetail();
+  }, []);
+
   return (
     <div className={styls.compare}>
+      {loading && <LoadingContext />}
       <div className={styls.header}>
         <div className={styls.media}>
           <div className={styls.site_wrap}>
-            <Image src={Google} alt="" width={145} height={42} />
+            <Image src={productInfo?.photo} alt="" width={145} height={42} />
           </div>
           <div className={styls.media_list}>
             {mediaList.map((item) => (
@@ -475,4 +502,4 @@ const Compare = () => {
   );
 };
 
-export default Compare;
+export default ProductDetail;

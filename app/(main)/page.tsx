@@ -120,7 +120,13 @@ export default function Home() {
             ))}
           </ul>
           <div className={styls.select_wrap}>
-            <Select defaultValue={1}>
+            <Select
+              defaultValue={currentSort}
+              onChange={(value) => {
+                setCurrentSort(value);
+                getSoftworeList();
+              }}
+            >
               {softworeTab.map((item) => (
                 <Select.Option value={item.id}>{item.name}</Select.Option>
               ))}
