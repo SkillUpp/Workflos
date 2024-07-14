@@ -15,7 +15,7 @@ const BlogDetail = (props: any) => {
 
   const getBlogDetail = async (id: string) => {
     const res = await blogDetail(id);
-    setInfo(res.data);
+    setInfo(res.data.data);
   };
 
   useEffect(() => {

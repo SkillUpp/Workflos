@@ -17,6 +17,7 @@ export default function Home() {
   const [currentSort, setCurrentSort] = useState("HighestRated");
   const [softworeTab, setSoftworeTab] = useState(sortOfRateEnumList);
   const [softworeList, setSoftworeList] = useState([]);
+  const [totalCount, setTotalCount] = useState(0);
 
   const handleJump = (path: string) => {
     route.push(path);
@@ -49,6 +50,7 @@ export default function Home() {
       if (res.data) {
         setLoading(false);
         setSoftworeList(res.data.list);
+        setTotalCount(res.data.totalCount);
       }
     } catch (error) {
       setLoading(false);
@@ -99,7 +101,7 @@ export default function Home() {
         </div>
         <div className={styls.searchPanel__bg}>
           <div className={styls.product_info}>
-            <h3 className={styls.title}>37K+</h3>
+            <h3 className={styls.title}>{totalCount}</h3>
             <p className={styls.desc}>Software profiles</p>
           </div>
         </div>
