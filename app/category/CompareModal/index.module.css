@@ -73,12 +73,20 @@
   background-size: cover;
   cursor: pointer;
 }
+.compareModal .list li .list_item .company_info {
+  display: flex;
+  align-items: center;
+}
+.compareModal .list li .list_item .company_info span {
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 800;
+}
 .compareModal .list li .list_item img {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-left: 24px;
-  width: 160px;
 }
 .compareModal .btns {
   display: flex;
