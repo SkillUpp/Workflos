@@ -5,17 +5,21 @@ import { blogDetail } from "@/api/blog";
 import Image from "next/image";
 import moment from "moment";
 import { marked } from "marked";
+import LoadingContext from "@/components/LoadingContext";
 
 interface IBlogDetailProps {
   id: string;
 }
 
 const BlogDetail = (props: any) => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [info, setInfo] = useState<any>({});
 
   const getBlogDetail = async (id: string) => {
+    setLoading(true);
     const res = await blogDetail(id);
     setInfo(res.data.data);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -23,6 +27,7 @@ const BlogDetail = (props: any) => {
   }, []);
   return (
     <div className={styls.blog_detail}>
+      {loading && <LoadingContext />}
       <div className={styls.blog_detail_header}>
         <div className={styls.container}>
           <h1>{info?.title}</h1>

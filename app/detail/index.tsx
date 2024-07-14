@@ -119,8 +119,9 @@ const ProductDetail = (props: any) => {
   };
 
   useEffect(() => {
+    setLoading(true);
     getProductDetail();
-  }, []);
+  }, [id]);
 
   return (
     <div className={styls.compare}>

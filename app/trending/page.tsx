@@ -53,7 +53,7 @@ const Trending = () => {
                 <div
                   className={styls.item}
                   key={item.name}
-                  onClick={() => handleJump("/detail")}
+                  onClick={() => handleJump("/product/" + item.name)}
                 >
                   <div className={styls.top}>
                     <div className={styls.left}>
