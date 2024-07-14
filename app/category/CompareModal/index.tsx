@@ -88,7 +88,7 @@ const CompareModal = (props: ICompareModalProps) => {
                   onClick={() => handleClose(item)}
                 ></i>
                 <div className={styls.company_info}>
-                  <Image src={item.photo} width={58} height={58} alt="" />
+                  <Image src={item.photo} width={40} height={40} alt="" />
                   <span>{item.name}</span>
                 </div>
               </div>
