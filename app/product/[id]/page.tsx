@@ -1,4 +1,3 @@
-import { blogList } from "@/api/blog";
 import ProductDetail from "@/app/detail/index";
 
 export const generateStaticParams = async () => {

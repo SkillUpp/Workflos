@@ -8,19 +8,21 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { launchDetail } from "@/api/product";
 import Category from "../../category/page";
+import LoadingContext from "@/components/LoadingContext";
 
 const mediaList = [
   { id: 1, img: Ins },
   { id: 2, img: x },
 ];
 
-const LaunchDetail = () => {
+const LaunchDetail = (props: any) => {
+  const { id } = props;
   const [loading, setLoading] = useState(false);
   const [launchInfo, setLaunchInfo] = useState<any>(null);
 
   const getLaunchDetail = async () => {
     setLoading(true);
-    const res = await launchDetail();
+    const res = await launchDetail(id);
     if (res.data) {
       setLoading(false);
       setLaunchInfo(res.data);
@@ -28,11 +30,14 @@ const LaunchDetail = () => {
   };
 
   useEffect(() => {
-    getLaunchDetail();
-  }, []);
+    if (id) {
+      getLaunchDetail();
+    }
+  }, [id]);
 
   return (
     <div className={styls.detail}>
+      {loading && <LoadingContext />}
       <div className={styls.header}>
         <h3 className={styls.title}>{launchInfo?.title}</h3>
         <p className={styls.desc}>{launchInfo?.content}</p>

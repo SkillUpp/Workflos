@@ -35,8 +35,8 @@ export const launchList = (data: any) => {
 /**
  * 获取launch详情信息
  */
-export const launchDetail = () => {
+export const launchDetail = (name: string) => {
   return request({
-    url: "/api/v1/launch/detail",
+    url: "/api/v1/launch/detail?name=" + name,
   });
 };
