@@ -12,6 +12,7 @@ import {
   AwaitedReactNode,
   Key,
 } from "react";
+import NoData from "../Nodata";
 
 const SoftworeList = (props: any) => {
   const { list } = props;
@@ -30,7 +31,7 @@ const SoftworeList = (props: any) => {
             onClick={() => handleJump(`product/${item.name}`)}
           >
             <div className={styls.left}>
-              <Image src={item.icon} alt="" width={36} height={36} />
+              <Image src={item.photo} alt="" width={36} height={36} />
             </div>
             <div className={styls.right}>
               <h3 className={styls.title}>{item.name}</h3>
@@ -39,9 +40,7 @@ const SoftworeList = (props: any) => {
           </div>
         ))}
       {list.length == 0 && (
-        <div className={styls.noData}>
-          <p className={styls.title}>No Data</p>
-        </div>
+        <NoData />
       )}
     </div>
   );

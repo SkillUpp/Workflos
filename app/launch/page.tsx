@@ -1,25 +1,36 @@
 "use client";
+import { throttle } from "lodash";
 import Image from "next/image";
-import { Input, Select } from "antd";
+import { Input } from "antd";
 import styls from "./index.module.css";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { SetStateAction, useCallback, useEffect, useRef, useState } from "react";
 import { launchList } from "@/api/product";
 import LoadingContext from "@/components/LoadingContext";
+import NoData from "@/components/Nodata";
 
 const tags = ["All", "Upcoming", "Past", "Launches"];
 
 const Launch = () => {
   const route = useRouter();
+  const searchValue = useRef("");
   const handleJump = (path: string) => {
     route.push(path);
   };
   const [loading, setLoading] = useState(false);
   const [launchData, setLaunchData] = useState<any>([]);
 
+  const handleChangeValue = useCallback(
+    throttle((val: string) => {
+      searchValue.current = val;
+      getLaunchData();
+    }, 1000),
+    []
+  );
+
   const getLaunchData = async () => {
     setLoading(true);
-    const res = await launchList({});
+    const res = await launchList({ keyword: searchValue.current });
     if (res.data) {
       setLoading(false);
       setLaunchData(res.data.list);
@@ -35,7 +46,10 @@ const Launch = () => {
       <div className={styls.header}>
         <h3 className={styls.title}>Launch</h3>
         <p className={styls.desc}>The launchpad for Launch</p>
-        <Input placeholder="Search for a Company" />
+        <Input
+          placeholder="Search for a Company"
+          onChange={(e) => handleChangeValue(e.target.value)}
+        />
         <div className={styls.tag_list}>
           {tags.map((item) => (
             <div className={styls.tag} key={item}>
@@ -66,7 +80,7 @@ const Launch = () => {
             launchData.map((item: any, index: number) => (
               <div
                 className={styls.launch_item}
-                onClick={() => handleJump("/launch/detail")}
+                onClick={() => handleJump("/launch/" + item.name)}
               >
                 <div className={styls.idx}>
                   <i className={styls.icon}></i>
@@ -101,6 +115,7 @@ const Launch = () => {
                 </div>
               </div>
             ))}
+          {launchData.length === 0 && <NoData />}
         </div>
       </div>
     </div>

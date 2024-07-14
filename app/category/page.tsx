@@ -10,6 +10,7 @@ import CompareModal from "./CompareModal";
 import { productList } from "@/api/product";
 import { productEnumList } from "@/utils/enum";
 import LoadingContext from "@/components/LoadingContext";
+import NoData from "@/components/Nodata";
 
 const tabs = [
   { id: 1, title: "Allapps", value: "HighestRated", active: true },
@@ -58,6 +59,7 @@ const Category = () => {
   const [currentSort, setCurrentSort] = useState("HighestRated");
   const [isCompareModalOpen, setIsCompareModalOpen] = useState(false);
   const [softworeList, setSoftworeList] = useState([]);
+  const [totalCount, setTotalCount] = useState(0);
   const [currentItem, setCurrentItem] = useState<any>({});
 
   const toggleCompareModal = () => setIsCompareModalOpen(!isCompareModalOpen);
@@ -100,6 +102,7 @@ const Category = () => {
       const res = await productList(params);
       if (res.data) {
         setLoading(false);
+        setTotalCount(res.data.totalCount);
         setSoftworeList(res.data.list);
       }
     } catch (error) {
@@ -118,6 +121,7 @@ const Category = () => {
   }, []);
   return (
     <div className={styls.category}>
+       {loading && <LoadingContext />}
       <div className={styls.category__content}>
         <h3 className={styls.title}>Accounting Software</h3>
         <div className={styls.category__tabs}>
@@ -148,7 +152,7 @@ const Category = () => {
         </div>
         <div className={styls.main}>
           <div className={styls.fillter}>
-            <p className={styls.content}>616 software options</p>
+            <p className={styls.content}>{totalCount} software options</p>
             {/* <div className={styls.sort_wrap}>
               <span className={styls.label}>Sort by</span>
               <Select defaultValue={"1"}>
@@ -181,7 +185,7 @@ const Category = () => {
           </div>
 
           <div className={styls.list}>
-            {loading && <LoadingContext />}
+           
             {softworeList.map((item: any) => (
               <div className={styls.item} key={item.name}>
                 <div className={styls.top}>
@@ -230,6 +234,9 @@ const Category = () => {
                </div> */}
               </div>
             ))}
+            {softworeList.length === 0 && (
+              <NoData />
+            )}
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
+  min-height: 300px;
 }
 .list::after {
   content: "";
@@ -15,6 +16,7 @@
   margin-bottom: 24px;
   background: #fff;
   border-radius: 16px;
+  height: 130px;
   padding: 24px;
   cursor: pointer;
   transition: all 0.2s;

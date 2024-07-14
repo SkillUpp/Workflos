@@ -15,9 +15,9 @@ export const productList = (data: any) => {
 /**
  * 获取产品详情信息
  */
-export const productDetail = () => {
+export const productDetail = (name: string) => {
   return request({
-    url: "/api/v1/item/detail",
+    url: "/api/v1/item/detail?name=" + name,
   });
 };
 

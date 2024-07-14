@@ -103,8 +103,10 @@
   margin-left: 16px;
 }
 .category .category__content .main .list {
+  position: relative;
   display: flex;
   flex-direction: column;
+  min-height: 300px;
 }
 .category .category__content .main .list .item {
   position: relative;

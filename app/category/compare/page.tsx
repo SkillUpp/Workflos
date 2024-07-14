@@ -22,7 +22,7 @@ const defaultCompareMenu = [
   {
     id: 1,
     htmlId: "overview",
-    name: "Overview",
+    name: "App Info",
     active: true,
   },
   {
@@ -33,7 +33,7 @@ const defaultCompareMenu = [
   },
   {
     id: 4,
-    name: "Key features",
+    name: "Features",
     htmlId: "features",
     active: false,
   },
@@ -79,7 +79,7 @@ const Compare = (props: any) => {
 
   const getProductDetail = async (id: string) => {
     try {
-      const res = await productDetail();
+      const res = await productDetail(id);
       return res.data;
     } catch (error) {
       console.error(error);
@@ -153,7 +153,7 @@ const Compare = (props: any) => {
         </div>
         <div className={styls.right}>
           <div className={styls.wrap} id="overview">
-            <h3 className={styls.title}>Overview</h3>
+            <h3 className={styls.title}>App Info</h3>
             <div className={styls.list}>
               {compareData &&
                 compareData.map((item: any) => (
@@ -163,7 +163,7 @@ const Compare = (props: any) => {
                     }`}
                     key={item.name}
                   >
-                    <h3 className={styls.title}>App Info</h3>
+                    {/* <h3 className={styls.title}>App Info</h3> */}
                     <p className={styls.desc}>{item?.description}</p>
 
                     <div className={styls.box}>
@@ -205,11 +205,11 @@ const Compare = (props: any) => {
                       </ul>
                     </div>
 
-                    <div
+                    {/* <div
                       dangerouslySetInnerHTML={{
                         __html: item?.keyBenefits,
                       }}
-                    ></div>
+                    ></div> */}
 
                     {/* <button className={styls.btn}>VIEW MORE DETAILS</button> */}
                   </div>
@@ -244,12 +244,12 @@ const Compare = (props: any) => {
                     </ul>
                   </div>
 
-                  <div
+                  {/* <div
                     style={{ paddingTop: "16px" }}
                     dangerouslySetInnerHTML={{
                       __html: item?.priceDetail,
                     }}
-                  ></div>
+                  ></div> */}
                 </div>
               ))}
             </div>

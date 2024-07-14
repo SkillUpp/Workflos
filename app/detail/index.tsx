@@ -108,7 +108,7 @@ const ProductDetail = (props: any) => {
   const getProductDetail = async () => {
     try {
       setLoading(true);
-      const res = await productDetail();
+      const res = await productDetail(id);
       if (res.data) {
         setLoading(false);
         setProductInfo(res.data);

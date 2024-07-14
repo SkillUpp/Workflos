@@ -63,10 +63,12 @@
   padding: 0 200px;
 }
 .launch .content .launch_list {
+  position: relative;
   width: 100%;
   display: flex;
   flex-direction: column;
   padding-top: 40px;
+  min-height: 300px;
 }
 .launch .content .launch_list .launch_item {
   display: flex;
