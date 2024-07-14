@@ -244,7 +244,7 @@ const ProductDetail = (props: any) => {
             <h3 className={styls.title}>Pricing</h3>
             <div className={styls.pricing_top}>
               <h4 className={styls.name}>Starting from</h4>
-              <p className={styls.price}>{productInfo?.price / 100}</p>
+              <p className={styls.price}>{productInfo?.price  ? productInfo?.price / 100 : 0}</p>
               <p className={styls.text}>per month</p>
             </div>
             <div className={styls.box}>
