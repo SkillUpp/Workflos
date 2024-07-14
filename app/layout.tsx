@@ -18,11 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Header />
       <body
         className={`${inter.className} antialiased`}
         style={{ margin: 0, overflowY: "scroll" }}
       >
+        <Header />
         <AntdRegistry>{children}</AntdRegistry>
       </body>
       {/* <Footer /> */}

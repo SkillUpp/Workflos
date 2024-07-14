@@ -90,9 +90,9 @@ const Category = () => {
   /**
    * 获取产品列表
    */
-  const getSoftworeList = async () => {
+  const getSoftworeList = async (category?: string) => {
     const params = {
-      category: currentCategory,
+      category: category || currentCategory,
       sortBy: currentSort,
       limit: 16,
       page: 1,
@@ -139,14 +139,14 @@ const Category = () => {
         </div>
         <div className={styls.select_wrap}>
           <Select
-            defaultValue={currentSort}
+            value={currentSort}
             onChange={(val) => {
-              setCurrentCategory(val);
+              setCurrentSort(val);
               getSoftworeList();
             }}
           >
             {categoryTabs.map((item) => (
-              <Select.Option value={item.value}>{item.title}</Select.Option>
+              <Select.Option value={item.value} key={item.id}>{item.title}</Select.Option>
             ))}
           </Select>
         </div>
@@ -170,12 +170,12 @@ const Category = () => {
               <Select
                 value={currentCategory}
                 onChange={(val: string) => {
-                  setCurrentCategory(val);
-                  getSoftworeList();
+                  setCurrentCategory(val)
+                  getSoftworeList(val);
                 }}
               >
                 {productEnumList.map((item) => (
-                  <Select.Option value={item.value}>{item.name}</Select.Option>
+                  <Select.Option value={item.value} key={item.name}>{item.name}</Select.Option>
                 ))}
               </Select>
               {/* <Select defaultValue={"1"}>

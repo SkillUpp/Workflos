@@ -27,7 +27,7 @@ const SoftworeList = (props: any) => {
         list.map((item: any, index: number) => (
           <div
             className={styls.list_item}
-            key={index}
+            key={item.name}
             onClick={() => handleJump(`product/${item.name}`)}
           >
             <div className={styls.left}>

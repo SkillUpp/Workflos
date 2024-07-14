@@ -36,10 +36,10 @@ export default function Home() {
   /**
    * 获取产品列表
    */
-  const getSoftworeList = async () => {
+  const getSoftworeList = async (category?: string) => {
     const params = {
       keyword: searchValue,
-      category: currentCategory,
+      category: category || currentCategory,
       sortBy: currentSort,
       limit: 16,
       page: 1,
@@ -85,14 +85,16 @@ export default function Home() {
             </h3>
             <div className={styls.button_wrap}>
               <Select
-                defaultValue={currentCategory}
+                value={currentCategory}
                 onChange={(value) => {
                   setCurrentCategory(value);
-                  getSoftworeList();
+                  getSoftworeList(value);
                 }}
               >
                 {productEnumList.map((item) => (
-                  <Select.Option value={item.value}>{item.name}</Select.Option>
+                  <Select.Option value={item.value} key={item.value}>
+                    {item.name}
+                  </Select.Option>
                 ))}
               </Select>
               <i className={styls.arrow}></i>
@@ -130,7 +132,7 @@ export default function Home() {
               }}
             >
               {softworeTab.map((item) => (
-                <Select.Option value={item.id}>{item.name}</Select.Option>
+                <Select.Option value={item.id} key={item.id}>{item.name}</Select.Option>
               ))}
             </Select>
           </div>
