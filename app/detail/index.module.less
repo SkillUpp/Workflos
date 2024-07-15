@@ -37,6 +37,26 @@
       line-height: 1.2;
       margin: 8px 0 0 0;
     }
+    .rate_info {
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      :global {
+        .ant-rate {
+          font-size: 18px;
+          line-height: 1.2;
+          font-weight: 800;
+          margin-left: 10px;
+          margin-right: 10px;
+        }
+      }
+      .count {
+        color: #9747ff;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+    }
     .wrap {
       display: flex;
       align-items: center;
@@ -389,6 +409,45 @@
           }
         }
       }
+    }
+  }
+}
+
+.dropdownWarp {
+  padding: 16px;
+  background: #fff;
+  max-width: 280px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
+  .wrap {
+    display: flex;
+    align-items: center;
+    .icon {
+      display: block;
+      width: 16px;
+      height: 16px;
+      background: url("../../images/star.svg") 0 0 no-repeat;
+      background-size: cover;
+    }
+    .rate {
+      display: flex;
+      align-items: center;
+      span {
+        margin-left: 6px;
+        margin-right: 6px;
+        display: block;
+        font-size: 16px;
+        line-height: 1.2;
+        color: #9747ff;
+      }
+    }
+    .count {
+      margin-left: 6px;
+      display: block;
+      font-size: 16px;
+      line-height: 1.2;
+      color: #9747ff;
     }
   }
 }

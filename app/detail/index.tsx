@@ -7,7 +7,7 @@ import x from "@/images/x.svg";
 import message from "@/images/message.svg";
 import twitter from "@/images/twitter.svg";
 import { useEffect, useState } from "react";
-import { Rate, Select } from "antd";
+import { Dropdown, Progress, Rate, Select } from "antd";
 import { productDetail } from "@/api/product";
 import LoadingContext from "@/components/LoadingContext";
 
@@ -21,64 +21,64 @@ const mediaList = [
 const defaultCompareMenu = [
   {
     id: 1,
-    htmlId: "overview",
+    htmlId: "appInfo",
     name: "App Info",
     active: true,
   },
   {
     id: 2,
-    name: "Pricing",
+    name: "Overview",
+    htmlId: "overview",
+    active: false,
+  },
+  {
+    id: 3,
+    name: "News",
     htmlId: "news",
     active: false,
   },
   {
     id: 3,
+    name: "Pricing",
+    htmlId: "pricing",
+    active: false,
+  },
+  {
+    id: 4,
     name: "Features",
-    htmlId: "products",
+    htmlId: "features",
     active: false,
   },
   {
     id: 4,
     name: "Reviews",
-    htmlId: "stack",
+    htmlId: "reviews",
     active: false,
   },
-  // {
-  //   id: 5,
-  //   name: "Alternatives",
-  //   htmlId: "funding",
-  //   active: false,
-  // },
-  // {
-  //   id: 6,
-  //   name: "Core Team",
-  //   htmlId: "team",
-  //   active: false,
-  // },
-  // {
-  //   id: 7,
-  //   name: "Revenue",
-  //   htmlId: "revenue",
-  //   active: false,
-  // },
-  // {
-  //   id: 8,
-  //   name: "Competitors",
-  //   htmlId: "competitors",
-  //   active: false,
-  // },
-  // {
-  //   id: 9,
-  //   name: "Challenges",
-  //   htmlId: "challenges",
-  //   active: false,
-  // },
-  // {
-  //   id: 10,
-  //   name: "Hiring",
-  //   htmlId: "hiring",
-  //   active: false,
-  // },
+  {
+    id: 5,
+    name: "Funding",
+    htmlId: "funding",
+    active: false,
+  },
+  {
+    id: 6,
+    name: "Core Team",
+    htmlId: "team",
+    active: false,
+  },
+  {
+    id: 7,
+    name: "Revenue",
+    htmlId: "revenue",
+    active: false,
+  },
+  {
+    id: 9,
+    name: "Challenges",
+    htmlId: "challenges",
+    active: false,
+  },
 ];
 
 const ProductDetail = (props: any) => {
@@ -117,6 +117,51 @@ const ProductDetail = (props: any) => {
       setLoading(false);
     }
   };
+  const menu = (
+    <div className={styls.dropdownWarp}>
+      <div className={styls.wrap}>
+        <div className={styls.rate}>
+          <i className={styls.icon}></i>
+          <span>5</span>
+        </div>
+
+        <Progress percent={30} showInfo={false} strokeColor="#9747ff" />
+        <span className={styls.count}>2.9</span>
+      </div>
+      <div className={styls.wrap}>
+        <div className={styls.rate}>
+          <i className={styls.icon}></i>
+          <span>4</span>
+        </div>
+        <Progress percent={30} showInfo={false} strokeColor="#9747ff" />
+        <span className={styls.count}>2k</span>
+      </div>
+      <div className={styls.wrap}>
+        <div className={styls.rate}>
+          <i className={styls.icon}></i>
+          <span>3</span>
+        </div>
+        <Progress percent={60} showInfo={false} strokeColor="#9747ff" />
+        <span className={styls.count}>3k</span>
+      </div>
+      <div className={styls.wrap}>
+        <div className={styls.rate}>
+          <i className={styls.icon}></i>
+          <span>2</span>
+        </div>
+        <Progress percent={10} showInfo={false} strokeColor="#9747ff" />
+        <span className={styls.count}>120</span>
+      </div>
+      <div className={styls.wrap}>
+        <div className={styls.rate}>
+          <i className={styls.icon}></i>
+          <span>1</span>
+        </div>
+        <Progress percent={3} showInfo={false} strokeColor="#9747ff" />
+        <span className={styls.count}>3</span>
+      </div>
+    </div>
+  );
 
   useEffect(() => {
     setLoading(true);
@@ -129,7 +174,9 @@ const ProductDetail = (props: any) => {
       <div className={styls.header}>
         <div className={styls.media}>
           <div className={styls.site_wrap}>
-            <Image src={productInfo?.photo} alt="" width={40} height={40} />
+            {productInfo?.photo && (
+              <Image src={productInfo?.photo} alt="" width={40} height={40} />
+            )}
             <span>{productInfo?.name}</span>
           </div>
           <div className={styls.media_list}>
@@ -141,6 +188,19 @@ const ProductDetail = (props: any) => {
           </div>
         </div>
         <p className={styls.address}>{productInfo?.introduce}</p>
+        <Dropdown overlay={menu} trigger={["hover"]}>
+          <div className={styls.rate_info}>
+            <span>{productInfo?.valueForMoney / 10}</span>
+            <Rate value={productInfo?.valueForMoney / 10} disabled />
+            <span className={styls.count}>
+              (
+              {productInfo?.totolRateUser
+                ? productInfo.totolRateUser / 1000 + "k"
+                : 0}
+              )
+            </span>
+          </div>
+        </Dropdown>
         {/* <div className={styls.wrap}>
           <div className={styls.phone}>
             <i className={styls.phone_icon}></i>
@@ -181,7 +241,7 @@ const ProductDetail = (props: any) => {
             ))}
           </div>
           <div className={styls.select_wrap}>
-            <Select defaultValue={"overview"} onChange={handleClick}>
+            <Select defaultValue={"appInfo"} onChange={handleClick}>
               {compareMenu.map((item) => (
                 <Select.Option value={item.htmlId} key={item.id}>
                   {item.name}
@@ -191,7 +251,7 @@ const ProductDetail = (props: any) => {
           </div>
         </div>
         <div className={styls.right}>
-          <div className={styls.overview} id="overview">
+          <div className={styls.overview} id="appInfo">
             <h3 className={styls.title}>App Info</h3>
             <p className={styls.desc}>{productInfo?.description}</p>
 
@@ -241,11 +301,110 @@ const ProductDetail = (props: any) => {
             ></div>
           </div>
 
+          <div className={styls.overview} id="overview">
+            <h3 className={styls.title}>Overview</h3>
+
+            <p className={styls.desc}>
+              Google LLC is an American multinational corporation and technology
+              company focusing on online advertising, search engine technology,
+              cloud computing, computer software, quantum computing, e-commerce,
+              consumer electronics, and artificial intelligence. The company's
+              business areas include advertising, search, platforms and
+              operating systems, and enterprise and hardware products Alphabet,
+              the parent company of Google, topped $100 billion in annual sales
+              for the first time in Google's 20-year history
+            </p>
+          </div>
+
           <div className={styls.news} id="news">
+            <h3 className={styls.title}>News</h3>
+            <div className={styls.news_list}>
+              <div className={styls.news_item}>
+                <div className={styls.top}>
+                  <span className={styls.time}>Jun 29, 2024</span>
+                  <p className={styls.line}></p>
+                </div>
+                <p className={styls.desc}>
+                  Google announced its next-generation Tensor Processing Units
+                  (TPUs) called Trillium, the Wear OS 5 update, and the Gemini
+                  1.5 Pro, its most capable generative AI model. The company has
+                  opened access to the 2-million-token context window of the
+                  Gemini 1.5 Pro AI model, enabling code execution and making
+                  the Gemma 2 model available in Google AI Studio.
+                </p>
+
+                <div className={styls.company_list}>
+                  <div className={styls.company_item}>
+                    <h3 className={styls.title}>techcrunch.com</h3>
+                    <p className={styls.text}>
+                      Here are the hottest product announcements fromApple,
+                      Google, Microsoft and others so far in 2024
+                    </p>
+                  </div>
+                  <div className={styls.company_item}>
+                    <h3 className={styls.title}>techcrunch.com</h3>
+                    <p className={styls.text}>
+                      Here are the hottest product announcements fromApple,
+                      Google, Microsoft and others so far in 2024
+                    </p>
+                  </div>
+                  <div className={styls.company_item}>
+                    <h3 className={styls.title}>techcrunch.com</h3>
+                    <p className={styls.text}>
+                      Here are the hottest product announcements fromApple,
+                      Google, Microsoft and others so far in 2024
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className={styls.news_item}>
+                <div className={styls.top}>
+                  <span className={styls.time}>Jun 29, 2024</span>
+                  <p className={styls.line}></p>
+                </div>
+                <p className={styls.desc}>
+                  Google announced its next-generation Tensor Processing Units
+                  (TPUs) called Trillium, the Wear OS 5 update, and the Gemini
+                  1.5 Pro, its most capable generative AI model. The company has
+                  opened access to the 2-million-token context window of the
+                  Gemini 1.5 Pro AI model, enabling code execution and making
+                  the Gemma 2 model available in Google AI Studio.
+                </p>
+                <div className={styls.company_list}>
+                  <div className={styls.company_item}>
+                    <h3 className={styls.title}>techcrunch.com</h3>
+                    <p className={styls.text}>
+                      Here are the hottest product announcements fromApple,
+                      Google, Microsoft and others so far in 2024
+                    </p>
+                  </div>
+                  <div className={styls.company_item}>
+                    <h3 className={styls.title}>techcrunch.com</h3>
+                    <p className={styls.text}>
+                      Here are the hottest product announcements fromApple,
+                      Google, Microsoft and others so far in 2024
+                    </p>
+                  </div>
+                  <div className={styls.company_item}>
+                    <h3 className={styls.title}>techcrunch.com</h3>
+                    <p className={styls.text}>
+                      Here are the hottest product announcements fromApple,
+                      Google, Microsoft and others so far in 2024
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className={styls.news} id="pricing">
             <h3 className={styls.title}>Pricing</h3>
             <div className={styls.pricing_top}>
               <h4 className={styls.name}>Starting from</h4>
-              <p className={styls.price}>{productInfo?.price  ? productInfo?.price / 100 : 0}</p>
+              <p className={styls.price}>
+                {productInfo?.price ? productInfo?.price / 100 : 0}
+              </p>
               <p className={styls.text}>per month</p>
             </div>
             <div className={styls.box}>
@@ -268,7 +427,7 @@ const ProductDetail = (props: any) => {
             ></div>
           </div>
 
-          <div className={styls.product} id="products">
+          <div className={styls.product} id="features">
             <h3 className={styls.title}>Features</h3>
             <div className={styls.box}>
               <ul className={styls.box_list}>
@@ -306,7 +465,7 @@ const ProductDetail = (props: any) => {
             </div>
           </div>
 
-          <div className={styls.stack} id="stack">
+          <div className={styls.stack} id="reviews">
             <h3 className={styls.title}>Reviews</h3>
             <div className={styls.box}>
               <h3 className={styls.title}>Rating criteria</h3>
@@ -344,8 +503,8 @@ const ProductDetail = (props: any) => {
             </div>
           </div>
 
-          {/* <div className={styls.funding} id="funding">
-            <h3 className={styls.title}>Alternatives</h3>
+          <div className={styls.funding} id="funding">
+            <h3 className={styls.title}>Funding</h3>
             <ul className={styls.funding_list}>
               <li className={styls.funding_item}>
                 Google.org commits $25M in funding to accelerate progress
@@ -373,9 +532,9 @@ const ProductDetail = (props: any) => {
                 Associates, Inc.
               </li>
             </ul>
-          </div> */}
+          </div>
 
-          {/* <div className={styls.team} id="team">
+          <div className={styls.team} id="team">
             <h3 className={styls.title}>Core Team</h3>
             <ul className={styls.team_list}>
               <li className={styls.team_item}>
@@ -467,7 +626,7 @@ const ProductDetail = (props: any) => {
                 reported $68.01 billion in the first quarter of 2022.
               </li>
             </ul>
-          </div> */}
+          </div>
 
           {/* <div className={styls.hiring} id="hiring">
             <h3 className={styls.title}>Hiring</h3>
