@@ -8,133 +8,178 @@ import message from "@/images/message.svg";
 import twitter from "@/images/twitter.svg";
 import { useEffect, useState } from "react";
 import { Dropdown, Progress, Rate, Select } from "antd";
+import { productDetail } from "@/api/product";
 import LoadingContext from "@/components/LoadingContext";
-const productDetail = require('@/api/product').productDetail
 
-interface MediaItem {
-  id: number;
-  img: string;
-}
-
-interface MenuItem {
-  id: number;
-  name: string;
-  htmlId: string;
-  active: boolean;
-}
-
-interface ProductInfo {
-  photo?: string;
-  name?: string;
-  introduce?: string;
-  valueForMoney?: number;
-  totalRateUser?: number;
-  description?: string;
-  platformsSupported?: string[];
-  typicalCustomers?: string[];
-  supportOptions?: string[];
-  keyBenefits?: string;
-  price?: number;
-  priceOption?: string[];
-  priceDetail?: string;
-  totalFeature?: number;
-  supportFeatures?: string[];
-  supportCommonFeatures?: string[];
-  unsupportCommonFeatures?: string[];
-  easeOfUse?: number;
-  features?: number;
-  customerSupport?: number;
-}
-
-const mediaList: MediaItem[] = [
+const mediaList = [
   { id: 1, img: Ins },
   { id: 2, img: x },
   { id: 3, img: message },
   { id: 4, img: twitter },
 ];
 
-const defaultCompareMenu: MenuItem[] = [
-  { id: 1, name: "App Info", htmlId: "appInfo", active: true },
-  { id: 2, name: "Overview", htmlId: "overview", active: false },
-  { id: 3, name: "News", htmlId: "news", active: false },
-  { id: 4, name: "Pricing", htmlId: "pricing", active: false },
-  { id: 5, name: "Features", htmlId: "features", active: false },
-  { id: 6, name: "Reviews", htmlId: "reviews", active: false },
-  { id: 7, name: "Funding", htmlId: "funding", active: false },
-  { id: 8, name: "Core Team", htmlId: "team", active: false },
-  { id: 9, name: "Revenue", htmlId: "revenue", active: false },
-  { id: 10, name: "Challenges", htmlId: "challenges", active: false },
+const defaultCompareMenu = [
+  {
+    id: 1,
+    htmlId: "appInfo",
+    name: "App Info",
+    active: true,
+  },
+  {
+    id: 2,
+    name: "Overview",
+    htmlId: "overview",
+    active: false,
+  },
+  {
+    id: 3,
+    name: "News",
+    htmlId: "news",
+    active: false,
+  },
+  {
+    id: 3,
+    name: "Pricing",
+    htmlId: "pricing",
+    active: false,
+  },
+  {
+    id: 4,
+    name: "Features",
+    htmlId: "features",
+    active: false,
+  },
+  {
+    id: 4,
+    name: "Reviews",
+    htmlId: "reviews",
+    active: false,
+  },
+  {
+    id: 5,
+    name: "Funding",
+    htmlId: "funding",
+    active: false,
+  },
+  {
+    id: 6,
+    name: "Core Team",
+    htmlId: "team",
+    active: false,
+  },
+  {
+    id: 7,
+    name: "Revenue",
+    htmlId: "revenue",
+    active: false,
+  },
+  {
+    id: 9,
+    name: "Challenges",
+    htmlId: "challenges",
+    active: false,
+  },
 ];
 
-const ProductDetailPage = ({ id }: { id: string }) => {
+const ProductDetail = (props: any) => {
+  const { id } = props;
   const [loading, setLoading] = useState(false);
-  const [productInfo, setProductInfo] = useState<ProductInfo>({});
-  const [compareMenu, setCompareMenu] = useState(defaultCompareMenu);
+  const [productInfo, setProductInfo] = useState<any>({});
 
+  const [compareMenu, setCompareMenu] = useState(defaultCompareMenu);
   const handleClick = (id: string) => {
+    console.log(id, "id");
+
     const el = document.getElementById(id);
     el && el.scrollIntoView({ behavior: "smooth" });
-    const updatedMenu = compareMenu.map((item) => ({
-      ...item,
-      active: item.htmlId === id,
-    }));
-    setCompareMenu(updatedMenu);
+    const menus = JSON.parse(JSON.stringify(compareMenu));
+    menus.forEach((item: { active: boolean; htmlId: string }) => {
+      item.active = false;
+      if (item.htmlId == id) {
+        item.active = true;
+      }
+    });
+    setCompareMenu(menus);
   };
 
+  /**
+   * 获取产品详情
+   */
   const getProductDetail = async () => {
     try {
       setLoading(true);
       const res = await productDetail(id);
       if (res.data) {
+        setLoading(false);
         setProductInfo(res.data);
       }
     } catch (error) {
-      console.error("Failed to fetch product details:", error);
-    } finally {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    getProductDetail();
-  }, [id]);
-
   const menu = (
-    <div className={styls.dropdownWrap}>
-      {[5, 4, 3, 2, 1].map((rate, idx) => (
-        <div className={styls.wrap} key={idx}>
-          <div className={styls.rate}>
-            <i className={styls.icon}></i>
-            <span>{rate}</span>
-          </div>
-          <Progress
-            percent={rate * 10}
-            showInfo={false}
-            strokeColor="#9747ff"
-          />
-          <span className={styls.count}>{rate * 100}</span>
+    <div className={styls.dropdownWarp}>
+      <div className={styls.wrap}>
+        <div className={styls.rate}>
+          <i className={styls.icon}></i>
+          <span>5</span>
         </div>
-      ))}
+
+        <Progress percent={30} showInfo={false} strokeColor="#9747ff" />
+        <span className={styls.count}>2.9</span>
+      </div>
+      <div className={styls.wrap}>
+        <div className={styls.rate}>
+          <i className={styls.icon}></i>
+          <span>4</span>
+        </div>
+        <Progress percent={30} showInfo={false} strokeColor="#9747ff" />
+        <span className={styls.count}>2k</span>
+      </div>
+      <div className={styls.wrap}>
+        <div className={styls.rate}>
+          <i className={styls.icon}></i>
+          <span>3</span>
+        </div>
+        <Progress percent={60} showInfo={false} strokeColor="#9747ff" />
+        <span className={styls.count}>3k</span>
+      </div>
+      <div className={styls.wrap}>
+        <div className={styls.rate}>
+          <i className={styls.icon}></i>
+          <span>2</span>
+        </div>
+        <Progress percent={10} showInfo={false} strokeColor="#9747ff" />
+        <span className={styls.count}>120</span>
+      </div>
+      <div className={styls.wrap}>
+        <div className={styls.rate}>
+          <i className={styls.icon}></i>
+          <span>1</span>
+        </div>
+        <Progress percent={3} showInfo={false} strokeColor="#9747ff" />
+        <span className={styls.count}>3</span>
+      </div>
     </div>
   );
+
+  useEffect(() => {
+    setLoading(true);
+    getProductDetail();
+  }, [id]);
 
   return (
     <div className={styls.compare}>
       {loading && <LoadingContext />}
       <div className={styls.header}>
         <div className={styls.media}>
-          <div className={styls.siteWrap}>
+          <div className={styls.site_wrap}>
             {productInfo?.photo && (
-              <Image
-                src={productInfo?.photo}
-                alt={productInfo?.name}
-                width={40}
-                height={40}
-              />
+              <Image src={productInfo?.photo} alt="" width={40} height={40} />
             )}
             <span>{productInfo?.name}</span>
           </div>
-          <div className={styls.mediaList}>
+          <div className={styls.media_list}>
             {mediaList.map((item) => (
               <Link href="/" key={item.id}>
                 <Image alt="" width={24} height={24} src={item.img} />
@@ -144,26 +189,50 @@ const ProductDetailPage = ({ id }: { id: string }) => {
         </div>
         <p className={styls.address}>{productInfo?.introduce}</p>
         <Dropdown overlay={menu} trigger={["hover"]}>
-          <div className={styls.rateInfo}>
-            <span>{(productInfo?.valueForMoney || 0) / 10}</span>
-            <Rate value={(productInfo?.valueForMoney || 0) / 10} disabled />
+          <div className={styls.rate_info}>
+            <span>{productInfo?.valueForMoney / 10}</span>
+            <Rate value={productInfo?.valueForMoney / 10} disabled />
             <span className={styls.count}>
               (
-              {productInfo?.totalRateUser
-                ? `${productInfo.totalRateUser / 1000}k`
+              {productInfo?.totolRateUser
+                ? productInfo.totolRateUser / 1000 + "k"
                 : 0}
               )
             </span>
           </div>
         </Dropdown>
+        {/* <div className={styls.wrap}>
+          <div className={styls.phone}>
+            <i className={styls.phone_icon}></i>
+            <span className={styls.text}>+1 650 253 0000</span>
+          </div>
+          <div className={styls.email}>
+            <i className={styls.email_icon}></i>
+            <span className={styls.text}>google@google.com</span>
+          </div>
+        </div> */}
+        {/* <div className={styls.tags}>
+          <div className={styls.user}>
+            <i className={styls.icon}></i>
+            <span className={styls.text}>100+</span>
+          </div>
+          <div className={styls.found}>
+            <i className={styls.icon}></i>
+            <span className={styls.text}>Founded in 1998</span>
+          </div>
+          <div className={styls.qian}>
+            <span>$</span>
+            <span className={styls.text}>100+</span>
+          </div>
+        </div> */}
       </div>
 
       <div className={styls.content}>
         <div className={styls.left}>
-          <div className={styls.menuList}>
+          <div className={styls.menu_list}>
             {compareMenu.map((item) => (
               <div
-                className={`${styls.menuItem} ${item.active && styls.active}`}
+                className={`${styls.menu_item} ${item.active && styls.active}`}
                 key={item.id}
                 onClick={() => handleClick(item.htmlId)}
               >
@@ -171,7 +240,7 @@ const ProductDetailPage = ({ id }: { id: string }) => {
               </div>
             ))}
           </div>
-          <div className={styls.selectWrap}>
+          <div className={styls.select_wrap}>
             <Select defaultValue={"appInfo"} onChange={handleClick}>
               {compareMenu.map((item) => (
                 <Select.Option value={item.htmlId} key={item.id}>
@@ -185,37 +254,43 @@ const ProductDetailPage = ({ id }: { id: string }) => {
           <div className={styls.overview} id="appInfo">
             <h3 className={styls.title}>App Info</h3>
             <p className={styls.desc}>{productInfo?.description}</p>
+
             <div className={styls.box}>
               <h3 className={styls.title}>Platforms supported</h3>
-              <ul className={styls.boxList}>
-                {productInfo?.platformsSupported?.map((item) => (
-                  <li className={styls.boxItem} key={item}>
-                    <span>{item}</span>
-                    <i className={styls.icon}></i>
-                  </li>
-                ))}
+              <ul className={styls.box_list}>
+                {productInfo?.platformsSupported &&
+                  productInfo.platformsSupported.map((item: string) => (
+                    <li className={styls.box_item} key={item}>
+                      <span>{item}</span>
+                      <i className={styls.icon}></i>
+                    </li>
+                  ))}
               </ul>
             </div>
+
             <div className={styls.box}>
               <h3 className={styls.title}>Typical customers</h3>
-              <ul className={styls.boxList}>
-                {productInfo?.typicalCustomers?.map((item) => (
-                  <li className={styls.boxItem} key={item}>
-                    <span>{item}</span>
-                    <i className={styls.icon}></i>
-                  </li>
-                ))}
+              <ul className={styls.box_list}>
+                {productInfo?.typicalCustomers &&
+                  productInfo.typicalCustomers.map((item: string) => (
+                    <li className={styls.box_item} key={item}>
+                      <span>{item}</span>
+                      <i className={styls.icon}></i>
+                    </li>
+                  ))}
               </ul>
             </div>
+
             <div className={styls.box}>
               <h3 className={styls.title}>Customer support</h3>
-              <ul className={styls.boxList}>
-                {productInfo?.supportOptions?.map((item) => (
-                  <li className={styls.boxItem} key={item}>
-                    <span>{item}</span>
-                    <i className={styls.icon}></i>
-                  </li>
-                ))}
+              <ul className={styls.box_list}>
+                {productInfo?.supportOptions &&
+                  productInfo.supportOptions.map((item: string) => (
+                    <li className={styls.box_item} key={item}>
+                      <span>{item}</span>
+                      <i className={styls.icon}></i>
+                    </li>
+                  ))}
               </ul>
             </div>
 
@@ -553,10 +628,13 @@ const ProductDetailPage = ({ id }: { id: string }) => {
             </ul>
           </div>
 
+          {/* <div className={styls.hiring} id="hiring">
+            <h3 className={styls.title}>Hiring</h3>
+          </div> */}
         </div>
       </div>
     </div>
   );
 };
 
-export default ProductDetailPage;
+export default ProductDetail;
