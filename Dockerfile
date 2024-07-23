@@ -4,14 +4,14 @@ FROM node:20-alpine as install-stage
 ENV CI=1
 WORKDIR /app
 COPY package.json ./
-COPY yarn.lock ./
-RUN yarn install --production --ignore-optional
+COPY package-lock.json ./
+RUN npm run install --production --ignore-optional
 
 FROM install-stage as build-stage
 ENV NODE_OPTIONS=--max_old_space_size=4096
-RUN yarn install
+RUN npm run install
 COPY . .
-RUN yarn build 
+RUN npm run build 
 
 FROM node:20-slim as app-stage
 ENV NODE_ENV=prod  \
@@ -25,4 +25,4 @@ COPY ./package.json ./
 
 EXPOSE 3000
 ENV NODE_OPTIONS=--max_old_space_size=4096
-CMD [ "yarn", "start" ]
+CMD [ "npm", "run", "start" ]
