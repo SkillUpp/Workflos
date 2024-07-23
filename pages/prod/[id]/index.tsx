@@ -21,7 +21,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: true, // 可以设置为 'blocking' 或 'false' 取决于需求
+    fallback: 'blocking', // 可以设置为 'blocking' 或 'false' 取决于需求
   };
 };
 
@@ -33,7 +33,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     props: {
       id,
     },
-    // revalidate: 10, // 每10秒重新生成静态页面
+    revalidate: 10, // 每10秒重新生成静态页面
   };
 };
 
