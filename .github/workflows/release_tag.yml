@@ -1,0 +1,33 @@
+name: Create Tag
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Get the date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y%m%d')"
+
+      - name: Count commits
+        id: count
+        run: echo "::set-output name=count::$(git rev-list --count HEAD)"
+
+      - name: Create Tag
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.API_SERVER_TOKEN }}
+        with:
+          tag_name: release-${{ steps.date.outputs.date }}-${{ steps.count.outputs.count }}
+          draft: false
+          prerelease: false
