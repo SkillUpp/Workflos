@@ -1,19 +1,15 @@
-"use client";
-
 import ProductDetail from "@/app/detail/index";
-import { usePathname } from "next/navigation";
 
-export const dynamicParams = false;
+export async function generateStaticParams() {
+  const paths = [
+    { id: "ClickUp" },
+    { id: "Slack" },
+    { id: "Trello" },
+    { id: "Clio" },
+  ];
+  return paths;
+}
 
-const ProductPage = () => {
-  const paths = usePathname()?.split("/") as string[];
-  const name = paths[paths?.length - 2];
-  console.log(name, "name");
-  return (
-    <div>
-      <ProductDetail id={name} />
-    </div>
-  );
-};
-
-export default ProductPage;
+export default async function PostPage({ params }: { params: { id: string } }) {
+  return <ProductDetail id={params.id} />;
+}

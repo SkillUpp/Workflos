@@ -77,10 +77,10 @@ const Header = () => {
             }`}
           >
             <ul className={styls.navbar_nav}>
-              {navList.map((item, index) => (
+              {navList.map((item) => (
                 <li
                   className={styls.nav_item}
-                  key={index}
+                  key={item.path}
                   onClick={() => handleJump(item.path)}
                 >
                   <div className={styls.nav_link} key={item.title}>
@@ -94,10 +94,10 @@ const Header = () => {
           <div className={styls.header_top_right}>
             {user?.uid ? (
               <div className={styls.user_info}>
-                <Image src={user.picture} alt="" width={64} height={64}/>
+                <Image src={user.picture} alt="" width={64} height={64} />
                 <div className={styls.info}>
                   <span className={styls.name}>{user?.name}</span>
-                  <span className={styls.email}>{ user.email}</span>
+                  <span className={styls.email}>{user.email}</span>
                 </div>
               </div>
             ) : (
