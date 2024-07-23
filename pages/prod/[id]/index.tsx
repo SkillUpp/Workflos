@@ -21,7 +21,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false, // 可以设置为 'blocking' 或 'false' 取决于需求
+    fallback: true, // 可以设置为 'blocking' 或 'false' 取决于需求
   };
 };
 
