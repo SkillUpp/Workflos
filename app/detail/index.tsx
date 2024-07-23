@@ -227,7 +227,7 @@ const ProductDetail = (props: any) => {
           </div>
         </div>
         <p className={styls.address}>{productInfo?.introduce}</p>
-        <Dropdown overlay={menu} trigger={["hover"]}>
+        <Dropdown menu={menu} trigger={["hover"]}>
           <div className={styls.rate_info}>
             <span>{productInfo?.valueForMoney || "0"}</span>
             <Rate value={productInfo?.valueForMoney} disabled />
