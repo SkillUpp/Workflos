@@ -4,16 +4,15 @@ const nextConfig = {
   images: { unoptimized: true },
   output: "export",
   trailingSlash: true,
-  typescript: {
-    ignoreBuildErrors: false,
-  },
   async rewrites() {
-    return [
-      {
-        source: "/product/:id",
-        destination: "/product/[id]",
-      },
-    ];
+    return {
+      fallback: [
+        {
+          source: "/product/:id",
+          destination: "/product/[id]",
+        },
+      ],
+    };
   },
 };
 
