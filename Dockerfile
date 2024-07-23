@@ -5,11 +5,11 @@ ENV CI=1
 WORKDIR /app
 COPY package.json ./
 COPY package-lock.json ./
-RUN npm run install --production --ignore-optional
+RUN npm install --production --ignore-optional
 
 FROM install-stage as build-stage
 ENV NODE_OPTIONS=--max_old_space_size=4096
-RUN npm run install
+RUN npm install
 COPY . .
 RUN npm run build 
 
