@@ -8,7 +8,6 @@ export async function generateStaticParams() {
     { id: "Clio" },
   ];
 
-
   return paths.map((path) => ({ id: path.id }));
 }
 
@@ -26,7 +25,7 @@ export default function PostPage({ params }: Props) {
   console.log(params.id, "params.id");
 
   if (!validIds.includes(params.id)) {
-    return <>今天天气怎么样</>;
+    return <ProductDetail id={params.id} />;
   }
 
   // 在服务器端打印参数
