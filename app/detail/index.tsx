@@ -477,30 +477,30 @@ const ProductDetail = (props: any) => {
               <ul className={styls.box_list}>
                 <li className={styls.box_item}>
                   <span>Value for money</span>
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <Rate value={productInfo?.valueForMoney} disabled />(
+                  <div className={styls.rateWrap}>
+                    <Rate value={productInfo?.valueForMoney ? Number(productInfo?.valueForMoney) : 0}  disabled />(
                     {productInfo?.valueForMoney})
                   </div>
                 </li>
 
                 <li className={styls.box_item}>
                   <span>Ease of use</span>
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <Rate value={productInfo?.easeOfUse} disabled />(
+                  <div className={styls.rateWrap}>
+                    <Rate value={productInfo?.easeOfUse ? productInfo?.easeOfUse.toFixed(0) : 0}  disabled />(
                     {productInfo?.easeOfUse})
                   </div>
                 </li>
                 <li className={styls.box_item}>
                   <span>Features</span>
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <Rate value={productInfo?.features} disabled />(
+                  <div className={styls.rateWrap}>
+                    <Rate value={productInfo?.features ? productInfo?.features.toFixed(0) : 0} disabled />(
                     {productInfo?.features})
                   </div>
                 </li>
                 <li className={styls.box_item}>
                   <span>Customer support</span>
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <Rate value={productInfo?.customerSupport} disabled />(
+                  <div className={styls.rateWrap}>
+                    <Rate value={productInfo?.customerSupport ? productInfo?.customerSupport.toFixed(0) : 0} disabled />(
                     {productInfo?.customerSupport})
                   </div>
                 </li>

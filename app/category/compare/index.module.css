@@ -180,6 +180,14 @@
   font-size: 14px;
   line-height: 24px;
 }
+.compare .content .right .wrap .list .item .box .box_list .box_item .rateWrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.compare .content .right .wrap .list .item .box .box_list .box_item .rateWrap :global .ant-rate .ant-rate-star {
+  width: 32px;
+}
 .compare .content .right .wrap .list .item .box .box_list .box_item.nocheck {
   color: #c5c5c5;
 }

@@ -253,6 +253,20 @@
               width: 100%;
               font-size: 14px;
               line-height: 24px;
+              .rateWrap {
+                display: flex;
+                align-items: center;
+                width: 240px;
+                justify-content: space-between;
+                :global {
+                  .ant-rate {
+                    width: 220px;
+                    .ant-rate-star {
+                      width: 32px;
+                    }
+                  }
+                }
+              }
 
               &.nocheck {
                 color: #c5c5c5;

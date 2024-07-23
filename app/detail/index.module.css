@@ -250,6 +250,33 @@
   font-size: 14px;
   line-height: 24px;
 }
+.compare .content .right .overview .box .box_list .box_item .rateWrap,
+.compare .content .right .product .box .box_list .box_item .rateWrap,
+.compare .content .right .stack .box .box_list .box_item .rateWrap,
+.compare .content .right .funding .box .box_list .box_item .rateWrap,
+.compare .content .right .team .box .box_list .box_item .rateWrap,
+.compare .content .right .news .box .box_list .box_item .rateWrap {
+  display: flex;
+  align-items: center;
+  width: 240px;
+  justify-content: space-between;
+}
+.compare .content .right .overview .box .box_list .box_item .rateWrap :global .ant-rate,
+.compare .content .right .product .box .box_list .box_item .rateWrap :global .ant-rate,
+.compare .content .right .stack .box .box_list .box_item .rateWrap :global .ant-rate,
+.compare .content .right .funding .box .box_list .box_item .rateWrap :global .ant-rate,
+.compare .content .right .team .box .box_list .box_item .rateWrap :global .ant-rate,
+.compare .content .right .news .box .box_list .box_item .rateWrap :global .ant-rate {
+  width: 220px;
+}
+.compare .content .right .overview .box .box_list .box_item .rateWrap :global .ant-rate .ant-rate-star,
+.compare .content .right .product .box .box_list .box_item .rateWrap :global .ant-rate .ant-rate-star,
+.compare .content .right .stack .box .box_list .box_item .rateWrap :global .ant-rate .ant-rate-star,
+.compare .content .right .funding .box .box_list .box_item .rateWrap :global .ant-rate .ant-rate-star,
+.compare .content .right .team .box .box_list .box_item .rateWrap :global .ant-rate .ant-rate-star,
+.compare .content .right .news .box .box_list .box_item .rateWrap :global .ant-rate .ant-rate-star {
+  width: 32px;
+}
 .compare .content .right .overview .box .box_list .box_item.nocheck,
 .compare .content .right .product .box .box_list .box_item.nocheck,
 .compare .content .right .stack .box .box_list .box_item.nocheck,

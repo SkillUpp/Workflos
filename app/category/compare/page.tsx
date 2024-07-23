@@ -2,21 +2,14 @@
 import Image from "next/image";
 import styls from "./index.module.css";
 import Google from "@/images/google.svg";
-import Ins from "@/images/ins.svg";
-import x from "@/images/x.svg";
-import message from "@/images/message.svg";
-import twitter from "@/images/twitter.svg";
 import { useEffect, useState } from "react";
 import { Rate, Select } from "antd";
 import { productDetail } from "@/api/product";
 import LoadingContext from "@/components/LoadingContext";
-
-const mediaList = [
-  { id: 1, img: Ins },
-  { id: 2, img: x },
-  { id: 3, img: message },
-  { id: 4, img: twitter },
-];
+interface IOptionItem {
+  name: string;
+  slug: string;
+}
 
 const defaultCompareMenu = [
   {
@@ -90,9 +83,8 @@ const Compare = (props: any) => {
   useEffect(() => {
     const fetchProductDetails = async () => {
       if (id) {
-        const ids = encodeURI(id).split("%2526");
+        const ids = encodeURIComponent(id).split("%2526");
         setLoading(true);
-
         const results = await Promise.all(
           ids.map((item) => getProductDetail(item))
         );
@@ -170,9 +162,9 @@ const Compare = (props: any) => {
                       <h3 className={styls.title}>Platforms supported</h3>
                       <ul className={styls.box_list}>
                         {item?.platformsSupported &&
-                          item.platformsSupported.map((val: string) => (
-                            <li className={styls.box_item} key={val}>
-                              <span>{val}</span>
+                          item.platformsSupported.map((item: IOptionItem) => (
+                            <li className={styls.box_item} key={item.slug}>
+                              <span>{item.name}</span>
                               <i className={styls.icon}></i>
                             </li>
                           ))}
@@ -183,9 +175,9 @@ const Compare = (props: any) => {
                       <h3 className={styls.title}>Typical customers</h3>
                       <ul className={styls.box_list}>
                         {item?.typicalCustomers &&
-                          item.typicalCustomers.map((val: string) => (
-                            <li className={styls.box_item} key={val}>
-                              <span>{val}</span>
+                          item.typicalCustomers.map((item: IOptionItem) => (
+                            <li className={styls.box_item} key={item.slug}>
+                              <span>{item.name}</span>
                               <i className={styls.icon}></i>
                             </li>
                           ))}
@@ -229,7 +221,7 @@ const Compare = (props: any) => {
                 >
                   <div className={styls.pricing_top}>
                     <h4 className={styls.name}>Starting from</h4>
-                    <p className={styls.price}>{item?.price / 100}</p>
+                    <p className={styls.price}>{item?.price ? item?.price / 100 : 0 }</p>
                     <p className={styls.text}>per month</p>
                   </div>
                   <div className={styls.box}>
@@ -269,34 +261,36 @@ const Compare = (props: any) => {
                     <ul className={styls.box_list}>
                       <li className={`${styls.box_item}`}>
                         <span>Total features</span>
-                        <span>{item?.totalFeature}</span>
+                        <span>{item?.totalFeatures}</span>
                       </li>
 
                       {item?.supportFeatures &&
-                        item.supportFeatures.map((val: string) => (
-                          <li className={styls.box_item} key={val}>
-                            <span>{val}</span>
+                        item.supportFeatures.map((item: IOptionItem) => (
+                          <li className={styls.box_item} key={item.slug}>
+                            <span>{item.name}</span>
                             <i className={styls.icon}></i>
                           </li>
                         ))}
 
                       {item?.supportCommonFeatures &&
-                        item.supportCommonFeatures.map((item: string) => (
-                          <li className={styls.box_item} key={item}>
-                            <span>{item}</span>
+                        item.supportCommonFeatures.map((item: IOptionItem) => (
+                          <li className={styls.box_item} key={item.slug}>
+                            <span>{item.name}</span>
                             <i className={styls.icon}></i>
                           </li>
                         ))}
                       {item?.unsupportCommonFeatures &&
-                        item.unsupportCommonFeatures.map((val: string) => (
-                          <li
-                            className={`${styls.box_item} ${styls.nocheck}`}
-                            key={val}
-                          >
-                            <span>{val}</span>
-                            <i className={styls.icon}></i>
-                          </li>
-                        ))}
+                        item.unsupportCommonFeatures.map(
+                          (item: IOptionItem) => (
+                            <li
+                              className={`${styls.box_item} ${styls.nocheck}`}
+                              key={item.slug}
+                            >
+                              <span>{item.name}</span>
+                              <i className={styls.icon}></i>
+                            </li>
+                          )
+                        )}
                     </ul>
                   </div>
                   {/* <button className={styls.btn}>VIEW MORE DETAILS</button> */}
@@ -320,31 +314,47 @@ const Compare = (props: any) => {
                     <ul className={styls.box_list}>
                       <li className={styls.box_item}>
                         <span>Value for money</span>
-                        <div style={{ display: "flex", alignItems: "center" }}>
-                          <Rate value={item?.valueForMoney / 10} disabled />(
-                          {item?.valueForMoney / 10})
+                        <div className={styls.rateWrap}>
+                          <Rate
+                            count={1}
+                            value={item?.valueForMoney > 0 ? 1 : 0}
+                            disabled
+                          />
+                          ({item?.valueForMoney})
                         </div>
                       </li>
 
                       <li className={styls.box_item}>
                         <span>Ease of use</span>
-                        <div style={{ display: "flex", alignItems: "center" }}>
-                          <Rate value={item?.easeOfUse / 10} disabled />(
-                          {item?.easeOfUse / 10})
+                        <div className={styls.rateWrap}>
+                          <Rate
+                            count={1}
+                            value={item?.easeOfUse > 0 ? 1 : 0}
+                            disabled
+                          />
+                          ({item?.easeOfUse})
                         </div>
                       </li>
                       <li className={styls.box_item}>
                         <span>Features</span>
-                        <div style={{ display: "flex", alignItems: "center" }}>
-                          <Rate value={item?.features / 10} disabled />(
-                          {item?.features / 10})
+                        <div className={styls.rateWrap}>
+                          <Rate
+                            count={1}
+                            value={item?.features > 0 ? 1 : 0}
+                            disabled
+                          />
+                          ({item?.features})
                         </div>
                       </li>
                       <li className={styls.box_item}>
                         <span>Customer support</span>
-                        <div style={{ display: "flex", alignItems: "center" }}>
-                          <Rate value={item?.customerSupport / 10} disabled />(
-                          {item?.customerSupport / 10})
+                        <div className={styls.rateWrap}>
+                          <Rate
+                            count={1}
+                            value={item?.customerSupport > 0 ? 1 : 0}
+                            disabled
+                          />
+                          ({item?.customerSupport})
                         </div>
                       </li>
                     </ul>
