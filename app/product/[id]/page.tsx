@@ -3,17 +3,7 @@
 import ProductDetail from "@/app/detail/index";
 import { usePathname } from "next/navigation";
 
-export const getStaticPaths = async () => {
-  console.log("执行咯吗");
-
-  return { paths: [], fallback: "blocking" };
-};
-
-export const getServerSideProps = async ({ params, res, query }) => {
-  console.log(params, 'params');
-  
-  return { props: { params } };
-};
+export const dynamicParams = false;
 
 const ProductPage = () => {
   const paths = usePathname()?.split("/") as string[];
