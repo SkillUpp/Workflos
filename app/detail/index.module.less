@@ -3,26 +3,33 @@
   background: #f0f0f0;
   overflow: hidden;
   height: calc(100vh - 86px);
+
   .header {
     width: 100%;
     padding: 42px 200px 24px 350px;
     background: #fff;
+
     .media {
       display: flex;
       height: 46px;
       align-items: center;
+
       .media_list {
         padding-left: 27px;
+
         a {
           margin-left: 12px;
+
           &:first-child {
             margin-left: 0;
           }
         }
       }
+
       .site_wrap {
         display: flex;
         align-items: center;
+
         span {
           font-size: 18px;
           line-height: 1.2;
@@ -32,16 +39,19 @@
         }
       }
     }
+
     .address {
       font-size: 14px;
       line-height: 1.2;
       margin: 8px 0 0 0;
     }
+
     .rate_info {
       margin-top: 8px;
       display: flex;
       align-items: center;
       cursor: pointer;
+
       :global {
         .ant-rate {
           font-size: 18px;
@@ -51,19 +61,23 @@
           margin-right: 10px;
         }
       }
+
       .count {
         color: #9747ff;
         font-size: 14px;
         line-height: 1.5;
       }
     }
+
     .wrap {
       display: flex;
       align-items: center;
       padding-top: 10px;
+
       .phone {
         display: flex;
         align-items: center;
+
         &_icon {
           width: 16px;
           height: 16px;
@@ -71,16 +85,19 @@
           background: url("../../images/icon/phone.svg") 0 0 no-repeat;
           background-size: cover;
         }
+
         .text {
           padding-left: 6px;
           font-size: 14px;
           line-height: 1.2;
         }
       }
+
       .email {
         padding-left: 36px;
         display: flex;
         align-items: center;
+
         &_icon {
           width: 18px;
           height: 18px;
@@ -88,6 +105,7 @@
           background: url("../../images/icon/mail-minus.svg") 0 0 no-repeat;
           background-size: cover;
         }
+
         .text {
           padding-left: 6px;
           font-size: 14px;
@@ -95,9 +113,11 @@
         }
       }
     }
+
     .tags {
       display: flex;
       padding-top: 10px;
+
       .user,
       .found,
       .qian {
@@ -113,8 +133,10 @@
         padding: 0 5px;
         height: 20px;
       }
+
       .user {
         margin-left: 0;
+
         .icon {
           width: 16px;
           height: 16px;
@@ -125,21 +147,26 @@
       }
     }
   }
+
   .content {
     padding: 18px 200px 0 200px;
     display: flex;
     height: calc(100vh - 250px);
+
     .left {
       width: 126px;
       margin-right: 24px;
+
       .select_wrap {
         display: none;
       }
+
       .menu_list {
         position: relative;
         display: flex;
         flex-direction: column;
         text-align: right;
+
         &::after {
           content: "";
           position: absolute;
@@ -149,6 +176,7 @@
           top: 0;
           right: 0;
         }
+
         .menu_item {
           display: flex;
           align-items: center;
@@ -161,9 +189,11 @@
           color: #000;
           border-top-left-radius: 12px;
           border-bottom-left-radius: 12px;
+
           &:first-child {
             margin-top: 0;
           }
+
           &.active {
             background: #9747ff;
             color: #fff;
@@ -171,10 +201,12 @@
         }
       }
     }
+
     .right {
       width: calc(100% - 110px);
       height: 100%;
       overflow: scroll;
+
       .overview,
       .product,
       .stack,
@@ -185,21 +217,25 @@
         background: #fff;
         padding: 20px;
         border-radius: 8px;
+
         .title {
           margin: 0;
           font-size: 20px;
           line-height: 1.2;
           font-weight: 700;
         }
+
         .desc {
           padding-top: 5px;
           margin: 0;
           font-size: 14px;
           line-height: 25px;
         }
+
         .box {
           list-style: none;
           padding-top: 24px;
+
           &:first-child {
             padding-top: 0;
           }
@@ -220,6 +256,7 @@
 
               &.nocheck {
                 color: #c5c5c5;
+
                 .icon {
                   display: block;
                   width: 16px;
@@ -248,6 +285,7 @@
             }
           }
         }
+
         .pricing_top {
           display: flex;
           flex-direction: column;
@@ -265,14 +303,22 @@
           }
 
           .price {
+            display: flex;
+            align-items: flex-end;
             font-size: 50px;
             line-height: 1.2;
             font-weight: 800;
 
-            &::before {
-              content: "$";
+            .currency {
               font-size: 16px;
             }
+            p {
+              margin: 0;
+            }
+          }
+
+          .currency {
+            font-size: 16px;
           }
 
           .text {
@@ -282,23 +328,29 @@
           }
         }
       }
+
       .overview {
         margin-top: 0;
       }
+
       .news {
         .news_list {
           display: flex;
           flex-direction: column;
+
           .news_item {
             margin-top: 20px;
+
             &:first-child {
               margin-top: 0;
             }
+
             .top {
               padding-top: 4px;
               display: flex;
               align-items: center;
               width: 100%;
+
               .time {
                 height: 18px;
                 background: #9747ff;
@@ -309,6 +361,7 @@
                 padding: 0 6px;
                 white-space: nowrap;
               }
+
               .line {
                 margin: 0;
                 margin-left: 16px;
@@ -317,14 +370,17 @@
                 background: #999999;
               }
             }
+
             .desc {
               margin: 4px 0 0 0;
             }
+
             .company_list {
               display: flex;
               justify-content: space-between;
               flex-wrap: wrap;
               padding-top: 10px;
+
               .company_item {
                 padding: 7px 9px;
                 border: 1px solid #9747ff;
@@ -332,10 +388,12 @@
                 box-sizing: border-box;
                 width: calc(50% - 12px);
                 margin-top: 24px;
+
                 &:nth-child(1),
                 &:nth-child(2) {
                   margin-top: 0;
                 }
+
                 .title,
                 .text {
                   margin: 0;
@@ -344,6 +402,7 @@
                   color: #9747ff;
                   font-weight: 600;
                 }
+
                 .text {
                   padding-top: 4px;
                   font-size: 12px;
@@ -359,6 +418,7 @@
       .product,
       .funding,
       .stack {
+
         .stack_list,
         .funding_list,
         .product_list {
@@ -366,12 +426,14 @@
           display: flex;
           flex-direction: column;
           padding: 0;
+
           .stack_item,
           .funding_item,
           .product_item {
             padding-top: 16px;
             font-size: 14px;
             line-height: 25px;
+
             &:first-child {
               padding-top: 0;
             }
@@ -387,6 +449,7 @@
           padding: 0;
           flex-wrap: wrap;
           justify-content: space-between;
+
           .team_item {
             border-radius: 5px;
             border: 1px solid #9747ff;
@@ -394,6 +457,7 @@
             margin-bottom: 16px;
             padding: 10px;
             width: calc(100% / 3 - 16px);
+
             .name {
               margin: 0;
               font-size: 16px;
@@ -401,6 +465,7 @@
               color: #9747ff;
               font-weight: 700;
             }
+
             .desc {
               margin: 0;
               font-size: 12px;
@@ -420,9 +485,11 @@
   border-radius: 5px;
   box-sizing: border-box;
   box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
+
   .wrap {
     display: flex;
     align-items: center;
+
     .icon {
       display: block;
       width: 16px;
@@ -430,9 +497,11 @@
       background: url("../../images/star.svg") 0 0 no-repeat;
       background-size: cover;
     }
+
     .rate {
       display: flex;
       align-items: center;
+
       span {
         margin-left: 6px;
         margin-right: 6px;
@@ -442,6 +511,7 @@
         color: #9747ff;
       }
     }
+
     .count {
       margin-left: 6px;
       display: block;
@@ -455,9 +525,11 @@
 @media (max-width: 1420px) {
   .compare {
     height: calc(100vh - 86px);
+
     .header {
       padding: 42px 56px 24px 56px;
     }
+
     .content {
       padding: 18px 56px 0 56px;
     }
@@ -470,39 +542,48 @@
     background: #f0f0f0;
     overflow: hidden;
     height: calc(100vh - 86px);
+
     .header {
       width: auto;
       padding: 42px 24px 24px 24px;
       background: #fff;
+
       .media {
         display: flex;
         flex-direction: column;
         height: auto;
         align-items: flex-start;
+
         .media_list {
           padding-top: 12px;
           padding-left: 0;
+
           a {
             margin-left: 12px;
+
             &:first-child {
               margin-left: 0;
             }
           }
         }
       }
+
       .address {
         font-size: 14px;
         line-height: 1.2;
         margin: 8px 0 0 0;
       }
+
       .wrap {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         padding-top: 10px;
+
         .phone {
           display: flex;
           align-items: center;
+
           &_icon {
             width: 16px;
             height: 16px;
@@ -510,17 +591,20 @@
             background: url("../../images/icon/phone.svg") 0 0 no-repeat;
             background-size: cover;
           }
+
           .text {
             padding-left: 6px;
             font-size: 14px;
             line-height: 1.2;
           }
         }
+
         .email {
           padding-top: 10px;
           padding-left: 0;
           display: flex;
           align-items: center;
+
           &_icon {
             width: 18px;
             height: 18px;
@@ -528,6 +612,7 @@
             background: url("../../images/icon/mail-minus.svg") 0 0 no-repeat;
             background-size: cover;
           }
+
           .text {
             padding-left: 6px;
             font-size: 14px;
@@ -535,9 +620,11 @@
           }
         }
       }
+
       .tags {
         display: flex;
         padding-top: 10px;
+
         .user,
         .found,
         .qian {
@@ -553,8 +640,10 @@
           padding: 0 5px;
           height: 20px;
         }
+
         .user {
           margin-left: 0;
+
           .icon {
             width: 16px;
             height: 16px;
@@ -565,17 +654,21 @@
         }
       }
     }
+
     .content {
       padding: 18px 24px 0 24px;
       display: flex;
       flex-direction: column;
       height: calc(100vh - 310px);
+
       .left {
         width: 100%;
         margin-right: 24px;
+
         .select_wrap {
           display: block;
           margin-bottom: 24px;
+
           :global {
             .ant-select {
               width: 100%;
@@ -588,14 +681,17 @@
               border: none;
               cursor: pointer;
               border: none;
+
               .ant-select-selector {
                 border-color: #9747ff !important;
               }
+
               input {
                 border-radius: 24px;
                 width: 100%;
                 height: 100%;
               }
+
               &:focus,
               &:hover {
                 .ant-select-selector {
@@ -605,14 +701,17 @@
             }
           }
         }
+
         .menu_list {
           display: none;
         }
       }
+
       .right {
         width: 100%;
         height: 100%;
         overflow: scroll;
+
         .overview,
         .product,
         .stack,
@@ -623,12 +722,14 @@
           background: #fff;
           padding: 20px;
           border-radius: 8px;
+
           .title {
             margin: 0;
             font-size: 20px;
             line-height: 1.2;
             font-weight: 700;
           }
+
           .desc {
             padding-top: 5px;
             margin: 0;
@@ -636,23 +737,29 @@
             line-height: 25px;
           }
         }
+
         .overview {
           margin-top: 0;
         }
+
         .news {
           .news_list {
             display: flex;
             flex-direction: column;
+
             .news_item {
               margin-top: 20px;
+
               &:first-child {
                 margin-top: 0;
               }
+
               .top {
                 padding-top: 4px;
                 display: flex;
                 align-items: center;
                 width: 100%;
+
                 .time {
                   height: 18px;
                   background: #9747ff;
@@ -663,6 +770,7 @@
                   padding: 0 6px;
                   white-space: nowrap;
                 }
+
                 .line {
                   margin: 0;
                   margin-left: 16px;
@@ -671,14 +779,17 @@
                   background: #999999;
                 }
               }
+
               .desc {
                 margin: 4px 0 0 0;
               }
+
               .company_list {
                 display: flex;
                 justify-content: space-between;
                 flex-wrap: wrap;
                 padding-top: 10px;
+
                 .company_item {
                   padding: 7px 9px;
                   border: 1px solid #9747ff;
@@ -686,10 +797,12 @@
                   box-sizing: border-box;
                   width: calc(50% - 12px);
                   margin-top: 24px;
+
                   &:nth-child(1),
                   &:nth-child(2) {
                     margin-top: 0;
                   }
+
                   .title,
                   .text {
                     margin: 0;
@@ -698,6 +811,7 @@
                     color: #9747ff;
                     font-weight: 600;
                   }
+
                   .text {
                     padding-top: 4px;
                     font-size: 12px;
@@ -713,6 +827,7 @@
         .product,
         .funding,
         .stack {
+
           .stack_list,
           .funding_list,
           .product_list {
@@ -720,12 +835,14 @@
             display: flex;
             flex-direction: column;
             padding: 0;
+
             .stack_item,
             .funding_item,
             .product_item {
               padding-top: 16px;
               font-size: 14px;
               line-height: 25px;
+
               &:first-child {
                 padding-top: 0;
               }
@@ -741,6 +858,7 @@
             padding: 0;
             flex-wrap: wrap;
             justify-content: space-between;
+
             .team_item {
               border-radius: 5px;
               border: 1px solid #9747ff;
@@ -748,6 +866,7 @@
               margin-bottom: 16px;
               padding: 10px;
               width: calc(100% / 3 - 16px);
+
               .name {
                 margin: 0;
                 font-size: 16px;
@@ -755,6 +874,7 @@
                 color: #9747ff;
                 font-weight: 700;
               }
+
               .desc {
                 margin: 0;
                 font-size: 12px;

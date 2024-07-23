@@ -340,17 +340,34 @@
 .compare .content .right .funding .pricing_top .price,
 .compare .content .right .team .pricing_top .price,
 .compare .content .right .news .pricing_top .price {
+  display: flex;
+  align-items: flex-end;
   font-size: 50px;
   line-height: 1.2;
   font-weight: 800;
 }
-.compare .content .right .overview .pricing_top .price::before,
-.compare .content .right .product .pricing_top .price::before,
-.compare .content .right .stack .pricing_top .price::before,
-.compare .content .right .funding .pricing_top .price::before,
-.compare .content .right .team .pricing_top .price::before,
-.compare .content .right .news .pricing_top .price::before {
-  content: "$";
+.compare .content .right .overview .pricing_top .price .currency,
+.compare .content .right .product .pricing_top .price .currency,
+.compare .content .right .stack .pricing_top .price .currency,
+.compare .content .right .funding .pricing_top .price .currency,
+.compare .content .right .team .pricing_top .price .currency,
+.compare .content .right .news .pricing_top .price .currency {
+  font-size: 16px;
+}
+.compare .content .right .overview .pricing_top .price p,
+.compare .content .right .product .pricing_top .price p,
+.compare .content .right .stack .pricing_top .price p,
+.compare .content .right .funding .pricing_top .price p,
+.compare .content .right .team .pricing_top .price p,
+.compare .content .right .news .pricing_top .price p {
+  margin: 0;
+}
+.compare .content .right .overview .pricing_top .currency,
+.compare .content .right .product .pricing_top .currency,
+.compare .content .right .stack .pricing_top .currency,
+.compare .content .right .funding .pricing_top .currency,
+.compare .content .right .team .pricing_top .currency,
+.compare .content .right .news .pricing_top .currency {
   font-size: 16px;
 }
 .compare .content .right .overview .pricing_top .text,

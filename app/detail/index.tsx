@@ -11,6 +11,11 @@ import { Dropdown, Progress, Rate, Select } from "antd";
 import { productDetail } from "@/api/product";
 import LoadingContext from "@/components/LoadingContext";
 
+interface IOptionItem {
+  name: string;
+  slug: string;
+}
+
 const mediaList = [
   { id: 1, img: Ins },
   { id: 2, img: x },
@@ -108,7 +113,7 @@ const ProductDetail = (props: any) => {
   const getProductDetail = async () => {
     try {
       setLoading(true);
-      const res = await productDetail(id);
+      const res = await productDetail(decodeURIComponent(id));
       if (res.data) {
         setLoading(false);
         setProductInfo(res.data);
@@ -125,40 +130,74 @@ const ProductDetail = (props: any) => {
           <span>5</span>
         </div>
 
-        <Progress percent={30} showInfo={false} strokeColor="#9747ff" />
-        <span className={styls.count}>2.9</span>
+        <Progress
+          percent={productInfo?.rateInfo ? productInfo?.rateInfo["5"] : 0}
+          showInfo={false}
+          strokeColor="#9747ff"
+        />
+        <span className={styls.count}>
+          {productInfo?.rateInfo
+            ? (productInfo?.rateInfo["5"] / 100).toFixed(1) + "k"
+            : "0"}
+        </span>
       </div>
       <div className={styls.wrap}>
         <div className={styls.rate}>
           <i className={styls.icon}></i>
           <span>4</span>
         </div>
-        <Progress percent={30} showInfo={false} strokeColor="#9747ff" />
-        <span className={styls.count}>2k</span>
+        <Progress
+          percent={productInfo?.rateInfo ? productInfo?.rateInfo["4"] : 0}
+          showInfo={false}
+          strokeColor="#9747ff"
+        />
+        <span className={styls.count}>
+          {productInfo?.rateInfo
+            ? (productInfo?.rateInfo["4"] / 100).toFixed(1) + "k"
+            : "0"}
+        </span>
       </div>
       <div className={styls.wrap}>
         <div className={styls.rate}>
           <i className={styls.icon}></i>
           <span>3</span>
         </div>
-        <Progress percent={60} showInfo={false} strokeColor="#9747ff" />
-        <span className={styls.count}>3k</span>
+        <Progress
+          percent={productInfo?.rateInfo ? productInfo?.rateInfo["3"] : 0}
+          showInfo={false}
+          strokeColor="#9747ff"
+        />
+        <span className={styls.count}>
+          {productInfo?.rateInfo ? productInfo?.rateInfo["3"] : "0"}
+        </span>
       </div>
       <div className={styls.wrap}>
         <div className={styls.rate}>
           <i className={styls.icon}></i>
           <span>2</span>
         </div>
-        <Progress percent={10} showInfo={false} strokeColor="#9747ff" />
-        <span className={styls.count}>120</span>
+        <Progress
+          percent={productInfo?.rateInfo ? productInfo?.rateInfo["2"] : 0}
+          showInfo={false}
+          strokeColor="#9747ff"
+        />
+        <span className={styls.count}>
+          {productInfo?.rateInfo ? productInfo?.rateInfo["2"] : "0"}
+        </span>
       </div>
       <div className={styls.wrap}>
         <div className={styls.rate}>
           <i className={styls.icon}></i>
           <span>1</span>
         </div>
-        <Progress percent={3} showInfo={false} strokeColor="#9747ff" />
-        <span className={styls.count}>3</span>
+        <Progress
+          percent={productInfo?.rateInfo ? productInfo?.rateInfo["1"] : 0}
+          showInfo={false}
+          strokeColor="#9747ff"
+        />
+        <span className={styls.count}>
+          {productInfo?.rateInfo ? productInfo?.rateInfo["1"] : "0"}
+        </span>
       </div>
     </div>
   );
@@ -190,41 +229,17 @@ const ProductDetail = (props: any) => {
         <p className={styls.address}>{productInfo?.introduce}</p>
         <Dropdown overlay={menu} trigger={["hover"]}>
           <div className={styls.rate_info}>
-            <span>{productInfo?.valueForMoney / 10}</span>
-            <Rate value={productInfo?.valueForMoney / 10} disabled />
+            <span>{productInfo?.valueForMoney || "0"}</span>
+            <Rate value={productInfo?.valueForMoney} disabled />
             <span className={styls.count}>
               (
               {productInfo?.totolRateUser
-                ? productInfo.totolRateUser / 1000 + "k"
+                ? productInfo.totolRateUser / 100 + "k"
                 : 0}
               )
             </span>
           </div>
         </Dropdown>
-        {/* <div className={styls.wrap}>
-          <div className={styls.phone}>
-            <i className={styls.phone_icon}></i>
-            <span className={styls.text}>+1 650 253 0000</span>
-          </div>
-          <div className={styls.email}>
-            <i className={styls.email_icon}></i>
-            <span className={styls.text}>google@google.com</span>
-          </div>
-        </div> */}
-        {/* <div className={styls.tags}>
-          <div className={styls.user}>
-            <i className={styls.icon}></i>
-            <span className={styls.text}>100+</span>
-          </div>
-          <div className={styls.found}>
-            <i className={styls.icon}></i>
-            <span className={styls.text}>Founded in 1998</span>
-          </div>
-          <div className={styls.qian}>
-            <span>$</span>
-            <span className={styls.text}>100+</span>
-          </div>
-        </div> */}
       </div>
 
       <div className={styls.content}>
@@ -259,9 +274,9 @@ const ProductDetail = (props: any) => {
               <h3 className={styls.title}>Platforms supported</h3>
               <ul className={styls.box_list}>
                 {productInfo?.platformsSupported &&
-                  productInfo.platformsSupported.map((item: string) => (
-                    <li className={styls.box_item} key={item}>
-                      <span>{item}</span>
+                  productInfo.platformsSupported.map((item: IOptionItem) => (
+                    <li className={styls.box_item} key={item.slug}>
+                      <span>{item.name}</span>
                       <i className={styls.icon}></i>
                     </li>
                   ))}
@@ -272,9 +287,9 @@ const ProductDetail = (props: any) => {
               <h3 className={styls.title}>Typical customers</h3>
               <ul className={styls.box_list}>
                 {productInfo?.typicalCustomers &&
-                  productInfo.typicalCustomers.map((item: string) => (
-                    <li className={styls.box_item} key={item}>
-                      <span>{item}</span>
+                  productInfo.typicalCustomers.map((item: IOptionItem) => (
+                    <li className={styls.box_item} key={item.slug}>
+                      <span>{item.name}</span>
                       <i className={styls.icon}></i>
                     </li>
                   ))}
@@ -285,12 +300,14 @@ const ProductDetail = (props: any) => {
               <h3 className={styls.title}>Customer support</h3>
               <ul className={styls.box_list}>
                 {productInfo?.supportOptions &&
-                  productInfo.supportOptions.map((item: string) => (
-                    <li className={styls.box_item} key={item}>
-                      <span>{item}</span>
-                      <i className={styls.icon}></i>
-                    </li>
-                  ))}
+                  productInfo.supportOptions.map(
+                    (item: string, index: number) => (
+                      <li className={styls.box_item} key={index}>
+                        <span>{item}</span>
+                        <i className={styls.icon}></i>
+                      </li>
+                    )
+                  )}
               </ul>
             </div>
 
@@ -304,21 +321,13 @@ const ProductDetail = (props: any) => {
           <div className={styls.overview} id="overview">
             <h3 className={styls.title}>Overview</h3>
 
-            <p className={styls.desc}>
-              Google LLC is an American multinational corporation and technology
-              company focusing on online advertising, search engine technology,
-              cloud computing, computer software, quantum computing, e-commerce,
-              consumer electronics, and artificial intelligence. The company's
-              business areas include advertising, search, platforms and
-              operating systems, and enterprise and hardware products Alphabet,
-              the parent company of Google, topped $100 billion in annual sales
-              for the first time in Google's 20-year history
-            </p>
+            <p className={styls.desc}>Comming Soon</p>
           </div>
 
           <div className={styls.news} id="news">
             <h3 className={styls.title}>News</h3>
-            <div className={styls.news_list}>
+            <p className={styls.desc}>Comming Soon</p>
+            {/* <div className={styls.news_list}>
               <div className={styls.news_item}>
                 <div className={styls.top}>
                   <span className={styls.time}>Jun 29, 2024</span>
@@ -395,22 +404,25 @@ const ProductDetail = (props: any) => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
 
           <div className={styls.news} id="pricing">
             <h3 className={styls.title}>Pricing</h3>
             <div className={styls.pricing_top}>
               <h4 className={styls.name}>Starting from</h4>
-              <p className={styls.price}>
-                {productInfo?.price ? productInfo?.price / 100 : 0}
-              </p>
+              <div className={styls.price}>
+                <span className={styls.currency}>
+                  {productInfo?.pricing?.currency_symbol}
+                </span>
+                <p>{productInfo?.pricing?.amount}</p>
+              </div>
               <p className={styls.text}>per month</p>
             </div>
             <div className={styls.box}>
               <ul className={styls.box_list}>
-                {productInfo?.priceOption &&
-                  productInfo.priceOption.map((item: string) => (
+                {productInfo?.pricing?.categories &&
+                  productInfo?.pricing?.categories.map((item: string) => (
                     <li className={styls.box_item} key={item}>
                       <span>{item}</span>
                       <i className={styls.icon}></i>
@@ -418,13 +430,6 @@ const ProductDetail = (props: any) => {
                   ))}
               </ul>
             </div>
-
-            <div
-              style={{ paddingTop: "16px" }}
-              dangerouslySetInnerHTML={{
-                __html: productInfo?.priceDetail,
-              }}
-            ></div>
           </div>
 
           <div className={styls.product} id="features">
@@ -437,21 +442,21 @@ const ProductDetail = (props: any) => {
                 </li>
 
                 {productInfo?.supportFeatures &&
-                  productInfo.supportFeatures.map((item: string) => (
-                    <li className={styls.box_item} key={item}>
-                      <span>{item}</span>
+                  productInfo.supportFeatures.map((item: IOptionItem) => (
+                    <li className={styls.box_item} key={item.slug}>
+                      <span>{item.name}</span>
                       <i className={styls.icon}></i>
                     </li>
                   ))}
 
-                {productInfo?.supportCommonFeatures &&
-                  productInfo.supportCommonFeatures.map((item: string) => (
-                    <li className={styls.box_item} key={item}>
-                      <span>{item}</span>
+                {productInfo?.commonFeatures &&
+                  productInfo.commonFeatures.map((item: IOptionItem) => (
+                    <li className={styls.box_item} key={item.slug}>
+                      <span>{item.name}</span>
                       <i className={styls.icon}></i>
                     </li>
                   ))}
-                {productInfo?.unsupportCommonFeatures &&
+                {/* {productInfo?.unsupportCommonFeatures &&
                   productInfo.unsupportCommonFeatures.map((item: string) => (
                     <li
                       className={`${styls.box_item} ${styls.nocheck}`}
@@ -460,7 +465,7 @@ const ProductDetail = (props: any) => {
                       <span>{item}</span>
                       <i className={styls.icon}></i>
                     </li>
-                  ))}
+                  ))} */}
               </ul>
             </div>
           </div>
@@ -473,30 +478,30 @@ const ProductDetail = (props: any) => {
                 <li className={styls.box_item}>
                   <span>Value for money</span>
                   <div style={{ display: "flex", alignItems: "center" }}>
-                    <Rate value={productInfo?.valueForMoney / 10} disabled />(
-                    {productInfo?.valueForMoney / 10})
+                    <Rate value={productInfo?.valueForMoney} disabled />(
+                    {productInfo?.valueForMoney})
                   </div>
                 </li>
 
                 <li className={styls.box_item}>
                   <span>Ease of use</span>
                   <div style={{ display: "flex", alignItems: "center" }}>
-                    <Rate value={productInfo?.easeOfUse / 10} disabled />(
-                    {productInfo?.easeOfUse / 10})
+                    <Rate value={productInfo?.easeOfUse} disabled />(
+                    {productInfo?.easeOfUse})
                   </div>
                 </li>
                 <li className={styls.box_item}>
                   <span>Features</span>
                   <div style={{ display: "flex", alignItems: "center" }}>
-                    <Rate value={productInfo?.features / 10} disabled />(
-                    {productInfo?.features / 10})
+                    <Rate value={productInfo?.features} disabled />(
+                    {productInfo?.features})
                   </div>
                 </li>
                 <li className={styls.box_item}>
                   <span>Customer support</span>
                   <div style={{ display: "flex", alignItems: "center" }}>
-                    <Rate value={productInfo?.customerSupport / 10} disabled />(
-                    {productInfo?.customerSupport / 10})
+                    <Rate value={productInfo?.customerSupport} disabled />(
+                    {productInfo?.customerSupport})
                   </div>
                 </li>
               </ul>
@@ -505,7 +510,8 @@ const ProductDetail = (props: any) => {
 
           <div className={styls.funding} id="funding">
             <h3 className={styls.title}>Funding</h3>
-            <ul className={styls.funding_list}>
+            <p className={styls.desc}>Comming Soon</p>
+            {/* <ul className={styls.funding_list}>
               <li className={styls.funding_item}>
                 Google.org commits $25M in funding to accelerate progress
                 towards the Sustainable Development Goals.
@@ -531,12 +537,13 @@ const ProductDetail = (props: any) => {
                 Vanguard Group Inc., BlackRock, Inc., and T. Rowe Price
                 Associates, Inc.
               </li>
-            </ul>
+            </ul> */}
           </div>
 
           <div className={styls.team} id="team">
             <h3 className={styls.title}>Core Team</h3>
-            <ul className={styls.team_list}>
+            <p className={styls.desc}>Comming Soon</p>
+            {/* <ul className={styls.team_list}>
               <li className={styls.team_item}>
                 <h3 className={styls.name}>Sundar Pichai</h3>
                 <p className={styls.desc}>CEO of Google and Alphabet Inc.</p>
@@ -573,12 +580,13 @@ const ProductDetail = (props: any) => {
                 <h3 className={styls.name}>Sundar Pichai</h3>
                 <p className={styls.desc}>CEO of Google and Alphabet Inc.</p>
               </li>
-            </ul>
+            </ul> */}
           </div>
 
           <div className={styls.funding} id="revenue">
             <h3 className={styls.title}>Revenue</h3>
-            <ul className={styls.funding_list}>
+            <p className={styls.desc}>Comming Soon</p>
+            {/* <ul className={styls.funding_list}>
               <li className={styls.funding_item}>
                 Google's revenue in the first quarter of 2024 amounted to over
                 79.9 billion U.S. dollars.
@@ -599,12 +607,13 @@ const ProductDetail = (props: any) => {
                 Alphabet Inc.'s revenue, as the parent company of Google,
                 reported $68.01 billion in the first quarter of 2022.
               </li>
-            </ul>
+            </ul> */}
           </div>
 
           <div className={styls.funding} id="challenges">
             <h3 className={styls.title}>Challenges</h3>
-            <ul className={styls.funding_list}>
+            <p className={styls.desc}>Comming Soon</p>
+            {/* <ul className={styls.funding_list}>
               <li className={styls.funding_item}>
                 Google's revenue in the first quarter of 2024 amounted to over
                 79.9 billion U.S. dollars.
@@ -625,7 +634,7 @@ const ProductDetail = (props: any) => {
                 Alphabet Inc.'s revenue, as the parent company of Google,
                 reported $68.01 billion in the first quarter of 2022.
               </li>
-            </ul>
+            </ul> */}
           </div>
 
           {/* <div className={styls.hiring} id="hiring">
