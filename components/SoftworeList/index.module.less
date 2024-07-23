@@ -6,7 +6,7 @@
   min-height: 300px;
   &::after {
     content: "";
-    width: calc(~"(100% / 3) - 64px");
+    width: calc(~"(100% / 3) - 16px");
     height: 1px;
   }
   .list_item {
@@ -57,7 +57,7 @@
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
         overflow: hidden;
-        text-overflow: ellipsis
+        text-overflow: ellipsis;
       }
     }
   }
@@ -83,7 +83,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     width: 100%;
-
+   
     .list_item {
       display: flex;
       width: calc(~"(100% / 2) - 56px");

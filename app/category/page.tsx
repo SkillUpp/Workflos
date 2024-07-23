@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import styls from "./index.module.css";
-import { Select } from "antd";
+import { Pagination, Select } from "antd";
 import Image from "next/image";
 import SoftIcon from "@/images/soft-icon.png";
 import Link from "next/link";
@@ -16,39 +16,6 @@ const tabs = [
   { id: 1, title: "Allapps", value: "HighestRated", active: true },
   { id: 2, title: "Leaders", value: "CategoryLeaders", active: false },
   { id: 3, title: "Guide", value: "EaseOfUse", active: false },
-];
-
-const defaultList = [
-  {
-    id: 1,
-    name: "616 software options",
-    desc: "Improve the speed and quality of your audit",
-    text: "DataSnipper is an intelligent Automation Platform created for Audit and Finance teams",
-  },
-  {
-    id: 2,
-    name: "616 software options",
-    desc: "Improve the speed and quality of your audit",
-    text: "DataSnipper is an intelligent Automation Platform created for Audit and Finance teams",
-  },
-  {
-    id: 3,
-    name: "616 software options",
-    desc: "Improve the speed and quality of your audit",
-    text: "DataSnipper is an intelligent Automation Platform created for Audit and Finance teams",
-  },
-  {
-    id: 4,
-    name: "616 software options",
-    desc: "Improve the speed and quality of your audit",
-    text: "DataSnipper is an intelligent Automation Platform created for Audit and Finance teams",
-  },
-  {
-    id: 5,
-    name: "616 software options",
-    desc: "Improve the speed and quality of your audit",
-    text: "DataSnipper is an intelligent Automation Platform created for Audit and Finance teams",
-  },
 ];
 
 const Category = () => {
@@ -90,12 +57,12 @@ const Category = () => {
   /**
    * 获取产品列表
    */
-  const getSoftworeList = async (category?: string) => {
+  const getSoftworeList = async (category?: string, page?: number) => {
     const params = {
-      category: category || currentCategory,
+      // category: category || currentCategory,
       sortBy: currentSort,
-      limit: 16,
-      page: 1,
+      limit: 10,
+      page: page || 1,
     };
     try {
       setLoading(true);
@@ -110,6 +77,10 @@ const Category = () => {
     }
   };
 
+  const handleChangePage = (page: number) => {
+    getSoftworeList("", page);
+  };
+
   const handleCompare = (item: any) => {
     setCurrentItem(item);
     // toggleCompareModal();
@@ -121,7 +92,7 @@ const Category = () => {
   }, []);
   return (
     <div className={styls.category}>
-       {loading && <LoadingContext />}
+      {loading && <LoadingContext />}
       <div className={styls.category__content}>
         <h3 className={styls.title}>Accounting Software</h3>
         <div className={styls.category__tabs}>
@@ -146,7 +117,9 @@ const Category = () => {
             }}
           >
             {categoryTabs.map((item) => (
-              <Select.Option value={item.value} key={item.id}>{item.title}</Select.Option>
+              <Select.Option value={item.value} key={item.id}>
+                {item.title}
+              </Select.Option>
             ))}
           </Select>
         </div>
@@ -170,12 +143,14 @@ const Category = () => {
               <Select
                 value={currentCategory}
                 onChange={(val: string) => {
-                  setCurrentCategory(val)
+                  setCurrentCategory(val);
                   getSoftworeList(val);
                 }}
               >
                 {productEnumList.map((item) => (
-                  <Select.Option value={item.value} key={item.name}>{item.name}</Select.Option>
+                  <Select.Option value={item.value} key={item.name}>
+                    {item.name}
+                  </Select.Option>
                 ))}
               </Select>
               {/* <Select defaultValue={"1"}>
@@ -185,7 +160,6 @@ const Category = () => {
           </div>
 
           <div className={styls.list}>
-           
             {softworeList.map((item: any) => (
               <div className={styls.item} key={item.name}>
                 <div className={styls.top}>
@@ -234,8 +208,15 @@ const Category = () => {
                </div> */}
               </div>
             ))}
-            {softworeList.length === 0 && (
-              <NoData />
+            {softworeList.length === 0 && <NoData />}
+
+            {totalCount > 10 && (
+              <Pagination
+                onChange={handleChangePage}
+                className={styls.pagination}
+                defaultCurrent={1}
+                total={totalCount}
+              />
             )}
           </div>
         </div>

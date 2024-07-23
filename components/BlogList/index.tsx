@@ -12,7 +12,11 @@ const BlogList = (props: { count: number }) => {
   const getBlogList = async (url: string) => {
     setList([]);
     const res = await blogList(url);
-    setList(res.data.data);
+    const data = res.data.data;
+    data.forEach((item: { title: string; path: string }) => {
+      item.path = item.title.toLowerCase().replace(/ /g, "-");
+    });
+    setList(data);
   };
 
   useEffect(() => {
@@ -28,7 +32,7 @@ const BlogList = (props: { count: number }) => {
             list.slice(0, props.count).map((item: any) => {
               return (
                 <Link
-                  href={`/blog/${item.id}`}
+                  href={`/blog/${item.path}`}
                   className={styls.blog_item}
                   key={item.id}
                 >

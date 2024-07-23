@@ -281,6 +281,41 @@
           }
         }
       }
+
+      .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 24px;
+
+        li {
+          display: flex;
+          width: 40px;
+          height: 40px;
+          border-radius: 6px;
+          -webkit-border-radius: 6px;
+          border: 1px solid rgba(99, 99, 99, 0.24);
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          color: gba(99, 99, 99, 0.5);
+          background: #fff;
+          font-size: 14px;
+          font-weight: 400;
+          background-repeat: no-repeat;
+          background-position: center center;
+        }
+        :global {
+          .ant-pagination-options {
+            display: none;
+          }
+          .ant-pagination-item-active {
+            background: #9747ff;
+            a {
+              color: #fff;
+            }
+          }
+        }
+      }
     }
   }
 }

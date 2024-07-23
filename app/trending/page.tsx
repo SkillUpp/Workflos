@@ -1,18 +1,20 @@
 "use client";
 import { useEffect, useState } from "react";
 import styls from "./index.module.css";
-import { Select } from "antd";
+import { Pagination, Select } from "antd";
 import Image from "next/image";
 import SoftIcon from "@/images/soft-icon.png";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { productList } from "@/api/product";
 import LoadingContext from "@/components/LoadingContext";
+import NoData from "@/components/Nodata";
 
 const Trending = () => {
   const route = useRouter();
   const [loading, setLoading] = useState(false);
   const [softworeList, setSoftworeList] = useState([]);
+  const [totalCount, setTotalCount] = useState(0);
   const handleJump = (path: string) => {
     route.push(path);
   };
@@ -20,26 +22,29 @@ const Trending = () => {
   /**
    * 获取产品列表
    */
-  const getSoftworeList = async () => {
+  const getSoftworeList = async (page: number) => {
     const params = {
-      category: "CRM",
-      sortBy: "HighestRated",
-      limit: 16,
-      page: 1,
+      limit: 10,
+      page: page,
     };
     try {
       setLoading(true);
       const res = await productList(params);
       if (res.data) {
         setLoading(false);
+        setTotalCount(res.data.totalCount);
         setSoftworeList(res.data.list);
       }
     } catch (error) {
       setLoading(false);
     }
   };
+
+  const handleChangePage = (page: number) => {
+    getSoftworeList(page);
+  };
   useEffect(() => {
-    getSoftworeList();
+    getSoftworeList(1);
   }, []);
   return (
     <div className={styls.trending}>
@@ -79,6 +84,17 @@ const Trending = () => {
                   </div>
                 </div>
               ))}
+
+            {softworeList.length === 0 && <NoData />}
+
+            {totalCount > 10 && (
+              <Pagination
+                onChange={handleChangePage}
+                className={styls.pagination}
+                defaultCurrent={1}
+                total={totalCount}
+              />
+            )}
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@
 }
 .list::after {
   content: "";
-  width: calc((100% / 3) - 64px);
+  width: calc((100% / 3) - 16px);
   height: 1px;
 }
 .list .list_item {
