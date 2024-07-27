@@ -14,25 +14,25 @@ export const sortOfRateEnumList = [
   {
     id: 1,
     name: "Highest rated",
-    value: "HighestRated",
+    value: "rateAvg",
     active: true,
   },
   {
     id: 2,
     name: "Category leaders",
-    value: "CategoryLeaders",
+    value: "categoryLeaders",
     active: false,
   },
   {
     id: 3,
     name: "Ease of use",
-    value: "EaseOfUse",
+    value: "easeOfUse",
     active: false,
   },
   {
     id: 4,
     name: "Value for money",
-    value: "ValueForMoney",
+    value: "valueForMoney",
     active: false,
   },
 ];

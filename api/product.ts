@@ -1,6 +1,15 @@
 import qs from "qs";
 import request from "@/utils/request";
-import Launch from '../app/launch/page';
+
+/**
+ * 获取搜索列表
+ */
+export const categoryList = () => {
+  return request({
+    url: `/api/v1/item/categories`,
+    method: "GET",
+  });
+};
 
 /**
  * 获取产品列表

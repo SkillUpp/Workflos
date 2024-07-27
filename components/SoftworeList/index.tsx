@@ -39,6 +39,9 @@ const SoftworeList = (props: any) => {
             </div>
           </div>
         ))}
+      <div
+        className={`${styls.list_item} ${styls.hidden}`}
+      ></div>
       {list.length == 0 && (
         <NoData />
       )}

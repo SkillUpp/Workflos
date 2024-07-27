@@ -1,8 +1,7 @@
 .compare {
   padding-top: 86px;
   background: #f0f0f0;
-  overflow: hidden;
-  height: calc(100vh - 86px);
+  height: 100%;
 }
 .compare .header {
   display: flex;
@@ -35,6 +34,10 @@
 .compare .header .list .item .logo_info {
   display: flex;
   align-items: center;
+}
+.compare .header .list .item .logo_info img {
+  width: 40px;
+  height: 40px;
 }
 .compare .header .list .item .logo_info span {
   margin-left: 12px;
@@ -69,10 +72,11 @@
 .compare .content {
   padding: 18px 200px 0 200px;
   display: flex;
-  height: calc(100vh - 400px);
-  overflow: hidden;
 }
 .compare .content .left {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
   width: 126px;
   margin-right: 24px;
 }
@@ -115,9 +119,9 @@
   color: #fff;
 }
 .compare .content .right {
+  margin-left: 150px;
   width: calc(100% - 110px);
   height: 100%;
-  overflow-y: scroll;
 }
 .compare .content .right .wrap {
   margin-top: 16px;
@@ -166,6 +170,14 @@
 .compare .content .right .wrap .list .item .box:first-child {
   padding-top: 0;
 }
+.compare .content .right .wrap .list .item .box .totalCount {
+  display: flex;
+  width: 100%;
+  margin-bottom: 12px;
+  justify-content: space-between;
+  font-size: 24px;
+  font-weight: 800;
+}
 .compare .content .right .wrap .list .item .box .box_list {
   display: flex;
   flex-direction: column;
@@ -212,6 +224,20 @@
   height: 20px;
   background: url(../../../images/check.svg) 0 0 no-repeat;
   background-size: cover;
+}
+.compare .content .right .wrap .list .item .box .moreBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 36px auto;
+  width: 100%;
+  outline: none;
+  border: 1px solid #9747ff;
+  background: #fff;
+  height: 32px;
+  border-radius: 4px;
+  color: #9747ff;
+  cursor: pointer;
 }
 .compare .content .right .wrap .list .item .pricing_top {
   display: flex;
@@ -262,8 +288,6 @@
   .compare {
     padding-top: 86px;
     background: #f0f0f0;
-    overflow: hidden;
-    height: calc(100vh - 86px);
   }
   .compare .header {
     display: flex;
@@ -318,8 +342,6 @@
   .compare .content {
     padding: 18px 56px 0 56px;
     display: flex;
-    height: calc(100vh - 400px);
-    overflow: hidden;
   }
   .compare .content .left {
     width: 126px;
@@ -365,8 +387,6 @@
   }
   .compare .content .right {
     width: calc(100% - 110px);
-    height: 100%;
-    overflow-y: scroll;
   }
   .compare .content .right .wrap {
     margin-top: 16px;
@@ -496,7 +516,7 @@
 @media (max-width: 960px) {
   .compare {
     padding-top: 70px;
-    height: calc(100vh - 70px);
+    height: 100%;
   }
   .compare .header {
     display: flex;
@@ -547,9 +567,10 @@
     padding: 18px 24px 0 24px;
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 400px);
+    height: 100%;
   }
   .compare .content .left {
+    position: static;
     width: 100%;
     margin-right: 24px;
   }
@@ -558,7 +579,7 @@
   }
   .compare .content .left .select_wrap {
     display: block;
-    margin-bottom: 24px;
+    margin-top: 24px;
   }
   .compare .content .left .select_wrap :global .ant-select {
     width: 100%;
@@ -586,7 +607,7 @@
   .compare .content .right {
     width: 100%;
     height: 100%;
-    overflow-y: scroll;
+    margin: 0;
   }
   .compare .content .right .wrap {
     margin-top: 16px;

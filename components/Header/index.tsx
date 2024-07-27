@@ -72,9 +72,8 @@ const Header = () => {
 
           <div
             id="navigation"
-            className={`${styls.navbar_collapse} ${
-              isnavbarToggler ? styls.show : ""
-            }`}
+            className={`${styls.navbar_collapse} ${isnavbarToggler ? styls.show : ""
+              }`}
           >
             <ul className={styls.navbar_nav}>
               {navList.map((item) => (
@@ -88,6 +87,27 @@ const Header = () => {
                   </div>
                 </li>
               ))}
+
+              <div className={styls.mobileNavbar}>
+                {user?.uid ? (
+                  <div className={styls.user_info}>
+                    <Image src={user.picture} alt="" width={64} height={64} />
+                    <div className={styls.info}>
+                      <span className={styls.name}>{user?.name}</span>
+                      <span className={styls.email}>{user.email}</span>
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <Link className={styls.btn} href={AUTH0_LOGIN_URL}>
+                      Sign in
+                    </Link>
+                    <Link className={styls.btn} href={AUTH0_SIGNUP_URL}>
+                      Join
+                    </Link>
+                  </>
+                )}
+              </div>
             </ul>
           </div>
 

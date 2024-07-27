@@ -9,6 +9,7 @@ import LoadingContext from "@/components/LoadingContext";
 interface IOptionItem {
   name: string;
   slug: string;
+  show?: boolean
 }
 
 const defaultCompareMenu = [
@@ -56,18 +57,21 @@ const Compare = (props: any) => {
   const [compareData, setCompareData] = useState<any>([]);
   const [compareMenu, setCompareMenu] = useState(defaultCompareMenu);
   const handleClick = (id: string) => {
-    console.log(id);
-
     const el = document.getElementById(id);
-    el && el.scrollIntoView({ behavior: "smooth" });
-    const menus = JSON.parse(JSON.stringify(compareMenu));
-    menus.forEach((item: { active: boolean; htmlId: string }) => {
-      item.active = false;
-      if (item.htmlId == id) {
-        item.active = true;
-      }
-    });
-    setCompareMenu(menus);
+    if (el) {
+      const rect = el.getBoundingClientRect();
+      const targetTop = rect.top + window.pageYOffset - 100;
+      const scrollToTop = Math.max(targetTop, 0);
+      window.scroll({
+        top: scrollToTop,
+        behavior: 'smooth',
+      });
+      const menus = compareMenu.map((item) => ({
+        ...item,
+        active: item.htmlId === id,
+      }));
+      setCompareMenu(menus);
+    }
   };
 
   const getProductDetail = async (id: string) => {
@@ -88,15 +92,35 @@ const Compare = (props: any) => {
         const results = await Promise.all(
           ids.map((item) => getProductDetail(item))
         );
+        const data = results;
+        data.forEach((item) => {
+          item.commonFeatureSlice = 10
+          item.supportFeatureSlice = 10
+          item.commonFeatures = updateCommonFeaturesWithSupport(item.commonFeatures, item.supportFeatures);
+        })
         setCompareData((prevData: any) => [
           ...prevData,
-          ...results.filter(Boolean),
+          ...data.filter(Boolean),
         ]);
         setLoading(false);
       }
     };
     fetchProductDetails();
   }, []);
+
+  /**
+   * 数据设置
+   * @param commonFeatures 
+   * @param support 
+   * @returns 
+   */
+  const updateCommonFeaturesWithSupport = (commonFeatures, supportFeatures) => {
+    const supportSlugs = new Set(supportFeatures.map(feature => feature.slug));
+    return commonFeatures.map(feature => ({
+      ...feature,
+      show: supportSlugs.has(feature.slug),
+    }));
+  };
   return (
     <div className={styls.compare}>
       {loading && <LoadingContext />}
@@ -106,9 +130,8 @@ const Compare = (props: any) => {
           {compareData &&
             compareData.map((item: any) => (
               <div
-                className={`${styls.item} ${
-                  compareData.length == 2 ? styls.two : styls.three
-                }`}
+                className={`${styls.item} ${compareData.length == 2 ? styls.two : styls.three
+                  }`}
                 key={item.name}
               >
                 <div className={styls.logo_info}>
@@ -150,9 +173,8 @@ const Compare = (props: any) => {
               {compareData &&
                 compareData.map((item: any) => (
                   <div
-                    className={`${styls.item} ${
-                      compareData.length == 2 ? styls.two : styls.three
-                    }`}
+                    className={`${styls.item} ${compareData.length == 2 ? styls.two : styls.three
+                      }`}
                     key={item.name}
                   >
                     {/* <h3 className={styls.title}>App Info</h3> */}
@@ -214,14 +236,13 @@ const Compare = (props: any) => {
             <div className={styls.list}>
               {compareData.map((item: any) => (
                 <div
-                  className={`${styls.item} ${
-                    compareData.length == 2 ? styls.two : styls.three
-                  }`}
+                  className={`${styls.item} ${compareData.length == 2 ? styls.two : styls.three
+                    }`}
                   key={item.name}
                 >
                   <div className={styls.pricing_top}>
                     <h4 className={styls.name}>Starting from</h4>
-                    <p className={styls.price}>{item?.price ? item?.price / 100 : 0 }</p>
+                    <p className={styls.price}>{item?.price ? item?.price / 100 : 0}</p>
                     <p className={styls.text}>per month</p>
                   </div>
                   <div className={styls.box}>
@@ -250,48 +271,72 @@ const Compare = (props: any) => {
           <div className={styls.wrap} id="features">
             <h3 className={styls.title}>Key features</h3>
             <div className={styls.list}>
-              {compareData.map((item: any) => (
+              {compareData.map((item: any, index: number) => (
                 <div
-                  className={`${styls.item} ${
-                    compareData.length == 2 ? styls.two : styls.three
-                  }`}
+                  className={`${styls.item} ${compareData.length == 2 ? styls.two : styls.three
+                    }`}
                   key={item.name}
                 >
                   <div className={styls.box}>
-                    <ul className={styls.box_list}>
-                      <li className={`${styls.box_item}`}>
-                        <span>Total features</span>
-                        <span>{item?.totalFeatures}</span>
-                      </li>
-
+                    <div className={styls.totalCount}>
+                      <span>{item?.name} features</span>
+                      <span>{item?.supportFeatures?.length + 1}</span>
+                    </div>
+                    <ul className={`${styls.box_list} ${styls.box_list_feature}`}>
                       {item?.supportFeatures &&
-                        item.supportFeatures.map((item: IOptionItem) => (
-                          <li className={styls.box_item} key={item.slug}>
+                        item?.supportFeatures.slice(0, item.supportFeatureSlice).map((item: IOptionItem) => (
+                          <li className={`${styls.box_item}`} key={item.slug}>
                             <span>{item.name}</span>
                             <i className={styls.icon}></i>
                           </li>
                         ))}
-
-                      {item?.supportCommonFeatures &&
-                        item.supportCommonFeatures.map((item: IOptionItem) => (
-                          <li className={styls.box_item} key={item.slug}>
-                            <span>{item.name}</span>
-                            <i className={styls.icon}></i>
-                          </li>
-                        ))}
-                      {item?.unsupportCommonFeatures &&
-                        item.unsupportCommonFeatures.map(
-                          (item: IOptionItem) => (
-                            <li
-                              className={`${styls.box_item} ${styls.nocheck}`}
-                              key={item.slug}
-                            >
-                              <span>{item.name}</span>
-                              <i className={styls.icon}></i>
-                            </li>
-                          )
-                        )}
                     </ul>
+                    {item?.supportFeatures?.length > 10 && (
+                      <button className={styls.moreBtn} onClick={() => {
+                        setCompareData((prev) => {
+                          return prev.map((item: any, idx: number) => {
+                            if (index === idx) {
+                              return {
+                                ...item,
+                                supportFeatureSlice: item.supportFeatureSlice === 10 ? item.supportFeatures.length : 10,
+                              };
+                            }
+                            return item;
+                          });
+                        })
+                      }}>{item.supportFeatureSlice === 10 ? 'Expand list' : "Collapse list"}</button>
+                    )}
+                  </div>
+
+                  <div className={styls.box}>
+                    <div className={styls.totalCount}>
+                      <span>Common features</span>
+                      <span>{item.commonFeatures.length + 1}</span>
+                    </div>
+                    <ul className={`${styls.box_list} ${styls.box_list_feature}`}>
+                      {item.commonFeatures &&
+                        item.commonFeatures.slice(0, item.commonFeatureSlice).map((item: IOptionItem) => (
+                          <li className={`${styls.box_item} ${!item.show && styls.nocheck}`} key={item.slug}>
+                            <span>{item.name}</span>
+                            <i className={styls.icon}></i>
+                          </li>
+                        ))}
+                    </ul>
+                    {item.commonFeatures.length > 10 && (
+                      <button className={styls.moreBtn} onClick={() => {
+                        setCompareData((prev) => {
+                          return prev.map((item: any, idx: number) => {
+                            if (index === idx) {
+                              return {
+                                ...item,
+                                commonFeatureSlice: item.commonFeatureSlice === 10 ? item.commonFeatures.length : 10,
+                              };
+                            }
+                            return item;
+                          });
+                        })
+                      }}>{item.commonFeatureSlice === 10 ? 'Expand list' : "Collapse list"}</button>
+                    )}
                   </div>
                   {/* <button className={styls.btn}>VIEW MORE DETAILS</button> */}
                 </div>
@@ -304,9 +349,8 @@ const Compare = (props: any) => {
             <div className={styls.list}>
               {compareData.map((item: any) => (
                 <div
-                  className={`${styls.item} ${
-                    compareData.length == 2 ? styls.two : styls.three
-                  }`}
+                  className={`${styls.item} ${compareData.length == 2 ? styls.two : styls.three
+                    }`}
                   key={item.name}
                 >
                   <div className={styls.box}>

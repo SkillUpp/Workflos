@@ -1,8 +1,7 @@
 .compare {
   padding-top: 86px;
   background: #f0f0f0;
-  overflow: hidden;
-  height: calc(100vh - 86px);
+  height: 100%;
 
   .header {
     display: flex;
@@ -35,6 +34,10 @@
         .logo_info {
           display: flex;
           align-items: center;
+          img {
+            width: 40px;
+            height: 40px;
+          }
           span {
             margin-left: 12px;
             font-size: 18px;
@@ -78,10 +81,11 @@
   .content {
     padding: 18px 200px 0 200px;
     display: flex;
-    height: calc(100vh - 400px);
-    overflow: hidden;
 
     .left {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
       width: 126px;
       margin-right: 24px;
 
@@ -131,9 +135,9 @@
     }
 
     .right {
+      margin-left: 150px;
       width: calc(100% - 110px);
       height: 100%;
-      overflow-y: scroll;
 
       .wrap {
         margin-top: 16px;
@@ -185,7 +189,14 @@
               &:first-child {
                 padding-top: 0;
               }
-
+              .totalCount {
+                display: flex;
+                width: 100%;
+                margin-bottom: 12px;
+                justify-content: space-between;
+                font-size: 24px;
+                font-weight: 800;
+              }
               .box_list {
                 display: flex;
                 flex-direction: column;
@@ -241,6 +252,20 @@
                     background-size: cover;
                   }
                 }
+              }
+              .moreBtn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 36px auto;
+                width: 100%;
+                outline: none;
+                border: 1px solid #9747ff;
+                background: #fff;
+                height: 32px;
+                border-radius: 4px;
+                color: #9747ff;
+                cursor: pointer;
               }
             }
 
@@ -308,9 +333,6 @@
   .compare {
     padding-top: 86px;
     background: #f0f0f0;
-    overflow: hidden;
-    height: calc(100vh - 86px);
-
     .header {
       display: flex;
       flex-direction: column;
@@ -373,8 +395,6 @@
     .content {
       padding: 18px 56px 0 56px;
       display: flex;
-      height: calc(100vh - 400px);
-      overflow: hidden;
 
       .left {
         width: 126px;
@@ -427,8 +447,6 @@
 
       .right {
         width: calc(100% - 110px);
-        height: 100%;
-        overflow-y: scroll;
 
         .wrap {
           margin-top: 16px;
@@ -585,7 +603,7 @@
 @media (max-width: 960px) {
   .compare {
     padding-top: 70px;
-    height: calc(100vh - 70px);
+    height: 100%;
 
     .header {
       display: flex;
@@ -645,9 +663,10 @@
       padding: 18px 24px 0 24px;
       display: flex;
       flex-direction: column;
-      height: calc(100vh - 400px);
+      height: 100%;
 
       .left {
+        position: static;
         width: 100%;
         margin-right: 24px;
         .menu_list {
@@ -656,7 +675,7 @@
 
         .select_wrap {
           display: block;
-          margin-bottom: 24px;
+          margin-top: 24px;
           :global {
             .ant-select {
               width: 100%;
@@ -691,8 +710,7 @@
       .right {
         width: 100%;
         height: 100%;
-        overflow-y: scroll;
-
+        margin: 0;
         .wrap {
           margin-top: 16px;
           padding: 20px;

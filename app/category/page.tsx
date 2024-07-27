@@ -7,15 +7,15 @@ import SoftIcon from "@/images/soft-icon.png";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import CompareModal from "./CompareModal";
-import { productList } from "@/api/product";
+import { categoryList, productList } from "@/api/product";
 import { productEnumList } from "@/utils/enum";
 import LoadingContext from "@/components/LoadingContext";
 import NoData from "@/components/Nodata";
 
 const tabs = [
-  { id: 1, title: "Allapps", value: "HighestRated", active: true },
-  { id: 2, title: "Leaders", value: "CategoryLeaders", active: false },
-  { id: 3, title: "Guide", value: "EaseOfUse", active: false },
+  // { id: 1, title: "Allapps", value: "HighestRated", active: true },
+  { id: 2, title: "Leaders", value: "categoryLeaders", active: true },
+  // { id: 3, title: "Guide", value: "EaseOfUse", active: false },
 ];
 
 const Category = () => {
@@ -23,12 +23,12 @@ const Category = () => {
   const [loading, setLoading] = useState(false);
   const [categoryTabs, setCategoryTabs] = useState(tabs);
   const [currentCategory, setCurrentCategory] = useState("CRM");
-  const [currentSort, setCurrentSort] = useState("HighestRated");
+  const [currentSort, setCurrentSort] = useState("categoryLeaders");
   const [isCompareModalOpen, setIsCompareModalOpen] = useState(false);
   const [softworeList, setSoftworeList] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [currentItem, setCurrentItem] = useState<any>({});
-
+  const [CategoryList, setCategoryList] = useState([])
   const toggleCompareModal = () => setIsCompareModalOpen(!isCompareModalOpen);
 
   const handleTabClick = (id: number, name: string) => {
@@ -41,6 +41,12 @@ const Category = () => {
     );
     getSoftworeList();
   };
+
+  const getCategoryList = async () => {
+    const res = await categoryList()
+    setCategoryList(res.data)
+
+  }
 
   const handleJumpCompare = () => {
     route.push("/compare");
@@ -59,7 +65,7 @@ const Category = () => {
    */
   const getSoftworeList = async (category?: string, page?: number) => {
     const params = {
-      // category: category || currentCategory,
+      category: category || currentCategory,
       sortBy: currentSort,
       limit: 10,
       page: page || 1,
@@ -88,6 +94,7 @@ const Category = () => {
   };
 
   useEffect(() => {
+    getCategoryList()
     getSoftworeList();
   }, []);
   return (
@@ -99,9 +106,8 @@ const Category = () => {
           {categoryTabs.map((item) => (
             <div
               key={item.id}
-              className={`${styls.category__item} ${
-                item.active && styls.active
-              }`}
+              className={`${styls.category__item} ${item.active && styls.active
+                }`}
               onClick={() => handleTabClick(item.id, item.value)}
             >
               {item.title}
@@ -147,8 +153,8 @@ const Category = () => {
                   getSoftworeList(val);
                 }}
               >
-                {productEnumList.map((item) => (
-                  <Select.Option value={item.value} key={item.name}>
+                {CategoryList.map((item: { name: string }) => (
+                  <Select.Option value={item.name} key={item.name}>
                     {item.name}
                   </Select.Option>
                 ))}

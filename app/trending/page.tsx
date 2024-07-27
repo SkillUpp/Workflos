@@ -13,6 +13,7 @@ import NoData from "@/components/Nodata";
 const Trending = () => {
   const route = useRouter();
   const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
   const [softworeList, setSoftworeList] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const handleJump = (path: string) => {
@@ -26,6 +27,7 @@ const Trending = () => {
     const params = {
       limit: 10,
       page: page,
+      sortby: "rateAvg"
     };
     try {
       setLoading(true);
@@ -42,6 +44,7 @@ const Trending = () => {
 
   const handleChangePage = (page: number) => {
     getSoftworeList(page);
+    setPage(page)
   };
   useEffect(() => {
     getSoftworeList(1);

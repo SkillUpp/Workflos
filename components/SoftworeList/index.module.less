@@ -4,11 +4,6 @@
   justify-content: space-between;
   width: 100%;
   min-height: 300px;
-  &::after {
-    content: "";
-    width: calc(~"(100% / 3) - 16px");
-    height: 1px;
-  }
   .list_item {
     display: flex;
     width: calc(~"(100% / 3) - 64px");
@@ -19,6 +14,9 @@
     padding: 24px;
     cursor: pointer;
     transition: all 0.2s;
+    &.hidden {
+      opacity: 0;
+    }
 
     &:hover {
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

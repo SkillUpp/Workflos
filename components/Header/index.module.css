@@ -38,6 +38,9 @@
 .header .header_top .main_nav .navbar_collapse .navbar_nav {
   display: flex;
 }
+.header .header_top .main_nav .navbar_collapse .navbar_nav .mobileNavbar {
+  display: none;
+}
 .header .header_top .main_nav .navbar_collapse .navbar_nav .nav_item {
   list-style: none;
   margin-left: 56px;
@@ -69,7 +72,7 @@
   color: #000000;
   cursor: pointer;
   background: #fff;
-  border: 1px solid #9747FF;
+  border: 1px solid #9747ff;
   border-radius: 5px;
   font-size: 18px;
   line-height: 24px;
@@ -81,7 +84,7 @@
   margin-left: 0;
 }
 .header .header_top .main_nav .header_top_right .btn:last-child {
-  background: #9747FF;
+  background: #9747ff;
   color: #fff;
 }
 .header .header_top .main_nav .header_top_right .user_info {
@@ -151,6 +154,57 @@
     font-family: "Montserrat", sans-serif;
     font-size: 1rem;
     cursor: pointer;
+  }
+  .header .header_top .main_nav .navbar_collapse.show .navbar_nav .mobileNavbar {
+    display: flex;
+    align-items: center;
+  }
+  .header .header_top .main_nav .navbar_collapse.show .navbar_nav .mobileNavbar .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    height: 34px;
+    padding: 0 10px;
+    color: #000000;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #9747ff;
+    border-radius: 5px;
+    font-size: 18px;
+    line-height: 24px;
+    opacity: 1;
+    text-decoration: none;
+    margin-left: 5px;
+  }
+  .header .header_top .main_nav .navbar_collapse.show .navbar_nav .mobileNavbar .btn:first-child {
+    margin-left: 0;
+  }
+  .header .header_top .main_nav .navbar_collapse.show .navbar_nav .mobileNavbar .btn:last-child {
+    background: #9747ff;
+    color: #fff;
+  }
+  .header .header_top .main_nav .navbar_collapse.show .navbar_nav .mobileNavbar .user_info {
+    display: flex;
+    align-items: center;
+  }
+  .header .header_top .main_nav .navbar_collapse.show .navbar_nav .mobileNavbar .user_info img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+  }
+  .header .header_top .main_nav .navbar_collapse.show .navbar_nav .mobileNavbar .user_info .info {
+    margin-left: 12px;
+    display: flex;
+    flex-direction: column;
+  }
+  .header .header_top .main_nav .navbar_collapse.show .navbar_nav .mobileNavbar .user_info .info .name {
+    font-size: 18px;
+    line-height: 1.2;
+  }
+  .header .header_top .main_nav .navbar_collapse.show .navbar_nav .mobileNavbar .user_info .info .email {
+    font-size: 16px;
+    line-height: 1.2;
   }
   .header .header_top .main_nav .header_top_right {
     display: none;

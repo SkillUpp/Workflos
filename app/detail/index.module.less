@@ -234,10 +234,18 @@
 
         .box {
           list-style: none;
-          padding-top: 24px;
+          padding: 24px 0;
 
           &:first-child {
             padding-top: 0;
+          }
+          .totalCount {
+            display: flex;
+            width: 100%;
+            margin-bottom: 12px;
+            justify-content: space-between;
+            font-size: 24px;
+            font-weight: 800;
           }
 
           .box_list {
@@ -246,6 +254,14 @@
             padding: 0;
             margin: 0;
             list-style: none;
+            &.box_list_feature {
+              flex-wrap: wrap;
+              flex-direction: row;
+              justify-content: space-between;
+              .box_item {
+                width: calc((100% / 2) - 48px);
+              }
+            }
 
             .box_item {
               display: flex;
@@ -297,6 +313,20 @@
                 background-size: cover;
               }
             }
+          }
+          .moreBtn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 36px auto;
+            width: 200px;
+            outline: none;
+            border: 1px solid #9747ff;
+            background: #fff;
+            height: 32px;
+            border-radius: 4px;
+            color: #9747ff;
+            cursor: pointer;
           }
         }
 
@@ -432,7 +462,6 @@
       .product,
       .funding,
       .stack {
-
         .stack_list,
         .funding_list,
         .product_list {
@@ -552,7 +581,7 @@
 
 @media (max-width: 960px) {
   .compare {
-    padding-top: 86px;
+    padding-top: 70px;
     background: #f0f0f0;
     overflow: hidden;
     height: calc(100vh - 86px);
@@ -750,6 +779,39 @@
             font-size: 14px;
             line-height: 25px;
           }
+
+          .box {
+            list-style: none;
+            padding: 24px 0;
+
+            &:first-child {
+              padding-top: 0;
+            }
+            .totalCount {
+              display: flex;
+              width: 100%;
+              margin-bottom: 12px;
+              justify-content: space-between;
+              font-size: 24px;
+              font-weight: 800;
+            }
+
+            .box_list {
+              display: flex;
+              flex-direction: column;
+              padding: 0;
+              margin: 0;
+              list-style: none;
+              &.box_list_feature {
+                flex-wrap: nowrap;
+                flex-direction: column;
+                justify-content: flex-start;
+                .box_item {
+                  width: 100%;
+                }
+              }
+            }
+          }
         }
 
         .overview {
@@ -841,7 +903,6 @@
         .product,
         .funding,
         .stack {
-
           .stack_list,
           .funding_list,
           .product_list {

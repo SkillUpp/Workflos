@@ -14,6 +14,7 @@ import LoadingContext from "@/components/LoadingContext";
 interface IOptionItem {
   name: string;
   slug: string;
+  show?: boolean
 }
 
 const mediaList = [
@@ -43,43 +44,43 @@ const defaultCompareMenu = [
     active: false,
   },
   {
-    id: 3,
+    id: 4,
     name: "Pricing",
     htmlId: "pricing",
     active: false,
   },
   {
-    id: 4,
+    id: 5,
     name: "Features",
     htmlId: "features",
     active: false,
   },
   {
-    id: 4,
+    id: 6,
     name: "Reviews",
     htmlId: "reviews",
     active: false,
   },
   {
-    id: 5,
+    id: 7,
     name: "Funding",
     htmlId: "funding",
     active: false,
   },
   {
-    id: 6,
+    id: 8,
     name: "Core Team",
     htmlId: "team",
     active: false,
   },
   {
-    id: 7,
+    id: 9,
     name: "Revenue",
     htmlId: "revenue",
     active: false,
   },
   {
-    id: 9,
+    id: 10,
     name: "Challenges",
     htmlId: "challenges",
     active: false,
@@ -90,6 +91,9 @@ const ProductDetail = (props: any) => {
   const { id } = props;
   const [loading, setLoading] = useState(false);
   const [productInfo, setProductInfo] = useState<any>({});
+  const [features, setFeatures] = useState<IOptionItem[]>([]);
+  const [supportSlice, setSupportSlice] = useState(10)
+  const [featureSlice, setFeatureSlice] = useState(10)
 
   const [compareMenu, setCompareMenu] = useState(defaultCompareMenu);
   const handleClick = (id: string) => {
@@ -116,11 +120,29 @@ const ProductDetail = (props: any) => {
       const res = await productDetail(decodeURIComponent(id));
       if (res.data) {
         setLoading(false);
+        const { commonFeatures, supportFeatures } = res.data;
         setProductInfo(res.data);
+        setFeatures(updateCommonFeaturesWithSupport(commonFeatures, supportFeatures))
       }
     } catch (error) {
       setLoading(false);
     }
+  };
+
+  /**
+   * 数据设置
+   * @param commonFeatures 
+   * @param support 
+   * @returns 
+   */
+  const updateCommonFeaturesWithSupport = (commonFeatures, supportFeatures) => {
+    const supportSlugs = new Set(supportFeatures.map(feature => feature.slug));
+    console.log(supportSlugs, 'supportSlugs');
+
+    return commonFeatures.map(feature => ({
+      ...feature,
+      show: supportSlugs.has(feature.slug),
+    }));
   };
   const menu = (
     <div className={styls.dropdownWarp}>
@@ -258,7 +280,7 @@ const ProductDetail = (props: any) => {
           <div className={styls.select_wrap}>
             <Select defaultValue={"appInfo"} onChange={handleClick}>
               {compareMenu.map((item) => (
-                <Select.Option value={item.htmlId} key={item.id}>
+                <Select.Option value={item.htmlId} key={item.htmlId}>
                   {item.name}
                 </Select.Option>
               ))}
@@ -301,8 +323,8 @@ const ProductDetail = (props: any) => {
               <ul className={styls.box_list}>
                 {productInfo?.supportOptions &&
                   productInfo.supportOptions.map(
-                    (item: string, index: number) => (
-                      <li className={styls.box_item} key={index}>
+                    (item) => (
+                      <li className={styls.box_item} key={item.slug}>
                         <span>{item}</span>
                         <i className={styls.icon}></i>
                       </li>
@@ -318,7 +340,7 @@ const ProductDetail = (props: any) => {
             ></div>
           </div>
 
-          <div className={styls.overview} id="overview">
+          <div className={styls.news} id="overview">
             <h3 className={styls.title}>Overview</h3>
 
             <p className={styls.desc}>Comming Soon</p>
@@ -422,8 +444,8 @@ const ProductDetail = (props: any) => {
             <div className={styls.box}>
               <ul className={styls.box_list}>
                 {productInfo?.pricing?.categories &&
-                  productInfo?.pricing?.categories.map((item: string) => (
-                    <li className={styls.box_item} key={item}>
+                  productInfo?.pricing?.categories.map((item: string, index: number) => (
+                    <li className={styls.box_item} key={index}>
                       <span>{item}</span>
                       <i className={styls.icon}></i>
                     </li>
@@ -435,38 +457,45 @@ const ProductDetail = (props: any) => {
           <div className={styls.product} id="features">
             <h3 className={styls.title}>Features</h3>
             <div className={styls.box}>
-              <ul className={styls.box_list}>
-                <li className={`${styls.box_item}`}>
-                  <span>Total features</span>
-                  <span>{productInfo?.totalFeature}</span>
-                </li>
-
+              <div className={styls.totalCount}>
+                <span>{productInfo?.name} features</span>
+                <span>{productInfo?.supportFeatures?.length + 1}</span>
+              </div>
+              <ul className={`${ styls.box_list} ${styls.box_list_feature}`}>
                 {productInfo?.supportFeatures &&
-                  productInfo.supportFeatures.map((item: IOptionItem) => (
-                    <li className={styls.box_item} key={item.slug}>
+                  productInfo?.supportFeatures.slice(0, supportSlice).map((item: IOptionItem) => (
+                    <li className={`${styls.box_item}`} key={item.slug}>
                       <span>{item.name}</span>
                       <i className={styls.icon}></i>
                     </li>
                   ))}
-
-                {productInfo?.commonFeatures &&
-                  productInfo.commonFeatures.map((item: IOptionItem) => (
-                    <li className={styls.box_item} key={item.slug}>
-                      <span>{item.name}</span>
-                      <i className={styls.icon}></i>
-                    </li>
-                  ))}
-                {/* {productInfo?.unsupportCommonFeatures &&
-                  productInfo.unsupportCommonFeatures.map((item: string) => (
-                    <li
-                      className={`${styls.box_item} ${styls.nocheck}`}
-                      key={item}
-                    >
-                      <span>{item}</span>
-                      <i className={styls.icon}></i>
-                    </li>
-                  ))} */}
               </ul>
+              {productInfo?.supportFeatures?.length > 10 && (
+                <button className={styls.moreBtn} onClick={() => {
+                  setSupportSlice(supportSlice == 10 ? productInfo?.supportFeatures.length : 10)
+                }}>{supportSlice === 10 ? 'Expand list' : 'Collapse list'}</button>
+              )}
+            </div>
+
+            <div className={styls.box}>
+              <div className={styls.totalCount}>
+                <span>Common features of Inventory Management software</span>
+                <span>{features.length + 1}</span>
+              </div>
+              <ul className={`${ styls.box_list} ${styls.box_list_feature}`}>
+                {features &&
+                  features.slice(0, featureSlice).map((item: IOptionItem) => (
+                    <li className={`${styls.box_item} ${!item.show && styls.nocheck}`} key={item.slug}>
+                      <span>{item.name}</span>
+                      <i className={styls.icon}></i>
+                    </li>
+                  ))}
+              </ul>
+              {features.length > 10 && (
+                <button className={styls.moreBtn} onClick={() => {
+                  setFeatureSlice(featureSlice == 10 ? features.length : 10)
+                }}>{featureSlice === 10 ? 'Expand list' : 'Collapse list'}</button>
+              )}
             </div>
           </div>
 
@@ -478,7 +507,7 @@ const ProductDetail = (props: any) => {
                 <li className={styls.box_item}>
                   <span>Value for money</span>
                   <div className={styls.rateWrap}>
-                    <Rate value={productInfo?.valueForMoney ? Number(productInfo?.valueForMoney) : 0}  disabled />(
+                    <Rate value={productInfo?.valueForMoney ? Number(productInfo?.valueForMoney) : 0} disabled />(
                     {productInfo?.valueForMoney})
                   </div>
                 </li>
@@ -486,7 +515,7 @@ const ProductDetail = (props: any) => {
                 <li className={styls.box_item}>
                   <span>Ease of use</span>
                   <div className={styls.rateWrap}>
-                    <Rate value={productInfo?.easeOfUse ? productInfo?.easeOfUse.toFixed(0) : 0}  disabled />(
+                    <Rate value={productInfo?.easeOfUse ? productInfo?.easeOfUse.toFixed(0) : 0} disabled />(
                     {productInfo?.easeOfUse})
                   </div>
                 </li>
@@ -637,9 +666,7 @@ const ProductDetail = (props: any) => {
             </ul> */}
           </div>
 
-          {/* <div className={styls.hiring} id="hiring">
-            <h3 className={styls.title}>Hiring</h3>
-          </div> */}
+
         </div>
       </div>
     </div>

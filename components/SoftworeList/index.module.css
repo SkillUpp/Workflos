@@ -5,11 +5,6 @@
   width: 100%;
   min-height: 300px;
 }
-.list::after {
-  content: "";
-  width: calc((100% / 3) - 16px);
-  height: 1px;
-}
 .list .list_item {
   display: flex;
   width: calc((100% / 3) - 64px);
@@ -20,6 +15,9 @@
   padding: 24px;
   cursor: pointer;
   transition: all 0.2s;
+}
+.list .list_item.hidden {
+  opacity: 0;
 }
 .list .list_item:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
