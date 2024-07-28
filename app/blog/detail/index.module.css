@@ -10,6 +10,14 @@
   margin: 0 auto;
   padding: 64px 0;
 }
+.blog_detail .blog_detail_header .container .title {
+  color: #000;
+  margin: 0 0 8px 0;
+  font-size: 42px;
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+}
 .blog_detail .blog_detail_header .container img {
   width: 100%;
   height: 564px;
@@ -46,6 +54,7 @@
   }
   .blog_detail .blog_detail_header {
     height: 780px;
+    padding: 0 56px;
   }
   .blog_detail .blog_detail_header .container {
     max-width: 100%;
@@ -54,7 +63,7 @@
   }
   .blog_detail .blog_detail_header .container .title {
     margin: 0 0 8px 0;
-    color: #fff;
+    color: #000;
     font-size: 42px;
     display: -webkit-box;
     line-clamp: 3;
@@ -79,10 +88,11 @@
   .blog_detail .blog_detail_header .container .source .text,
   .blog_detail .blog_detail_header .container .source .time {
     font-size: 18px;
-    color: #fff;
+    color: #333;
   }
   .blog_detail .blog_detail_content {
     margin: 36px 0;
+    padding: 0 56px;
   }
   .blog_detail .blog_detail_content .container {
     max-width: 100%;
@@ -96,6 +106,7 @@
   }
   .blog_detail .blog_detail_header {
     height: auto;
+    padding: 0 24px;
   }
   .blog_detail .blog_detail_header .container {
     max-width: 100%;
@@ -105,7 +116,7 @@
   }
   .blog_detail .blog_detail_header .container .title {
     margin: 0 0 8px 0;
-    color: #fff;
+    color: #000;
     font-size: 32px;
     display: -webkit-box;
     line-clamp: 3;
@@ -130,10 +141,11 @@
   .blog_detail .blog_detail_header .container .source .text,
   .blog_detail .blog_detail_header .container .source .time {
     font-size: 18px;
-    color: #fff;
+    color: #333;
   }
   .blog_detail .blog_detail_content {
     margin: 36px 0;
+    padding: 0 24px;
   }
   .blog_detail .blog_detail_content .container {
     max-width: 100%;
@@ -148,12 +160,12 @@
   .blog_detail .blog_detail_header .container {
     max-width: 100%;
     width: auto;
-    margin: 0 24px;
-    padding: 48px 0;
+    margin: 0;
+    padding: 32px 0 0 0;
   }
   .blog_detail .blog_detail_header .container .title {
     margin: 0 0 8px 0;
-    color: #fff;
+    color: #000;
     font-size: 32px;
     display: -webkit-box;
     line-clamp: 3;
@@ -178,14 +190,14 @@
   .blog_detail .blog_detail_header .container .source .text,
   .blog_detail .blog_detail_header .container .source .time {
     font-size: 18px;
-    color: #fff;
+    color: #333;
   }
   .blog_detail .blog_detail_content {
-    margin: 36px 0;
+    margin: 0;
   }
   .blog_detail .blog_detail_content .container {
     max-width: 100%;
     width: auto;
-    margin: 0 24px;
+    margin: 0;
   }
 }

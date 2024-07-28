@@ -551,7 +551,8 @@
 
 @media (max-width: 799px) {
   .category {
-    padding-top: 86px;
+    padding-top: 70px;
+    min-height: calc(100vh - 70px);
     background: #f0f0f0;
     overflow: hidden;
     .category__content {
@@ -663,11 +664,12 @@
           .right {
             padding-top: 12px;
             display: flex;
+            width: 100%;
             :global {
               .ant-select {
-                width: calc(100% / 2 - 8px);
+                width: 100%;
                 &:last-child {
-                  margin-left: 16px;
+                  margin-left: 0;
                 }
               }
             }

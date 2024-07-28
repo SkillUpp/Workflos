@@ -265,8 +265,8 @@ const ProductDetail = (props: any) => {
             <Rate value={productInfo?.valueForMoney} disabled />
             <span className={styls.count}>
               (
-              {productInfo?.totolRateUser
-                ? productInfo.totolRateUser / 100 + "k"
+              {productInfo?.totalRateUser
+                ? productInfo.totalRateUser / 100 + "k"
                 : 0}
               )
             </span>
@@ -494,7 +494,7 @@ const ProductDetail = (props: any) => {
 
             <div className={styls.box}>
               <div className={styls.totalCount}>
-                <span>Common features of Inventory Management software</span>
+                <span>Common features</span>
                 <span>{features.length + 1}</span>
               </div>
               <ul className={`${styls.box_list} ${styls.box_list_feature}`}>
@@ -522,7 +522,7 @@ const ProductDetail = (props: any) => {
                 <li className={styls.box_item}>
                   <span>Value for money</span>
                   <div className={styls.rateWrap}>
-                    <Rate value={productInfo?.valueForMoney ? Number(productInfo?.valueForMoney) : 0} disabled />(
+                    <Rate count={1} value={productInfo?.valueForMoney ? Number(productInfo?.valueForMoney) : 0} disabled />(
                     {productInfo?.valueForMoney})
                   </div>
                 </li>
@@ -530,21 +530,21 @@ const ProductDetail = (props: any) => {
                 <li className={styls.box_item}>
                   <span>Ease of use</span>
                   <div className={styls.rateWrap}>
-                    <Rate value={productInfo?.easeOfUse ? productInfo?.easeOfUse.toFixed(0) : 0} disabled />(
+                    <Rate count={1} value={productInfo?.easeOfUse ? productInfo?.easeOfUse.toFixed(0) : 0} disabled />(
                     {productInfo?.easeOfUse})
                   </div>
                 </li>
                 <li className={styls.box_item}>
                   <span>Features</span>
                   <div className={styls.rateWrap}>
-                    <Rate value={productInfo?.features ? productInfo?.features.toFixed(0) : 0} disabled />(
+                    <Rate count={1} value={productInfo?.features ? productInfo?.features.toFixed(0) : 0} disabled />(
                     {productInfo?.features})
                   </div>
                 </li>
                 <li className={styls.box_item}>
                   <span>Customer support</span>
                   <div className={styls.rateWrap}>
-                    <Rate value={productInfo?.customerSupport ? productInfo?.customerSupport.toFixed(0) : 0} disabled />(
+                    <Rate count={1} value={productInfo?.customerSupport ? productInfo?.customerSupport.toFixed(0) : 0} disabled />(
                     {productInfo?.customerSupport})
                   </div>
                 </li>

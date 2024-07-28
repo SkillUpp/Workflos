@@ -21,7 +21,7 @@
 }
 @media (max-width: 960px) {
   .blog {
-    padding: 100px 24px;
+    padding: 100px 24px 0 24px;
     overflow: hidden;
   }
   .blog .title {

@@ -54,6 +54,7 @@
               color: #454545;
             }
             .more {
+              white-space: nowrap;
               cursor: pointer;
               text-decoration: none;
               color: #454545;
@@ -335,7 +336,7 @@
         flex-wrap: wrap;
         justify-content: space-between;
         .blog_item {
-          height: 384px;
+          height: auto;
           border-radius: 8px;
           background: #fff;
           cursor: pointer;
@@ -363,7 +364,7 @@
           .blog_content {
             padding: 16px;
             .title {
-              height: 65px;
+              height: 56px;
               color: #9e00ff;
               font-size: 18px;
               font-weight: 800;
@@ -376,7 +377,11 @@
               display: flex;
               justify-content: space-between;
               .time {
+                width: calc(100% - 80px);
                 color: #454545;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
               }
               .more {
                 cursor: pointer;

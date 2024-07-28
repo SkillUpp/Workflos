@@ -48,7 +48,7 @@ const BlogDetail = (props: any) => {
       {loading && <LoadingContext />}
       <div className={styls.blog_detail_header}>
         <div className={styls.container}>
-          <h1>{info?.title}</h1>
+          <h1 className={styls.title}>{info?.title}</h1>
           {info?.cover && (
             <Image
               src={`https://directus.aiapex.asia/assets/${info?.cover}`}

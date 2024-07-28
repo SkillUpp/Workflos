@@ -199,7 +199,7 @@
 .compare .content .right .funding .title,
 .compare .content .right .team .title,
 .compare .content .right .news .title {
-  margin: 0;
+  margin: 0 0 8px 0;
   font-size: 20px;
   line-height: 1.2;
   font-weight: 700;
@@ -295,7 +295,7 @@
 .compare .content .right .news .box .box_list .box_item .rateWrap {
   display: flex;
   align-items: center;
-  width: 240px;
+  width: 80px;
   justify-content: space-between;
 }
 .compare .content .right .overview .box .box_list .box_item .rateWrap :global .ant-rate,
@@ -304,7 +304,7 @@
 .compare .content .right .funding .box .box_list .box_item .rateWrap :global .ant-rate,
 .compare .content .right .team .box .box_list .box_item .rateWrap :global .ant-rate,
 .compare .content .right .news .box .box_list .box_item .rateWrap :global .ant-rate {
-  width: 220px;
+  width: 32px;
 }
 .compare .content .right .overview .box .box_list .box_item .rateWrap :global .ant-rate .ant-rate-star,
 .compare .content .right .product .box .box_list .box_item .rateWrap :global .ant-rate .ant-rate-star,
