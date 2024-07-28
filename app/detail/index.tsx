@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { Dropdown, Progress, Rate, Select } from "antd";
 import { productDetail } from "@/api/product";
 import LoadingContext from "@/components/LoadingContext";
+import { marked } from "marked";
 
 interface IOptionItem {
   name: string;
@@ -97,20 +98,22 @@ const ProductDetail = (props: any) => {
 
   const [compareMenu, setCompareMenu] = useState(defaultCompareMenu);
   const handleClick = (id: string) => {
-    console.log(id, "id");
-
     const el = document.getElementById(id);
-    el && el.scrollIntoView({ behavior: "smooth" });
-    const menus = JSON.parse(JSON.stringify(compareMenu));
-    menus.forEach((item: { active: boolean; htmlId: string }) => {
-      item.active = false;
-      if (item.htmlId == id) {
-        item.active = true;
-      }
-    });
-    setCompareMenu(menus);
+    if (el) {
+      const rect = el.getBoundingClientRect();
+      const targetTop = rect.top + window.pageYOffset - 100;
+      const scrollToTop = Math.max(targetTop, 0);
+      window.scroll({
+        top: scrollToTop,
+        behavior: 'smooth',
+      });
+      const menus = compareMenu.map((item) => ({
+        ...item,
+        active: item.htmlId === id,
+      }));
+      setCompareMenu(menus);
+    }
   };
-
   /**
    * 获取产品详情
    */
@@ -120,6 +123,8 @@ const ProductDetail = (props: any) => {
       const res = await productDetail(decodeURIComponent(id));
       if (res.data) {
         const data = res.data;
+        data.description = data.description.replace(/\\n/g, "<br/>")
+        data.keyBenefits = data.keyBenefits.replace(/\\n/g, "<br/>")
         data.introduce = data.introduce.replace(/\\u0026/g, '&');
         setLoading(false);
         const { commonFeatures, supportFeatures } = res.data;
@@ -292,7 +297,12 @@ const ProductDetail = (props: any) => {
         <div className={styls.right}>
           <div className={styls.overview} id="appInfo">
             <h3 className={styls.title}>App Info</h3>
-            <p className={styls.desc}>{productInfo?.description}</p>
+            {productInfo?.description && (
+              <p className={styls.desc} dangerouslySetInnerHTML={{
+                __html: productInfo?.description,
+              }}></p>
+            )}
+
 
             <div className={styls.box}>
               <h3 className={styls.title}>Platforms supported</h3>
@@ -463,7 +473,7 @@ const ProductDetail = (props: any) => {
                 <span>{productInfo?.name} features</span>
                 <span>{productInfo?.supportFeatures?.length + 1}</span>
               </div>
-              <ul className={`${ styls.box_list} ${styls.box_list_feature}`}>
+              <ul className={`${styls.box_list} ${styls.box_list_feature}`}>
                 {productInfo?.supportFeatures &&
                   productInfo?.supportFeatures.slice(0, supportSlice).map((item: IOptionItem) => (
                     <li className={`${styls.box_item}`} key={item.slug}>
@@ -484,7 +494,7 @@ const ProductDetail = (props: any) => {
                 <span>Common features of Inventory Management software</span>
                 <span>{features.length + 1}</span>
               </div>
-              <ul className={`${ styls.box_list} ${styls.box_list_feature}`}>
+              <ul className={`${styls.box_list} ${styls.box_list_feature}`}>
                 {features &&
                   features.slice(0, featureSlice).map((item: IOptionItem) => (
                     <li className={`${styls.box_item} ${!item.show && styls.nocheck}`} key={item.slug}>

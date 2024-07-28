@@ -91,13 +91,15 @@ const Compare = (props: any) => {
         setLoading(true);
         try {
           const results = await Promise.all(
-            ids.map((item) => getProductDetail(item))
+            ids.map((item) => getProductDetail(decodeURIComponent(item)))
           );
           const data = results;
           data.forEach((item) => {
             item.commonFeatureSlice = 10
             item.supportFeatureSlice = 10
             item.introduce = item.introduce.replace(/\\u0026/g, '&');
+            item.description = item.description.replace(/\\n/g, "<br/>")
+            item.keyBenefits = item.keyBenefits.replace(/\\n/g, "<br/>")
             item.commonFeatures = updateCommonFeaturesWithSupport(item.commonFeatures, item.supportFeatures);
           })
           setCompareData((prevData: any) => [
