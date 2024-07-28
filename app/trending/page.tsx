@@ -33,9 +33,13 @@ const Trending = () => {
       setLoading(true);
       const res = await productList(params);
       if (res.data) {
+        const list = res.data.list;
         setLoading(false);
         setTotalCount(res.data.totalCount);
-        setSoftworeList(res.data.list);
+        list.forEach(item => {
+          item.introduce = item.introduce.replace(/\\u0026/g, '&');
+        })
+        setSoftworeList(list);
       }
     } catch (error) {
       setLoading(false);

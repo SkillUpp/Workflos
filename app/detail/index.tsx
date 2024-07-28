@@ -119,9 +119,11 @@ const ProductDetail = (props: any) => {
       setLoading(true);
       const res = await productDetail(decodeURIComponent(id));
       if (res.data) {
+        const data = res.data;
+        data.introduce = data.introduce.replace(/\\u0026/g, '&');
         setLoading(false);
         const { commonFeatures, supportFeatures } = res.data;
-        setProductInfo(res.data);
+        setProductInfo(data);
         setFeatures(updateCommonFeaturesWithSupport(commonFeatures, supportFeatures))
       }
     } catch (error) {

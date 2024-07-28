@@ -89,20 +89,25 @@ const Compare = (props: any) => {
       if (id) {
         const ids = encodeURIComponent(id).split("%2526");
         setLoading(true);
-        const results = await Promise.all(
-          ids.map((item) => getProductDetail(item))
-        );
-        const data = results;
-        data.forEach((item) => {
-          item.commonFeatureSlice = 10
-          item.supportFeatureSlice = 10
-          item.commonFeatures = updateCommonFeaturesWithSupport(item.commonFeatures, item.supportFeatures);
-        })
-        setCompareData((prevData: any) => [
-          ...prevData,
-          ...data.filter(Boolean),
-        ]);
-        setLoading(false);
+        try {
+          const results = await Promise.all(
+            ids.map((item) => getProductDetail(item))
+          );
+          const data = results;
+          data.forEach((item) => {
+            item.commonFeatureSlice = 10
+            item.supportFeatureSlice = 10
+            item.introduce = item.introduce.replace(/\\u0026/g, '&');
+            item.commonFeatures = updateCommonFeaturesWithSupport(item.commonFeatures, item.supportFeatures);
+          })
+          setCompareData((prevData: any) => [
+            ...prevData,
+            ...data.filter(Boolean),
+          ]);
+          setLoading(false);
+        } catch (error) {
+          setLoading(false);
+        }
       }
     };
     fetchProductDetails();

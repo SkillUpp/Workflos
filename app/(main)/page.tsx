@@ -56,8 +56,12 @@ export default function Home() {
       setLoading(true);
       const res = await productList(params);
       if (res.data) {
+        const list = res.data.list;
         setLoading(false);
-        setSoftworeList(res.data.list);
+        setTotalCount(res.data.totalCount);
+        list.forEach(item => {
+          item.introduce = item.introduce.replace(/\\u0026/g, '&');
+        })
         setTotalCount(res.data.totalCount);
       }
     } catch (error) {

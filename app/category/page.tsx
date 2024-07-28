@@ -74,9 +74,13 @@ const Category = () => {
       setLoading(true);
       const res = await productList(params);
       if (res.data) {
+        const list = res.data.list;
         setLoading(false);
         setTotalCount(res.data.totalCount);
-        setSoftworeList(res.data.list);
+        list.forEach(item => {
+          item.introduce = item.introduce.replace(/\\u0026/g, '&');
+        })
+        setSoftworeList(list);
       }
     } catch (error) {
       setLoading(false);
@@ -87,10 +91,15 @@ const Category = () => {
     getSoftworeList("", page);
   };
 
-  const handleCompare = (item: any) => {
+  const handleCompare = (event, item: any) => {
+    event.stopPropagation();
     setCurrentItem(item);
     // toggleCompareModal();
     setIsCompareModalOpen(true);
+  };
+
+  const handleJump = (path: string) => {
+    route.push(path);
   };
 
   useEffect(() => {
@@ -167,7 +176,7 @@ const Category = () => {
 
           <div className={styls.list}>
             {softworeList.map((item: any) => (
-              <div className={styls.item} key={item.name}>
+              <div className={styls.item} key={item.name} onClick={() => handleJump(`/product/${item.name}`)}>
                 <div className={styls.top}>
                   <div className={styls.left}>
                     <Image src={item.photo} alt="" width={77} height={77} />
@@ -182,19 +191,19 @@ const Category = () => {
                   <div className={styls.right}>
                     <button
                       className={styls.btn}
-                      onClick={() => handleCompare(item)}
+                      onClick={(e) => handleCompare(e, item)}
                     >
                       <i className={styls.compare}></i>
                       <span>Compare</span>
                     </button>
 
-                    <button
+                    {/* <button
                       className={styls.btn}
                       onClick={() => handleJumpWebsite(item.website)}
                     >
                       <span>VISIT WEBSITE</span>
                       <i className={styls.share}></i>
-                    </button>
+                    </button> */}
                   </div>
                 </div>
                 <div className={styls.content}>
