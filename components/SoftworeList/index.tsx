@@ -1,17 +1,7 @@
 "use client";
 import Image from "next/image";
-import SIcon from "@/images/s1.png";
 import styls from "./index.module.css";
 import { useRouter } from "next/navigation";
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
-import {
-  ReactElement,
-  JSXElementConstructor,
-  ReactNode,
-  ReactPortal,
-  AwaitedReactNode,
-  Key,
-} from "react";
 import NoData from "../Nodata";
 
 const SoftworeList = (props: any) => {
@@ -35,7 +25,9 @@ const SoftworeList = (props: any) => {
             </div>
             <div className={styls.right}>
               <h3 className={styls.title}>{item.name}</h3>
-              <p className={styls.desc}>{item.description}</p>
+              <p className={styls.desc} dangerouslySetInnerHTML={{
+                __html: item?.description,
+              }}></p>
             </div>
           </div>
         ))}

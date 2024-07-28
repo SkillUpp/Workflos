@@ -124,8 +124,11 @@ const ProductDetail = (props: any) => {
       if (res.data) {
         const data = res.data;
         data.description = data.description.replace(/\\n/g, "<br/>")
+        data.description = data.description.replace(/\\r/g, " ")
         data.keyBenefits = data.keyBenefits.replace(/\\n/g, "<br/>")
+        data.keyBenefits = data.keyBenefits.replace(/\\r/g, " ")
         data.introduce = data.introduce.replace(/\\u0026/g, '&');
+        data.keyBenefits = data.keyBenefits.replace(/\\u0026/g, '&');
         setLoading(false);
         const { commonFeatures, supportFeatures } = res.data;
         setProductInfo(data);
@@ -299,7 +302,7 @@ const ProductDetail = (props: any) => {
             <h3 className={styls.title}>App Info</h3>
             {productInfo?.description && (
               <p className={styls.desc} dangerouslySetInnerHTML={{
-                __html: productInfo?.description,
+                __html: marked(productInfo?.description),
               }}></p>
             )}
 
@@ -477,7 +480,7 @@ const ProductDetail = (props: any) => {
                 {productInfo?.supportFeatures &&
                   productInfo?.supportFeatures.slice(0, supportSlice).map((item: IOptionItem) => (
                     <li className={`${styls.box_item}`} key={item.slug}>
-                      <span>{item.name}</span>
+                      <span>{item.name.replace(/\\u0026/g, '&')}</span>
                       <i className={styls.icon}></i>
                     </li>
                   ))}
@@ -498,7 +501,7 @@ const ProductDetail = (props: any) => {
                 {features &&
                   features.slice(0, featureSlice).map((item: IOptionItem) => (
                     <li className={`${styls.box_item} ${!item.show && styls.nocheck}`} key={item.slug}>
-                      <span>{item.name}</span>
+                      <span>{item.name.replace(/\\u0026/g, '&')}</span>
                       <i className={styls.icon}></i>
                     </li>
                   ))}

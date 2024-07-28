@@ -99,12 +99,13 @@ const Compare = (props: any) => {
             item.supportFeatureSlice = 10
             item.introduce = item.introduce ? item.introduce.replace(/\\u0026/g, '&') : "";
             item.description = item.description ? item.description.replace(/\\n/g, "<br/>") : ""
+            item.description = item.description ? item.description.replace(/\\r/g, "<br/>") : ""
             item.keyBenefits = item.keyBenefits ? item.keyBenefits.replace(/\\n/g, "<br/>") : ""
             item.commonFeatures = updateCommonFeaturesWithSupport(item.commonFeatures, item.supportFeatures);
           })
 
           console.log(data, 'data');
-          
+
           setCompareData((prevData: any) => [
             ...prevData,
             ...data.filter(Boolean),
@@ -188,8 +189,9 @@ const Compare = (props: any) => {
                     key={item.name}
                   >
                     {/* <h3 className={styls.title}>App Info</h3> */}
-                    <p className={styls.desc}>{item?.description}</p>
-
+                    <p className={styls.desc} dangerouslySetInnerHTML={{
+                      __html: item?.description,
+                    }}></p>
                     <div className={styls.box}>
                       <h3 className={styls.title}>Platforms supported</h3>
                       <ul className={styls.box_list}>
@@ -296,7 +298,7 @@ const Compare = (props: any) => {
                       {item?.supportFeatures &&
                         item?.supportFeatures.slice(0, item.supportFeatureSlice).map((item: IOptionItem) => (
                           <li className={`${styls.box_item}`} key={item.slug}>
-                            <span>{item.name}</span>
+                            <span>{item.name.replace(/\\u0026/g, '&')}</span>
                             <i className={styls.icon}></i>
                           </li>
                         ))}
@@ -327,7 +329,7 @@ const Compare = (props: any) => {
                       {item.commonFeatures &&
                         item.commonFeatures.slice(0, item.commonFeatureSlice).map((item: IOptionItem) => (
                           <li className={`${styls.box_item} ${!item.show && styls.nocheck}`} key={item.slug}>
-                            <span>{item.name}</span>
+                            <span>{item.name.replace(/\\u0026/g, '&')}</span>
                             <i className={styls.icon}></i>
                           </li>
                         ))}

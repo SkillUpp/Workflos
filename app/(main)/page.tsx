@@ -14,7 +14,7 @@ export default function Home() {
   const route = useRouter();
   const [loading, setLoading] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const [currentCategory, setCurrentCategory] = useState("CRM");
+  const [currentCategory, setCurrentCategory] = useState("");
   const [currentSort, setCurrentSort] = useState("rateAvg");
   const [softworeTab, setSoftworeTab] = useState(sortOfRateEnumList);
   const [softworeList, setSoftworeList] = useState([]);
@@ -49,7 +49,7 @@ export default function Home() {
       keyword: searchValue,
       category: category || currentCategory,
       sortBy: currentSort,
-      limit: 16,
+      limit: 10,
       page: 1,
     };
     try {
@@ -59,6 +59,9 @@ export default function Home() {
         const list = res.data.list;
         setLoading(false);
         list.forEach(item => {
+          item.description = item.description.replace(/\\n/g, " ")
+          item.description = item.description.replace(/\\r/g, " ")
+          item.description = item.description.replace(/\\u0026/g, '&');
           item.introduce = item.introduce.replace(/\\u0026/g, '&');
         })
         setSoftworeList(list)
@@ -101,6 +104,7 @@ export default function Home() {
                 </h3>
                 <div className={styls.button_wrap}>
                   <Select
+                    showSearch
                     value={currentCategory}
                     onChange={(value) => {
                       setCurrentCategory(value);
@@ -119,7 +123,7 @@ export default function Home() {
             </div>
             <div className={styls.searchPanel__bg}>
               <div className={styls.product_info}>
-                <h3 className={styls.title}>{totalCount}</h3>
+                <h3 className={styls.title}>{totalCount ? totalCount / 1000 + 'K' : ""}</h3>
                 <p className={styls.desc}>Software profiles</p>
               </div>
             </div>
@@ -156,7 +160,7 @@ export default function Home() {
 
             <div className={styls.content}>
               <SoftworeList list={softworeList} />
-              {softworeList.length > 10 && (
+              {softworeList.length >= 10 && (
                 <div className={styls.more} onClick={() => handleJump("/category")}>
                   See all CRM Software
                 </div>

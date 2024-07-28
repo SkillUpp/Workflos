@@ -37,6 +37,9 @@ const Trending = () => {
         setLoading(false);
         setTotalCount(res.data.totalCount);
         list.forEach(item => {
+          item.description = item.description.replace(/\\n/g, " ")
+          item.description = item.description.replace(/\\r/g, " ")
+          item.description = item.description.replace(/\\u0026/g, '&');
           item.introduce = item.introduce.replace(/\\u0026/g, '&');
         })
         setSoftworeList(list);

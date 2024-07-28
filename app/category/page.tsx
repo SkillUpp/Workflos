@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import styls from "./index.module.css";
 import { Pagination, Select } from "antd";
 import Image from "next/image";
-import SoftIcon from "@/images/soft-icon.png";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import CompareModal from "./CompareModal";
@@ -13,8 +12,8 @@ import LoadingContext from "@/components/LoadingContext";
 import NoData from "@/components/Nodata";
 
 const tabs = [
-  // { id: 1, title: "Allapps", value: "HighestRated", active: true },
-  { id: 2, title: "Leaders", value: "categoryLeaders", active: true },
+  { id: 1, title: "Allapps", value: "rateAvg", active: true },
+  { id: 2, title: "Leaders", value: "categoryLeaders", active: false },
   // { id: 3, title: "Guide", value: "EaseOfUse", active: false },
 ];
 
@@ -23,7 +22,7 @@ const Category = () => {
   const [loading, setLoading] = useState(false);
   const [categoryTabs, setCategoryTabs] = useState(tabs);
   const [currentCategory, setCurrentCategory] = useState("CRM");
-  const [currentSort, setCurrentSort] = useState("categoryLeaders");
+  const [currentSort, setCurrentSort] = useState("rateAvg");
   const [isCompareModalOpen, setIsCompareModalOpen] = useState(false);
   const [softworeList, setSoftworeList] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
@@ -78,6 +77,9 @@ const Category = () => {
         setLoading(false);
         setTotalCount(res.data.totalCount);
         list.forEach(item => {
+          item.description = item.description.replace(/\\n/g, " ")
+          item.description = item.description.replace(/\\r/g, " ")
+          item.description = item.description.replace(/\\u0026/g, '&');
           item.introduce = item.introduce.replace(/\\u0026/g, '&');
         })
         setSoftworeList(list);
@@ -185,7 +187,9 @@ const Category = () => {
                         <span className={styls.text}>{item.name}</span>
                         {/* <i className={styls.share_icon}></i> */}
                       </div>
-                      <p className={styls.desc}>{item.introduce}</p>
+                      <p className={styls.desc} dangerouslySetInnerHTML={{
+                        __html: item?.introduce,
+                      }}></p>
                     </div>
                   </div>
                   <div className={styls.right}>
@@ -207,7 +211,9 @@ const Category = () => {
                   </div>
                 </div>
                 <div className={styls.content}>
-                  <p className={styls.desc}>{item.description}</p>
+                  <p className={styls.desc} dangerouslySetInnerHTML={{
+                    __html: item?.description,
+                  }}></p>
                   <Link href={"/"} className={styls.more}>
                     Read more about DataSnipper
                   </Link>
