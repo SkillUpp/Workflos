@@ -97,11 +97,14 @@ const Compare = (props: any) => {
           data.forEach((item) => {
             item.commonFeatureSlice = 10
             item.supportFeatureSlice = 10
-            item.introduce = item.introduce.replace(/\\u0026/g, '&');
-            item.description = item.description.replace(/\\n/g, "<br/>")
-            item.keyBenefits = item.keyBenefits.replace(/\\n/g, "<br/>")
+            item.introduce = item.introduce ? item.introduce.replace(/\\u0026/g, '&') : "";
+            item.description = item.description ? item.description.replace(/\\n/g, "<br/>") : ""
+            item.keyBenefits = item.keyBenefits ? item.keyBenefits.replace(/\\n/g, "<br/>") : ""
             item.commonFeatures = updateCommonFeaturesWithSupport(item.commonFeatures, item.supportFeatures);
           })
+
+          console.log(data, 'data');
+          
           setCompareData((prevData: any) => [
             ...prevData,
             ...data.filter(Boolean),

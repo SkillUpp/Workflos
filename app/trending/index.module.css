@@ -48,6 +48,7 @@
   width: 77px;
   height: 77px;
   border-radius: 5px;
+  object-fit: contain;
 }
 .trending .trending__content .main .list .item .top .left .info {
   padding-left: 22px;

@@ -26,6 +26,8 @@
 .list .list_item .left img {
   width: 36px;
   height: 36px;
+  object-fit: contain;
+  border-radius: 4px;
 }
 .list .list_item .right {
   padding-left: 12px;

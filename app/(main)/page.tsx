@@ -58,10 +58,10 @@ export default function Home() {
       if (res.data) {
         const list = res.data.list;
         setLoading(false);
-        setTotalCount(res.data.totalCount);
         list.forEach(item => {
           item.introduce = item.introduce.replace(/\\u0026/g, '&');
         })
+        setSoftworeList(list)
         setTotalCount(res.data.totalCount);
       }
     } catch (error) {
