@@ -124,7 +124,7 @@ export default function Home() {
             <div className={styls.searchPanel__bg}>
               <div className={styls.product_info}>
                 <h3 className={styls.title}>{totalCount ? totalCount / 1000 + 'K' : ""}</h3>
-                <p className={styls.desc}>Software profiles</p>
+                <p className={styls.desc}>Software Profiles</p>
               </div>
             </div>
           </div>
