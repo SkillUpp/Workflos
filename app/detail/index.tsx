@@ -27,16 +27,10 @@ const mediaList = [
 
 const defaultCompareMenu = [
   {
-    id: 1,
-    htmlId: "appInfo",
-    name: "App Info",
-    active: true,
-  },
-  {
     id: 2,
     name: "Overview",
     htmlId: "overview",
-    active: false,
+    active: true,
   },
   {
     id: 3,
@@ -46,7 +40,7 @@ const defaultCompareMenu = [
   },
   {
     id: 4,
-    name: "Pricing",
+    name: "Opening",
     htmlId: "pricing",
     active: false,
   },
@@ -76,16 +70,16 @@ const defaultCompareMenu = [
   },
   {
     id: 9,
-    name: "Revenue",
+    name: "Key Customers",
     htmlId: "revenue",
     active: false,
   },
-  {
-    id: 10,
-    name: "Challenges",
-    htmlId: "challenges",
-    active: false,
-  },
+  // {
+  //   id: 10,
+  //   name: "Challenges",
+  //   htmlId: "challenges",
+  //   active: false,
+  // },
 ];
 
 const ProductDetail = (props: any) => {
@@ -288,7 +282,7 @@ const ProductDetail = (props: any) => {
             ))}
           </div>
           <div className={styls.select_wrap}>
-            <Select defaultValue={"appInfo"} onChange={handleClick}>
+            <Select defaultValue={"overview"} onChange={handleClick}>
               {compareMenu.map((item) => (
                 <Select.Option value={item.htmlId} key={item.htmlId}>
                   {item.name}
@@ -298,8 +292,8 @@ const ProductDetail = (props: any) => {
           </div>
         </div>
         <div className={styls.right}>
-          <div className={styls.overview} id="appInfo">
-            <h3 className={styls.title}>App Info</h3>
+          <div className={styls.overview} id="overview">
+            <h3 className={styls.title}>Overview</h3>
             {productInfo?.description && (
               <p className={styls.desc} dangerouslySetInnerHTML={{
                 __html: marked(productInfo?.description),
@@ -355,11 +349,11 @@ const ProductDetail = (props: any) => {
             ></div>
           </div>
 
-          <div className={styls.news} id="overview">
+          {/* <div className={styls.news} id="overview">
             <h3 className={styls.title}>Overview</h3>
 
             <p className={styls.desc}>Comming Soon</p>
-          </div>
+          </div> */}
 
           <div className={styls.news} id="news">
             <h3 className={styls.title}>News</h3>
@@ -445,7 +439,7 @@ const ProductDetail = (props: any) => {
           </div>
 
           <div className={styls.news} id="pricing">
-            <h3 className={styls.title}>Pricing</h3>
+            <h3 className={styls.title}>Opening</h3>
             <div className={styls.pricing_top}>
               <h4 className={styls.name}>Starting from</h4>
               <div className={styls.price}>
@@ -628,7 +622,7 @@ const ProductDetail = (props: any) => {
           </div>
 
           <div className={styls.funding} id="revenue">
-            <h3 className={styls.title}>Revenue</h3>
+            <h3 className={styls.title}>Key Customers</h3>
             <p className={styls.desc}>Comming Soon</p>
             {/* <ul className={styls.funding_list}>
               <li className={styls.funding_item}>
