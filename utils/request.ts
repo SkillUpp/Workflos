@@ -2,8 +2,8 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 
 const api = axios.create({
   // baseURL: "https://api-dev.skillupp.xyz",
-  baseURL: "https://api.aitracker.ai",
-  timeout: 5000,
+  baseURL: "https://api-uat.aitracker.ai",
+  timeout: 50000,
   withCredentials: true,
 });
 

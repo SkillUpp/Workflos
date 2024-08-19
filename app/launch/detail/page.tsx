@@ -7,7 +7,6 @@ import x from "@/images/x.svg";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { launchDetail } from "@/api/product";
-import Category from "../../category/page";
 import LoadingContext from "@/components/LoadingContext";
 
 const mediaList = [
@@ -43,11 +42,6 @@ const LaunchDetail = (props: any) => {
         <p className={styls.desc}>{launchInfo?.content}</p>
 
         <div className={styls.info}>
-          {/* <div className={styls.left}>
-            <Image src={Image1} alt="" width={50} height={50} />
-            <span className={styls.name}>By Fernando Fierro</span>
-            <span className={styls.time}>5 days ago</span>
-          </div> */}
           <div className={styls.right}>
             {mediaList.map((item) => (
               <Link href="/" key={item.id}>

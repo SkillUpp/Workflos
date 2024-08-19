@@ -1,115 +1,93 @@
 "use client";
-import { useEffect, useState } from "react";
-import styls from "./index.module.css";
-import { Pagination, Select } from "antd";
+import Card from "./Card";
 import Image from "next/image";
-import SoftIcon from "@/images/soft-icon.png";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import Bg from "@/images/bg.png";
+import React, { useEffect, useState } from "react";
+import { Pagination } from "antd";
 import { productList } from "@/api/product";
-import LoadingContext from "@/components/LoadingContext";
-import NoData from "@/components/Nodata";
+import NoFound from "@/components/NoFound";
 
-const Trending = () => {
-  const route = useRouter();
-  const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(1);
-  const [softworeList, setSoftworeList] = useState([]);
-  const [totalCount, setTotalCount] = useState(0);
-  const handleJump = (path: string) => {
-    route.push(path);
+const Home: React.FC = () => {
+
+
+  const [list, setList] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [totalCount, setTotalCount] = useState(0)
+
+  const [selectedValue, setSelectedValue] = useState("option1");
+
+  const handleSelectChange = (value: any) => {
+    setSelectedValue(value);
   };
+
+  const options = [{ value: "All Batches", label: "All Batches" }];
 
   /**
    * 获取产品列表
    */
-  const getSoftworeList = async (page: number) => {
+  const getProductList = async (page: number) => {
     const params = {
       limit: 10,
       page: page,
-      sortby: "rateAvg"
     };
     try {
       setLoading(true);
       const res = await productList(params);
       if (res.data) {
-        const list = res.data.list;
         setLoading(false);
-        setTotalCount(res.data.totalCount);
-        list.forEach(item => {
-          item.description = item.description.replace(/\\n/g, " ")
-          item.description = item.description.replace(/\\r/g, " ")
-          item.description = item.description.replace(/\\u0026/g, '&');
-          item.introduce = item.introduce.replace(/\\u0026/g, '&');
-        })
-        setSoftworeList(list);
+        setTotalCount(0);
+        setList([]);
       }
     } catch (error) {
       setLoading(false);
     }
   };
 
-  const handleChangePage = (page: number) => {
-    getSoftworeList(page);
-    setPage(page)
-  };
   useEffect(() => {
-    getSoftworeList(1);
-  }, []);
+    getProductList(1)
+  }, [])
+
+  const handleChangePage = (page: number) => {
+    getProductList(page);
+  };
+
   return (
-    <div className={styls.trending}>
-      <div className={styls.trending__content}>
-        <h3 className={styls.title}>Trending</h3>
-        <div className={styls.main}>
-          <div className={styls.list}>
-            {loading && <LoadingContext />}
-            {softworeList &&
-              softworeList.map((item: any, index: number) => (
-                <div
-                  className={styls.item}
-                  key={item.name}
-                  onClick={() => handleJump("/product/" + item.name)}
-                >
-                  <div className={styls.top}>
-                    <div className={styls.left}>
-                      <Image src={item.photo} alt="" width={77} height={77} />
-
-                      <div className={styls.info}>
-                        <div className={styls.title_wrap}>
-                          <span className={styls.text}>{item.name}</span>
-                          {/* <i className={styls.share_icon}></i> */}
-                        </div>
-                        <p className={styls.desc}>{item.introduce}</p>
-                      </div>
-                    </div>
-                    <div className={styls.right}>
-                      <span className={styls.active}>NO.{index + 1}</span>
-                    </div>
-                  </div>
-                  <div className={styls.content}>
-                    <p className={styls.desc}>{item.description}</p>
-                    <Link href={"/"} className={styls.more}>
-                      Read more about DataSnipper
-                    </Link>
-                  </div>
-                </div>
-              ))}
-
-            {softworeList.length === 0 && <NoData />}
-
-            {totalCount > 10 && (
-              <Pagination
-                onChange={handleChangePage}
-                className={styls.pagination}
-                defaultCurrent={1}
-                total={totalCount}
-              />
-            )}
-          </div>
+    <div className="mt-[86px] pt-[60px] px-6 lg:px-6 xl:px-[56px] 2xl:px-[200px]  bg-gray-100 min-h-screen p-8 overflow-x-hidden">
+      <div className="absolute inset-0 z-0 left-[80%] translate-x-[-50%] top-[90px]">
+        <Image
+          className="hidden md:block"
+          src={Bg}
+          alt="Background"
+          objectFit="cover"
+          quality={100}
+          width={500}
+          height={500}
+        />
+      </div>
+      <div className="grid grid-cols-1 gap-4 relative z-10">
+        <div className="grid grid-cols-1 gap-4">
+          {list && list.map((card, index) => (
+            <Card
+              key={index}
+              index={index}
+              row={card}
+            />
+          ))}
+           {list.length == 0 && <NoFound title="No Trending Products" message="No Trending Products found" />}
         </div>
+
+        {totalCount > 10 && (
+          <Pagination
+            onChange={handleChangePage}
+            className="pagination"
+            defaultCurrent={1}
+            total={totalCount}
+            responsive
+          />
+        )}
       </div>
     </div>
   );
 };
 
-export default Trending;
+export default Home;

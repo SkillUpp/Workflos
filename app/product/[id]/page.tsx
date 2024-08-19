@@ -1,35 +1,36 @@
-import ProductDetail from "@/app/detail/index";
+import { productDetail, productList } from "@/api/product";
+import ProductDetailComp from "../detail/page";
+
 
 export async function generateStaticParams() {
-  const paths = [
-    { id: "ClickUp" },
-    { id: "Slack" },
-    { id: "Trello" },
-    { id: "Clio" },
-  ];
-
-  return paths.map((path) => ({ id: path.id }));
+	const res = await productList({
+		limit: 50,
+		page: 1,
+	})
+	const list = res.data.list;
+	return list.map((path: any) => ({ id: path.name }));
 }
 
 type Params = {
-  id: string;
+	id: string;
 };
 
 type Props = {
-  params: Params;
+	params: Params;
 };
 
-export default function PostPage({ params }: Props) {
-  const validIds = ["ClickUp", "Slack", "Trello", "Clio"];
-  console.log(validIds, "validIds");
-  console.log(params.id, "params.id");
+/**
+ * 获取产品信息
+ * @param id 
+ * @returns 
+ */
+async function getProductData(id: string) {
+	const res = await productDetail(id);
+	return res
+}
 
-  if (!validIds.includes(params.id)) {
-    return <ProductDetail id={params.id} />;
-  }
 
-  // 在服务器端打印参数
-  console.log(params, "Server-side PARAMS");
-
-  return <ProductDetail id={params.id} />;
+export default async function PostPage({ params }: Props) {
+	const res = await getProductData(params.id)
+	return <ProductDetailComp info={res} />;
 }

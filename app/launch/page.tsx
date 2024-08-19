@@ -1,125 +1,126 @@
 "use client";
-import { throttle } from "lodash";
 import Image from "next/image";
-import { Input } from "antd";
-import styls from "./index.module.css";
-import { useRouter } from "next/navigation";
-import { SetStateAction, useCallback, useEffect, useRef, useState } from "react";
+import Bg from "@/images/bg.png";
+import React, { useEffect, useState } from "react";
+import Card from "@/components/Card/index";
+// import Select from "@/components/CSelect";
 import { launchList } from "@/api/product";
-import LoadingContext from "@/components/LoadingContext";
-import NoData from "@/components/Nodata";
+import { Select } from "antd";
+import { useRouter } from "next/navigation";
+import NoFound from "@/components/NoFound";
 
-const tags = ["All", "Upcoming", "Past", "Launches"];
-
-const Launch = () => {
-  const route = useRouter();
-  const searchValue = useRef("");
-  const handleJump = (path: string) => {
-    route.push(path);
-  };
+const Home: React.FC = () => {
+  const route = useRouter()
   const [loading, setLoading] = useState(false);
-  const [launchData, setLaunchData] = useState<any>([]);
-
-  const handleChangeValue = useCallback(
-    throttle((val: string) => {
-      searchValue.current = val;
-      getLaunchData();
-    }, 1000),
-    []
-  );
+  const [list, setList] = useState([])
+  const cardsData = [
+    {
+      title: "Hamming - Make your RAG & AI agents reliable",
+      description:
+        "The only end-to-end AI development platform you need: prompt management, evals, observability",
+      tags: ["AI", "B2B", "Climate"],
+      time: "a day ago",
+    },
+    // 可以添加更多卡片数据
+  ];
 
   const getLaunchData = async () => {
     setLoading(true);
-    const res = await launchList({ keyword: searchValue.current });
+    const res = await launchList({ keyword: '' });
     if (res.data) {
       setLoading(false);
-      setLaunchData(res.data.list);
+      setList([]);
     }
+  };
+
+  const [selectedValue, setSelectedValue] = useState("option1");
+
+  const handleSelectChange = (value: any) => {
+    setSelectedValue(value);
   };
 
   useEffect(() => {
     getLaunchData();
   }, []);
+
+  const options = [{ value: "All Batches", label: "All Batches" }];
+
   return (
-    <div className={styls.launch}>
-      {loading && <LoadingContext />}
-      <div className={styls.header}>
-        <h3 className={styls.title}>Launch</h3>
-        <p className={styls.desc}>The launchpad for Launch</p>
-        <Input
-          placeholder="Search for a Company"
-          onChange={(e) => handleChangeValue(e.target.value)}
+    <div className="mt-[86px] pt-[60px] px-6 lg:px-6 xl:px-[56px] 2xl:px-[200px]  bg-gray-100 min-h-screen p-8">
+      <div className="absolute inset-0 z-0 left-[80%] translate-x-[-50%] top-[90px]">
+        <Image
+          src={Bg}
+          alt="Background"
+          objectFit="cover"
+          quality={100}
+          width={500}
+          height={500}
+          className="rounded-md"
         />
-        <div className={styls.tag_list}>
-          {tags.map((item) => (
-            <div className={styls.tag} key={item}>
-              {item}
-            </div>
-          ))}
-        </div>
-        {/* <div className={styls.search}>
-          <div className={styls.left}>
-            <Select defaultValue={"1"}>
-              <Select.Option value="1">All Batches</Select.Option>
-            </Select>
-            <Select defaultValue={"1"}>
-              <Select.Option value="1">All Industries</Select.Option>
-            </Select>
-          </div>
-          <div className={styls.sort_wrap}>
-            <span className={styls.label}>Sort by</span>
-            <Select defaultValue={"1"}>
-              <Select.Option value="1">Date</Select.Option>
-            </Select>
-          </div>
-        </div> */}
       </div>
-      <div className={styls.content}>
-        <div className={styls.launch_list}>
-          {launchData.length > 0 &&
-            launchData.map((item: any, index: number) => (
-              <div
-                className={styls.launch_item}
-                onClick={() => handleJump("/launch/" + item.name)}
-              >
-                <div className={styls.idx}>
-                  <i className={styls.icon}></i>
-                  <span className={styls.text}>{index + 1}</span>
-                </div>
-                <div className={styls.picture}>
-                  <Image src={item.photo} alt="" width={74} height={74} />
-                </div>
-                <div className={styls.info}>
-                  <h3 className={styls.title}>{item.title}</h3>
-                  <p className={styls.desc}>{item.content}</p>
-                  <div className={styls.user_info}>
-                    {/* <div className={styls.user}>
-                      <div className={styls.wrap}>
-                        <Image src={User} alt={""} width={22} height={22} />
-                        <span className={styls.name}>Sumanyu Sharma</span>
-                      </div>
-                      <div className={styls.wrap}>
-                        <span className={styls.tie}>Hamming AI</span>
-                        <span className={styls.time}>a day ago</span>
-                      </div>
-                    </div> */}
-                    <div className={styls.tags}>
-                      {item.category &&
-                        item.category.map((tag: string) => (
-                          <div className={styls.tag} key={tag}>
-                            {tag}
-                          </div>
-                        ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          {launchData.length === 0 && <NoData />}
+      <h1 className="text-3xl font-bold mb-4 text-[#222222]">Launch</h1>
+      <p className="text-base leading-10 text-[#555555]">The launchpad for Launch</p>
+      <input
+        type="text"
+        placeholder="Search for a Company"
+        className="p-2 border border-gray-300 rounded mb-4 w-full relative z-10 text-[#333333] outline-none focus:outline-none focus:border-customPurple"
+      />
+      {/* <div className="flex space-x-2 mb-4">
+        <span className="text-xs bg-customPurple text-white rounded-full px-2 py-1">
+          AI
+        </span>
+        <span className="text-xs bg-customPurple text-white rounded-full px-2 py-1">
+          B2B
+        </span>
+        <span className="text-xs bg-customPurple text-white rounded-full px-2 py-1">
+          Climate
+        </span>
+      </div> */}
+      {/* <div className="flex flex-col lg:flex-row lg:justify-between">
+        <div className="flex space-x-2">
+          <div className="w-[50%] lg:w-[152px]">
+            <Select
+              options={options}
+              onSelect={handleSelectChange}
+              value={selectedValue}
+              label="选择一个选项"
+            />
+          </div>
+          <div className="w-[50%] lg:w-[152px]">
+            <Select
+              options={options}
+              onSelect={handleSelectChange}
+              value={selectedValue}
+              label="选择一个选项"
+            />
+          </div>
         </div>
+
+        <div className="flex items-center mt-4 lg:mt-0">
+          <span className="text-xs mr-2 w-14">Sort By:</span>
+          <div className="w-[100%] lg:w-[152px]">
+            <Select
+              options={options}
+              onChange={handleSelectChange}
+              value={selectedValue}
+              label="选择一个选项"
+            />
+          </div>
+        </div>
+      </div> */}
+
+      <div className="grid grid-cols-1 gap-4 mt-8">
+        {list.length > 0 &&  list.map((card: any, index: number) => (
+          <Card
+            index={index}
+            row={card}
+            key={card.name}
+          />
+        ))}
+        {list.length == 0 && <NoFound title="No launch products" message="" />}
       </div>
     </div>
   );
 };
 
-export default Launch;
+export default Home;
