@@ -2,7 +2,8 @@
 import _ from 'loadsh'
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import AILogo from "@/images/logo.svg";
+import { useEffect, useRef, useState } from "react";
 import BarIcon from "@/images/bars.svg";
 import { usePathname, useRouter } from "next/navigation";
 import Select from "../Select";
@@ -13,8 +14,6 @@ import {
   AUTH0_LOGOUT_URL,
   AUTH0_SIGNUP_URL,
 } from "@/utils/constant";
-import WorkflosLogo from '@/assets/images/logo.svg'
-
 
 const defaultNavList = [
   { title: "Search", id: "category-section", path: "/" },
@@ -22,6 +21,12 @@ const defaultNavList = [
   { title: "Trending", id: "speakers-sectionid", path: "/trending" },
   { title: "Launch", id: "partners-section", path: "/launch" },
   { title: "About", id: "partners-section", path: "/about" },
+];
+
+const options = [
+  { value: "1", label: "Option 1" },
+  { value: "2", label: "Option 2" },
+  { value: "3", label: "Option 3" },
 ];
 
 const Header = () => {
@@ -76,7 +81,7 @@ const Header = () => {
         <nav className="w-full flex items-center justify-between relative px-[24px] xl:px-[56px] 2xl:px-[90px]">
           <div className="w-full flex items-center h-[34px] justify-between">
             <Link href="/" className="h-[34px] w-[165px]">
-              <Image src={WorkflosLogo} alt="logo" width={165} height={34} />
+              <Image src={AILogo} alt="logo" width={165} height={34} />
             </Link>
 
             <button
@@ -98,9 +103,11 @@ const Header = () => {
 
             <div
               id="navigation"
-              className={`absolute z-100 lg:static top-full left-0 w-full lg:w-auto flex-col lg:flex-row lg:flex mt-[22px] lg:mt-0 2xl:pl-[80px] xl:pl-[40px] lg:pl-[16px] 2xl:pr-[80px] xl:pr-[40px] lg:pr-[16px] ${isnavbarToggler ? "flex" : "hidden"
-                } transition-transform transform ${isnavbarToggler ? "translate-y-0" : "-translate-y-full"
-                } lg:translate-y-0 bg-white`}
+              className={`absolute z-100 lg:static top-full left-0 w-full lg:w-auto flex-col lg:flex-row lg:flex mt-[22px] lg:mt-0 2xl:pl-[80px] xl:pl-[40px] lg:pl-[16px] 2xl:pr-[80px] xl:pr-[40px] lg:pr-[16px] ${
+                isnavbarToggler ? "flex" : "hidden"
+              } transition-transform transform ${
+                isnavbarToggler ? "translate-y-0" : "-translate-y-full"
+              } lg:translate-y-0 bg-white`}
             >
               <ul className="flex flex-col lg:flex-row w-full px-[24px] lg:px-0 pb-4 lg:pb-0">
                 {navList.map((item, index) => (
