@@ -1,5 +1,5 @@
 import Image from "next/image";
-import EmptyImage from "@/images/empty-list.svg";
+import EmptyImage from "@/assets/images/empty-list.svg";
 
 const NoFound = (props: { title: string; message: string }) => {
   return (

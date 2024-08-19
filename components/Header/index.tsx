@@ -13,14 +13,14 @@ import {
   AUTH0_LOGOUT_URL,
   AUTH0_SIGNUP_URL,
 } from "@/utils/constant";
-import WorkflosLogo from '@/assets/images/logo.svg'
+import WorkflosLogo from '@/assets/images/workflos.svg'
 
 
 const defaultNavList = [
-  { title: "Search", id: "category-section", path: "/" },
-  { title: "Following", id: "agenda-section", path: "/following" },
-  { title: "Trending", id: "speakers-sectionid", path: "/trending" },
-  { title: "Launch", id: "partners-section", path: "/launch" },
+  { title: "Category", id: "category-section", path: "/category" },
+  { title: "Trending", id: "agenda-section", path: "/trending" },
+  { title: "Launch", id: "speakers-sectionid", path: "/launch" },
+  { title: "Blog", id: "partners-section", path: "/blog" },
   { title: "About", id: "partners-section", path: "/about" },
 ];
 
@@ -73,10 +73,10 @@ const Header = () => {
   return (
     <header className="fixed z-50 top-0 right-0 left-0 flex items-center justify-between w-full h-[86px] bg-white">
       <div className="w-full">
-        <nav className="w-full flex items-center justify-between relative px-[24px] xl:px-[56px] 2xl:px-[90px]">
+        <nav className="w-full flex items-center justify-between relative px-[24px] xl:px-[50px] 2xl:px-[90px]">
           <div className="w-full flex items-center h-[34px] justify-between">
-            <Link href="/" className="h-[34px] w-[165px]">
-              <Image src={WorkflosLogo} alt="logo" width={165} height={34} />
+            <Link href="/" className="h-[34px] w-[226px]">
+              <Image src={WorkflosLogo} alt="logo" width={226} height={34} />
             </Link>
 
             <button
@@ -162,12 +162,9 @@ const Header = () => {
           </div>
 
           <div className="w-auto lg:w-full flex justify-end">
-            {currentPathName != "/" && (
-              <div className="hidden w-[180px] md:w-[260px] lg:w-[200px] xl:w-[200px] 2xl:w-[290px] sm:block absolute lg:static sm:left-[50%] sm:translate-x-[-50%] sm:top-[50%] sm:translate-y-[-50%] lg:translate-y-0 lg:translate-x-0 lg:mx-[20px] xl:mx-[40px] 2xl:mx-[60px]">
-                <Select />
-              </div>
-            )}
-
+            <div className="hidden w-[180px] md:w-[260px] lg:w-[200px] xl:w-[200px] 2xl:w-[290px] sm:block absolute lg:static sm:left-[50%] sm:translate-x-[-50%] sm:top-[50%] sm:translate-y-[-50%] lg:translate-y-0 lg:translate-x-0 lg:mx-[20px] xl:mx-[40px] 2xl:mx-[60px]">
+              <Select />
+            </div>
             {!user?.uid && (
               <div className="hidden lg:flex items-center">
                 <button

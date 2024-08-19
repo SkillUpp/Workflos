@@ -1,8 +1,8 @@
+import { BASE_URL } from './constant'
 import axios, { AxiosError, AxiosResponse } from "axios";
 
 const api = axios.create({
-  // baseURL: "https://api-dev.skillupp.xyz",
-  baseURL: "https://api-uat.aitracker.ai",
+  baseURL: BASE_URL,
   timeout: 50000,
   withCredentials: true,
 });

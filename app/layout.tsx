@@ -8,7 +8,7 @@ import { AntdRegistry } from "@ant-design/nextjs-registry";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "AI Tracker",
+  title: "Workflos",
   description: "",
 };
 
@@ -20,24 +20,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>AI Tracker</title>
+        <title>Workflos</title>
         <meta
           name="description"
           content=""
         />
         <meta name="color-scheme" content="light" />
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y015EE44QT"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-Y015EE44QT');
-            `,
-          }}
-        />
       </head>
       <body className={inter.className}>
         <Headers />
