@@ -15,6 +15,8 @@ const config: Config = {
         search: "url('../assets/images/search.svg')",
         arrow: "url('../assets/images/arrow.svg')",
         "search-bg": "url('../assets/images/search_bg.png')",
+        compare: "url('../assets/images/git-compare.svg')",
+        share2: "url('../assets/images/s-icon.svg')",
       },
       translate: {
         "-x": "-50%",

@@ -48,6 +48,7 @@
   text-decoration-color: #9747ff
 }
 
+
 .ant-select {
   width: 100% !important;
   height: 100% !important;
@@ -82,6 +83,19 @@
   text-align: center;
   color: #9747ff;
   font-size: 24px !important;
+}
+
+.common-select .ant-select .ant-select-selector .ant-select-selection-item  {
+  font-size: 14px !important;
+  text-align: left;
+}
+
+.common-select .ant-select input{
+  border-radius: 8px !important;
+}
+
+.common-select .ant-select .ant-select-selector {
+  border-radius: 8px !important;
 }
 
 @layer utilities {
