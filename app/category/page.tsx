@@ -169,7 +169,7 @@ const Category = () => {
 					<div className="flex flex-col min-h-[300px]">
 						{softworeList.map((item: any) => (
 							<div
-								className="relative mt-[16px] p-[12px_12px_0_12px] bg-white rounded-[12px] transition-all duration-200 cursor-pointer hover:shadow-lg hover:scale-[1.02]"
+								className="relative mt-[24px] p-[12px_12px_0_12px] bg-white rounded-[12px] transition-all duration-200 cursor-pointer hover:shadow-lg hover:scale-[1.02]"
 								key={item.name}
 								onClick={() => handleJump(`/product/${item.name}`)}
 							>
