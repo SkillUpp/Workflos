@@ -117,12 +117,12 @@ const ProductDetail = (props: any) => {
       const res = await productDetail(decodeURIComponent(id));
       if (res.data) {
         const data = res.data;
-        data.description = data.description.replace(/\\n/g, "<br/>")
-        data.description = data.description.replace(/\\r/g, " ")
-        data.keyBenefits = data.keyBenefits.replace(/\\n/g, "<br/>")
-        data.keyBenefits = data.keyBenefits.replace(/\\r/g, " ")
-        data.introduce = data.introduce.replace(/\\u0026/g, '&');
-        data.keyBenefits = data.keyBenefits.replace(/\\u0026/g, '&');
+        // data.description = data.description.replace(/\\n/g, "<br/>")
+        // data.description = data.description.replace(/\\r/g, " ")
+        // data.keyBenefits = data.keyBenefits.replace(/\\n/g, "<br/>")
+        // data.keyBenefits = data.keyBenefits.replace(/\\r/g, " ")
+        // data.introduce = data.introduce.replace(/\\u0026/g, '&');
+        // data.keyBenefits = data.keyBenefits.replace(/\\u0026/g, '&');
         setLoading(false);
         const { commonFeatures, supportFeatures } = res.data;
         setProductInfo(data);
