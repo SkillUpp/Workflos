@@ -47,17 +47,6 @@ const Home: React.FC = () => {
 
   return (
     <div className="mt-[86px] pt-[60px] px-6 lg:px-6 xl:px-[56px] 2xl:px-[200px]  bg-gray-100 min-h-screen p-8">
-      <div className="absolute inset-0 z-0 left-[80%] translate-x-[-50%] top-[90px]">
-        <Image
-          src={Bg}
-          alt="Background"
-          objectFit="cover"
-          quality={100}
-          width={500}
-          height={500}
-          className="rounded-md"
-        />
-      </div>
       <h1 className="text-3xl font-bold mb-4 text-[#222222]">Launch</h1>
       <p className="text-base leading-10 text-[#555555]">The launchpad for Launch</p>
       <input

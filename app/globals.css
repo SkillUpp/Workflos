@@ -216,3 +216,9 @@ body {
   background-size: cover;
   animation: spin 2s linear infinite;
 }
+
+
+.marked-data  img {
+  width: 100%;
+  height: 100%;
+}
