@@ -1,36 +1,37 @@
+"use server";
 import { productDetail, productList } from "@/api/product";
 import ProductDetailComp from "../detail/page";
-
+import { cookies } from "next/headers";
 
 export async function generateStaticParams() {
-	const res = await productList({
-		limit: 50,
-		page: 1,
-	})
-	const list = res.data.list;
-	return list.map((path: any) => ({ id: path.name }));
+  const res = await productList({
+    limit: 50,
+    page: 1,
+  });
+  const list = res.data.list;
+  return list.map((path: any) => ({ id: path.name }));
 }
 
 type Params = {
-	id: string;
+  id: string;
 };
 
 type Props = {
-	params: Params;
+  params: Params;
 };
 
 /**
  * 获取产品信息
- * @param id 
- * @returns 
+ * @param id
+ * @returns
  */
 async function getProductData(id: string) {
-	const res = await productDetail(id);
-	return res
+  // 使用 cookie 发起请求
+  const res = await productDetail(decodeURIComponent(id));
+  return res;
 }
 
-
 export default async function PostPage({ params }: Props) {
-	const res = await getProductData(params.id)
-	return <ProductDetailComp info={res} />;
+  const res = await getProductData(params.id);
+  return <ProductDetailComp info={res.data} />;
 }
