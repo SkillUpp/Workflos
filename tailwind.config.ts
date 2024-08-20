@@ -18,6 +18,10 @@ const config: Config = {
         compare: "url('../assets/images/git-compare.svg')",
         share2: "url('../assets/images/s-icon.svg')",
         star: "url('../assets/images/star.svg')",
+        check: "url('../assets/images/check.svg')",
+        users: "url('../assets/images/users.svg')",
+        signal: "url('../assets/images/signal.svg')",
+        calendar: "url('../assets/images/calendar.svg')",
       },
       translate: {
         "-x": "-50%",
