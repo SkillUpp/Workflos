@@ -22,6 +22,7 @@ const config: Config = {
         users: "url('../assets/images/users.svg')",
         signal: "url('../assets/images/signal.svg')",
         calendar: "url('../assets/images/calendar.svg')",
+        close1: "url('../assets/images/close1.svg')",
       },
       translate: {
         "-x": "-50%",
