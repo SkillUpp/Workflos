@@ -43,7 +43,7 @@ const Select = () => {
     setFilteredOptions([]);
     const res = await productList(params);
     if (res.data) {
-      console.log(res.data.list, 'list');
+      console.log(res.data.list, "list");
 
       setFilteredOptions(res.data.list);
       setLoading(false);
@@ -121,7 +121,7 @@ const Select = () => {
       <div className="inline-block relative w-full">
         <div>
           <input
-            className="placeholder-ellipsis w-full pl-4 pr-8 py-2 rounded-full border border-r border-[#9747FF] focus:outline-none focus:border-[#9747FF] text-[#333333]"
+            className="placeholder-ellipsis w-full pl-4 pr-8 py-2 rounded-2xl border border-r border-[#9747FF] focus:outline-none focus:border-[#9747FF] text-[#333333]"
             type="text"
             placeholder="Search for any company"
             value={selectedOption ? selectedOption : ""}
@@ -138,7 +138,7 @@ const Select = () => {
           />
         </div>
         {isOpen && (
-          <div className="absolute h-[246px] z-10 mt-2 w-full rounded-lg shadow-lg bg-white border border-gray-300">
+          <div className="absolute h-[250px] z-10 mt-2 w-full rounded-lg shadow-lg bg-white border border-gray-300">
             {loading && (
               <div className="px-4 py-2 text-gray-500 flex items-center justify-center h-[246px]">
                 <Image
@@ -163,14 +163,16 @@ const Select = () => {
                   className="px-4 py-2 cursor-pointer hover:bg-gray-100 flex items-center"
                   onClick={() => handleSelectOption(option)}
                 >
-                  {option.logo && (
-                    <Image
-                      src={option.logo}
-                      alt=""
-                      width={32}
-                      height={32}
-                      className="rounded-md"
-                    />
+                  {option.photo && (
+                    <div className="rounded-md w-8 h-8 flex items-center justify-center">
+                      <Image
+                        src={option.photo}
+                        alt=""
+                        width={28}
+                        height={28}
+                        className="rounded-md"
+                      />
+                    </div>
                   )}
                   <span className="ml-4 font-bold text-md overflow-hidden text-ellipsis whitespace-nowrap text-[#333333]">
                     {option.name}
