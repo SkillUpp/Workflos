@@ -23,6 +23,7 @@ const config: Config = {
         signal: "url('../assets/images/signal.svg')",
         calendar: "url('../assets/images/calendar.svg')",
         close1: "url('../assets/images/close1.svg')",
+        closeCircle: "url('../assets/images/x-circle.svg')",
       },
       translate: {
         "-x": "-50%",

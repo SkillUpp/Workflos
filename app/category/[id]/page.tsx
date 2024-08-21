@@ -21,7 +21,6 @@ export const generateStaticParams = async () => {
 async function getProductData(id: string) {
   // 使用 cookie 发起请求
   const res = await productDetail(id);
-  console.log(res, 'res')
   return res;
 }
 
@@ -34,18 +33,12 @@ type Props = {
 };
 const LearnDetail = async ({ params }: Props) => {
   const ids = decodeURIComponent(params.id).split("&"); 
-  console.log(ids, 'ids');
-  
   const productDataList: any[] = [];
   const productDataPromises = ids.map((id) => getProductData(id));
   const productDataResults = await Promise.all(productDataPromises);
-  console.log(productDataResults, 'productDataResults');
-  
   productDataResults.forEach((result) => {
     productDataList.push(result.data);
   });
-  console.log(productDataList, 'productDataList');
-  
   return <ProductCompare list={productDataList} />;
 };
 
