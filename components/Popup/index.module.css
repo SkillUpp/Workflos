@@ -71,7 +71,7 @@
   background-color: transparent;
   border: none;
   padding: 0;
-  background-image: url('../../assets/svg/close-popup2.svg');
+  background-image: url('../../assets/images/close-popup2.svg');
   background-repeat: no-repeat;
   background-position: center center;
   cursor: pointer;
@@ -104,18 +104,6 @@
     -webkit-border-radius: 10px;
     background-repeat: no-repeat;
     background-position: left top;
-  }
-  .popupMain .popupHolder.error {
-    background-image: url('../../assets/svg/background02.svg');
-  }
-  .popupMain .popupHolder.info {
-    background-image: url('../../assets/svg/info.svg');
-  }
-  .popupMain .popupHolder.success {
-    background-image: url('../../assets/svg/success.svg');
-  }
-  .popupMain .popupHolder.warning {
-    background-image: url('../../assets/svg/warning.svg');
   }
   .popupMain .popupHolder .popupBlock02 h5 {
     font-size: 20px;
@@ -163,9 +151,6 @@
     background-color: transparent;
     border: none;
     padding: 0;
-    background-image: url('../../assets/svg/close-popup2.svg');
-    background-repeat: no-repeat;
-    background-position: center center;
     cursor: pointer;
   }
 }

@@ -1,3 +1,4 @@
+import { marked } from "marked";
 import { AUTH0_LOGIN_URL } from "./constant";
 import { showModal } from "./modal";
 
@@ -27,4 +28,12 @@ export const LoginDialog = (message: string) => {
     "Cancel",
     "Confirm"
   );
+};
+
+
+
+export const sanitizeDescription = (description: string) => {
+  if (!description) return "";
+  const sanitizedDescription = description.replace(/\r\n/g, "<br>");
+  return marked(sanitizedDescription);
 };

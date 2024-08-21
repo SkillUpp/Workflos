@@ -11,6 +11,7 @@ import { productDetail } from "@/api/product";
 import LoadingContext from "@/components/LoadingContext";
 import { marked } from "marked";
 import ScrollableTabs from "@/components/ScrollableTabs";
+import { sanitizeDescription } from "@/utils/utils";
 
 const defaultCompareMenu = [
   {
@@ -154,7 +155,6 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
       result.keyBenefits = result?.keyBenefits.replace(/\\r/g, " ");
       result.keyBenefits = result?.keyBenefits.replace(/\\u0026/g, "&");
     }
-
     const { commonFeatures, supportFeatures } = result;
     setFeatures(
       updateCommonFeaturesWithSupport(commonFeatures, supportFeatures)
