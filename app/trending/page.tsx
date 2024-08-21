@@ -75,7 +75,7 @@ const Category = () => {
         const list = res.data.list;
         setLoading(false);
         setTotalCount(res.data.totalCount);
-        list.forEach(item => {
+        list.forEach((item: { description: string; introduce: string; }) => {
           item.description = item.description.replace(/\\n/g, " ")
           item.description = item.description.replace(/\\r/g, " ")
           item.description = item.description.replace(/\\u0026/g, '&');
@@ -92,12 +92,6 @@ const Category = () => {
     getSoftworeList("", page);
   };
 
-  const handleCompare = (event, item: any) => {
-    event.stopPropagation();
-    setCurrentItem(item);
-    // toggleCompareModal();
-    setIsCompareModalOpen(true);
-  };
 
   const handleJump = (path: string) => {
     route.push(path);

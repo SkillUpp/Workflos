@@ -2,16 +2,9 @@ import { productDetail } from "@/api/product";
 import ProductCompare from "../ProductCompare";
 
 export const generateStaticParams = async () => {
-  // const { compareStr } = useStore();
-  const paths = [
-    { id: "ClickUp&name" },
-    { id: "name&ClickUp" },
-    { id: "ClickUp&Slack" },
-    { id: "Slack&ClickUp" },
-  ];
+  const paths = [];
   return paths;
 };
-
 
 /**
  * 获取产品信息
@@ -32,7 +25,7 @@ type Props = {
   params: Params;
 };
 const LearnDetail = async ({ params }: Props) => {
-  const ids = decodeURIComponent(params.id).split("&"); 
+  const ids = decodeURIComponent(params.id).split("&");
   const productDataList: any[] = [];
   const productDataPromises = ids.map((id) => getProductData(id));
   const productDataResults = await Promise.all(productDataPromises);

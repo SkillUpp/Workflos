@@ -1,11 +1,10 @@
 "use server";
 import { productDetail, productList } from "@/api/product";
-import ProductDetailComp from "../detail/page";
-import { cookies } from "next/headers";
+import ProductDetailComp from "../detail";
 
 export async function generateStaticParams() {
   const res = await productList({
-    limit: 50,
+    limit: 10,
     page: 1,
   });
   const list = res.data.list;

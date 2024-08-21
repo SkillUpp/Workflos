@@ -74,7 +74,6 @@ interface IProductDetailCompProps {
   info: any;
 }
 
-
 const getDeviceType = () => {
   const isMobile = window.matchMedia("(max-width: 768px)").matches;
   return isMobile ? "mobile" : "desktop";
@@ -102,8 +101,9 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
       const rect = el.getBoundingClientRect();
       const defaultHeight = getDeviceType() === "mobile" ? 400 : 320;
       const targetHeight = getDeviceType() === "mobile" ? 200 : 166;
-      const targetOffset = window.pageYOffset == 0 ? defaultHeight : targetHeight;
-      const targetTop = (rect.top + window.pageYOffset) - targetOffset;
+      const targetOffset =
+        window.pageYOffset == 0 ? defaultHeight : targetHeight;
+      const targetTop = rect.top + window.pageYOffset - targetOffset;
       const scrollToTop = Math.max(targetTop, 0);
       window.scroll({
         top: scrollToTop,
@@ -118,14 +118,16 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
     }
   };
 
-
   /**
    * 数据设置
    * @param commonFeatures
    * @param support
    * @returns
    */
-  const updateCommonFeaturesWithSupport = (commonFeatures: any, supportFeatures: any) => {
+  const updateCommonFeaturesWithSupport = (
+    commonFeatures: any,
+    supportFeatures: any
+  ) => {
     const supportSlugs = new Set(
       supportFeatures.map((feature: any) => feature.slug)
     );
@@ -140,12 +142,19 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
    */
   const initData = () => {
     const result = props.info;
-    result.description = result.description.replace(/\\n/g, "<br/>");
-    result.description = result.description.replace(/\\r/g, " ");
-    result.keyBenefits = result.keyBenefits.replace(/\\n/g, "<br/>");
-    result.keyBenefits = result.keyBenefits.replace(/\\r/g, " ");
-    result.introduce = result.introduce.replace(/\\u0026/g, "&");
-    result.keyBenefits = result.keyBenefits.replace(/\\u0026/g, "&");
+    if (result?.description) {
+      result.description = result?.description.replace(/\\n/g, "<br/>");
+      result.description = result?.description.replace(/\\r/g, " ");
+    }
+    if (result?.introduce) {
+      result.introduce = result?.introduce.replace(/\\u0026/g, "&");
+    }
+    if (result?.keyBenefits) {
+      result.keyBenefits = result?.keyBenefits.replace(/\\n/g, "<br/>");
+      result.keyBenefits = result?.keyBenefits.replace(/\\r/g, " ");
+      result.keyBenefits = result?.keyBenefits.replace(/\\u0026/g, "&");
+    }
+
     const { commonFeatures, supportFeatures } = result;
     setFeatures(
       updateCommonFeaturesWithSupport(commonFeatures, supportFeatures)
@@ -207,11 +216,17 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
 
   return (
     <div className="mt-20 bg-gray-200 overflow-x-hidden">
-      <div id="productHeader" className={`w-full px-6 2xl:pl-[350px] 2xl:pr-[200px] bg-white lg:py-6 lg:px-6 transition-all duration-300 shadow-lg ${isScrolled
-        ? "h-[60px] fixed top-[86px] left-0 right-0 z-10 pt-[10px] pb-[10px] md:pt-[10px] md:pb-[10px] justify-center"
-        : "md:h-auto py-[24px] md:py-[42px]"
-        }`}>
-        <div className={`flex items-center ${isScrolled ? "h-full" : "h-[46px]"}`}>
+      <div
+        id="productHeader"
+        className={`w-full px-6 2xl:pl-[350px] 2xl:pr-[200px] bg-white lg:py-6 lg:px-6 transition-all duration-300 shadow-lg ${
+          isScrolled
+            ? "h-[60px] fixed top-[86px] left-0 right-0 z-10 pt-[10px] pb-[10px] md:pt-[10px] md:pb-[10px] justify-center"
+            : "md:h-auto py-[24px] md:py-[42px]"
+        }`}
+      >
+        <div
+          className={`flex items-center ${isScrolled ? "h-full" : "h-[46px]"}`}
+        >
           <div className="flex items-center">
             {productInfo?.photo && (
               <Image
@@ -267,27 +282,36 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
           </>
         )}
       </div>
-      <div className={`md:hidden w-full bg-white ${isScrolled ? 'fixed top-[146px] left-0 right-0 z-10' : ""}`}>
-        <ScrollableTabs tabs={compareMenu} onTabClick={(tab: { htmlId: string }) => handleClick(tab.htmlId)} />
+      <div
+        className={`md:hidden w-full bg-white ${
+          isScrolled ? "fixed top-[146px] left-0 right-0 z-10" : ""
+        }`}
+      >
+        <ScrollableTabs
+          tabs={compareMenu}
+          onTabClick={(tab: { htmlId: string }) => handleClick(tab.htmlId)}
+        />
       </div>
 
       <div
         className={`reative flex flex-col md:flex-row px-6 xl:px-[56px] 2xl:pl-56 2xl:pr-[200px] pt-6 z-10`}
       >
-
         <div className={`flex-shrink-0 w-full mr-6 md:w-32`}>
           <div
-            className={`hidden md:block fixed z-10 ${isScrolled ? "top-[144px] md:top-[160px]" : ""}`}
+            className={`hidden md:block fixed z-10 ${
+              isScrolled ? "top-[144px] md:top-[160px]" : ""
+            }`}
           >
             <div className="relative flex flex-row md:flex-col items-end text-right">
               <div className="absolute h-full w-px bg-purple-600 right-0"></div>
               {compareMenu.map((item) => (
                 <div
                   key={item.id}
-                  className={`animation-all-3 cursor-pointer flex items-center justify-end h-8 pr-4 text-[#333333] ${item.active
-                    ? "font-bold bg-customPurple w-[130px] whitespace-nowrap text-white rounded-l-xl"
-                    : ""
-                    }`}
+                  className={`animation-all-3 cursor-pointer flex items-center justify-end h-8 pr-4 text-[#333333] ${
+                    item.active
+                      ? "font-bold bg-customPurple w-[130px] whitespace-nowrap text-white rounded-l-xl"
+                      : ""
+                  }`}
                   onClick={() => handleClick(item.htmlId)}
                 >
                   <span className="text-sm">{item.name}</span>
@@ -297,28 +321,33 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
           </div>
         </div>
 
-        <div
-          className={`flex-grow overflow-y-auto md:ml-[100px]`}
-        >
+        <div className={`flex-grow overflow-y-auto md:ml-[100px]`}>
           <div
             id="overview"
             className="mb-4 bg-white box-border px-5 py-5 rounded-lg"
           >
             <h3 className="text-xl font-bold mb-2 text-[#222]">Overview</h3>
             {productInfo?.description && (
-              <p className="text-[16px] leading-[1.5] text-[#333333]"
+              <p
+                className="text-[16px] leading-[1.5] text-[#333333]"
                 dangerouslySetInnerHTML={{
                   __html: marked(productInfo?.description),
-                }}></p>
+                }}
+              ></p>
             )}
 
             <div className="mt-6 flex flex-col md:flex-row md:justify-between">
               <div className="flex flex-col w-full md:w-1/2">
-                <h4 className="text-[18px] leading-[1.2] text-[#222] font-bold">Typical customers</h4>
+                <h4 className="text-[18px] leading-[1.2] text-[#222] font-bold">
+                  Typical customers
+                </h4>
                 <ul className="mt-4 pr-6">
                   {productInfo?.typicalCustomers &&
                     productInfo.typicalCustomers.map((item: any) => (
-                      <li className="flex items-center justify-between pt-1" key={item.slug}>
+                      <li
+                        className="flex items-center justify-between pt-1"
+                        key={item.slug}
+                      >
                         <span>{item.name}</span>
                         <i className="w-[20px] h-[20px] ml-[8px] bg-check bg-contain bg-no-repeat bg-center"></i>
                       </li>
@@ -326,11 +355,16 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
                 </ul>
               </div>
               <div className="flex flex-col w-full md:w-1/2">
-                <h4 className="text-[18px] leading-[1.2] text-[#222] font-bold mt-4 md:mt-0">Platforms supported</h4>
+                <h4 className="text-[18px] leading-[1.2] text-[#222] font-bold mt-4 md:mt-0">
+                  Platforms supported
+                </h4>
                 <ul className="mt-4 pr-6">
                   {productInfo?.platformsSupported &&
                     productInfo.platformsSupported.map((item: any) => (
-                      <li className="flex items-center justify-between pt-1" key={item.slug}>
+                      <li
+                        className="flex items-center justify-between pt-1"
+                        key={item.slug}
+                      >
                         <span>{item.name}</span>
                         <i className="w-[20px] h-[20px] ml-[8px] bg-check bg-contain bg-no-repeat bg-center"></i>
                       </li>
@@ -340,20 +374,26 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
             </div>
 
             <div className="mt-6 justify-between">
-              <h4 className="text-[18px] leading-[1.2] text-[#222] font-bold mt-4">Key benefits of using {productInfo?.name}</h4>
-              <p className="text-[16px] leading-[1.5] text-[#333333] mt-4" dangerouslySetInnerHTML={{
-                __html: productInfo?.keyBenefits,
-              }}></p>
+              <h4 className="text-[18px] leading-[1.2] text-[#222] font-bold mt-4">
+                Key benefits of using {productInfo?.name}
+              </h4>
+              <p
+                className="text-[16px] leading-[1.5] text-[#333333] mt-4"
+                dangerouslySetInnerHTML={{
+                  __html: productInfo?.keyBenefits,
+                }}
+              ></p>
             </div>
           </div>
-
 
           <div
             id="news"
             className="mb-4 bg-white box-border px-5 py-5 rounded-lg"
           >
             <h3 className="text-xl font-bold mb-2 text-[#222]">News</h3>
-            <p className="text-[16px] leading-[1.5] text-[#333333]">Comming Soon</p>
+            <p className="text-[16px] leading-[1.5] text-[#333333]">
+              Comming Soon
+            </p>
           </div>
 
           <div
@@ -369,13 +409,20 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
                 <div className="flex justify-start items-center mt-4">
                   <i className="bg-star bg-contain bg-no-repeat bg-center w-[28px] h-[28px]"></i>
                   <div className="flex items-baseline ml-4">
-                    <span className="text-[28px] leading-[1.2] text-[#222] font-medium">{Math.round(productInfo?.valueForMoney || 0).toFixed(1)}</span>
-                    <span className="text-[16px] leading-[1.2] text-[#222] font-normal"> / {productInfo?.rateAvg}</span>
+                    <span className="text-[28px] leading-[1.2] text-[#222] font-medium">
+                      {Math.round(productInfo?.valueForMoney || 0).toFixed(1)}
+                    </span>
+                    <span className="text-[16px] leading-[1.2] text-[#222] font-normal">
+                      {" "}
+                      / {productInfo?.rateAvg}
+                    </span>
                   </div>
                 </div>
                 <div className="flex justify-start items-center mt-4">
                   <i className="bg-users bg-contain bg-no-repeat bg-center w-[28px] h-[28px]"></i>
-                  <span className="text-[22px] leading-[1.2] text-[#222222] ml-4 font-medium">{productInfo?.totalRateUser}</span>
+                  <span className="text-[22px] leading-[1.2] text-[#222222] ml-4 font-medium">
+                    {productInfo?.totalRateUser}
+                  </span>
                 </div>
               </div>
 
@@ -384,16 +431,24 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
                   Price starts from
                 </h4>
                 <div className="flex justify-start items-center mt-4">
-                  <span className="text-[24px] leading-[1.2] text-[#9747ff] font-medium">{productInfo?.pricing?.currency_symbol}</span>
-                  <span className="text-[28px] leading-[1.2] text-[#222222] ml-2 font-medium">{productInfo?.pricing?.amount}</span>
+                  <span className="text-[24px] leading-[1.2] text-[#9747ff] font-medium">
+                    {productInfo?.pricing?.currency_symbol}
+                  </span>
+                  <span className="text-[28px] leading-[1.2] text-[#222222] ml-2 font-medium">
+                    {productInfo?.pricing?.amount}
+                  </span>
                 </div>
                 <div className="flex justify-start items-center mt-4">
                   <i className="bg-calendar bg-contain bg-no-repeat bg-center w-[20px] h-[20px]"></i>
-                  <span className="text-[18px] leading-[1.2] text-[#222222] ml-2">Pre {productInfo?.pricing?.periodicity}</span>
+                  <span className="text-[18px] leading-[1.2] text-[#222222] ml-2">
+                    Pre {productInfo?.pricing?.periodicity}
+                  </span>
                 </div>
                 <div className="flex justify-start items-center mt-4">
                   <i className="bg-signal bg-contain bg-no-repeat bg-center w-[20px] h-[20px]"></i>
-                  <span className="text-[18px] leading-[1.2] text-[#222222] ml-2">{productInfo?.pricing?.pricing_model}</span>
+                  <span className="text-[18px] leading-[1.2] text-[#222222] ml-2">
+                    {productInfo?.pricing?.pricing_model}
+                  </span>
                 </div>
               </div>
               <div className="flex flex-col">
@@ -403,7 +458,10 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
                 <ul>
                   {productInfo?.pricing?.categories &&
                     productInfo?.pricing?.categories.map((item: any) => (
-                      <li className="flex items-center justify-between pt-1" key={item}>
+                      <li
+                        className="flex items-center justify-between pt-1"
+                        key={item}
+                      >
                         <span>{item}</span>
                         <i className="w-[20px] h-[20px] ml-[8px] bg-check bg-contain bg-no-repeat bg-center"></i>
                       </li>
@@ -413,7 +471,6 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
             </div>
           </div>
 
-
           <div
             id="features"
             className="mb-4 bg-white box-border px-5 py-5 rounded-lg"
@@ -421,46 +478,76 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
             <h3 className="text-xl font-bold mb-2 text-[#222]">Features</h3>
             <div className="mt-4">
               <div className="flex w-full justify-between items-center">
-                <span className="text-[18px] leading-[1.2] text-[#111] font-bold">{productInfo?.name} features</span>
-                <span className="text-[18px] leading-[1.2] text-[#111] font-bold">{productInfo?.supportFeatures?.length + 1}</span>
+                <span className="text-[18px] leading-[1.2] text-[#111] font-bold">
+                  {productInfo?.name} features
+                </span>
+                <span className="text-[18px] leading-[1.2] text-[#111] font-bold">
+                  {productInfo?.supportFeatures?.length + 1}
+                </span>
               </div>
               <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
                 {productInfo?.supportFeatures &&
-                  productInfo.supportFeatures.slice(0, supportSlice).map((item: any) => (
-                    <li className="flex items-center justify-between" key={item.slug}>
-                      <span className="block text-[16px] leading-[1.2] text-[#222222] font-medium truncate-lines-1">{item.name.replace(/\\u0026/g, '&')}</span>
-                      <i className="w-[20px] h-[20px] ml-[8px] bg-check bg-contain bg-no-repeat bg-center"></i>
-                    </li>
-                  ))}
+                  productInfo.supportFeatures
+                    .slice(0, supportSlice)
+                    .map((item: any) => (
+                      <li
+                        className="flex items-center justify-between"
+                        key={item.slug}
+                      >
+                        <span className="block text-[16px] leading-[1.2] text-[#222222] font-medium truncate-lines-1">
+                          {item.name.replace(/\\u0026/g, "&")}
+                        </span>
+                        <i className="w-[20px] h-[20px] ml-[8px] bg-check bg-contain bg-no-repeat bg-center"></i>
+                      </li>
+                    ))}
               </ul>
               {productInfo?.supportFeatures?.length > 10 && (
-                <button className="flex justify-center items-center mt-8 w-[200px] mx-auto border border-[#9747ff] h-8 rounded-8 hover:bg-[#9747ff] hover:text-white"
+                <button
+                  className="flex justify-center items-center mt-8 w-[200px] mx-auto border border-[#9747ff] h-8 rounded-8 hover:bg-[#9747ff] hover:text-white"
                   onClick={() => {
-                    setSupportSlice(supportSlice == 10 ? productInfo?.supportFeatures.length : 10)
-                  }}>
-                  {supportSlice === 10 ? 'Expand list' : 'Collapse list'}
+                    setSupportSlice(
+                      supportSlice == 10
+                        ? productInfo?.supportFeatures.length
+                        : 10
+                    );
+                  }}
+                >
+                  {supportSlice === 10 ? "Expand list" : "Collapse list"}
                 </button>
               )}
             </div>
 
             <div className="mt-8">
               <div className="flex w-full justify-between items-center">
-                <span className="text-[18px] leading-[1.2] text-[#111] font-bold">Common features</span>
-                <span className="text-[18px] leading-[1.2] text-[#111] font-bold">{features?.length + 1}</span>
+                <span className="text-[18px] leading-[1.2] text-[#111] font-bold">
+                  Common features
+                </span>
+                <span className="text-[18px] leading-[1.2] text-[#111] font-bold">
+                  {features?.length + 1}
+                </span>
               </div>
               <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
                 {features &&
                   features.slice(0, featureSlice).map((item: any) => (
-                    <li className="flex items-center justify-between" key={item.slug}>
-                      <span className="block text-[16px] leading-[1.2] text-[#222222] font-medium truncate-lines-1">{item.name.replace(/\\u0026/g, '&')}</span>
+                    <li
+                      className="flex items-center justify-between"
+                      key={item.slug}
+                    >
+                      <span className="block text-[16px] leading-[1.2] text-[#222222] font-medium truncate-lines-1">
+                        {item.name.replace(/\\u0026/g, "&")}
+                      </span>
                       <i className="w-[20px] h-[20px] ml-[8px] bg-check bg-contain bg-no-repeat bg-center"></i>
                     </li>
                   ))}
               </ul>
               {features?.length > 10 && (
-                <button className="flex justify-center items-center mt-8 w-[200px] mx-auto border border-[#9747ff] h-8 rounded-8 hover:bg-[#9747ff] hover:text-white"
-                  onClick={() => setFeatureSlice(featureSlice == 10 ? features.length : 10)}>
-                  {supportSlice === 10 ? 'Expand list' : 'Collapse list'}
+                <button
+                  className="flex justify-center items-center mt-8 w-[200px] mx-auto border border-[#9747ff] h-8 rounded-8 hover:bg-[#9747ff] hover:text-white"
+                  onClick={() =>
+                    setFeatureSlice(featureSlice == 10 ? features.length : 10)
+                  }
+                >
+                  {supportSlice === 10 ? "Expand list" : "Collapse list"}
                 </button>
               )}
             </div>
@@ -479,13 +566,20 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
                 <div className="flex justify-start items-center mt-4">
                   <i className="bg-star bg-contain bg-no-repeat bg-center w-[28px] h-[28px]"></i>
                   <div className="flex items-baseline ml-4">
-                    <span className="text-[28px] leading-[1.2] text-[#222] font-medium">{Math.round(productInfo?.valueForMoney || 0).toFixed(1)}</span>
-                    <span className="text-[16px] leading-[1.2] text-[#222] font-normal"> / {productInfo?.rateAvg}</span>
+                    <span className="text-[28px] leading-[1.2] text-[#222] font-medium">
+                      {Math.round(productInfo?.valueForMoney || 0).toFixed(1)}
+                    </span>
+                    <span className="text-[16px] leading-[1.2] text-[#222] font-normal">
+                      {" "}
+                      / {productInfo?.rateAvg}
+                    </span>
                   </div>
                 </div>
                 <div className="flex justify-start items-center mt-4">
                   <i className="bg-users bg-contain bg-no-repeat bg-center w-[28px] h-[28px]"></i>
-                  <span className="text-[22px] leading-[1.2] text-[#222222] ml-4 font-medium">{productInfo?.totalRateUser}</span>
+                  <span className="text-[22px] leading-[1.2] text-[#222222] ml-4 font-medium">
+                    {productInfo?.totalRateUser}
+                  </span>
                 </div>
               </div>
 
@@ -497,30 +591,70 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
                   <li className="flex items-center justify-between mt-2">
                     <span>Value for money</span>
                     <div className="flex items-center">
-                      <Rate count={1} value={productInfo?.valueForMoney ? Number(productInfo?.valueForMoney) : 0} disabled />
-                      <span className="text-[16px] leading-[1.2] text-[#222] font-normal ml-2">({productInfo?.valueForMoney})</span>
+                      <Rate
+                        count={1}
+                        value={
+                          productInfo?.valueForMoney
+                            ? Number(productInfo?.valueForMoney)
+                            : 0
+                        }
+                        disabled
+                      />
+                      <span className="text-[16px] leading-[1.2] text-[#222] font-normal ml-2">
+                        ({productInfo?.valueForMoney})
+                      </span>
                     </div>
                   </li>
 
                   <li className="flex items-center justify-between mt-2">
                     <span>Ease of use</span>
                     <div className="flex items-center">
-                      <Rate count={1} value={productInfo?.easeOfUse ? productInfo?.easeOfUse.toFixed(0) : 0} disabled />
-                      <span className="text-[16px] leading-[1.2] text-[#222] font-normal ml-2">({productInfo?.easeOfUse})</span>
+                      <Rate
+                        count={1}
+                        value={
+                          productInfo?.easeOfUse
+                            ? productInfo?.easeOfUse.toFixed(0)
+                            : 0
+                        }
+                        disabled
+                      />
+                      <span className="text-[16px] leading-[1.2] text-[#222] font-normal ml-2">
+                        ({productInfo?.easeOfUse})
+                      </span>
                     </div>
                   </li>
                   <li className="flex items-center justify-between mt-2">
                     <span>Features</span>
                     <div className="flex items-center">
-                      <Rate count={1} value={productInfo?.features ? productInfo?.features.toFixed(0) : 0} disabled />
-                      <span className="text-[16px] leading-[1.2] text-[#222] font-normal ml-2">({productInfo?.features})</span>
+                      <Rate
+                        count={1}
+                        value={
+                          productInfo?.features
+                            ? productInfo?.features.toFixed(0)
+                            : 0
+                        }
+                        disabled
+                      />
+                      <span className="text-[16px] leading-[1.2] text-[#222] font-normal ml-2">
+                        ({productInfo?.features})
+                      </span>
                     </div>
                   </li>
                   <li className="flex items-center justify-between mt-2">
                     <span>Customer support</span>
                     <div className="flex items-center">
-                      <Rate count={1} value={productInfo?.customerSupport ? productInfo?.customerSupport.toFixed(0) : 0} disabled />
-                      <span className="text-[16px] leading-[1.2] text-[#222] font-normal ml-2">({productInfo?.customerSupport})</span>
+                      <Rate
+                        count={1}
+                        value={
+                          productInfo?.customerSupport
+                            ? productInfo?.customerSupport.toFixed(0)
+                            : 0
+                        }
+                        disabled
+                      />
+                      <span className="text-[16px] leading-[1.2] text-[#222] font-normal ml-2">
+                        ({productInfo?.customerSupport})
+                      </span>
                     </div>
                   </li>
                 </ul>
@@ -533,7 +667,9 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
             className="mb-4 bg-white box-border px-5 py-5 rounded-lg"
           >
             <h3 className="text-xl font-bold mb-2 text-[#222]">Funding</h3>
-            <p className="text-[16px] leading-[1.5] text-[#333333]">Comming Soon</p>
+            <p className="text-[16px] leading-[1.5] text-[#333333]">
+              Comming Soon
+            </p>
           </div>
 
           <div
@@ -541,16 +677,21 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
             className="mb-4 bg-white box-border px-5 py-5 rounded-lg"
           >
             <h3 className="text-xl font-bold mb-2 text-[#222]">Core Team</h3>
-            <p className="text-[16px] leading-[1.5] text-[#333333]">Comming Soon</p>
+            <p className="text-[16px] leading-[1.5] text-[#333333]">
+              Comming Soon
+            </p>
           </div>
-
 
           <div
             id="revenue"
             className="mb-4 bg-white box-border px-5 py-5 rounded-lg"
           >
-            <h3 className="text-xl font-bold mb-2 text-[#222]">Key Customers</h3>
-            <p className="text-[16px] leading-[1.5] text-[#333333]">Comming Soon</p>
+            <h3 className="text-xl font-bold mb-2 text-[#222]">
+              Key Customers
+            </h3>
+            <p className="text-[16px] leading-[1.5] text-[#333333]">
+              Comming Soon
+            </p>
           </div>
         </div>
       </div>

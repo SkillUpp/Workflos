@@ -18,12 +18,12 @@ const About = () => {
           specific business needs and industry challenges.
         </p>
         <p className="text-[20px] leading-[1.6] text-black pt-[36px]">
-          The platform streamlines the entire procurement process, from
+          {` The platform streamlines the entire procurement process, from
           discovery to purchase, with features like detailed comparisons,
           AI-driven insights, and automated vendor communication. Workflos AI's
           intuitive interface and powerful capabilities enable businesses to
           make informed software decisions quickly, driving digital
-          transformation and operational efficiency.
+          transformation and operational efficiency.`}
         </p>
       </div>
     </div>
