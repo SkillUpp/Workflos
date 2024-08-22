@@ -1,5 +1,5 @@
 // 生产
-export const BASE_URL = "https://api.aitracker.ai";
+export const BASE_URL = "https://api.workflos.ai";
 
 // auth0 登录页
 export const AUTH0_LOGIN_URL = `${BASE_URL}/api/v1/login`;
