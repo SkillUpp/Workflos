@@ -244,7 +244,7 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
               {productInfo?.name}
             </span>
           </div>
-          <div className="flex pl-[27px]">
+          {/* <div className="flex pl-[27px]">
             {mediaList.map((item) => (
               <Link href="/" key={item.id} className="ml-[12px] first:ml-0">
                 <Image
@@ -256,7 +256,7 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
                 />
               </Link>
             ))}
-          </div>
+          </div> */}
         </div>
         {!isScrolled && (
           <>
