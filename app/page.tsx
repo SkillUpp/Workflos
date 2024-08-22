@@ -183,13 +183,19 @@ export default function Home() {
                 >
                   <div className="flex-shrink-0 flex items-center">
                     {item.photo && (
-                      <Image
-                        src={item.photo}
-                        alt=""
-                        width={40}
-                        height={40}
-                        className="rounded-md object-contain"
-                      />
+                      <div className="w-[40px] h-[40px] rounded-md overflow-hidden">
+                        <Image
+                          src={item.photo}
+                          alt=""
+                          width={40}
+                          height={40}
+                          className="rounded-md object-full w-full h-full"
+                          onError={(e) => {
+                            e.currentTarget.src =
+                              "https://aitracker.ai/empty.jpeg";
+                          }}
+                        />
+                      </div>
                     )}
 
                     <h3 className="pl-2 text-black text-2xl font-extrabold leading-tight whitespace-nowrap overflow-hidden text-ellipsis">
@@ -220,7 +226,7 @@ export default function Home() {
               className="w-[198px] h-[30px] mx-auto flex items-center justify-center bg-[#9747ff] rounded-[5px] text-white text-[16px] mt-[50px] cursor-pointer hover:opacity-80"
               onClick={() => handleJump("/category")}
             >
-              See all CRM Software
+              See all Software
             </Link>
           )}
         </div>

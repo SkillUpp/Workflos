@@ -184,16 +184,22 @@ const Category = () => {
               >
                 <div className="flex justify-between pb-[12px] mb-[12px] border-b border-[rgba(151,71,255,0.3)]">
                   <div className="flex">
-                    <Image
-                      src={item.photo}
-                      alt=""
-                      width={77}
-                      height={77}
-                      className="w-[42px] h-[42px] md:w-[76px] md:h-[76px] rounded-[5px] object-contain"
-                    />
+                    <div className="w-[42px] h-[42px] md:w-[76px] md:h-[76px] rounded-8">
+                      <Image
+                        src={item.photo}
+                        alt=""
+                        width={77}
+                        height={77}
+                        className="w-[42px] h-[42px] md:w-[76px] md:h-[76px] rounded-8 object-fill"
+                        onError={(e) => {
+                          e.currentTarget.src =
+                            "https://aitracker.ai/empty.jpeg";
+                        }}
+                      />
+                    </div>
                     <div className="pl-[12px]">
                       <div className="flex items-center">
-                        <span className="max-w-[800px] text-[24px] font-semiboldtext-[#9747ff] truncate truncate-lines-1">
+                        <span className="max-w-[800px] text-[24px] font-semibold text-[#9747ff] truncate truncate-lines-1">
                           {item.name}
                         </span>
                       </div>
@@ -225,7 +231,7 @@ const Category = () => {
                 </div>
                 <div className="pb-[12px]">
                   <p
-                    className="m-0 text-[14px] line-clamp-2 truncate-lines-2"
+                    className="m-0 text-[14px] text-[#333] line-clamp-2 truncate-lines-2"
                     dangerouslySetInnerHTML={{ __html: item?.description }}
                   ></p>
                   {/* <Link href="/" className="block mt-[6px] text-[#9747ff] font-extrabold text-[14px] leading-[1.2]">Read more about DataSnipper</Link> */}

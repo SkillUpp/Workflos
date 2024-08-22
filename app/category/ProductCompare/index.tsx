@@ -198,7 +198,7 @@ const ProductCompare = (props: Props) => {
       {compareList && compareList.length > 0 && (
         <>
           <div className="mx-auto px-6 lg:px-[50px] 2xl:px-[200px]">
-            <h3 className="text-[42px] font-bold pt-8">Compare</h3>
+            <h3 className="text-[42px] font-bold pt-8 text-black">Compare</h3>
             <div
               className="grid gap-4 py-4"
               style={{
@@ -212,8 +212,22 @@ const ProductCompare = (props: Props) => {
               {compareList.map((item: any, index: number) => (
                 <div className="p-4 w-full bg-white rounded-8" key={index}>
                   <div className="flex items-center justify-center h-10">
-                    <Image src={item.photo} alt="" width={40} height={40} />
-                    <span className="text-xl font-bold ml-4">{item.name}</span>
+                    <div className="w-10 h-10 rounded-8">
+                      <Image
+                        className="w-full h-full rounded-8"
+                        src={item.photo}
+                        width={40}
+                        height={40}
+                        alt=""
+                        onError={(e) => {
+                          e.currentTarget.src =
+                            "https://aitracker.ai/empty.jpeg";
+                        }}
+                      />
+                    </div>
+                    <span className="text-xl font-bold ml-4 text-[#222]">
+                      {item.name}
+                    </span>
                   </div>
                   <p
                     className="text-gray-500 text-center mt-4 truncate-lines-2"
@@ -228,7 +242,9 @@ const ProductCompare = (props: Props) => {
 
           <div className="mb-12">
             <div className="mx-auto px-6 lg:px-[50px] 2xl:px-[200px]">
-              <h3 className="text-[32px] font-bold pt-4">App Info</h3>
+              <h3 className="text-[32px] font-bold pt-4 text-black">
+                App Info
+              </h3>
               <div
                 className="grid gap-4 mt-4"
                 style={{
@@ -341,7 +357,7 @@ const ProductCompare = (props: Props) => {
             </div>
 
             <div className="mx-auto mt-4 px-6 lg:px-[50px] 2xl:px-[200px]">
-              <h3 className="text-[32px] font-bold pt-4">Pricing</h3>
+              <h3 className="text-[32px] font-bold pt-4 text-black">Pricing</h3>
               <div
                 className="grid gap-4 mt-4"
                 style={{
@@ -431,7 +447,7 @@ const ProductCompare = (props: Props) => {
                       </ul>
                       {item?.supportFeatures?.length > 10 && (
                         <button
-                          className="flex justify-center items-center mt-8 w-[200px] mx-auto border border-[#9747ff] h-8 rounded-8 hover:bg-[#9747ff] hover:text-white"
+                          className="flex justify-center items-center text-black mt-8 w-[200px] mx-auto border border-[#9747ff] h-8 rounded-8 hover:bg-[#9747ff] hover:text-white"
                           onClick={() => {
                             setCompareList((prev: any[]) => {
                               return prev.map((item: any, idx: number) => {
@@ -501,7 +517,7 @@ const ProductCompare = (props: Props) => {
                       </ul>
                       {item?.commonFeatures?.length > 10 && (
                         <button
-                          className="flex justify-center items-center mt-8 w-[200px] mx-auto border border-[#9747ff] h-8 rounded-8 hover:bg-[#9747ff] hover:text-white"
+                          className="flex justify-center items-center mt-8 text-black w-[200px] mx-auto border border-[#9747ff] h-8 rounded-8 hover:bg-[#9747ff] hover:text-white"
                           onClick={() => {
                             setCompareList((prev: any[]) => {
                               return prev.map((item: any, idx: number) => {
@@ -568,39 +584,45 @@ const ProductCompare = (props: Props) => {
                         <span className="text-[16px] font-medium leading-[1.2] text-[#222222]">
                           Ease of use
                         </span>
-                        <div className="flex items-center w-[80px] justify-between">
+                        <div className="flex items-center w-[80px] justify-between ">
                           <Rate
                             count={1}
                             value={item?.easeOfUse > 0 ? 1 : 0}
                             disabled
                           />
-                          ({item?.easeOfUse})
+                          <span className="text-[16px] font-medium leading-[1.2] text-[#222222]">
+                            ({item?.easeOfUse})
+                          </span>
                         </div>
                       </li>
                       <li className="flex justify-between items-center">
                         <span className="text-[16px] font-medium leading-[1.2] text-[#222222]">
                           Features
                         </span>
-                        <div className="flex items-center w-[80px] justify-between">
+                        <div className="flex items-center w-[80px] justify-between text-[#454545]">
                           <Rate
                             count={1}
                             value={item?.features > 0 ? 1 : 0}
                             disabled
                           />
-                          ({item?.features})
+                          <span className="text-[16px] font-medium leading-[1.2] text-[#222222]">
+                            ({item?.features})
+                          </span>
                         </div>
                       </li>
                       <li className="flex justify-between items-center">
                         <span className="text-[16px] font-medium leading-[1.2] text-[#222222]">
                           Customer support
                         </span>
-                        <div className="flex items-center w-[80px] justify-between">
+                        <div className="flex items-center w-[80px] justify-between text-[#454545]">
                           <Rate
                             count={1}
                             value={item?.customerSupport > 0 ? 1 : 0}
                             disabled
                           />
-                          ({item?.customerSupport})
+                          <span className="text-[16px] font-medium leading-[1.2] text-[#222222]">
+                            ({item?.customerSupport})
+                          </span>
                         </div>
                       </li>
                     </ul>

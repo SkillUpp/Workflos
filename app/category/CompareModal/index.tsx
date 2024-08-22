@@ -67,12 +67,14 @@ const CompareModal = (props: ICompareModalProps) => {
   return (
     <>
       <div className="fixed top-[280px] left-1/2 transform -translate-x-1/2 w-[312px] bg-white rounded-lg p-[22px] shadow-lg">
-        <h3 className="text-[18px] leading-[40px] font-bold">App comparison</h3>
+        <h3 className="text-[20px] leading-[40px] font-bold text-black">
+          App comparison
+        </h3>
         <i
           className="absolute top-[16px] right-[16px] w-[20px] h-[20px] bg-[url('/images/close.svg')] bg-cover cursor-pointer"
           onClick={() => props.close()}
         ></i>
-        <p className="text-[14px] leading-[1.2]">
+        <p className="text-[14px] leading-[1.2] text-[#454545]">
           {`Add up to 3 apps below to see how they compare. You can also use the
           "Compare" buttons while browsing.`}
         </p>
@@ -89,8 +91,19 @@ const CompareModal = (props: ICompareModalProps) => {
                   onClick={() => handleClose(item)}
                 ></i>
                 <div className="flex items-center pl-[12px] w-[calc(100%-24px)]">
-                  <Image src={item.photo} width={40} height={40} alt="" />
-                  <span className="pl-[12px] text-[16px] font-bold leading-[1.2] truncate-lines-1">
+                  <div className="w-10 h-10 rounded-8">
+                    <Image
+                      className="w-full h-full rounded-8"
+                      src={item.photo}
+                      width={40}
+                      height={40}
+                      alt=""
+                      onError={(e) => {
+                        e.currentTarget.src = "https://aitracker.ai/empty.jpeg";
+                      }}
+                    />
+                  </div>
+                  <span className="w-[calc(100%-40px)] pl-[12px] text-[16px] font-bold leading-[1.2] truncate-lines-1 text-[#222]">
                     {item.name}
                   </span>
                 </div>
@@ -115,8 +128,8 @@ const CompareModal = (props: ICompareModalProps) => {
             className="flex justify-center items-center bg-purple-600 text-white rounded-[5px] w-full h-[32px] mt-[8px] hover:opacity-70"
             onClick={() => handleJumpCompare()}
           >
-            <i className="w-[20px] h-[20px] bg-[url('/images/git-compare-white.svg')] bg-cover"></i>
-            <span className="pl-[8px]">SEE COMPARISON</span>
+            <i className="w-[20px] h-[20px] bg-compareWhite bg-cover"></i>
+            <span className="pl-[8px] text-white">SEE COMPARISON</span>
           </button>
         </div>
       </div>

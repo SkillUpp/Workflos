@@ -170,7 +170,11 @@ const Select = () => {
                         alt=""
                         width={28}
                         height={28}
-                        className="rounded-md"
+                        className="rounded-md w-full h-full object-fill"
+                        onError={(e) => {
+                          e.currentTarget.src =
+                            "https://aitracker.ai/empty.jpeg";
+                        }}
                       />
                     </div>
                   )}

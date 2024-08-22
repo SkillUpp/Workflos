@@ -26,7 +26,7 @@ const Category = () => {
   const [softworeList, setSoftworeList] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [currentItem, setCurrentItem] = useState<any>({});
-  const [CategoryList, setCategoryList] = useState([])
+  const [CategoryList, setCategoryList] = useState([]);
   const toggleCompareModal = () => setIsCompareModalOpen(!isCompareModalOpen);
 
   const handleTabClick = (id: number, name: string) => {
@@ -41,10 +41,9 @@ const Category = () => {
   };
 
   const getCategoryList = async () => {
-    const res = await categoryList()
-    setCategoryList(res.data)
-
-  }
+    const res = await categoryList();
+    setCategoryList(res.data);
+  };
 
   const handleJumpCompare = () => {
     route.push("/compare");
@@ -66,7 +65,7 @@ const Category = () => {
       category: category || currentCategory,
       limit: 10,
       page: page || 1,
-      sortby: "rateAvg"
+      sortby: "rateAvg",
     };
     try {
       setLoading(true);
@@ -75,12 +74,12 @@ const Category = () => {
         const list = res.data.list;
         setLoading(false);
         setTotalCount(res.data.totalCount);
-        list.forEach((item: { description: string; introduce: string; }) => {
-          item.description = item.description.replace(/\\n/g, " ")
-          item.description = item.description.replace(/\\r/g, " ")
-          item.description = item.description.replace(/\\u0026/g, '&');
-          item.introduce = item.introduce.replace(/\\u0026/g, '&');
-        })
+        list.forEach((item: { description: string; introduce: string }) => {
+          item.description = item.description.replace(/\\n/g, " ");
+          item.description = item.description.replace(/\\r/g, " ");
+          item.description = item.description.replace(/\\u0026/g, "&");
+          item.introduce = item.introduce.replace(/\\u0026/g, "&");
+        });
         setSoftworeList(list);
       }
     } catch (error) {
@@ -92,22 +91,22 @@ const Category = () => {
     getSoftworeList("", page);
   };
 
-
   const handleJump = (path: string) => {
     route.push(path);
   };
 
   useEffect(() => {
-    getCategoryList()
+    getCategoryList();
     getSoftworeList();
   }, []);
   return (
     <div className="pt-[86px] bg-[#f0f0f0] overflow-hidden min-h-[calc(100vh-86px)]">
       {loading && <LoadingContext />}
       <div>
-
         <div className="pt-[13px] pb-[64px] px-[24px] lg:px-[56px] 2xl:px-[200px] bg-[#f0f0f0]">
-          <h3 className="text-[42px] font-bold text-black mt-[24px]">Trending</h3>
+          <h3 className="text-[42px] font-bold text-black mt-[24px]">
+            Trending
+          </h3>
           <div className="flex flex-col min-h-[300px]">
             {softworeList.map((item: any, index: number) => (
               <div
@@ -117,12 +116,24 @@ const Category = () => {
               >
                 <div className="flex justify-between pb-[12px] mb-[12px] border-b border-[rgba(151,71,255,0.3)]">
                   <div className="flex">
-                    <div className="w-[42px] h-[42px] md:w-[76px] md:h-[76px] rounded-[5px] border">
-                      <Image src={item.photo} alt="" width={77} height={77} className="w-full h-full rounded-[5px] object-contain" />
+                    <div className="w-[42px] h-[42px] md:w-[76px] md:h-[76px] rounded-8">
+                      <Image
+                        src={item.photo}
+                        alt=""
+                        width={77}
+                        height={77}
+                        className="w-full h-full rounded-8 object-fill"
+                        onError={(e) => {
+                          e.currentTarget.src =
+                            "https://aitracker.ai/empty.jpeg";
+                        }}
+                      />
                     </div>
                     <div className="pl-[12px]">
                       <div className="flex items-center">
-                        <span className="max-w-[800px] text-[24px] font-semiboldtext-[#9747ff] truncate truncate-lines-1">{item.name}</span>
+                        <span className="max-w-[800px] text-[24px] font-semiboldtext-[#9747ff] truncate truncate-lines-1">
+                          {item.name}
+                        </span>
                       </div>
                       <p
                         className="mt-[6px] text-[14px] leading-[1.2] text-black truncate-lines-2"
@@ -131,9 +142,8 @@ const Category = () => {
                     </div>
                   </div>
                   <div className="flex text-[30px] text-[#9747ff] font-semibold">
-                    No.{index + 1} 
+                    No.{index + 1}
                   </div>
-
                 </div>
                 <div className="pb-[12px]">
                   <p
@@ -144,7 +154,12 @@ const Category = () => {
                 </div>
               </div>
             ))}
-            {softworeList.length === 0 && <NoFound title="No software found" message="Try searching for something else" />}
+            {softworeList.length === 0 && (
+              <NoFound
+                title="No software found"
+                message="Try searching for something else"
+              />
+            )}
 
             {totalCount > 10 && (
               <div className="mt-6">
@@ -160,7 +175,6 @@ const Category = () => {
         </div>
       </div>
     </div>
-
   );
 };
 

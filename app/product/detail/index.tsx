@@ -56,12 +56,12 @@ const defaultCompareMenu = [
     htmlId: "team",
     active: false,
   },
-  {
-    id: 9,
-    name: "Key Customers",
-    htmlId: "revenue",
-    active: false,
-  },
+  // {
+  //   id: 9,
+  //   name: "Key Customers",
+  //   htmlId: "revenue",
+  //   active: false,
+  // },
 ];
 
 const mediaList = [
@@ -235,6 +235,9 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
                 width={40}
                 height={40}
                 className="w-[40px] h-[40px] object-contain rounded-sm"
+                onError={(e) => {
+                  e.currentTarget.src = "https://aitracker.ai/empty.jpeg";
+                }}
               />
             )}
             <span className="text-[18px] leading-[1.2] text-black font-extrabold ml-[10px] truncate-lines-1">
@@ -348,7 +351,7 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
                         className="flex items-center justify-between pt-1"
                         key={item.slug}
                       >
-                        <span>{item.name}</span>
+                        <span className="text-[#222222]">{item.name}</span>
                         <i className="w-[20px] h-[20px] ml-[8px] bg-check bg-contain bg-no-repeat bg-center"></i>
                       </li>
                     ))}
@@ -365,7 +368,7 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
                         className="flex items-center justify-between pt-1"
                         key={item.slug}
                       >
-                        <span>{item.name}</span>
+                        <span className="text-[#222222]">{item.name}</span>
                         <i className="w-[20px] h-[20px] ml-[8px] bg-check bg-contain bg-no-repeat bg-center"></i>
                       </li>
                     ))}
@@ -462,7 +465,7 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
                         className="flex items-center justify-between pt-1"
                         key={item}
                       >
-                        <span>{item}</span>
+                        <span className="text-[#222222]">{item}</span>
                         <i className="w-[20px] h-[20px] ml-[8px] bg-check bg-contain bg-no-repeat bg-center"></i>
                       </li>
                     ))}
@@ -503,7 +506,7 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
               </ul>
               {productInfo?.supportFeatures?.length > 10 && (
                 <button
-                  className="flex justify-center items-center mt-8 w-[200px] mx-auto border border-[#9747ff] h-8 rounded-8 hover:bg-[#9747ff] hover:text-white"
+                  className="flex justify-center text-[#222222] items-center mt-8 w-[200px] mx-auto border border-[#9747ff] h-8 rounded-8 hover:bg-[#9747ff] hover:text-white"
                   onClick={() => {
                     setSupportSlice(
                       supportSlice == 10
@@ -542,7 +545,7 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
               </ul>
               {features?.length > 10 && (
                 <button
-                  className="flex justify-center items-center mt-8 w-[200px] mx-auto border border-[#9747ff] h-8 rounded-8 hover:bg-[#9747ff] hover:text-white"
+                  className="flex justify-center items-center text-[#222222] mt-8 w-[200px] mx-auto border border-[#9747ff] h-8 rounded-8 hover:bg-[#9747ff] hover:text-white"
                   onClick={() =>
                     setFeatureSlice(featureSlice == 10 ? features.length : 10)
                   }
@@ -624,7 +627,9 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
                     </div>
                   </li>
                   <li className="flex items-center justify-between mt-2">
-                    <span>Features</span>
+                    <span className="text-[#222222] text-lg font-medium">
+                      Features
+                    </span>
                     <div className="flex items-center">
                       <Rate
                         count={1}
@@ -641,7 +646,9 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
                     </div>
                   </li>
                   <li className="flex items-center justify-between mt-2">
-                    <span>Customer support</span>
+                    <span className="text-[#222222] text-lg font-medium">
+                      Customer support
+                    </span>
                     <div className="flex items-center">
                       <Rate
                         count={1}
@@ -682,7 +689,7 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
             </p>
           </div>
 
-          <div
+          {/* <div
             id="revenue"
             className="mb-4 bg-white box-border px-5 py-5 rounded-lg"
           >
@@ -692,7 +699,7 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
             <p className="text-[16px] leading-[1.5] text-[#333333]">
               Comming Soon
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
