@@ -26,6 +26,8 @@ type Props = {
  */
 async function getProductData(id: string) {
   // 使用 cookie 发起请求
+  console.log(decodeURIComponent(id));
+  
   const res = await productDetail(decodeURIComponent(id));
   return res;
 }

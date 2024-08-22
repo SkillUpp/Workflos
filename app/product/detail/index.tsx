@@ -143,6 +143,10 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
    */
   const initData = () => {
     const result = props.info;
+    if (!result?.name) {
+      return;
+    }
+    
     if (result?.description) {
       result.description = result?.description.replace(/\\n/g, "<br/>");
       result.description = result?.description.replace(/\\r/g, " ");
@@ -154,11 +158,14 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
       result.keyBenefits = result?.keyBenefits.replace(/\\n/g, "<br/>");
       result.keyBenefits = result?.keyBenefits.replace(/\\r/g, " ");
       result.keyBenefits = result?.keyBenefits.replace(/\\u0026/g, "&");
+      result.keyBenefits = result?.keyBenefits.replace(/\\u003c/g, "<").replace(/\\u003e/g, ">")
     }
     const { commonFeatures, supportFeatures } = result;
-    setFeatures(
-      updateCommonFeaturesWithSupport(commonFeatures, supportFeatures)
-    );
+    if (commonFeatures && supportFeatures) {
+      setFeatures(
+        updateCommonFeaturesWithSupport(commonFeatures, supportFeatures)
+      );
+    }
     setProductInfo(result);
   };
 
@@ -218,11 +225,10 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
     <div className="mt-20 bg-gray-200 overflow-x-hidden">
       <div
         id="productHeader"
-        className={`w-full px-6 2xl:pl-[350px] 2xl:pr-[200px] bg-white lg:py-6 lg:px-6 transition-all duration-300 shadow-lg ${
-          isScrolled
+        className={`w-full px-6 2xl:pl-[350px] 2xl:pr-[200px] bg-white lg:py-6 lg:px-6 transition-all duration-300 shadow-lg ${isScrolled
             ? "h-[60px] fixed top-[86px] left-0 right-0 z-10 pt-[10px] pb-[10px] md:pt-[10px] md:pb-[10px] justify-center"
             : "md:h-auto py-[24px] md:py-[42px]"
-        }`}
+          }`}
       >
         <div
           className={`flex items-center ${isScrolled ? "h-full" : "h-[46px]"}`}
@@ -286,9 +292,8 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
         )}
       </div>
       <div
-        className={`md:hidden w-full bg-white ${
-          isScrolled ? "fixed top-[146px] left-0 right-0 z-10" : ""
-        }`}
+        className={`md:hidden w-full bg-white ${isScrolled ? "fixed top-[146px] left-0 right-0 z-10" : ""
+          }`}
       >
         <ScrollableTabs
           tabs={compareMenu}
@@ -301,20 +306,18 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
       >
         <div className={`flex-shrink-0 w-full mr-6 md:w-32`}>
           <div
-            className={`hidden md:block fixed z-10 ${
-              isScrolled ? "top-[144px] md:top-[160px]" : ""
-            }`}
+            className={`hidden md:block fixed z-10 ${isScrolled ? "top-[144px] md:top-[160px]" : ""
+              }`}
           >
             <div className="relative flex flex-row md:flex-col items-end text-right">
               <div className="absolute h-full w-px bg-purple-600 right-0"></div>
               {compareMenu.map((item) => (
                 <div
                   key={item.id}
-                  className={`animation-all-3 cursor-pointer flex items-center justify-end h-8 pr-4 text-[#333333] ${
-                    item.active
+                  className={`animation-all-3 cursor-pointer flex items-center justify-end h-8 pr-4 text-[#333333] ${item.active
                       ? "font-bold bg-customPurple w-[130px] whitespace-nowrap text-white rounded-l-xl"
                       : ""
-                  }`}
+                    }`}
                   onClick={() => handleClick(item.htmlId)}
                 >
                   <span className="text-sm">{item.name}</span>
@@ -331,6 +334,7 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
           >
             <h3 className="text-xl font-bold mb-2 text-[#222]">Overview</h3>
             {productInfo?.description && (
+              
               <p
                 className="text-[16px] leading-[1.5] text-[#333333]"
                 dangerouslySetInnerHTML={{
@@ -376,17 +380,20 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
               </div>
             </div>
 
-            <div className="mt-6 justify-between">
-              <h4 className="text-[18px] leading-[1.2] text-[#222] font-bold mt-4">
-                Key benefits of using {productInfo?.name}
-              </h4>
-              <p
-                className="text-[16px] leading-[1.5] text-[#333333] mt-4"
-                dangerouslySetInnerHTML={{
-                  __html: productInfo?.keyBenefits,
-                }}
-              ></p>
-            </div>
+            {productInfo?.keyBenefits && (
+              <div className="mt-6 justify-between">
+                <h4 className="text-[18px] leading-[1.2] text-[#222] font-bold mt-4">
+                  Key benefits of using {productInfo?.name}
+                </h4>
+                <p
+                  className="text-[16px] leading-[1.5] text-[#333333] mt-4"
+                  dangerouslySetInnerHTML={{
+                    __html: marked(productInfo?.keyBenefits),
+                  }}
+                ></p>
+              </div>
+            )}
+
           </div>
 
           <div

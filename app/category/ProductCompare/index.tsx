@@ -162,22 +162,22 @@ const ProductCompare = (props: Props) => {
     newList2.forEach((item: any) => {
       item.commonFeatureSlice = 10;
       item.supportFeatureSlice = 10;
-      item.introduce = item.introduce
-        ? item.introduce.replace(/\\u0026/g, "&")
-        : "";
-      item.description = item.description
-        ? item.description.replace(/\\n/g, "<br/>")
-        : "";
-      item.description = item.description
-        ? item.description.replace(/\\r/g, "<br/>")
-        : "";
-      item.keyBenefits = item.keyBenefits
-        ? item.keyBenefits.replace(/\\n/g, "<br/>")
-        : "";
-      item.commonFeatures = updateCommonFeaturesWithSupport(
-        item.commonFeatures,
-        item.supportFeatures
-      );
+      if (item.description) {
+        item.description = item.description
+          ? item.description.replace(/\\n/g, "<br/>")
+          : "";
+        item.description = item.description
+          ? item.description.replace(/\\r/g, "<br/>")
+          : "";
+        item.description = item?.description.replace(/\\u003c/g, "<").replace(/\\u003e/g, ">")
+      }
+      if (item.commonFeatures && item.supportFeatures) {
+        item.commonFeatures = updateCommonFeaturesWithSupport(
+          item.commonFeatures,
+          item.supportFeatures
+        );
+      }
+
     });
     setCompareList(newList2);
   };
@@ -202,11 +202,10 @@ const ProductCompare = (props: Props) => {
             <div
               className="grid gap-4 py-4"
               style={{
-                gridTemplateColumns: `${
-                  deviceType == "mobile"
-                    ? "repeat(1, minmax(0, 1fr))"
-                    : `repeat(${compareList.length}, minmax(0, 1fr))`
-                }`,
+                gridTemplateColumns: `${deviceType == "mobile"
+                  ? "repeat(1, minmax(0, 1fr))"
+                  : `repeat(${compareList.length}, minmax(0, 1fr))`
+                  }`,
               }}
             >
               {compareList.map((item: any, index: number) => (
@@ -248,11 +247,10 @@ const ProductCompare = (props: Props) => {
               <div
                 className="grid gap-4 mt-4"
                 style={{
-                  gridTemplateColumns: `${
-                    deviceType == "mobile"
-                      ? "repeat(1, minmax(0, 1fr))"
-                      : `repeat(${compareList.length}, minmax(0, 1fr))`
-                  }`,
+                  gridTemplateColumns: `${deviceType == "mobile"
+                    ? "repeat(1, minmax(0, 1fr))"
+                    : `repeat(${compareList.length}, minmax(0, 1fr))`
+                    }`,
                 }}
               >
                 {compareList.map((item: any, index: number) => (
@@ -279,9 +277,8 @@ const ProductCompare = (props: Props) => {
                               key={item.slug}
                             >
                               <span
-                                className={`text-black ${
-                                  !item.check ? "text-gray-500" : ""
-                                }`}
+                                className={`text-black ${!item.check ? "text-gray-500" : ""
+                                  }`}
                               >
                                 {item.name}
                               </span>
@@ -307,9 +304,8 @@ const ProductCompare = (props: Props) => {
                               key={item.slug}
                             >
                               <span
-                                className={`text-black ${
-                                  !item.check ? "text-gray-500" : ""
-                                }`}
+                                className={`text-black ${!item.check ? "text-gray-500" : ""
+                                  }`}
                               >
                                 {item.name}
                               </span>
@@ -335,9 +331,8 @@ const ProductCompare = (props: Props) => {
                               key={item.name}
                             >
                               <span
-                                className={`text-black ${
-                                  !item.check ? "text-gray-500" : ""
-                                }`}
+                                className={`text-black ${!item.check ? "text-gray-500" : ""
+                                  }`}
                               >
                                 {item.name}
                               </span>
@@ -361,11 +356,10 @@ const ProductCompare = (props: Props) => {
               <div
                 className="grid gap-4 mt-4"
                 style={{
-                  gridTemplateColumns: `${
-                    deviceType == "mobile"
-                      ? "repeat(1, minmax(0, 1fr))"
-                      : `repeat(${compareList.length}, minmax(0, 1fr))`
-                  }`,
+                  gridTemplateColumns: `${deviceType == "mobile"
+                    ? "repeat(1, minmax(0, 1fr))"
+                    : `repeat(${compareList.length}, minmax(0, 1fr))`
+                    }`,
                 }}
               >
                 {compareList.map((item: any, index: number) => (
@@ -408,11 +402,10 @@ const ProductCompare = (props: Props) => {
               <div
                 className="grid gap-4 mt-4"
                 style={{
-                  gridTemplateColumns: `${
-                    deviceType == "mobile"
-                      ? "repeat(1, minmax(0, 1fr))"
-                      : `repeat(${compareList.length}, minmax(0, 1fr))`
-                  }`,
+                  gridTemplateColumns: `${deviceType == "mobile"
+                    ? "repeat(1, minmax(0, 1fr))"
+                    : `repeat(${compareList.length}, minmax(0, 1fr))`
+                    }`,
                 }}
               >
                 {compareList.map((item: any, index: number) => (
@@ -478,11 +471,10 @@ const ProductCompare = (props: Props) => {
               <div
                 className="grid gap-4 mt-4"
                 style={{
-                  gridTemplateColumns: `${
-                    deviceType == "mobile"
-                      ? "repeat(1, minmax(0, 1fr))"
-                      : `repeat(${compareList.length}, minmax(0, 1fr))`
-                  }`,
+                  gridTemplateColumns: `${deviceType == "mobile"
+                    ? "repeat(1, minmax(0, 1fr))"
+                    : `repeat(${compareList.length}, minmax(0, 1fr))`
+                    }`,
                 }}
               >
                 {compareList.map((item: any, index: number) => (
@@ -551,11 +543,10 @@ const ProductCompare = (props: Props) => {
               <div
                 className="grid gap-4 mt-4"
                 style={{
-                  gridTemplateColumns: `${
-                    deviceType == "mobile"
-                      ? "repeat(1, minmax(0, 1fr))"
-                      : `repeat(${compareList.length}, minmax(0, 1fr))`
-                  }`,
+                  gridTemplateColumns: `${deviceType == "mobile"
+                    ? "repeat(1, minmax(0, 1fr))"
+                    : `repeat(${compareList.length}, minmax(0, 1fr))`
+                    }`,
                 }}
               >
                 {compareList.map((item: any, index: number) => (
