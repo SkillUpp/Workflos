@@ -118,32 +118,45 @@ const Category = () => {
                   <div className="flex">
                     <div className="w-[42px] h-[42px] md:w-[76px] md:h-[76px] rounded-8">
                       {item.photo && (
-                        <Image
-                          src={item.photo}
-                          alt=""
-                          width={77}
-                          height={77}
-                          className="w-full h-full rounded-8 object-fill"
-                          onError={(e) => {
-                            e.currentTarget.src =
-                              "https://aitracker.ai/empty.jpeg";
-                          }}
-                        />
+                        <div className="w-[40px] h-[40px] md:w-[77px] md:h-[77px] rounded-8 object-fill">
+                          <Image
+                            src={item.photo}
+                            alt=""
+                            width={77}
+                            height={77}
+                            className="w-full h-full rounded-8 object-fill"
+                            onError={(e) => {
+                              e.currentTarget.src =
+                                "https://aitracker.ai/empty.jpeg";
+                            }}
+                          />
+                        </div>
+                      )}
+                      {!item.photo && (
+                        <div className="w-[40px] h-[40px] md:w-[77px] md:h-[77px] rounded-8 object-fill">
+                          <Image
+                            src="https://aitracker.ai/empty.jpeg"
+                            alt=""
+                            width={77}
+                            height={77}
+                            className="w-full h-full rounded-8 object-fill"
+                          />
+                        </div>
                       )}
                     </div>
                     <div className="pl-[12px]">
                       <div className="flex items-center">
-                        <span className="max-w-[800px] text-[24px] font-bold text-[#9747ff] truncate truncate-lines-1 ">
+                        <span className="w-[calc(100% - 70px)] lg:max-w-[800px] text-[16px] md:text-[24px] font-bold text-[#9747ff] truncate-lines-1 ">
                           {item.name}
                         </span>
                       </div>
                       <p
-                        className="mt-[6px] text-[14px] leading-[1.2] text-black truncate-lines-2"
+                        className="mt-[6px] text-[14px] md:text-[16px] leading-[1.2] text-black truncate-lines-2"
                         dangerouslySetInnerHTML={{ __html: item?.introduce }}
                       ></p>
                     </div>
                   </div>
-                  <div className="flex text-[30px] text-[#9747ff] font-semibold">
+                  <div className="flex text-[24px] md:text-[30px] text-[#9747ff] font-semibold">
                     No.{index + 1}
                   </div>
                 </div>

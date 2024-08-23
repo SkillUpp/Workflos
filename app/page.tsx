@@ -9,6 +9,7 @@ import { sortOfRateEnumList } from "@/utils/enum";
 import { ICategoryList, IPorductList } from "./type";
 import { categoryList, productList } from "@/api/product";
 import LoadingContext from "@/components/LoadingContext";
+import ScrollableTabs from "@/components/ScrollableTabs";
 
 export default function Home() {
   const route = useRouter();
@@ -75,6 +76,11 @@ export default function Home() {
     }
   };
 
+  const handleTabClick = (tab) => {
+    setCurrentSort(tab.value)
+    getSoftworeList()
+  }
+
   useEffect(() => {
     getCategoryList();
     getSoftworeList();
@@ -82,10 +88,10 @@ export default function Home() {
 
   return (
     <div className="pt-[86px] overflow-hidden">
-      <div className="sm:px-[24px] sm:pt-[40px] pt-[80px] lg:px-[56px] xl:pl-[200px] relative flex justify-between pb-8 h-auto lg:pb-0 lg:h-[420px]">
+      <div className="px-[24px] sm:pt-[40px] pt-[80px] lg:px-[56px] xl:pl-[200px] relative flex justify-between pb-8 h-auto lg:pb-0 lg:h-[420px]">
         <div className="w-full lg:w-1/2">
           <div className="flex flex-col">
-            <h3 className="text-[#9747ff] text-[36px] font-extrabold">
+            <h3 className="text-[#9747ff] text-[32px] md:text-[36px] font-extrabold">
               Where business leaders find software
             </h3>
             <div className="relative h-[50px] mt-[32px] border border-black rounded-[24px]">
@@ -138,8 +144,8 @@ export default function Home() {
       </div>
 
       <div className="relative z-10">
-        <div className="w-full h-[52px] bg-black">
-          <ul className="flex items-center justify-around h-full mx-[90px] list-none">
+        <div className="w-full h-[52px] md:bg-black">
+          <ul className="hidden md:flex items-center justify-around h-full mx-[90px] list-none">
             {softworeTab.map((item) => (
               <li
                 className={`flex items-center text-white text-[16px] cursor-pointer ${
@@ -154,6 +160,9 @@ export default function Home() {
               </li>
             ))}
           </ul>
+          <div className="block md:hidden">
+            <ScrollableTabs tabs={softworeTab} onTabClick={handleTabClick}/>
+          </div>
           <div className="hidden">
             <Select
               defaultValue={currentSort}

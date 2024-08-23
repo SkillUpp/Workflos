@@ -119,8 +119,8 @@ const Category = () => {
             <div
               key={item.id}
               className={`text-[16px] text-white font-semibold ml-[160px] cursor-pointer first:ml-0 ${item.active
-                  ? "text-[#9747ff] border-b border-[#9747ff] transition-all duration-300"
-                  : ""
+                ? "text-[#9747ff] border-b border-[#9747ff] transition-all duration-300"
+                : ""
                 }`}
               onClick={() => handleTabClick(item.id, item.value)}
             >
@@ -186,17 +186,29 @@ const Category = () => {
                 <div className="flex justify-between pb-[12px] mb-[12px] border-b border-[rgba(151,71,255,0.3)]">
                   <div className="flex">
                     <div className="w-[42px] h-[42px] md:w-[76px] md:h-[76px] rounded-8">
-                      <Image
-                        src={item.photo}
-                        alt=""
-                        width={77}
-                        height={77}
-                        className="w-[42px] h-[42px] md:w-[76px] md:h-[76px] rounded-8 object-fill"
-                        onError={(e) => {
-                          e.currentTarget.src =
-                            "https://aitracker.ai/empty.jpeg";
-                        }}
-                      />
+                      {item.photo && (
+                        <Image
+                          src={item.photo}
+                          alt=""
+                          width={77}
+                          height={77}
+                          className="w-[42px] h-[42px] md:w-[76px] md:h-[76px] rounded-8 object-fill"
+                          onError={(e) => {
+                            e.currentTarget.src =
+                              "https://aitracker.ai/empty.jpeg";
+                          }}
+                        />
+                      )}
+                      {!item.photo && (
+                        <Image
+                          src="https://aitracker.ai/empty.jpeg"
+                          alt=""
+                          width={77}
+                          height={77}
+                          className="w-[42px] h-[42px] md:w-[76px] md:h-[76px] rounded-8 object-fill"
+                        />
+                      )}
+
                     </div>
                     <div className="pl-[12px]">
                       <div className="flex items-center">
