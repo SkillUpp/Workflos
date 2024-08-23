@@ -266,7 +266,7 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
         </div>
         {!isScrolled && (
           <>
-            <p className="text-[14px] leading-[1.2] mt-[8px]">
+            <p className="text-[14px] leading-[1.2] mt-[8px] text-[#333]">
               {productInfo?.introduce}
             </p>
             <Dropdown overlay={menu} trigger={["hover"]}>
