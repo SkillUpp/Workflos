@@ -28,7 +28,7 @@ const defaultCompareMenu = [
   },
   {
     id: 4,
-    name: "Opening",
+    name: "Pricing",
     htmlId: "pricing",
     active: false,
   },
@@ -410,7 +410,7 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
             id="pricing"
             className="mb-4 bg-white box-border px-5 py-5 rounded-lg"
           >
-            <h3 className="text-xl font-bold mb-2 text-[#222]">Opening</h3>
+            <h3 className="text-xl font-bold mb-2 text-[#222]">Pricing</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <div className="flex flex-col">
                 <h4 className="text-[18px] leading-[1.2] text-[#222] font-bold mt-4">
