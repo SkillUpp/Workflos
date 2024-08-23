@@ -118,11 +118,10 @@ const Category = () => {
           {categoryTabs.map((item) => (
             <div
               key={item.id}
-              className={`text-[16px] text-white font-semibold ml-[160px] cursor-pointer first:ml-0 ${
-                item.active
+              className={`text-[16px] text-white font-semibold ml-[160px] cursor-pointer first:ml-0 ${item.active
                   ? "text-[#9747ff] border-b border-[#9747ff] transition-all duration-300"
                   : ""
-              }`}
+                }`}
               onClick={() => handleTabClick(item.id, item.value)}
             >
               {item.title}
@@ -152,14 +151,9 @@ const Category = () => {
           </div>
 
           <div className="flex items-center flex-col h-auto p-4 justify-between md:flex-row md:h-[57px] md:py-0 px-[20px] mt-[14px] bg-[#9747ff] rounded-[12px]">
-            <div className="flex items-center">
-              <i className="w-[24px] h-[24px] bg-share2 bg-cover"></i>
-              <span className="pl-[16px] text-[20px] leading-8 text-white">
-                Personalize your search
-              </span>
-            </div>
             <div className="w-[298px] common-select pt-4 md:pt-0">
               <Select
+                showSearch
                 value={currentCategory}
                 onChange={(val: string) => {
                   setCurrentCategory(val);
@@ -173,6 +167,13 @@ const Category = () => {
                 ))}
               </Select>
             </div>
+            <div className="flex items-center">
+              <i className="w-[24px] h-[24px] bg-share2 bg-cover"></i>
+              <span className="pl-[16px] text-[20px] leading-8 text-white">
+                Personalize your search
+              </span>
+            </div>
+
           </div>
 
           <div className="flex flex-col min-h-[300px]">
