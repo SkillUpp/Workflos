@@ -117,21 +117,23 @@ const Category = () => {
                 <div className="flex justify-between pb-[12px] mb-[12px] border-b border-[rgba(151,71,255,0.3)]">
                   <div className="flex">
                     <div className="w-[42px] h-[42px] md:w-[76px] md:h-[76px] rounded-8">
-                      <Image
-                        src={item.photo}
-                        alt=""
-                        width={77}
-                        height={77}
-                        className="w-full h-full rounded-8 object-fill"
-                        onError={(e) => {
-                          e.currentTarget.src =
-                            "https://aitracker.ai/empty.jpeg";
-                        }}
-                      />
+                      {item.photo && (
+                        <Image
+                          src={item.photo}
+                          alt=""
+                          width={77}
+                          height={77}
+                          className="w-full h-full rounded-8 object-fill"
+                          onError={(e) => {
+                            e.currentTarget.src =
+                              "https://aitracker.ai/empty.jpeg";
+                          }}
+                        />
+                      )}
                     </div>
                     <div className="pl-[12px]">
                       <div className="flex items-center">
-                        <span className="max-w-[800px] text-[24px] font-semiboldtext-[#9747ff] truncate truncate-lines-1">
+                        <span className="max-w-[800px] text-[24px] font-bold text-[#9747ff] truncate truncate-lines-1 ">
                           {item.name}
                         </span>
                       </div>

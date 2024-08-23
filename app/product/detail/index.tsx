@@ -271,7 +271,7 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
             </p>
             <Dropdown overlay={menu} trigger={["hover"]}>
               <div className="flex items-center cursor-pointer mt-4">
-                <span>{productInfo?.valueForMoney || "0"}</span>
+                <span className="text-[#222] font-medium">{productInfo?.valueForMoney || "0"}</span>
                 <div className="mx-[10px]">
                   <Rate
                     value={productInfo?.valueForMoney}
