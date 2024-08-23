@@ -151,7 +151,7 @@ const Category = () => {
           </div>
 
           <div className="flex items-center flex-col h-auto p-4 justify-between md:flex-row md:h-[57px] md:py-0 px-[20px] mt-[14px] bg-[#9747ff] rounded-[12px]">
-            <div className="w-[298px] common-select pt-4 md:pt-0">
+            <div className="w-[298px] common-select">
               <Select
                 showSearch
                 value={currentCategory}
@@ -167,7 +167,7 @@ const Category = () => {
                 ))}
               </Select>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center  pt-4 md:pt-0">
               <i className="w-[24px] h-[24px] bg-share2 bg-cover"></i>
               <span className="pl-[16px] text-[20px] leading-8 text-white">
                 Personalize your search
@@ -212,7 +212,7 @@ const Category = () => {
                     </div>
                     <div className="pl-[12px]">
                       <div className="flex items-center">
-                        <span className="max-w-[800px] text-[24px] font-semibold text-[#9747ff] truncate truncate-lines-1">
+                        <span className="md:max-w-[800px] text-[24px] font-semibold text-[#9747ff] truncate-lines-1">
                           {item.name}
                         </span>
                       </div>
