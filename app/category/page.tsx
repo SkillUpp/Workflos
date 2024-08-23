@@ -111,7 +111,7 @@ const Category = () => {
     <div className="pt-[86px] bg-[#f0f0f0] overflow-hidden min-h-[calc(100vh-86px)]">
       {loading && <LoadingContext />}
       <div>
-        <h3 className="m-0 pt-[42px] px-[24px] lg:px-[56px] 2xl:px-[200px] pb-[14px] text-[32px] font-extrabold bg-white text-black">
+        <h3 className="m-0 pt-[24px] md:pt-[42px] px-[24px] lg:px-[56px] 2xl:px-[200px] pb-[14px] text-[32px] font-extrabold bg-white text-black">
           Accounting Software
         </h3>
         <div className="flex items-center h-[52px] bg-black  px-[24px] lg:px-[56px] 2xl:px-[200px]">
@@ -187,26 +187,30 @@ const Category = () => {
                   <div className="flex">
                     <div className="w-[42px] h-[42px] md:w-[76px] md:h-[76px] rounded-8">
                       {item.photo && (
-                        <Image
-                          src={item.photo}
-                          alt=""
-                          width={77}
-                          height={77}
-                          className="w-[42px] h-[42px] md:w-[76px] md:h-[76px] rounded-8 object-fill"
-                          onError={(e) => {
-                            e.currentTarget.src =
-                              "https://aitracker.ai/empty.jpeg";
-                          }}
-                        />
+                        <div className="w-[40px] h-[40px] md:w-[77px] md:h-[77px] rounded-8 object-fill">
+                          <Image
+                            src={item.photo}
+                            alt=""
+                            width={77}
+                            height={77}
+                            className="w-full h-full rounded-8 object-fill"
+                            onError={(e) => {
+                              e.currentTarget.src =
+                                "https://aitracker.ai/empty.jpeg";
+                            }}
+                          />
+                        </div>
                       )}
                       {!item.photo && (
-                        <Image
-                          src="https://aitracker.ai/empty.jpeg"
-                          alt=""
-                          width={77}
-                          height={77}
-                          className="w-[42px] h-[42px] md:w-[76px] md:h-[76px] rounded-8 object-fill"
-                        />
+                        <div className="w-[40px] h-[40px] md:w-[77px] md:h-[77px] rounded-8 object-fill">
+                          <Image
+                            src="https://aitracker.ai/empty.jpeg"
+                            alt=""
+                            width={77}
+                            height={77}
+                            className="w-full h-full rounded-8 object-fill"
+                          />
+                        </div>
                       )}
 
                     </div>
