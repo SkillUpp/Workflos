@@ -12,7 +12,7 @@ import NoFound from "@/components/NoFound";
 import CompareModal from "./CompareModal";
 
 const tabs = [
-  { id: 1, title: "Allapps", value: "rateAvg", active: true },
+  { id: 1, title: "All Apps", value: "rateAvg", active: true },
   { id: 2, title: "Leaders", value: "categoryLeaders", active: false },
   // { id: 3, title: "Guide", value: "EaseOfUse", active: false },
 ];
