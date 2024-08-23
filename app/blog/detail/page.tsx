@@ -64,7 +64,7 @@ const BlogDetail = (props: any) => {
       </div>
 
       <div className="px-6 lg:px-[50px] 2xl:px-[200px]">
-        <div className="w-full marked-data">
+        <div className="w-full marked-data text-block">
           {info?.description && (
             <div
               dangerouslySetInnerHTML={{

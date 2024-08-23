@@ -149,7 +149,7 @@ const Category = () => {
                 </div>
                 <div className="pb-[12px]">
                   <p
-                    className="m-0 text-[14px] line-clamp-2 truncate-lines-2"
+                    className="m-0 text-[14px] line-clamp-2 truncate-lines-2 text-[#333]"
                     dangerouslySetInnerHTML={{ __html: item?.description }}
                   ></p>
                   {/* <Link href="/" className="block mt-[6px] text-[#9747ff] font-extrabold text-[14px] leading-[1.2]">Read more about DataSnipper</Link> */}

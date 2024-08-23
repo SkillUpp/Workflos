@@ -143,10 +143,12 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
    */
   const initData = () => {
     const result = props.info;
+    console.log(result, 'res');
+
     if (!result?.name) {
       return;
     }
-    
+
     if (result?.description) {
       result.description = result?.description.replace(/\\n/g, "<br/>");
       result.description = result?.description.replace(/\\r/g, " ");
@@ -226,8 +228,8 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
       <div
         id="productHeader"
         className={`w-full px-6 2xl:pl-[350px] 2xl:pr-[200px] bg-white lg:py-6 lg:px-6 transition-all duration-300 shadow-lg ${isScrolled
-            ? "h-[60px] fixed top-[86px] left-0 right-0 z-10 pt-[10px] pb-[10px] md:pt-[10px] md:pb-[10px] justify-center"
-            : "md:h-auto py-[24px] md:py-[42px]"
+          ? "h-[60px] fixed top-[86px] left-0 right-0 z-10 pt-[10px] pb-[10px] md:pt-[10px] md:pb-[10px] justify-center"
+          : "md:h-auto py-[24px] md:py-[42px]"
           }`}
       >
         <div
@@ -315,8 +317,8 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
                 <div
                   key={item.id}
                   className={`animation-all-3 cursor-pointer flex items-center justify-end h-8 pr-4 text-[#333333] ${item.active
-                      ? "font-bold bg-customPurple w-[130px] whitespace-nowrap text-white rounded-l-xl"
-                      : ""
+                    ? "font-bold bg-customPurple w-[130px] whitespace-nowrap text-white rounded-l-xl"
+                    : ""
                     }`}
                   onClick={() => handleClick(item.htmlId)}
                 >
@@ -334,7 +336,7 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
           >
             <h3 className="text-xl font-bold mb-2 text-[#222]">Overview</h3>
             {productInfo?.description && (
-              
+
               <p
                 className="text-[16px] leading-[1.5] text-[#333333]"
                 dangerouslySetInnerHTML={{
@@ -420,7 +422,7 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
                   <i className="bg-star bg-contain bg-no-repeat bg-center w-[28px] h-[28px]"></i>
                   <div className="flex items-baseline ml-4">
                     <span className="text-[28px] leading-[1.2] text-[#222] font-medium">
-                      {Math.round(productInfo?.valueForMoney || 0).toFixed(1)}
+                      {productInfo?.valueForMoney}
                     </span>
                     <span className="text-[16px] leading-[1.2] text-[#222] font-normal">
                       {" "}
@@ -577,7 +579,7 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
                   <i className="bg-star bg-contain bg-no-repeat bg-center w-[28px] h-[28px]"></i>
                   <div className="flex items-baseline ml-4">
                     <span className="text-[28px] leading-[1.2] text-[#222] font-medium">
-                      {Math.round(productInfo?.valueForMoney || 0).toFixed(1)}
+                      {productInfo?.valueForMoney}
                     </span>
                     <span className="text-[16px] leading-[1.2] text-[#222] font-normal">
                       {" "}
