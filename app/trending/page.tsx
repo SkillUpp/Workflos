@@ -96,8 +96,8 @@ const Category = () => {
   };
 
   useEffect(() => {
-    getCategoryList();
-    getSoftworeList();
+    // getCategoryList();
+    // getSoftworeList();
   }, []);
   return (
     <div className="pt-[86px] bg-[#f0f0f0] overflow-hidden min-h-[calc(100vh-86px)]">
