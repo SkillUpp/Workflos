@@ -398,7 +398,7 @@ const ProductCompare = (props: Props) => {
             </div>
 
             <div className="mx-auto mt-4 px-6 lg:px-[50px] 2xl:px-[200px]">
-              <h3 className="text-[32px] font-bold pt-4">Key features</h3>
+              <h3 className="text-[32px] font-bold pt-4 text-black">Key features</h3>
               <div
                 className="grid gap-4 mt-4"
                 style={{
@@ -539,7 +539,7 @@ const ProductCompare = (props: Props) => {
             </div>
 
             <div className="mx-auto mt-4 px-6 lg:px-[50px] 2xl:px-[200px]">
-              <h3 className="text-[32px] font-bold pt-4">Reviews</h3>
+              <h3 className="text-[32px] font-bold pt-4 text-black">Reviews</h3>
               <div
                 className="grid gap-4 mt-4"
                 style={{
