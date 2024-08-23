@@ -111,7 +111,7 @@ const Category = () => {
     <div className="pt-[86px] bg-[#f0f0f0] overflow-hidden min-h-[calc(100vh-86px)]">
       {loading && <LoadingContext />}
       <div>
-        <h3 className="m-0 pt-[42px] px-[24px] lg:px-[56px] 2xl:px-[200px] pb-[14px] text-[32px] font-extrabold bg-white">
+        <h3 className="m-0 pt-[42px] px-[24px] lg:px-[56px] 2xl:px-[200px] pb-[14px] text-[32px] font-extrabold bg-white text-black">
           Accounting Software
         </h3>
         <div className="flex items-center h-[52px] bg-black  px-[24px] lg:px-[56px] 2xl:px-[200px]">
