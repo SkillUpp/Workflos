@@ -148,11 +148,10 @@ export default function Home() {
           <ul className="hidden md:flex items-center justify-around h-full mx-[90px] list-none">
             {softworeTab.map((item) => (
               <li
-                className={`flex items-center text-white text-[16px] cursor-pointer ${
-                  item.value === currentSort
+                className={`flex items-center text-white text-[16px] cursor-pointer ${item.value === currentSort
                     ? "text-[#9747ff] border-b border-[#9747ff]"
                     : ""
-                }`}
+                  }`}
                 key={item.name}
                 onClick={() => handleChangeSoftwore(item.id, item.value)}
               >
@@ -161,7 +160,7 @@ export default function Home() {
             ))}
           </ul>
           <div className="block md:hidden">
-            <ScrollableTabs tabs={softworeTab} onTabClick={handleTabClick}/>
+            <ScrollableTabs tabs={softworeTab} onTabClick={handleTabClick} />
           </div>
           <div className="hidden">
             <Select
@@ -198,11 +197,22 @@ export default function Home() {
                           alt=""
                           width={40}
                           height={40}
-                          className="rounded-md object-full w-full h-full"
+                          className="rounded-md object-contain w-full h-full"
                           onError={(e) => {
                             e.currentTarget.src =
                               "https://aitracker.ai/empty.jpeg";
                           }}
+                        />
+                      </div>
+                    )}
+                    {!item.photo && (
+                      <div className="w-[40px] h-[40px] rounded-md overflow-hidden">
+                        <Image
+                          src="https://aitracker.ai/empty.jpeg"
+                          alt=""
+                          width={40}
+                          height={40}
+                          className="rounded-md object-contain w-full h-full"
                         />
                       </div>
                     )}

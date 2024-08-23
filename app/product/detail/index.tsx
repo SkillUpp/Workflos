@@ -237,16 +237,29 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
         >
           <div className="flex items-center">
             {productInfo?.photo && (
-              <Image
-                src={productInfo?.photo}
-                alt=""
-                width={40}
-                height={40}
-                className="w-[40px] h-[40px] object-contain rounded-sm"
-                onError={(e) => {
-                  e.currentTarget.src = "https://aitracker.ai/empty.jpeg";
-                }}
-              />
+              <div className="w-[40px] h-[40px] rounded-md overflow-hidden">
+                <Image
+                  src={productInfo?.photo}
+                  alt=""
+                  width={40}
+                  height={40}
+                  className="w-[40px] h-[40px] object-contain rounded-sm"
+                  onError={(e) => {
+                    e.currentTarget.src = "https://aitracker.ai/empty.jpeg";
+                  }}
+                />
+              </div>
+            )}
+            {!productInfo?.photo && (
+              <div className="w-[40px] h-[40px] rounded-md overflow-hidden">
+                <Image
+                  src="https://aitracker.ai/empty.jpeg"
+                  alt=""
+                  width={40}
+                  height={40}
+                  className="rounded-md object-contain w-full h-full"
+                />
+              </div>
             )}
             <span className="text-[18px] leading-[1.2] text-black font-extrabold ml-[10px] truncate-lines-1">
               {productInfo?.name}

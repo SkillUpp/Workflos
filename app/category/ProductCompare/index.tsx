@@ -211,19 +211,31 @@ const ProductCompare = (props: Props) => {
               {compareList.map((item: any, index: number) => (
                 <div className="p-4 w-full bg-white rounded-8" key={index}>
                   <div className="flex items-center justify-center h-10">
-                    <div className="w-10 h-10 rounded-8">
-                      <Image
-                        className="w-full h-full rounded-8"
-                        src={item.photo}
-                        width={40}
-                        height={40}
-                        alt=""
-                        onError={(e) => {
-                          e.currentTarget.src =
-                            "https://aitracker.ai/empty.jpeg";
-                        }}
-                      />
-                    </div>
+                    {item?.photo && (
+                      <div className="w-[40px] h-[40px] rounded-md overflow-hidden">
+                        <Image
+                          src={item?.photo}
+                          alt=""
+                          width={40}
+                          height={40}
+                          className="w-[40px] h-[40px] object-contain rounded-sm"
+                          onError={(e) => {
+                            e.currentTarget.src = "https://aitracker.ai/empty.jpeg";
+                          }}
+                        />
+                      </div>
+                    )}
+                    {!item?.photo && (
+                      <div className="w-[40px] h-[40px] rounded-md overflow-hidden">
+                        <Image
+                          src="https://aitracker.ai/empty.jpeg"
+                          alt=""
+                          width={40}
+                          height={40}
+                          className="rounded-md object-contain w-full h-full"
+                        />
+                      </div>
+                    )}
                     <span className="text-xl font-bold ml-4 text-[#222]">
                       {item.name}
                     </span>
