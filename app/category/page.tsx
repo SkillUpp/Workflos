@@ -193,7 +193,7 @@ const Category = () => {
                             alt=""
                             width={77}
                             height={77}
-                            className="w-full h-full rounded-8 object-fill"
+                            className="w-full h-full rounded-8 object-contain"
                             onError={(e) => {
                               e.currentTarget.src =
                                 "https://aitracker.ai/empty.jpeg";
@@ -208,7 +208,7 @@ const Category = () => {
                             alt=""
                             width={77}
                             height={77}
-                            className="w-full h-full rounded-8 object-fill"
+                            className="w-full h-full rounded-8 object-contain"
                           />
                         </div>
                       )}
