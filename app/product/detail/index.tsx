@@ -168,8 +168,11 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
     if (result?.description) {
       result.description = result?.description.replace(/\\n/g, "<br/>");
       result.description = result?.description.replace(/\\r/g, " ");
+      result.description = result?.description.replace(/\\u0026/g, "&");
     }
     if (result?.introduce) {
+      result.introduce = result?.introduce.replace(/\\n/g, "<br/>");
+      result.introduce = result?.introduce.replace(/\\r/g, " ");
       result.introduce = result?.introduce.replace(/\\u0026/g, "&");
     }
     if (result?.keyBenefits) {

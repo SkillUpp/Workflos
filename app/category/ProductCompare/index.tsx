@@ -170,7 +170,8 @@ const ProductCompare = (props: Props) => {
         item.description = item.description
           ? item.description.replace(/\\r/g, "<br/>")
           : "";
-        item.description = item?.description.replace(/\\u003c/g, "<").replace(/\\u003e/g, ">")
+        item.description = item.description.replace(/\\u0026/g, "&");
+        item.description = item.description.replace(/\\u003c/g, "<").replace(/\\u003e/g, ">")
       }
       if (item.commonFeatures && item.supportFeatures) {
         item.commonFeatures = updateCommonFeaturesWithSupport(
