@@ -6,7 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { categoryList, productList } from "@/api/product";
-import { productEnumList } from "@/utils/enum";
 import LoadingContext from "@/components/LoadingContext";
 import NoFound from "@/components/NoFound";
 import CompareModal from "./CompareModal";
@@ -39,7 +38,7 @@ const Category = () => {
         active: tab.id === id,
       }))
     );
-    getSoftworeList();
+    getSoftworeList('', currentPage, name);
   };
 
   const getCategoryList = async () => {
@@ -62,10 +61,10 @@ const Category = () => {
   /**
    * 获取产品列表
    */
-  const getSoftworeList = async (category?: string, page?: number) => {
+  const getSoftworeList = async (category?: string, page?: number, sortBy?: string) => {
     const params = {
       category: category || currentCategory,
-      sortBy: currentSort,
+      sortBy: sortBy || currentSort,
       limit: 10,
       page: page || currentPage,
     };
