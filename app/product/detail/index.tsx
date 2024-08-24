@@ -614,7 +614,7 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
                 </h4>
                 <ul className="">
                   <li className="flex items-center justify-between mt-2">
-                    <span>Value for money</span>
+                    <span className="text-[#222222] text-lg font-medium">Value for money</span>
                     <div className="flex items-center">
                       <Rate
                         count={1}
@@ -632,7 +632,7 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
                   </li>
 
                   <li className="flex items-center justify-between mt-2">
-                    <span>Ease of use</span>
+                    <span className="text-[#222222] text-lg font-medium">Ease of use</span>
                     <div className="flex items-center">
                       <Rate
                         count={1}
