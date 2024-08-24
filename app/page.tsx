@@ -34,7 +34,7 @@ export default function Home() {
    */
   const handleChangeSoftwore = (id: number, val: string) => {
     setCurrentSort(val);
-    getSoftworeList();
+    getSoftworeList('', '', val);
   };
 
   /**
@@ -60,11 +60,11 @@ export default function Home() {
   /**
    * 获取产品列表
    */
-  const getSoftworeList = async (category?: string, keyword?: string) => {
+  const getSoftworeList = async (category?: string, keyword?: string, sortBy?: string) => {
     const params = {
       keyword: keyword || searchValue,
       category: category || currentCategory,
-      sortBy: currentSort,
+      sortBy: sortBy || currentSort,
       limit: 21,
       page: 1,
     };
