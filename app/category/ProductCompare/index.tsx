@@ -1,6 +1,7 @@
 "use client";
 import { Rate } from "antd";
 import Image from "next/image";
+import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 
 interface Props {
@@ -198,7 +199,13 @@ const ProductCompare = (props: Props) => {
       {compareList && compareList.length > 0 && (
         <>
           <div className="mx-auto px-6 lg:px-[50px] 2xl:px-[200px]">
-            <h3 className="text-[42px] font-bold pt-8 text-black">Compare</h3>
+            <div className="flex justify-between items-center w-full pt-8">
+              <h3 className="text-[42px] font-bold text-black">Compare</h3>
+              <Link className="border border-customPurple px-1 py-1 md:px-3 rounded-8 flex items-center cursor-pointer hover:opacity-70" href="/category">
+                <i className="block bg-back bg-cover w-5 h-5 md:w-6 md:h-6"></i>
+                <span className="text-customPurple ml-2 text-[14px] md:text-[18px]">Back</span>
+              </Link>
+            </div>
             <div
               className="grid gap-4 py-4"
               style={{

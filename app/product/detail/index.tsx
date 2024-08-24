@@ -12,6 +12,7 @@ import LoadingContext from "@/components/LoadingContext";
 import { marked } from "marked";
 import ScrollableTabs from "@/components/ScrollableTabs";
 import { sanitizeDescription } from "@/utils/utils";
+import { useRouter } from "next/navigation";
 
 const defaultCompareMenu = [
   {
@@ -88,6 +89,7 @@ const scrollToTop = () => {
 };
 
 const ProductDetailComp = (props: IProductDetailCompProps) => {
+  const route = useRouter()
   const hasInitialized = useRef(false);
   const [features, setFeatures] = useState([]);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -95,6 +97,20 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
   const [featureSlice, setFeatureSlice] = useState(10);
   const [productInfo, setProductInfo] = useState<any>({});
   const [compareMenu, setCompareMenu] = useState(defaultCompareMenu);
+
+  /**
+   * 返回上一页
+   */
+  const handleBack = () => {
+    const prevPageInfo = sessionStorage.getItem("workflos_product_info");
+    if (prevPageInfo) {
+      const prevPage = JSON.parse(prevPageInfo);
+      prevPage.isBack = true;
+      sessionStorage.setItem("workflos_product_info", JSON.stringify(prevPage));
+      route.push(prevPage.page);
+    }
+    
+  }
 
   const handleClick = (id: string) => {
     const el = document.getElementById(id);
@@ -284,25 +300,31 @@ const ProductDetailComp = (props: IProductDetailCompProps) => {
             <p className="text-[14px] leading-[1.2] mt-[8px] text-[#333]">
               {productInfo?.introduce}
             </p>
-            <Dropdown overlay={menu} trigger={["hover"]}>
-              <div className="flex items-center cursor-pointer mt-4">
-                <span className="text-[#222] font-medium">{productInfo?.valueForMoney || "0"}</span>
-                <div className="mx-[10px]">
-                  <Rate
-                    value={productInfo?.valueForMoney}
-                    disabled
-                    className="text-[18px] leading-[1.2] font-extrabold"
-                  />
+            <div className="flex justify-between items-center mt-4">
+              <Dropdown overlay={menu} trigger={["hover"]}>
+                <div className="flex items-center cursor-pointer">
+                  <span className="text-[#222] font-medium">{productInfo?.valueForMoney || "0"}</span>
+                  <div className="mx-[10px]">
+                    <Rate
+                      value={productInfo?.valueForMoney}
+                      disabled
+                      className="text-[18px] leading-[1.2] font-extrabold"
+                    />
+                  </div>
+                  <span className="text-[14px] leading-[1.5] text-[#9747ff]">
+                    (
+                    {productInfo?.totalRateUser
+                      ? productInfo.totalRateUser / 100 + "k"
+                      : 0}
+                    )
+                  </span>
                 </div>
-                <span className="text-[14px] leading-[1.5] text-[#9747ff]">
-                  (
-                  {productInfo?.totalRateUser
-                    ? productInfo.totalRateUser / 100 + "k"
-                    : 0}
-                  )
-                </span>
+              </Dropdown>
+              <div className="border border-customPurple px-1 py-1 md:px-3 rounded-8 flex items-center cursor-pointer hover:opacity-70" onClick={() => handleBack()}>
+                <i className="block bg-back bg-cover w-5 h-5 md:w-6 md:h-6"></i>
+                <span className="text-customPurple ml-2 text-[14px] md:text-[18px]">Back</span>
               </div>
-            </Dropdown>
+            </div>
           </>
         )}
       </div>

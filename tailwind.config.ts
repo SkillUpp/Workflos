@@ -25,6 +25,7 @@ const config: Config = {
         close1: "url('../assets/images/close1.svg')",
         closeCircle: "url('../assets/images/x-circle.svg')",
         compareWhite: "url('../assets/images/git-compare-white.svg')",
+        back: "url('../assets/images/icon/arrow-left-circle.svg')",
       },
       translate: {
         "-x": "-50%",

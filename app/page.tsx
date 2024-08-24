@@ -3,13 +3,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { Select, Spin } from "antd";
 import NoFound from "@/components/NoFound";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { sortOfRateEnumList } from "@/utils/enum";
 import { ICategoryList, IPorductList } from "./type";
 import { categoryList, productList } from "@/api/product";
 import LoadingContext from "@/components/LoadingContext";
 import ScrollableTabs from "@/components/ScrollableTabs";
+import { debounce } from "@/components/Select";
 
 export default function Home() {
   const route = useRouter();
@@ -45,11 +46,23 @@ export default function Home() {
   };
 
   /**
+   * 产品搜索
+   * @param val 
+   */
+  const handleSearchProduct = useCallback(
+    debounce(async (value) => {
+      setSearchValue(value);
+      getSoftworeList('', value);
+    }, 800),
+    []
+  );
+
+  /**
    * 获取产品列表
    */
-  const getSoftworeList = async (category?: string) => {
+  const getSoftworeList = async (category?: string, keyword?: string) => {
     const params = {
-      keyword: searchValue,
+      keyword: keyword || searchValue,
       category: category || currentCategory,
       sortBy: currentSort,
       limit: 21,
@@ -81,10 +94,27 @@ export default function Home() {
     getSoftworeList()
   }
 
-  useEffect(() => {
-    getCategoryList();
+  const initData = () => {
+    const info = sessionStorage.getItem('workflos_product_info')
+    if (info) {
+      const infoObj = JSON.parse(info)
+      if (infoObj.isBack) {
+        sessionStorage.removeItem('workflos_product_info')
+        setCurrentCategory(infoObj.category)
+        setCurrentSort(infoObj.sortBy)
+        setSearchValue(infoObj.keyword)
+        getSoftworeList(infoObj.category, infoObj.keyword)
+      }
+      return
+    }
     getSoftworeList();
+  }
+
+  useEffect(() => {
+    initData()
+    getCategoryList();
   }, []);
+
 
   return (
     <div className="pt-[86px] overflow-hidden">
@@ -98,9 +128,8 @@ export default function Home() {
               <input
                 type="text"
                 placeholder="Search apps, categories..."
-                onChange={(e) => setSearchValue(e.target.value)}
+                onChange={(e) => handleSearchProduct(e.target.value)}
                 className="pl-[20px] h-full w-full outline-none border-none text-black text-[18px] bg-transparent"
-                onKeyDown={() => getSoftworeList()}
               />
               <i
                 className="absolute right-[8px] top-1/2 w-[36px] h-[36px] bg-search bg-cover transform -translate-y-1/2 cursor-pointer hover:opacity-70"
@@ -149,8 +178,8 @@ export default function Home() {
             {softworeTab.map((item) => (
               <li
                 className={`flex items-center text-white text-[16px] cursor-pointer ${item.value === currentSort
-                    ? "text-[#9747ff] border-b border-[#9747ff]"
-                    : ""
+                  ? "text-[#9747ff] border-b border-[#9747ff]"
+                  : ""
                   }`}
                 key={item.name}
                 onClick={() => handleChangeSoftwore(item.id, item.value)}
@@ -184,10 +213,19 @@ export default function Home() {
           {softworeList.length > 0 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
               {softworeList.map((item) => (
-                <div
+                <Link
                   key={item.name}
+                  href={`product/${item.name}`}
                   className="w-full mb-1 bg-white rounded-xl p-6 cursor-pointer transition-all duration-200 hover:shadow-md hover:scale-[1.02]"
-                  onClick={() => handleJump(`product/${item.name}`)}
+                  onClick={() => {
+                    sessionStorage.setItem("workflos_product_info", JSON.stringify({
+                      keyword: searchValue,
+                      category: currentCategory,
+                      sortBy: currentSort,
+                      page: ""
+                    }));
+                    handleJump(`product/${item.name}`)
+                  }}
                 >
                   <div className="flex-shrink-0 flex items-center">
                     {item.photo && (
@@ -229,7 +267,7 @@ export default function Home() {
                       }}
                     ></p>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           )}
@@ -239,15 +277,15 @@ export default function Home() {
             </div>
           )}
 
-          {softworeList.length >= 10 && (
-            <Link
-              href={"/category"}
-              className="w-[198px] h-[30px] mx-auto flex items-center justify-center bg-[#9747ff] rounded-[5px] text-white text-[16px] mt-[50px] cursor-pointer hover:opacity-80"
-              onClick={() => handleJump("/category")}
-            >
-              See all Software
-            </Link>
-          )}
+          <Link
+            href={"/category"}
+            className="w-[198px] py-2 mx-auto flex items-center justify-center bg-[#9747ff] rounded-[5px] text-white text-[16px] mt-[50px] cursor-pointer hover:opacity-80"
+            onClick={() => {
+              handleJump("/category")
+            }}
+          >
+            See all Software
+          </Link>
         </div>
       </div>
     </div>

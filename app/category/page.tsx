@@ -20,8 +20,9 @@ const tabs = [
 const Category = () => {
   const route = useRouter();
   const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const [categoryTabs, setCategoryTabs] = useState(tabs);
-  const [currentCategory, setCurrentCategory] = useState("CRM");
+  const [currentCategory, setCurrentCategory] = useState("");
   const [currentSort, setCurrentSort] = useState("rateAvg");
   const [isCompareModalOpen, setIsCompareModalOpen] = useState(false);
   const [softworeList, setSoftworeList] = useState([]);
@@ -66,7 +67,7 @@ const Category = () => {
       category: category || currentCategory,
       sortBy: currentSort,
       limit: 10,
-      page: page || 1,
+      page: page || currentPage,
     };
     try {
       setLoading(true);
@@ -89,6 +90,7 @@ const Category = () => {
   };
 
   const handleChangePage = (page: number) => {
+    setCurrentPage(page);
     getSoftworeList("", page);
   };
 
@@ -103,9 +105,25 @@ const Category = () => {
     route.push(path);
   };
 
-  useEffect(() => {
-    getCategoryList();
+  const initData = () => {
+    const info = sessionStorage.getItem('workflos_product_info')
+    if (info) {
+      const infoObj = JSON.parse(info)
+      if (infoObj.isBack) {
+        sessionStorage.removeItem('workflos_product_info')
+        setCurrentCategory(infoObj.category)
+        setCurrentPage(infoObj.currentPage)
+        setCurrentSort(infoObj.sortBy)
+        getSoftworeList(infoObj.category, infoObj.currentPage)
+      }
+      return
+    }
     getSoftworeList();
+  }
+
+  useEffect(() => {
+    initData()
+    getCategoryList();
   }, []);
   return (
     <div className="pt-[86px] bg-[#f0f0f0] overflow-hidden min-h-[calc(100vh-86px)]">
@@ -155,6 +173,7 @@ const Category = () => {
               <Select
                 showSearch
                 value={currentCategory}
+                allowClear
                 onChange={(val: string) => {
                   setCurrentCategory(val);
                   getSoftworeList(val);
@@ -181,7 +200,15 @@ const Category = () => {
               <div
                 className="relative mt-[24px] p-[12px_12px_0_12px] bg-white rounded-[12px] transition-all duration-200 cursor-pointer hover:shadow-lg hover:scale-[1.02]"
                 key={item.name}
-                onClick={() => handleJump(`/product/${item.name}`)}
+                onClick={() => {
+                  sessionStorage.setItem("workflos_product_info", JSON.stringify({
+                    currentPage: currentPage,
+                    category: currentCategory,
+                    sortBy: currentSort,
+                    page: "/category"
+                  }));
+                  handleJump(`/product/${item.name}`)
+                }}
               >
                 <div className="flex justify-between pb-[12px] mb-[12px] border-b border-[rgba(151,71,255,0.3)]">
                   <div className="flex">
@@ -267,7 +294,7 @@ const Category = () => {
                 <Pagination
                   onChange={handleChangePage}
                   className="pagination flex justify-center mt-[24px]"
-                  defaultCurrent={1}
+                  defaultCurrent={currentPage}
                   total={totalCount}
                 />
               </div>

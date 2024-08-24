@@ -8,7 +8,7 @@ import { useStore } from "@/store/userStore";
 import { LoginDialog } from "@/utils/utils";
 import { AUTH0_LOGIN_URL } from "@/utils/constant";
 
-function debounce(func: (...args: any[]) => void, delay: number) {
+export function debounce(func: (...args: any[]) => void, delay: number) {
   let timeoutId: NodeJS.Timeout | null = null;
 
   return (...args: any[]) => {
