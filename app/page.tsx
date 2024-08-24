@@ -222,7 +222,7 @@ export default function Home() {
                       keyword: searchValue,
                       category: currentCategory,
                       sortBy: currentSort,
-                      page: ""
+                      page: "/"
                     }));
                     handleJump(`product/${item.name}`)
                   }}
