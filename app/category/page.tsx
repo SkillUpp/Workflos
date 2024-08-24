@@ -114,8 +114,9 @@ const Category = () => {
         setCurrentPage(infoObj.currentPage)
         setCurrentSort(infoObj.sortBy)
         getSoftworeList(infoObj.category, infoObj.currentPage)
+        return
       }
-      return
+      getSoftworeList();
     }
     getSoftworeList();
   }

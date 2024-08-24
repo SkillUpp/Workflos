@@ -104,8 +104,9 @@ export default function Home() {
         setCurrentSort(infoObj.sortBy)
         setSearchValue(infoObj.keyword)
         getSoftworeList(infoObj.category, infoObj.keyword)
+        return
       }
-      return
+      getSoftworeList();
     }
     getSoftworeList();
   }
